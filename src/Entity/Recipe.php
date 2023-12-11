@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Recipe
 {
     #[ORM\Id]
@@ -31,6 +32,12 @@ class Recipe
 
     #[ORM\Column]
     private ?int $prepareTime = null;
+
+    // #[ORM\PrePersist]
+    // public function setDateValue(): void
+    // {
+    //     $this->date = new \DateTimeImmutable();
+    // }
 
     public function getId(): ?int
     {
