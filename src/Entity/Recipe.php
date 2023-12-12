@@ -35,12 +35,6 @@ class Recipe
     #[ORM\Column]
     private ?int $prepareTime = null;
 
-    // #[ORM\PrePersist]
-    // public function setDateValue(): void
-    // {
-    //     $this->date = new \DateTimeImmutable();
-    // }
-
     #[ORM\PrePersist]
     public function setDateValue(): void
     {
