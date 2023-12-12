@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\RecipeRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -39,6 +41,11 @@ class Recipe
     //     $this->date = new \DateTimeImmutable();
     // }
 
+    #[ORM\PrePersist]
+    public function setDateValue(): void
+    {
+        $this->date = new DateTime('now');
+    }
     public function getId(): ?int
     {
         return $this->id;
