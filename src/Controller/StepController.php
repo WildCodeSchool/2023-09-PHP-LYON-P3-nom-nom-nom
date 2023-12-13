@@ -16,15 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/step')]
 class StepController extends AbstractController
 {
-    #[Route('/', name: 'app_step_index', methods: ['GET'])]
-    public function index(StepRepository $stepRepository, RecipeRepository $recipeRepository): Response
-    {
-        return $this->render('step/index.html.twig', [
-            'steps' => $stepRepository->findAll(),
-            'recipe' => $recipeRepository->findAll()
-        ]);
-    }
-
     #[Route('/new', name: 'app_step_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
