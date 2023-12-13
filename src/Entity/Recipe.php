@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\RecipeRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -34,6 +36,14 @@ class Recipe
 
     #[ORM\Column]
     private ?int $prepareTime = null;
+
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: RecipeIngredient::class, orphanRemoval: true)]
+    private Collection $ingredients;
+
+    public function __construct()
+    {
+        $this->ingredients = new ArrayCollection();
+    }
 
     #[ORM\PrePersist]
     public function setDateValue(): void
@@ -113,6 +123,36 @@ class Recipe
     public function setPrepareTime(int $prepareTime): static
     {
         $this->prepareTime = $prepareTime;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RecipeIngredient>
+     */
+    public function getIngredients(): Collection
+    {
+        return $this->ingredients;
+    }
+
+    public function addIngredient(RecipeIngredient $ingredient): static
+    {
+        if (!$this->ingredients->contains($ingredient)) {
+            $this->ingredients->add($ingredient);
+            $ingredient->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIngredient(RecipeIngredient $ingredient): static
+    {
+        if ($this->ingredients->removeElement($ingredient)) {
+            // set the owning side to null (unless already changed)
+            if ($ingredient->getRecipe() === $this) {
+                $ingredient->setRecipe(null);
+            }
+        }
 
         return $this;
     }

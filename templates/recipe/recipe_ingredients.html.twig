@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Steps recipe
+{% endblock %}
+
+{% block body %}
+    <h1 class="step-recipe">{{recipe.nameRecipe}}</h1>
+
+    <h2>Les ingrédients de la recette</h2>
+
+    <div>
+        {% for ingredient in recipe.ingredients %}
+            <h2>
+                {{ ingredient.nameIngredient }}</h2>
+        {% endfor %}
+    </div>
+
+    <a href="{{ path('app_recipe_show', {'id': recipe.id}) }}">Retour à la recette</a>
+
+{% endblock %}

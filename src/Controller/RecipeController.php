@@ -78,4 +78,12 @@ class RecipeController extends AbstractController
 
         return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/{id}/ingredients', name: 'app_recipe_show_ingredients', methods: ['GET'])]
+    public function showIngredients(Recipe $recipe): Response
+    {
+        return $this->render("recipe/recipe_ingredients.html.twig", [
+            "recipe" => $recipe,
+        ]);
+    }
 }
