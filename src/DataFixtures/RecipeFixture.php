@@ -24,7 +24,7 @@ class RecipeFixture extends Fixture
             $recipe->setNameRecipe($recipeFixture['nameRecipe']);
             $recipe->setPrepareTime($recipeFixture['prepareTime']);
             $recipe->setCookingTime($recipeFixture['cookingTime']);
-            $recipe->setPersonNumber($recipeFixture['cookingTime']);
+            $recipe->setPersonNumber($recipeFixture['personNumber']);
             $recipe->setPicture($recipeFixture['picture']);
 
             $manager->persist($recipe);
