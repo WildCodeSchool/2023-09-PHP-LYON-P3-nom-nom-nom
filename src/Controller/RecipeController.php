@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Recipe;
+use App\Entity\Step;
 use App\Form\RecipeType;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -77,5 +78,14 @@ class RecipeController extends AbstractController
         }
 
         return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/step/{recipeId}', name :'app_recipe_show_step', methods: ['GET'])]
+    public function showStep(Recipe $recipe, Step $step): Response
+    {
+        return $this->render('recipe/recipe_step.html.twig', [
+            'recipe' => $recipe,
+            'step' => $step
+        ]);
     }
 }
