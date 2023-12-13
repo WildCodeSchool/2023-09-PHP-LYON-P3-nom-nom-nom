@@ -38,6 +38,9 @@ class Recipe
     #[ORM\Column]
     private ?int $personNumber = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $picture = null;
+
     #[ORM\PrePersist]
     public function setDateValue(): void
     {
@@ -128,6 +131,18 @@ class Recipe
     public function setPersonNumber(int $personNumber): static
     {
         $this->personNumber = $personNumber;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): static
+    {
+        $this->picture = $picture;
 
         return $this;
     }
