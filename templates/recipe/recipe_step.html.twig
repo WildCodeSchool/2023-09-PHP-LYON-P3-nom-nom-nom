@@ -4,7 +4,9 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Les étapes de la recette</h1>
+	<h1 class="step-recipe">{{recipe.nameRecipe}}</h1>
+
+	<h2>Les étapes de la recette</h2>
 
 	<div>
 		{% for step in recipe.steps %}
@@ -17,6 +19,6 @@
 
 	<a href="{{ path('app_recipe_show', {'id': recipe.id}) }}">Retour à la recette</a>
 
-	{{ include('step/_delete_form.html.twig') }}
+
 
 {% endblock %}
