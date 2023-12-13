@@ -2,3 +2,21 @@
 @import "wcs";
 
 @import "~bootstrap/scss/bootstrap";
+
+//--------------------navbar-------------------
+.fa-solid {
+    color: #444559 ;
+}
+
+.fa-regular {
+    color: #444559 ;
+}
+.fa-circle-plus {
+    color:#BF4E40;
+}
+
+.nav
+{
+    position: fixed;
+    bottom: 0;
+}
