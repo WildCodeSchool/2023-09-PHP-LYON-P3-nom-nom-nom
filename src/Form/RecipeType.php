@@ -20,6 +20,7 @@ class RecipeType extends AbstractType
             ->add('date', HiddenType::class)
             ->add('cookingTime')
             ->add('prepareTime')
+            ->add('personNumber')
         ;
     }
 

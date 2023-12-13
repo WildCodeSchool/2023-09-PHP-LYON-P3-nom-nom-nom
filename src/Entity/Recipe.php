@@ -35,6 +35,9 @@ class Recipe
     #[ORM\Column]
     private ?int $prepareTime = null;
 
+    #[ORM\Column]
+    private ?int $personNumber = null;
+
     #[ORM\PrePersist]
     public function setDateValue(): void
     {
@@ -113,6 +116,18 @@ class Recipe
     public function setPrepareTime(int $prepareTime): static
     {
         $this->prepareTime = $prepareTime;
+
+        return $this;
+    }
+
+    public function getPersonNumber(): ?int
+    {
+        return $this->personNumber;
+    }
+
+    public function setPersonNumber(int $personNumber): static
+    {
+        $this->personNumber = $personNumber;
 
         return $this;
     }
