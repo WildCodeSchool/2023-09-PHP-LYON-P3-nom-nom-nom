@@ -183,7 +183,7 @@ class Recipe
     {
         $this->picture = $picture;
 
-        return $this->$picture;
+        return $this;
     }
 
     public function addStep(Step $step): static

@@ -10,15 +10,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(RecipeRepository $recipeRespository): Response
+
+    public function index(RecipeRepository $recipeRepository): Response
     {
-        $recipes = $recipeRespository->findBy(
-            [],
+        $showRecipes = $recipeRepository->findBy(
+            [], // No specific conditions
             ['id' => 'DESC'],
-            3
+            3 // Limit to 3 recipes
         );
+
         return $this->render('home/index.html.twig', [
-            'recipes' => $recipes
+            'showRecipes' => $showRecipes,
         ]);
     }
 }
