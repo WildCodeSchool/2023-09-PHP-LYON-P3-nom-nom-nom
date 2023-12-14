@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Recipe;
 use App\Repository\RecipeRepository;
-use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
+
     public function index(RecipeRepository $recipeRepository): Response
     {
         $showRecipes = $recipeRepository->findBy(
@@ -21,7 +20,7 @@ class HomeController extends AbstractController
         );
 
         return $this->render('home/index.html.twig', [
-        'showRecipes' => $showRecipes,
+            'showRecipes' => $showRecipes,
         ]);
     }
 }

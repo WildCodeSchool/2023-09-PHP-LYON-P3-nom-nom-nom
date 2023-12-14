@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\RecipeRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -34,6 +36,19 @@ class Recipe
 
     #[ORM\Column]
     private ?int $prepareTime = null;
+
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, orphanRemoval: true)]
+    private Collection $steps;
+
+    #[ORM\Column]
+    private ?int $personNumber = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $picture = null;
+    public function __construct()
+    {
+        $this->steps = new ArrayCollection();
+    }
 
     #[ORM\PrePersist]
     public function setDateValue(): void
@@ -114,6 +129,58 @@ class Recipe
     {
         $this->prepareTime = $prepareTime;
 
+        return $this;
+    }
+
+    public function getPersonNumber(): ?int
+    {
+        return $this->personNumber;
+    }
+
+    public function setPersonNumber(int $personNumber): static
+    {
+        $this->personNumber = $personNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Step>
+     */
+    public function getSteps(): Collection
+    {
+        return $this->steps;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): static
+    {
+        $this->picture = $picture;
+
+        return $this->$picture;
+    }
+
+    public function addStep(Step $step): static
+    {
+        if (!$this->steps->contains($step)) {
+            $this->steps->add($step);
+            $step->setRecipe($this);
+        }
+
+        return $this;
+    }
+    public function removeStep(Step $step): static
+    {
+        if ($this->steps->removeElement($step)) {
+// set the owning side to null (unless already changed)
+            if ($step->getRecipe() === $this) {
+                $step->setRecipe(null);
+            }
+        }
         return $this;
     }
 }

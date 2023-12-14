@@ -20,7 +20,11 @@ Encore
         to: 'images/[path][name].[ext]',
 
         // if versioning is enabled, add the file hash too
+<<<<<<< HEAD
         // to: 'images/[path][name].[hash:8] . [ext]',
+=======
+        // to: 'images/[path][name].[hash:8].[ext]',
+>>>>>>> 4c506024853b6fdd97e6185dfc4689a4bb418a81
 
         // only copy files matching this pattern
         // pattern: /\.(png|jpg|jpeg)$/
