@@ -22,7 +22,7 @@ $lineHeightText: normal;
 @mixin myButton ($x, $y, $radius, $color, $fontFamily, $fontColor, $fontSize, $fontStyle, $fontWeight, $lineHeight) {
     width: $x;
     height: $y;
-    border-radius : $radius;
+    border-radius: $radius;
     background-color: $color;
     font-family: $fontFamily;
     color: $fontColor;
@@ -49,14 +49,15 @@ $lineHeightText: normal;
     list-style: none;
     scroll-behavior: smooth;
     text-decoration: none;
+    background-color: #FAF6F4;
 }
 
 
 // -----------------------button------------------------------
 .but {
     @include myButton(8.625rem, 1.875rem, 0.75rem, ($backgroundButton), ($fontTitle), ($fontColorButton), ($fontSizeButton), ($fontStyleButton),
-    ($fontWeightButton), ($lineHeightButton));
-    
+        ($fontWeightButton), ($lineHeightButton));
+
 }
 
 .btn-primary {
@@ -91,14 +92,14 @@ p {
 }
 
 .nav {
-        position: fixed;
-        bottom: 5vw;
-        justify-content:center;
-        width: 100vw;
-        align-items: center;
-    }
+    position: fixed;
+    bottom: 5vw;
+    justify-content: center;
+    width: 100vw;
+    align-items: center;
+}
 
-.nav-link{
+.nav-link {
     padding: 0;
 }
 
@@ -106,3 +107,15 @@ ul {
     gap: 3rem;
 }
 
+//------------------------page inconstruction----------------------------
+.div-inconstruction {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+}
+.inconstruction {
+    color:$backgroundButton;
+}
