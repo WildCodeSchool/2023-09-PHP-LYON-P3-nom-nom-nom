@@ -36,6 +36,8 @@ class Recipe
 
     #[ORM\Column]
     private ?int $prepareTime = null;
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, orphanRemoval: true)]
+    private Collection $steps;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: RecipeIngredient::class, orphanRemoval: true)]
     private Collection $ingredients;
@@ -43,6 +45,7 @@ class Recipe
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
+        $this->steps = new ArrayCollection();
     }
 
     #[ORM\PrePersist]
@@ -141,6 +144,23 @@ class Recipe
             $this->ingredients->add($ingredient);
             $ingredient->setRecipe($this);
         }
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Step>
+     */
+    public function getSteps(): Collection
+    {
+        return $this->steps;
+    }
+
+    public function addStep(Step $step): static
+    {
+        if (!$this->steps->contains($step)) {
+            $this->steps->add($step);
+            $step->setRecipe($this);
+        }
 
         return $this;
     }
@@ -151,6 +171,17 @@ class Recipe
             // set the owning side to null (unless already changed)
             if ($ingredient->getRecipe() === $this) {
                 $ingredient->setRecipe(null);
+            }
+        }
+        return $this;
+    }
+
+    public function removeStep(Step $step): static
+    {
+        if ($this->steps->removeElement($step)) {
+// set the owning side to null (unless already changed)
+            if ($step->getRecipe() === $this) {
+                $step->setRecipe(null);
             }
         }
 
