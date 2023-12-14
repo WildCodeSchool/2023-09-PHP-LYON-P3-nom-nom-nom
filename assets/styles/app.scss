@@ -1,4 +1,71 @@
-//start coding by removing this file and adding yours ;)
-@import "wcs";
-
 @import "~bootstrap/scss/bootstrap";
+//--------------------------variable--------------------------
+$backgroundButton: #BF4E40;
+$fontTitle: 'Maven Pro';
+$fontColorButton: #FFF;
+$fontSizeButton: 0.75rem;
+$fontStyleButton: normal;
+$fontWeightButton: 700;
+$lineHeightButton: normal;
+$fontText: 'Noto Sans';
+$fontColorText: #100F0F;
+$fontSizeText: 0.9375rem;
+$fontStyleText: normal;
+$fontWeightText: 400;
+$lineHeightText: normal;
+
+
+
+// ---------------------------mixin------------------------------
+@mixin myButton ($x, $y, $radius, $color, $fontFamily, $fontColor, $fontSize, $fontStyle, $fontWeight, $lineHeight) {
+    width: $x;
+    height: $y;
+    border-radius : $radius;
+    background-color: $color;
+    font-family: $fontFamily;
+    color: $fontColor;
+    font-size: $fontSize;
+    font-style: $fontStyle;
+    font-weight: $fontWeight;
+    line-height: $lineHeight;
+}
+
+@mixin myText ($fontFamily, $fontColor, $fontSize, $fontStyle, $fontWeight, $lineHeight) {
+    font-family: $fontFamily;
+    color: $fontColor;
+    font-size: $fontSize;
+    font-style: $fontStyle;
+    font-weight: $fontWeight;
+    line-height: $lineHeight;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    scroll-behavior: smooth;
+    text-decoration: none;
+}
+
+
+// -----------------------button------------------------------
+.but {
+    @include myButton(8.625rem, 1.875rem, 0.75rem, ($backgroundButton), ($fontTitle), ($fontColorButton), ($fontSizeButton), ($fontStyleButton),
+    ($fontWeightButton), ($lineHeightButton));
+    
+}
+
+.btn-primary {
+    --bs-btn-border-color: none;
+}
+
+//---------------------------text-----------------------------
+.paragraph {
+    @include myText(($fontText), ($fontColorText), ($fontSizeText), ($fontStyleText), ($fontWeightText), ($lineHeightText));
+}
+
+p {
+    margin: 16px 0 16px;
+}
