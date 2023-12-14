@@ -5,18 +5,34 @@
 
 //--------------------navbar-------------------
 .fa-solid {
-    color: #444559 ;
+    color: #444559;
+    font-size: 1.32rem;
+    padding: 0;
 }
 
 .fa-regular {
-    color: #444559 ;
-}
-.fa-circle-plus {
-    color:#BF4E40;
+    color: #444559;
+    font-size: 1.32rem;
+    padding: 0;
 }
 
-.nav
-{
-    position: fixed;
-    bottom: 0;
+.fa-circle-plus {
+    color: #BF4E40;
+    font-size: 2.2rem;
+}
+
+.nav {
+        position: fixed;
+        bottom: 5vw;
+        justify-content:center;
+        width: 100vw;
+        align-items: center;
+    }
+
+.nav-link{
+    padding: 0;
+}
+
+ul {
+    gap: 3rem;
 }
