@@ -18,7 +18,6 @@ class RecipeFixture extends Fixture
     ];
     public function load(ObjectManager $manager): void
     {
-
         foreach (self::RECIPES as $recipeFixture) {
             $recipe = new Recipe();
             $recipe->setNameRecipe($recipeFixture['nameRecipe']);
