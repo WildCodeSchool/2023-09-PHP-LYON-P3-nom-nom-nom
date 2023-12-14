@@ -1,9 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}
+	Accueil - Bienvenue sur l'application Nom nom nom
+{% endblock %}
 
 {% block body %}
+	<div class="container text-center">
+		<div id="carouselExampleCaptions" class="carousel slide">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				{% for recipe in showRecipes %}
+					<div class="carousel-item active">
+						<img src="./build/images/Cassoulet.png" class="w-50 mx-auto p-2 " alt="..."/>
+						<div class="carousel-caption d-none d-md-block">
+							<h5>{{ recipe.nameRecipe }}</h5>
+							<p>{{ recipe.description }}</p>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
 
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+	</div>
     
     <div class="container text-center">
     <p class="paragraph">Rejoignez-nous pour des recettes inoubliables, partagez des moments délicieux en famille et entre amis</p>
