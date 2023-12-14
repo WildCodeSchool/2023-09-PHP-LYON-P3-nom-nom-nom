@@ -21,6 +21,7 @@ class RecipeType extends AbstractType
             ->add('cookingTime')
             ->add('prepareTime')
             ->add('personNumber')
+            ->add('picture')
         ;
     }
 

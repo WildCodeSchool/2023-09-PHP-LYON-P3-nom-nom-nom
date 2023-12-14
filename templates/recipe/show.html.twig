@@ -14,13 +14,13 @@
 			</div>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-block w-50 rounded mx-auto d-block" alt="photo d'un cassoulet">
+					<img src="{{ asset('build/images/' ~ recipe.picture)}}" class="d-block w-50 rounded mx-auto d-block" alt="{{ recipe.nameRecipe }}">
 				</div>
-				<div class="carousel-item">
-					<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-block w-50 rounded mx-auto d-block" alt="photo d'un cassoulet">
+				<div class="carousel-item active">
+					<img src="{{ asset('build/images/' ~ recipe.picture)}}" class="d-block w-50 rounded mx-auto d-block" alt="{{ recipe.nameRecipe }}">
 				</div>
-				<div class="carousel-item">
-					<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-block w-50 rounded mx-auto d-block" alt="photo d'un cassoulet">
+				<div class="carousel-item active">
+					<img src="{{ asset('build/images/' ~ recipe.picture)}}" class="d-block w-50 rounded mx-auto d-block" alt="{{ recipe.nameRecipe }}">
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
