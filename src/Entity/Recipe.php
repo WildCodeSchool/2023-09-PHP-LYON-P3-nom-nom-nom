@@ -36,8 +36,15 @@ class Recipe
 
     #[ORM\Column]
     private ?int $prepareTime = null;
+
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, orphanRemoval: true)]
     private Collection $steps;
+
+    #[ORM\Column]
+    private ?int $personNumber = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $picture = null;
     public function __construct()
     {
         $this->steps = new ArrayCollection();
@@ -125,12 +132,36 @@ class Recipe
         return $this;
     }
 
+    public function getPersonNumber(): ?int
+    {
+        return $this->personNumber;
+    }
+
+    public function setPersonNumber(int $personNumber): static
+    {
+        $this->personNumber = $personNumber;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Step>
      */
     public function getSteps(): Collection
     {
         return $this->steps;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): static
+    {
+        $this->picture = $picture;
+
+        return $this->$picture;
     }
 
     public function addStep(Step $step): static
@@ -142,7 +173,6 @@ class Recipe
 
         return $this;
     }
-
     public function removeStep(Step $step): static
     {
         if ($this->steps->removeElement($step)) {
@@ -151,7 +181,6 @@ class Recipe
                 $step->setRecipe(null);
             }
         }
-
         return $this;
     }
 }
