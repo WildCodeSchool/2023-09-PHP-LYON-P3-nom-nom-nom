@@ -36,6 +36,7 @@ class Recipe
 
     #[ORM\Column]
     private ?int $prepareTime = null;
+
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, orphanRemoval: true)]
     private Collection $steps;
 
