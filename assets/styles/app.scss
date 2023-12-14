@@ -107,15 +107,3 @@ ul {
     gap: 3rem;
 }
 
-//------------------------page inconstruction----------------------------
-.div-inconstruction {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    height: 100vh;
-    justify-content: center;
-}
-.inconstruction {
-    color:$backgroundButton;
-}
