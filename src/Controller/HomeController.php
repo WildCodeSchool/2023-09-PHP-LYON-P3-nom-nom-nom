@@ -12,13 +12,13 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(RecipeRepository $recipeRespository): Response
     {
-        $showRecipes = $recipeRespository->findBy(
+        $recipes = $recipeRespository->findBy(
             [],
             ['id' => 'DESC'],
             3
         );
         return $this->render('home/index.html.twig', [
-            'showRecipes' => $showRecipes
+            'recipes' => $recipes
         ]);
     }
 }
