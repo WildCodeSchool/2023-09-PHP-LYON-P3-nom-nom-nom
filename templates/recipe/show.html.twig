@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Recipe
+{% endblock %}
+
+{% block body %}
+  <h2 class="text-center m-3">{{ recipe.nameRecipe }}</h2>
+  <div class="container text-center">
+    <div id="carouselExampleIndicators" class="carousel carousel-dark slide">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe" alt="photo d'un cassoulet" />
+        </div>
+        <div class="carousel-item">
+          <img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe" alt="photo d'un cassoulet" />
+        </div>
+        <div class="carousel-item">
+          <img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe" alt="photo d'un cassoulet" />
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <div class="row mt-5">
+      <div class="col">
+        <i class="fa-solid fa-fire"></i>
+        <p class="infos-recipe">{{ recipe.prepareTime }}
+          min</p>
+      </div>
+      <div class="col">
+        <i class="fa-solid fa-hourglass-half"></i>
+        <p class="infos-recipe">{{ recipe.cookingTime }}
+          min</p>
+      </div>
+      <div class="col">
+        <i class="fa-solid fa-user-group"></i>
+        <p class="infos-recipe">{{ recipe.personNumber }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="container text-center">
+    <div class="d-flex gap-3 justify-content-center">
+      <a class="btn mb-3 button-crud" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
+      <a class="btn mb-3 button-crud" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
+    </div>
+  </div>
+{% endblock %}
