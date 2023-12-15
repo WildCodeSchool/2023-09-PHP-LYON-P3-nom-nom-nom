@@ -1,25 +1,44 @@
 @import "~bootstrap/scss/bootstrap";
 //--------------------------variable--------------------------
-$backgroundButton: #BF4E40;
-$fontTitle: 'Maven Pro';
-$fontColorButton: #FFF;
+$backgroundButton: #bf4e40;
+$backgroundButtonDark: #444559;
+$fontTitle: "Maven Pro";
+$fontColorButton: #fff;
 $fontSizeButton: 0.75rem;
 $fontStyleButton: normal;
 $fontWeightButton: 700;
 $lineHeightButton: normal;
-$fontText: 'Noto Sans';
-$fontColorText: #100F0F;
+
+$fontText: "Noto Sans";
+$fontColorText: #100f0f;
 $fontSizeText: 0.9375rem;
 $fontStyleText: normal;
 $fontWeightText: 400;
+$fontWeightTitle: 800;
+$fontWeightInfos: 700;
 $lineHeightText: normal;
+$fontSizeTitle: 1.5rem;
+
+$widthPic: 13.9375rem;
+$heightPic: 23.3125rem;
+$borderRadiusPic: 1.625rem;
+$boxShadowPic: 0px 4px 9px 3px #c2aca1;
 
 @import "~bootstrap/scss/bootstrap";
 
-
-
 // ---------------------------mixin------------------------------
-@mixin myButton ($x, $y, $radius, $color, $fontFamily, $fontColor, $fontSize, $fontStyle, $fontWeight, $lineHeight) {
+@mixin myButton(
+    $x,
+    $y,
+    $radius,
+    $color,
+    $fontFamily,
+    $fontColor,
+    $fontSize,
+    $fontStyle,
+    $fontWeight,
+    $lineHeight
+) {
     width: $x;
     height: $y;
     border-radius: $radius;
@@ -32,7 +51,14 @@ $lineHeightText: normal;
     line-height: $lineHeight;
 }
 
-@mixin myText ($fontFamily, $fontColor, $fontSize, $fontStyle, $fontWeight, $lineHeight) {
+@mixin myText(
+    $fontFamily,
+    $fontColor,
+    $fontSize,
+    $fontStyle,
+    $fontWeight,
+    $lineHeight
+) {
     font-family: $fontFamily;
     color: $fontColor;
     font-size: $fontSize;
@@ -41,6 +67,12 @@ $lineHeightText: normal;
     line-height: $lineHeight;
 }
 
+@mixin myPicture($x, $y, $borderRadius, $boxShadow) {
+    width: $x;
+    height: $y;
+    border-radius: $borderRadius;
+    box-shadow: $boxShadow;
+}
 
 * {
     box-sizing: border-box;
@@ -49,45 +81,93 @@ $lineHeightText: normal;
     list-style: none;
     scroll-behavior: smooth;
     text-decoration: none;
-    background-color: #FAF6F4;
 }
 
+body {
+    background-color: #faf6f4;
+}
 
 // -----------------------button------------------------------
 .but {
-    @include myButton(8.625rem, 1.875rem, 0.75rem, ($backgroundButton), ($fontTitle), ($fontColorButton), ($fontSizeButton), ($fontStyleButton),
-        ($fontWeightButton), ($lineHeightButton));
-
+    @include myButton(
+        8.625rem,
+        1.875rem,
+        0.75rem,
+        ($backgroundButton),
+        ($fontTitle),
+        ($fontColorButton),
+        ($fontSizeButton),
+        ($fontStyleButton),
+        ($fontWeightButton),
+        ($lineHeightButton)
+    );
 }
 
 .btn-primary {
     --bs-btn-border-color: none;
 }
 
+.button-crud {
+    @include myButton(
+        8.625rem,
+        1.875rem,
+        0.75rem,
+        ($backgroundButton),
+        ($fontTitle),
+        ($fontColorButton),
+        ($fontSizeButton),
+        ($fontStyleButton),
+        ($fontWeightButton),
+        ($lineHeightButton)
+    );
+}
 //---------------------------text-----------------------------
 .paragraph {
-    @include myText(($fontText), ($fontColorText), ($fontSizeText), ($fontStyleText), ($fontWeightText), ($lineHeightText));
+    @include myText(
+        ($fontText),
+        ($fontColorText),
+        ($fontSizeText),
+        ($fontStyleText),
+        ($fontWeightText),
+        ($lineHeightText)
+    );
 }
 
 p {
     margin: 16px 0 16px;
 }
 
-//--------------------navbar-------------------
-.fa-solid {
-    color: #444559;
-    font-size: 1.32rem;
-    padding: 0;
+.infos-recipe {
+    @include myText(
+        ($fontTitle),
+        ($fontColorText),
+        ($fontSizeText),
+        ($fontStyleText),
+        ($fontWeightInfos),
+        ($lineHeightText)
+    );
 }
 
+h2 {
+    @include myText(
+        ($fontTitle),
+        ($fontColorText),
+        ($fontSizeTitle),
+        ($fontStyleText),
+        ($fontWeightTitle),
+        ($lineHeightText)
+    );
+}
+//--------------------navbar-------------------
+.fa-solid,
 .fa-regular {
-    color: #444559;
+    color: $backgroundButtonDark;
     font-size: 1.32rem;
     padding: 0;
 }
 
 .fa-circle-plus {
-    color: #BF4E40;
+    color: $backgroundButton;
     font-size: 2.2rem;
 }
 
@@ -106,4 +186,27 @@ p {
 ul {
     gap: 3rem;
 }
+//-------Carrousel----------
+.carousel-dark .carousel-indicators [data-bs-target] {
+    background-color: $fontColorButton;
+}
 
+.carousel-dark .carousel-caption {
+    color: $fontColorButton;
+}
+
+.pic-recipe {
+    margin: 15px 0 15px;
+    @include myPicture(
+        ($widthPic),
+        ($heightPic),
+        ($borderRadiusPic),
+        ($boxShadowPic)
+    );
+}
+//-------------------icon----------------
+.fa-fire,
+.fa-hourglass-half,
+.fa-user-group {
+    color: $backgroundButton;
+}
