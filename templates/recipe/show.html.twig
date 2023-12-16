@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block body %}
-  <h2 class="text-center m-3">{{ recipe.nameRecipe }}</h2>
+  <h2 class="mx-auto text-center mt-5 pt-4 text-uppercase w-75">{{ recipe.nameRecipe }}</h2>
   <div class="container text-center">
-    <div id="carouselExampleIndicators" class="carousel carousel-dark slide">
+    <div id="carouselExampleIndicators " class="carousel carousel-dark slide">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -24,7 +24,7 @@
           <img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe" alt="photo d'un cassoulet" />
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <button class="carousel-control-prev d-none" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
@@ -33,14 +33,14 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    <div class="row mt-5">
+    <div class="row mt-3 pt-2">
       <div class="col">
-        <i class="fa-solid fa-fire"></i>
+        <i class="fa-solid fa-hourglass-half"></i>
         <p class="infos-recipe">{{ recipe.prepareTime }}
           min</p>
       </div>
       <div class="col">
-        <i class="fa-solid fa-hourglass-half"></i>
+        <i class="fa-solid fa-fire"></i>
         <p class="infos-recipe">{{ recipe.cookingTime }}
           min</p>
       </div>
@@ -51,9 +51,8 @@
     </div>
   </div>
   <div class="container text-center">
-    <div class="d-flex gap-3 justify-content-center">
-      <a class="btn mb-3 button-crud" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
-      <a class="btn mb-3 button-crud" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
+    <div class="d-flex justify-content-center">
+      <a class="btn button-crud" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
     </div>
   </div>
 {% endblock %}
