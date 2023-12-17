@@ -7,17 +7,17 @@
 {% block body %}
   <div class="container text-center mt-4 pt-3">
     <div id="carouselExampleIndicators" class="carousel carousel-dark slide">
-       <div class="carousel-inner">
-    {% for key, recipe in showRecipes %}
-        <div class="carousel-item {% if key == 0 %} active {% endif %}">
-            <img src="./build/images/stock-chicken.png" class="pic-recipe" alt="{{ recipe.nameRecipe }}" />
+      <div class="carousel-inner">
+        {% for key, recipe in showRecipes %}
+          <div class="carousel-item {% if key == 0 %} active {% endif %}">
+            <img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}" />
             <div class="carousel-caption d-md-block">
-                <h5>{{ recipe.nameRecipe }}</h5>
-                <p>{{ recipe.description }}</p>
+              <h5>{{ recipe.nameRecipe }}</h5>
+              <p class="w-75 container text-center">{{ recipe.description }}</p>
             </div>
-        </div>
-    {% endfor %}
-</div>
+          </div>
+        {% endfor %}
+      </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -30,9 +30,9 @@
     </div>
   </div>
 
-  <div class="container text-center">
-    <p class="paragraph"> A chaque bouchée une nouvelle saveur.</p>
-    <a href="#" type="button" class="btn button-crud" tabindex="-1" role="button" aria-disabled="true">Rejoignez-nous</a>
-    <p>Rejoignez notre communauté culinaire et transformez chaque repas en une expérience mémorable, où la passion de la cuisine se marie harmonieusement avec le plaisir de créer des souvenirs délicieux.</p>
+  <div class="container text-center mt-4">
+    <p class="paragraph">A chaque bouchée une nouvelle saveur.</p>
+    <a href="#" type="button" class="btn button-crud mt-1" tabindex="-1" role="button" aria-disabled="true">Rejoignez-nous</a>
+    <p class="container-fluid w-100 mt-4 px-4 paragraph">Rejoignez notre communauté culinaire et transformez chaque repas en une expérience mémorable, où la passion de la cuisine se marie harmonieusement avec le plaisir de créer des souvenirs délicieux.</p>
   </div>
 {% endblock %}

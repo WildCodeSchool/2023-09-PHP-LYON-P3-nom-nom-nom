@@ -9,26 +9,29 @@ use Doctrine\Persistence\ObjectManager;
 class RecipeFixture extends Fixture
 {
     public const RECIPES = [
-        ['nameRecipe' => 'Cassoulet Toulousain',
-        'prepareTime' => 45,
-        'cookingTime' => 60,
-        'personNumber' => 2,
-        'description' => 'Découvrez le fameux cassoulet Toulousain... ',
-        'picture' => 'cassoulet_1.jpg',
+        [
+            'nameRecipe' => 'Cassoulet Toulousain',
+            'prepareTime' => 45,
+            'cookingTime' => 60,
+            'personNumber' => 2,
+            'picture' => 'cassoulet.png',
+            'description' => 'Découvrez le fameux cassoulet Toulousain... ',
         ],
-        ['nameRecipe' => 'Donnër Kebab',
-        'prepareTime' => 45,
-        'cookingTime' => 60,
-        'personNumber' => 2,
-        'description' => 'Réaliser un kebab aussi bon que dans un snack',
-        'picture' => 'cassoulet_1.jpg',
+        [
+            'nameRecipe' => 'Donnër Kebab',
+            'prepareTime' => 45,
+            'cookingTime' => 60,
+            'personNumber' => 2,
+            'picture' => 'kebab.png',
+            'description' => 'Réaliser un kebab aussi bon que dans un snack',
         ],
-        ['nameRecipe' => 'Banh Bao',
-        'prepareTime' => 45,
-        'cookingTime' => 60,
-        'personNumber' => 2,
-        'description' => 'Gouter ces délicieuses brioches vietnamiennes',
-        'picture' => 'cassoulet_1.jpg',
+        [
+            'nameRecipe' => 'Gua Bao',
+            'prepareTime' => 45,
+            'cookingTime' => 60,
+            'personNumber' => 2,
+            'picture' => 'guabao.png',
+            'description' => 'Gouter ces délicieux sandwich chinois',
         ],
     ];
     public function load(ObjectManager $manager): void

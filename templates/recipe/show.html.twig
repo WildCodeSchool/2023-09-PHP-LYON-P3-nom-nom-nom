@@ -15,13 +15,13 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe" alt="photo d'un cassoulet" />
+          <img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe object-fit-cover" alt="photo d'un cassoulet" />
         </div>
         <div class="carousel-item">
-          <img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe" alt="photo d'un cassoulet" />
+          <img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe object-fit-cover" alt="photo d'un cassoulet" />
         </div>
         <div class="carousel-item">
-          <img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe" alt="photo d'un cassoulet" />
+          <img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe object-fit-cover" alt="photo d'un cassoulet" />
         </div>
       </div>
       <button class="carousel-control-prev d-none" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -52,7 +52,7 @@
   </div>
   <div class="container text-center">
     <div class="d-flex justify-content-center">
-      <a class="btn button-crud" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
+      <a class="container btn button-crud mt-2" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
     </div>
   </div>
 {% endblock %}
