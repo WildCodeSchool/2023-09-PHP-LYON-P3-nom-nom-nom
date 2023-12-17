@@ -9,9 +9,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[Vich\Uploadable]
 class Recipe
 {
     #[ORM\Id]
@@ -20,6 +24,11 @@ class Recipe
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
+    #[Assert\Length(
+        max: 100,
+        maxMessage: 'Le nom de la recette dépasse la taille maximum de {{ limit }} caractères',
+    )]
     private ?string $nameRecipe = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -29,22 +38,37 @@ class Recipe
     private ?int $calorie = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\Date(message: 'La date n\'est pas correcte')]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
+    #[Assert\PositiveOrZero(message: 'Un temps de cuisson ne peut pas être négatif')]
+
     private ?int $cookingTime = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
+    #[Assert\Positive(message: 'Un temps de préparation ne peut pas être négatif')]
     private ?int $prepareTime = null;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, orphanRemoval: true)]
     private Collection $steps;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
+    #[Assert\Positive(message: 'La recette est pour combien de personne?')]
     private ?int $personNumber = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
+
+    #[Vich\UploadableField(mapping: 'picture_file', fileNameProperty: 'picture')]
+    #[Assert\File(
+        maxSize: '2M',
+        mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
+    )]
+    private ?File $pictureFile = null;
     public function __construct()
     {
         $this->steps = new ArrayCollection();
@@ -162,6 +186,17 @@ class Recipe
         $this->picture = $picture;
 
         return $this;
+    }
+
+    public function setPictureFile(File $image = null): Recipe
+    {
+        $this->picture = $image;
+        return $this;
+    }
+
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
     }
 
     public function addStep(Step $step): static

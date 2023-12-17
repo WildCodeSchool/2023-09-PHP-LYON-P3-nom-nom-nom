@@ -43,6 +43,7 @@ class RecipeFixture extends Fixture
             $recipe->setDescription($recipeFixture['description']);
 
             $manager->persist($recipe);
+            $this->addReference('recipe_' . $recipeFixture['nameRecipe'], $recipe);
         }
         $manager->flush();
     }
