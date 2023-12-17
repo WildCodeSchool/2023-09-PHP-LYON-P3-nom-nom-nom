@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use App\Repository\RecipeRepository;
 use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
@@ -16,6 +17,11 @@ use Symfony\Component\HttpFoundation\File\File;
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[Vich\Uploadable]
+#[UniqueEntity(
+    fields: ['nameRecipe'],
+    errorPath: 'nameRecipe',
+    message: 'cette recette existe déjà',
+)]
 class Recipe
 {
     #[ORM\Id]
@@ -39,7 +45,7 @@ class Recipe
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\Date(message: 'La date n\'est pas correcte')]
-    private ?\DateTimeInterface $date = null;
+    private ?DateTimeInterface $date = null;
 
     #[ORM\Column]
     #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
@@ -59,6 +65,9 @@ class Recipe
     #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
     #[Assert\Positive(message: 'La recette est pour combien de personne?')]
     private ?int $personNumber = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?DateTimeInterface $updatedAt = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
@@ -120,12 +129,12 @@ class Recipe
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): static
+    public function setDate(DateTimeInterface $date): static
     {
         $this->date = $date;
 
@@ -167,6 +176,16 @@ class Recipe
 
         return $this;
     }
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(DatetimeInterface $updatedAt): Recipe
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
 
     /**
      * @return Collection<int, Step>
@@ -190,7 +209,10 @@ class Recipe
 
     public function setPictureFile(File $image = null): Recipe
     {
-        $this->picture = $image;
+        $this->pictureFile = $image;
+        if ($image) {
+            $this->updatedAt = new DateTime('now');
+        }
         return $this;
     }
 
@@ -211,7 +233,7 @@ class Recipe
     public function removeStep(Step $step): static
     {
         if ($this->steps->removeElement($step)) {
-// set the owning side to null (unless already changed)
+            // set the owning side to null (unless already changed)
             if ($step->getRecipe() === $this) {
                 $step->setRecipe(null);
             }
