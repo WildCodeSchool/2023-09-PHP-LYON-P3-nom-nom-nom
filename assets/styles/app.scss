@@ -19,6 +19,7 @@ $fontWeightTitle: 800;
 $fontWeightInfos: 1000;
 $lineHeightText: normal;
 $fontSizeTitle: 1.5rem;
+$glassmorphism: blur(9.2px);
 
 $widthPic: 14.94rem;
 $heightPic: 26.3125rem;
@@ -58,7 +59,7 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     $fontSize,
     $fontStyle,
     $fontWeight,
-    $lineHeight,
+    $lineHeight
 ) {
     font-family: $fontFamily;
     color: $fontColorText;
@@ -75,6 +76,10 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     box-shadow: $boxShadow;
 }
 
+@mixin glass($glassmorphism, $borderRadiusPic) {
+    backdrop-filter: $glassmorphism;
+    border-radius: $borderRadiusPic;
+}
 * {
     box-sizing: border-box;
     margin: 0;
@@ -147,6 +152,9 @@ p {
         ($fontWeightInfos),
         ($lineHeightText)
     );
+}
+.glassmorphism {
+    @include glass(($glassmorphism), ($borderRadiusPic));
 }
 
 h2 {
