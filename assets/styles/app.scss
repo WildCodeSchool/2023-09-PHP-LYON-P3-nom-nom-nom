@@ -2,6 +2,7 @@
 //--------------------------variable--------------------------
 $backgroundButton: #bf4e40;
 $backgroundButtonDark: #444559;
+$backgroundMainColor: #faf6f4;
 $fontTitle: "Maven Pro";
 $fontColorButton: #fff;
 $fontSizeButton: 0.75rem;
@@ -85,7 +86,8 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 }
 
 body {
-    background-color: #faf6f4;
+    background-color: $backgroundMainColor;
+    height: 100vh;
 }
 
 // -----------------------button------------------------------
@@ -174,10 +176,10 @@ h2 {
 
 .nav {
     position: fixed;
-    bottom: 5vw;
     justify-content: center;
     width: 100vw;
     align-items: center;
+    background-color: $backgroundMainColor;
 }
 
 .nav-link {
