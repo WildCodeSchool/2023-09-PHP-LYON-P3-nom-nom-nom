@@ -180,6 +180,10 @@ h2 {
     width: 100vw;
     align-items: center;
     background-color: $backgroundMainColor;
+
+    @include media-breakpoint-up(lg) {
+        position: relative;
+    }
 }
 
 .nav-link {
@@ -189,6 +193,11 @@ h2 {
 ul {
     gap: 3rem;
 }
+
+// ------------------- media query ------------------ //
+
+
+
 //-------Carrousel----------
 .carousel-dark .carousel-indicators [data-bs-target] {
     background-color: $fontColorButton;
