@@ -188,6 +188,10 @@ h2 {
 
 .nav-link {
     padding: 0;
+
+    @include media-breakpoint-up(lg) {
+        cursor: pointer;
+    }
 }
 
 ul {
