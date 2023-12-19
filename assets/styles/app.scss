@@ -76,7 +76,9 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     box-shadow: $boxShadow;
 }
 
-@mixin glass($glassmorphism, $borderRadiusPic) {
+@mixin glass($x, $y, $glassmorphism, $borderRadiusPic) {
+    width: $x;
+    height: $y;
     backdrop-filter: $glassmorphism;
     border-radius: $borderRadiusPic;
 }
@@ -153,8 +155,9 @@ p {
         ($lineHeightText)
     );
 }
+
 .glassmorphism {
-    @include glass(($glassmorphism), ($borderRadiusPic));
+    @include glass(14.5rem, 9rem, ($glassmorphism), ($borderRadiusPic));
 }
 
 h2 {
