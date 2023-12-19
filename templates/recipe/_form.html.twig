@@ -1,6 +1,20 @@
-{{ form_start(form) }}
+{# {{ form_start(form) }}
 <div class="mt-3">
 	{{ form_widget(form) }}
 </div>
-<button class="btn btn-primary mt-4 mb-2 fs-4">{{ button_label|default('Save') }}</button>
+<button class="btn btn-primary mt-4 mb-2 fs-4">{{ button_label|default('Publier votre recette') }}</button>
+{{ form_end(form) }} #}
+
+{{ form_start(form) }}
+<ul class="steps" data-prototype="{{ form_widget(form.steps.vars.prototype)|e('html_attr') }}">
+	<div class="mt-3">
+		{{ form_widget(form) }}
+	</div>
+	{% for stepForm in form.steps %}
+		<li>{{ form_row(stepForm) }}</li>
+	{% endfor %}
+</ul>
+<button type="button" class="add_step">Ajouter une étape</button>
+{# <button type="submit">Save Recipe</button> #}
+<button class="btn btn-primary mt-4 mb-2 fs-4">{{ button_label|default('Publier votre recette') }}</button>
 {{ form_end(form) }}

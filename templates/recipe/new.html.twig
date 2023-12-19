@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Recipe
+{% block title %}Ajouter votre recette
 {% endblock %}
 
 {% block body %}
 	<div class="container mb-5">
-		<h1 class="mt-5 mb-5 text-center">Create new Recipe</h1>
+		<h1 class="mt-5 mb-5 text-center">Ajouter votre recette</h1>
 		<div class="form-control text-center fs-3 mb-3 p-5">
 			{{ include('recipe/_form.html.twig') }}
 
-			<a href="{{ path('app_recipe_index') }}">back to list</a>
+			<a href="{{ path('app_recipe_index') }}">Retour à la liste des recettes</a>
 		</div>
 	</div>
 {% endblock %}
