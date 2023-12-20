@@ -4,16 +4,19 @@ namespace App\DataFixtures;
 
 use App\Entity\Ingredient;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class IngredientFixtures extends Fixture
+class IngredientFixtures extends Fixture implements DependentFixtureInterface
 {
     public const INGREDIENT = [
-        ['nameIngredient' => 'Carotte', 'Category' => 'Légumes'],
-        ['nameIngredient' => 'Salade','Category' => 'Légumes'],
-        ['nameIngredient' => 'Lait','Category' => 'Produits laitier'],
-        ['nameIngredient' => 'Chocolat','Category' => 'Produits sucrés'],
-        ['nameIngredient' => 'Huile d\'olive','Category' => 'Huile']
+        ['nameIngredient' => 'Carotte', 'Category' => 'Légume'],
+        ['nameIngredient' => 'Oignon','Category' => 'Légume'],
+        ['nameIngredient' => 'Saucisse de Toulouse','Category' => 'Viande'],
+        ['nameIngredient' => 'Echine de porc','Category' => 'Viande'],
+        ['nameIngredient' => 'Haricot blanc','Category' => 'Légumineuse'],
+        ['nameIngredient' => 'Huile d\'olive','Category' => 'Huile'],
+        ['nameIngredient' => 'Thym','Category' => 'Assaisonnement']
     ];
 
     public function load(ObjectManager $manager): void
@@ -26,5 +29,12 @@ class IngredientFixtures extends Fixture
             $manager->persist($ingredient);
             $manager->flush();
         }
+    }
+
+    public function getDependencies()
+    {
+        return [
+          RecipeFixture::class,
+        ];
     }
 }

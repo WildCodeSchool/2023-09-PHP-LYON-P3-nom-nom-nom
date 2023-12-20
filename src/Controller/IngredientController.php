@@ -4,9 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Ingredient;
 use App\Entity\Recipe;
-use App\Entity\RecipeIngredient;
 use App\Form\IngredientType;
-use App\Repository\IngredientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,15 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/ingredient', name: 'ingredient_')]
 class IngredientController extends AbstractController
 {
-    #[Route('/', name: 'index')]
-    public function index(IngredientRepository $ingredientRepository): Response
-    {
-        $ingredients = $ingredientRepository->findAll();
-        return $this->render('ingredient/index.html.twig', [
-            'ingredients' => $ingredients,
-        ]);
-    }
-
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -42,14 +31,6 @@ class IngredientController extends AbstractController
         return $this->render('ingredient/new.html.twig', [
             'ingredient' => $ingredient,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Recipe $recipe): Response
-    {
-        return $this->render('ingredient/show.html.twig', [
-            'recipe' => $recipe,
         ]);
     }
 
