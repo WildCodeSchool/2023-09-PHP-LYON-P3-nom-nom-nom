@@ -16,9 +16,9 @@ class StepType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('stepNumber', NumberType::class)
-            ->add('description', TextareaType::class)
-        //     ->add('recipe', EntityType::class, [
+            ->add('stepNumber')
+            ->add('description')
+                    //     ->add('recipe', EntityType::class, [
         //         'class' => Recipe::class,
         // 'choice_label' => 'nameRecipe',
         //     ])

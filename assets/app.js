@@ -11,10 +11,9 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 
-document.querySelector('.add_step').addEventListener('click', function() {
-    console.log("toto");
-    let prototype = document.querySelector('.steps').dataset.prototype;
-    let index = document.querySelectorAll('.steps li').length;
-    var newForm = prototype.replace(/__name__/g, index);
-    document.querySelector('.steps').insertAdjacentHTML('beforeend', newForm);
-});
+// document.querySelector('.add_step').addEventListener('click', function() {
+//     let prototype = document.querySelector('.steps').dataset.prototype;
+//     let index = document.querySelectorAll('.steps li').length;
+//     var newForm = prototype.replace(/__name__/g, index);
+//     document.querySelector('.steps').insertAdjacentHTML('beforeend', newForm);
+// });

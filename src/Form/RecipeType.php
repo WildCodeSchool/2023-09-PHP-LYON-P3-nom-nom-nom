@@ -45,10 +45,11 @@ class RecipeType extends AbstractType
             ])
             ->add('steps', CollectionType::class, [
                 'entry_type' => StepType::class,
-                'entry_options' => ['label' => 'Etapes de votre recette'],
+                'entry_options' => ['label' => false],
                 'allow_add' => true,
+                // 'allow_delete' => true,
                 'by_reference' => false,
-                'label' => 'Etapes de votre recette'
+                // 'label' => 'Etapes de votre recette'
             ]);
     }
 
