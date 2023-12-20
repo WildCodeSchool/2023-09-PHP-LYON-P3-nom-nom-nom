@@ -195,33 +195,45 @@ h2 {
     }
 }
 
-.nav-link:hover {
-    @include media-breakpoint-up(lg) {
-        background-color: $backgroundMainColor;
-    }
-}
-
 ul {
     gap: 3rem;
 }
 
 //--------------------navbar-desktop-------------------//
+.nav-desktop-container{
+    display: block;
+}
 
 .navbar-desktop {
     display: none;
 
     @include media-breakpoint-up(lg) {
-        width: 50vw;
+        width: 24vw;
         position: fixed;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
-        background-color: $backgroundMainColor;
+        background-color: $backgroundButtonDark;
+        border-radius: 16px;
+        padding: 16px;
+        margin-left: 74vw;
+        margin-bottom: 27vw;
+        transition: 4s;
     }
 }
 
 .navbar-desktop li{
     cursor: pointer;
+    color: $backgroundMainColor;
+    font-size: larger;
+    transition: 0.4s;
+}
+
+.navbar-desktop li:hover {
+    @include media-breakpoint-up(lg) {
+
+        font-weight: bold;
+    }
 }
 
 .bento-container{
