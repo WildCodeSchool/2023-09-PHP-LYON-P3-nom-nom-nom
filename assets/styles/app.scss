@@ -174,17 +174,18 @@ h2 {
     font-size: 2.2rem;
 }
 
-.nav {
+#navbar-mobile {
     position: fixed;
+    display: flex;
     justify-content: center;
-    width: 100vw;
     align-items: center;
     background-color: $backgroundMainColor;
 
     @include media-breakpoint-up(lg) {
-        position: relative;
+        display: none;
     }
 }
+
 
 .nav-link {
     padding: 0;
@@ -194,16 +195,51 @@ h2 {
     }
 }
 
+.nav-link:hover {
+    @include media-breakpoint-up(lg) {
+        background-color: $backgroundMainColor;
+    }
+}
+
 ul {
     gap: 3rem;
 }
 
-.bento{
+//--------------------navbar-desktop-------------------//
+
+#navbar-desktop {
     display: none;
+
+    @include media-breakpoint-up(lg) {
+        width: 50vw;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: $backgroundMainColor;
+    }
 }
 
-// ------------------- media query ------------------ //
+.bento-container{
+   
+    @include media-breakpoint-up(lg) {
+        position: fixed;
+        right: 0;
+        top: 0;
+    }
+}
 
+.bento-container img{
+    display: none;
+    
+    @include media-breakpoint-up(lg) {
+        display: block;
+        height: 30px;
+        margin: 15px;
+        cursor: pointer;
+    }
+}
 
 
 //-------Carrousel----------
