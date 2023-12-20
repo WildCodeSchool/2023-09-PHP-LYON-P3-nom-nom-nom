@@ -174,7 +174,7 @@ h2 {
     font-size: 2.2rem;
 }
 
-#navbar-mobile {
+.navbar-mobile {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -207,18 +207,21 @@ ul {
 
 //--------------------navbar-desktop-------------------//
 
-#navbar-desktop {
+.navbar-desktop {
     display: none;
 
     @include media-breakpoint-up(lg) {
         width: 50vw;
         position: fixed;
-        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         background-color: $backgroundMainColor;
     }
+}
+
+.navbar-desktop li{
+    cursor: pointer;
 }
 
 .bento-container{
@@ -241,6 +244,9 @@ ul {
     }
 }
 
+.list-visible{
+    display: flex;
+}
 
 //-------Carrousel----------
 .carousel-dark .carousel-indicators [data-bs-target] {

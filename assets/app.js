@@ -11,12 +11,10 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 
-console.log(connecté);
-
 const icon = document.querySelector(".bento-container");
-const list = document.querySelector(".navbar");
+const list = document.querySelector(".navbar-desktop");
 
 icon.addEventListener("click", function () {
 	list.classList.toggle("list-visible");
-	list.classList.toggle("icon-visible");
+	// list.classList.toggle("icon-visible");
 });
