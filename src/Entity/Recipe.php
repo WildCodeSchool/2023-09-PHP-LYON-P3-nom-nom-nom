@@ -4,14 +4,24 @@ namespace App\Entity;
 
 use App\Repository\RecipeRepository;
 use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[Vich\Uploadable]
+#[UniqueEntity(
+    fields: ['nameRecipe'],
+    errorPath: 'nameRecipe',
+    message: 'cette recette existe déjà',
+)]
 class Recipe
 {
     #[ORM\Id]
@@ -20,6 +30,11 @@ class Recipe
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
+    #[Assert\Length(
+        max: 100,
+        maxMessage: 'Le nom de la recette dépasse la taille maximum de {{ limit }} caractères',
+    )]
     private ?string $nameRecipe = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -29,12 +44,18 @@ class Recipe
     private ?int $calorie = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
+    #[Assert\Date(message: 'La date n\'est pas correcte')]
+    private ?DateTimeInterface $date = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
+    #[Assert\PositiveOrZero(message: 'Un temps de cuisson ne peut pas être négatif')]
+
     private ?int $cookingTime = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
+    #[Assert\Positive(message: 'Un temps de préparation ne peut pas être négatif')]
     private ?int $prepareTime = null;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, orphanRemoval: true)]
@@ -45,10 +66,22 @@ class Recipe
 
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
+    #[Assert\Positive(message: 'La recette est pour combien de personne?')]
     private ?int $personNumber = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?DateTimeInterface $updatedAt = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
+
+    #[Vich\UploadableField(mapping: 'picture_file', fileNameProperty: 'picture')]
+    #[Assert\File(
+        maxSize: '2M',
+        mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
+    )]
+    private ?File $pictureFile = null;
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
@@ -101,12 +134,12 @@ class Recipe
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): static
+    public function setDate(DateTimeInterface $date): static
     {
         $this->date = $date;
 
@@ -148,6 +181,16 @@ class Recipe
 
         return $this;
     }
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(DatetimeInterface $updatedAt): Recipe
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
 
     /**
      * @return Collection<int, RecipeIngredient>
@@ -186,6 +229,20 @@ class Recipe
         return $this;
     }
 
+    public function setPictureFile(File $image = null): Recipe
+    {
+        $this->pictureFile = $image;
+        if ($image) {
+            $this->updatedAt = new DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
+    }
+
     public function addStep(Step $step): static
     {
         if (!$this->steps->contains($step)) {
@@ -210,7 +267,7 @@ class Recipe
     public function removeStep(Step $step): static
     {
         if ($this->steps->removeElement($step)) {
-// set the owning side to null (unless already changed)
+            // set the owning side to null (unless already changed)
             if ($step->getRecipe() === $this) {
                 $step->setRecipe(null);
             }
