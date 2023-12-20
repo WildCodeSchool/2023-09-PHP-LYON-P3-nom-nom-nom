@@ -1,15 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter votre recette
+{% block title %}Ajouter une recette
 {% endblock %}
 
 {% block body %}
-	<div class="container mb-5">
-		<h1 class="mt-5 mb-5 text-center">Ajouter votre recette</h1>
-		<div class="form-control text-center fs-3 mb-3 p-5">
-			{{ include('recipe/_form.html.twig') }}
+	<div class="container-fluid w-100 mt-4 px-4 paragraph">
 
-			<a href="{{ path('app_recipe_index') }}">Retour à la liste des recettes</a>
+		<h1 class="mt-2 mb-2 text-center">Ajouter une recette</h1>
+					
+				<div class="container-add-form">
+		<img src="/build/images/nomnomlogo.png" alt="logo de nomnomnom" class="logo-add">
+		</div>
+				<div class="paragraph mb-3">
+			<div>{{ include('recipe/_form.html.twig') }}<div>
+
+		{# <a class="mb-4" href="{{ path('app_recipe_index') }}">Retour à la liste des recettes</a> #}
+
 		</div>
 	</div>
+
 {% endblock %}

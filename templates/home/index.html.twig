@@ -10,7 +10,8 @@
       <div class="carousel-inner">
         {% for key, recipe in showRecipes %}
           <div class="carousel-item {% if key == 0 %} active {% endif %}">
-           <a href="{{ path('app_recipe_show', { id:recipe.id }) }}"> <img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}" /></a>
+          <a href="{{ path('app_recipe_show', { id:recipe.id }) }}"> <img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}" /></a>
+          {# {{ asset('/uploads/images/pictures/' ~ recipe.picture) }} quand on enregistre par le formulaire Ben ne le dégage pas #}
             <div class="container-fluid carousel-caption d-md-block glassmorphism ">
               <h5>{{ recipe.nameRecipe }}</h5>
               <p class="w-75 container text-center">{{ recipe.description }}</p>

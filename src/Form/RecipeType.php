@@ -25,23 +25,23 @@ class RecipeType extends AbstractType
                 'label' => 'Télecharger une photo illustrant votre recette '
             ])
             ->add('nameRecipe', TextType::class, [
-                'label' => 'Nom de la recette :'
+                'label' => 'Nom de la recette : '
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Un commentaire sur votre recette ?'
+                'label' => 'Un commentaire sur votre recette ? '
             ])
             ->add('calorie', NumberType::class, [
-                'label' => 'Nombre de calories :'
+                'label' => 'Nombre de calories : '
             ])
             ->add('date', HiddenType::class)
             ->add('cookingTime', NumberType::class, [
-                'label' => 'Temps de cuisson'
+                'label' => 'Temps de cuisson : '
             ])
             ->add('prepareTime', NumberType::class, [
-                'label' => 'Temps de préparation'
+                'label' => 'Temps de préparation : '
             ])
             ->add('personNumber', NumberType::class, [
-                'label' => 'Pour combien de personne ?'
+                'label' => 'Pour combien de personne ? '
             ])
             ->add('steps', CollectionType::class, [
                 'entry_type' => StepType::class,
@@ -49,7 +49,7 @@ class RecipeType extends AbstractType
                 'allow_add' => true,
                 // 'allow_delete' => true,
                 'by_reference' => false,
-                // 'label' => 'Etapes de votre recette'
+                'label' => false
             ]);
     }
 

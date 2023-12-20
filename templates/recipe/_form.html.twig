@@ -1,23 +1,22 @@
-
 {{ form_start(form) }}
 
-	<div class="mt-3">
-		{{ form_row(form.pictureFile) }}
-		{{ form_row(form.nameRecipe) }}
-		{{ form_row(form.description) }}
-		{{ form_row(form.calorie) }}
-		{{ form_row(form.cookingTime) }}
-		{{ form_row(form.prepareTime) }}
-		{{ form_row(form.personNumber) }}
+<div class="mt-3 grid-form">
+	{{ form_row(form.pictureFile) }}
+	{{ form_row(form.nameRecipe) }}
+	{{ form_row(form.description) }}
+	{{ form_row(form.calorie) }}
+	{{ form_row(form.cookingTime) }}
+	{{ form_row(form.prepareTime) }}
+	{{ form_row(form.personNumber) }}
 
+</div>
+<div {{ stimulus_controller('form-collection') }} data-form-collection-index-value="{{ form.steps|length }}" data-form-collection-prototype-value="{{ form_widget(form.steps.vars.prototype)|e('html_attr') }}">
+	<ul class="paragraph p-0" {{ stimulus_target('form-collection', 'collectionContainer') }}></ul>
+	<div class="button-form">
+		<button type="button" class="btn btn-primary but-form mt-4 mb-2 fs-4" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Ajouter une étape</button>
 	</div>
-	<div {{ stimulus_controller('form-collection') }}
-        data-form-collection-index-value="{{ form.steps|length }}"
-        data-form-collection-prototype-value="{{ form_widget(form.steps.vars.prototype)|e('html_attr') }}"
-    >
-        <ul {{ stimulus_target('form-collection', 'collectionContainer') }}></ul>
-        <button type="button" class="btn btn-primary mt-4 mb-2 fs-4" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Ajouter une étape</button>
-    </div>
-
-<button class="btn btn-primary mt-4 mb-2 fs-4">{{ button_label|default('Publier votre recette') }}</button>
+</div>
+<div class="button-form">
+	<button class="btn btn-primary but button-form mt-4 mb-2 fs-4">{{ button_label|default('Publier votre recette') }}</button>
+</div>
 {{ form_end(form) }}
