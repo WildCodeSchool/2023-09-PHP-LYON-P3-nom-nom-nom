@@ -1,18 +1,23 @@
 
 {{ form_start(form) }}
-{# <ul class="steps" data-prototype="{{ form_widget(form.steps.vars.prototype)|e('html_attr') }}"> #}
-	{# <div class="mt-3">
+
+	<div class="mt-3">
 		{{ form_row(form.pictureFile) }}
-	</div> #}
+		{{ form_row(form.nameRecipe) }}
+		{{ form_row(form.description) }}
+		{{ form_row(form.calorie) }}
+		{{ form_row(form.cookingTime) }}
+		{{ form_row(form.prepareTime) }}
+		{{ form_row(form.personNumber) }}
+
+	</div>
 	<div {{ stimulus_controller('form-collection') }}
         data-form-collection-index-value="{{ form.steps|length }}"
         data-form-collection-prototype-value="{{ form_widget(form.steps.vars.prototype)|e('html_attr') }}"
     >
         <ul {{ stimulus_target('form-collection', 'collectionContainer') }}></ul>
-        <button type="button" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Add an step</button>
+        <button type="button" class="btn btn-primary mt-4 mb-2 fs-4" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Ajouter une étape</button>
     </div>
-{# </ul> #}
-{# <button type="button" class="btn btn-primary mt-4 mb-2 fs-4 add_step">Ajouter une étape</button> #}
-{# <button type="submit">Save Recipe</button> #}
+
 <button class="btn btn-primary mt-4 mb-2 fs-4">{{ button_label|default('Publier votre recette') }}</button>
 {{ form_end(form) }}
