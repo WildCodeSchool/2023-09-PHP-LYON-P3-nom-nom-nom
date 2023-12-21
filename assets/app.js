@@ -16,5 +16,5 @@ const list = document.querySelector(".navbar-desktop");
 
 icon.addEventListener("click", function () {
 	list.classList.toggle("list-visible");
-	// list.classList.toggle("icon-visible");
+	icon.classList.toggle("icon-visible");
 });
