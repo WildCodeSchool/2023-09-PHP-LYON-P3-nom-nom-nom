@@ -11,6 +11,7 @@ $lineHeightButton: normal;
 
 $fontText: "Noto Sans";
 $fontColorText: #444559;
+$fontColorTextRed: #bf4e40;
 $fontSizeText: 0.9375rem;
 $fontSizeInfosRecipe: 1.2rem;
 $fontStyleText: normal;
@@ -19,6 +20,7 @@ $fontWeightTitle: 800;
 $fontWeightInfos: 1000;
 $lineHeightText: normal;
 $fontSizeTitle: 1.5rem;
+$fontSizeTitleH3: 1.3rem;
 $glassmorphism: blur(9.2px);
 
 $widthPic: 14.94rem;
@@ -165,6 +167,17 @@ h2 {
         ($fontTitle),
         ($fontColorText),
         ($fontSizeTitle),
+        ($fontStyleText),
+        ($fontWeightTitle),
+        ($lineHeightText)
+    );
+}
+
+h3 {
+    @include myText(
+        ($fontTitle),
+        ($fontColorTextRed),
+        ($fontSizeTitleH3),
         ($fontStyleText),
         ($fontWeightTitle),
         ($lineHeightText)
