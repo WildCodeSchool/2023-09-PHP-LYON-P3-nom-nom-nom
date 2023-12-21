@@ -23,8 +23,10 @@ $fontSizeTitle: 1.5rem;
 $fontSizeTitleH3: 1.3rem;
 $glassmorphism: blur(9.2px);
 
-$widthPic: 14.94rem;
-$heightPic: 26.3125rem;
+$widthPic: 16rem;
+$heightPic: 29rem;
+$widthPicDesktop: 14.94rem;
+$heightPicDesktop: 26.3125rem;
 $borderRadiusPic: 1.625rem;
 $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 
@@ -77,6 +79,11 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     border-radius: $borderRadius;
     box-shadow: $boxShadow;
 }
+@mixin myPictureDesktop($x, $y, $boxShadow) {
+    width: $x;
+    height: $y;
+    box-shadow: $boxShadow;
+}
 
 @mixin glass($x, $y, $glassmorphism, $borderRadiusPic) {
     width: $x;
@@ -84,9 +91,13 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     backdrop-filter: $glassmorphism;
     border-radius: $borderRadiusPic;
 }
+
+@mixin glassDesktop($glassmorphism, $borderRadiusPic) {
+    backdrop-filter: $glassmorphism;
+    border-radius: $borderRadiusPic;
+}
 * {
     box-sizing: border-box;
-    margin: 0;
     padding: 0;
     list-style: none;
     scroll-behavior: smooth;
@@ -162,6 +173,15 @@ p {
     @include glass(14.5rem, 9rem, ($glassmorphism), ($borderRadiusPic));
 }
 
+.glassmorphism-desktop {
+    position: absolute;
+    bottom: 9vh;
+    left: 0;
+    text-align: center;
+    color: #faf6f4;
+    @include glassDesktop(($glassmorphism), ($borderRadiusPic));
+}
+
 h2 {
     @include myText(
         ($fontTitle),
@@ -226,6 +246,15 @@ ul {
         ($widthPic),
         ($heightPic),
         ($borderRadiusPic),
+        ($boxShadowPic)
+    );
+}
+
+.pic-recipe-desktop {
+    margin: 15px 0 15px;
+    @include myPictureDesktop(
+        ($widthPicDesktop),
+        ($heightPicDesktop),
         ($boxShadowPic)
     );
 }
