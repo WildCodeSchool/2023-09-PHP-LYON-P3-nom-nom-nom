@@ -96,24 +96,10 @@ body {
 }
 
 // -----------------------button------------------------------
-.but {
-    @include myButton(
-        8.625rem,
-        1.875rem,
-        0.75rem,
-        ($backgroundButton),
-        ($fontTitle),
-        ($fontColorButton),
-        ($fontSizeButton),
-        ($fontStyleButton),
-        ($fontWeightButton),
-        ($lineHeightButton)
-    );
-}
-
 .btn-primary {
     --bs-btn-border-color: none;
     background-color: $backgroundButton;
+    --bs-btn-active-bg: #2f5057;
 }
 
 .button-crud {
@@ -129,6 +115,9 @@ body {
         ($fontWeightButton),
         ($lineHeightButton)
     );
+    &:hover{
+        background-color: $backgroundButtonDark;
+    }
 }
 
 .but-form {
@@ -144,6 +133,9 @@ body {
         ($fontWeightButton),
         ($lineHeightButton)
     );
+    &:hover{
+        background-color: $backgroundButtonDark;
+    }
 }
 
 .button-form{
