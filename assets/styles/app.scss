@@ -180,8 +180,10 @@ h2 {
     justify-content: center;
     align-items: center;
     background-color: $backgroundMainColor;
+    margin: 0;
+    bottom: 0;
 
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(md) {
         display: none;
     }
 }
@@ -190,7 +192,7 @@ h2 {
 .nav-link {
     padding: 0;
 
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(md) {
         cursor: pointer;
     }
 }
@@ -207,7 +209,7 @@ ul {
 .navbar-desktop {
     display: none;
 
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(md) {
         width: 24vw;
         position: fixed;
         flex-direction: column;
@@ -231,14 +233,14 @@ ul {
 }
 
 .navbar-desktop li:hover {
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(md) {
         font-weight: bold;
     }
 }
 
 .bento-container{
    
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(md) {
         position: fixed;
         right: 0;
         top: 0;
@@ -248,7 +250,7 @@ ul {
 .bento-container img{
     display: none;
     
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(md) {
         display: block;
         height: 30px;
         margin: 15px;
@@ -265,11 +267,11 @@ ul {
 
 .navbar-desktop.list-visible{
     display: flex;
-    margin-left: 74vw;
 }
 
 .icon-visible{
     height: 35px;
+    left: 74vw;
 }
 
 //-------Carrousel----------
