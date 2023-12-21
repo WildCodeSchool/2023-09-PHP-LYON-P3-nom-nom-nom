@@ -96,23 +96,10 @@ body {
 }
 
 // -----------------------button------------------------------
-.but {
-    @include myButton(
-        8.625rem,
-        1.875rem,
-        0.75rem,
-        ($backgroundButton),
-        ($fontTitle),
-        ($fontColorButton),
-        ($fontSizeButton),
-        ($fontStyleButton),
-        ($fontWeightButton),
-        ($lineHeightButton)
-    );
-}
-
 .btn-primary {
     --bs-btn-border-color: none;
+    background-color: $backgroundButton;
+    --bs-btn-active-bg: #2f5057;
 }
 
 .button-crud {
@@ -128,6 +115,32 @@ body {
         ($fontWeightButton),
         ($lineHeightButton)
     );
+    &:hover{
+        background-color: $backgroundButtonDark;
+    }
+}
+
+.button-form {
+    @include myButton(
+        16rem,
+        1.875rem,
+        .75,
+        ($backgroundButton),
+        ($fontTitle),
+        ($fontColorButton),
+        ($fontSizeButton),
+        ($fontStyleButton),
+        ($fontWeightButton),
+        ($lineHeightButton)
+    );
+    &:hover{
+        background-color: $backgroundButtonDark;
+    }
+}
+
+.button-form-center{
+    display: flex;
+    justify-content: center;
 }
 //---------------------------text-----------------------------
 .paragraph {
@@ -161,6 +174,17 @@ p {
 }
 
 h2 {
+    @include myText(
+        ($fontTitle),
+        ($fontColorText),
+        ($fontSizeTitle),
+        ($fontStyleText),
+        ($fontWeightTitle),
+        ($lineHeightText)
+    );
+}
+
+h1 {
     @include myText(
         ($fontTitle),
         ($fontColorText),
@@ -221,4 +245,40 @@ ul {
 .fa-hourglass-half,
 .fa-user-group {
     color: $backgroundButton;
+}
+
+//----------------------logo in form add----------------------
+.logo-add {
+    width: 10.25rem;
+    height: 10rem;
+}
+
+.container-add-form {
+    display: flex;
+    justify-content: center;
+}
+
+.grid-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+}
+
+.col-form-label {
+    text-align: center;
+}
+
+.mb-3:first-child{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.mb-3:nth-child(2){
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.mb-3:nth-child(3){
+    grid-column-start: 1;
+    grid-column-end: 3;
 }

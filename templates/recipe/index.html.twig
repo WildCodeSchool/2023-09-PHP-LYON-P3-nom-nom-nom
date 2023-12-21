@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recipe index{% endblock %}
+{% block title %}Liste des recettes{% endblock %}
 
 {% block body %}
-    <h1>Recipe index</h1>
+    <h1>Liste des recettes</h1>
 
     <table class="table">
         <thead>
@@ -29,8 +29,8 @@
                 <td>{{ recipe.cookingTime }}</td>
                 <td>{{ recipe.prepareTime }}</td>
                 <td>
-                    <a href="{{ path('app_recipe_show', {'id': recipe.id}) }}">show</a>
-                    <a href="{{ path('app_recipe_edit', {'id': recipe.id}) }}">edit</a>
+                    <a href="{{ path('app_recipe_show', {'id': recipe.id}) }}">détail de la recette</a>
+                    <a href="{{ path('app_recipe_edit', {'id': recipe.id}) }}">editer</a>
                 </td>
             </tr>
         {% else %}
@@ -41,5 +41,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_recipe_new') }}">Create new</a>
+    <a href="{{ path('app_recipe_new') }}">Ajouter votre recette</a>
 {% endblock %}
