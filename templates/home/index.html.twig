@@ -39,7 +39,7 @@
 	<h2 class="pt-5 m-5 text-center ">Découvrez les 3 dernières recettes</h2>
 
 
-	<div class="d-flex justify-content-evenly ">
+	<div class="d-flex justify-content-evenly .d-none .d-lg-block .d-xl-none">
 		{% for recipe in showRecipes %}
 			<div class="position-relative mb-5 pb-">
 				<a class="" href="{{ path('app_recipe_show', { id: recipe.id }) }}">
@@ -55,7 +55,7 @@
 	</div>
 
 	<div class="position-relative">
-		<img class="img-fluid" src="{{ asset('/build/images/background.png') }}"/>
+		<img class="w-100 img-fluid" src="{{ asset('/build/images/background.png') }}"/>
 		<div class="container text-center position-absolute top-50 start-50 translate-middle">
 			<h1>Rejoignez notre communauté</h1>
 			<p class="paragraph">A chaque bouchée une nouvelle saveur.</p>

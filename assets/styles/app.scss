@@ -25,8 +25,8 @@ $glassmorphism: blur(9.2px);
 
 $widthPic: 16rem;
 $heightPic: 29rem;
-$widthPicDesktop: 14.94rem;
-$heightPicDesktop: 26.3125rem;
+$widthPicDesktop: 23rem;
+$heightPicDesktop: 31rem;
 $borderRadiusPic: 1.625rem;
 $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 
@@ -175,10 +175,11 @@ p {
 
 .glassmorphism-desktop {
     position: absolute;
-    bottom: 9vh;
+    bottom: 2vh;
     left: 0;
     text-align: center;
     color: #faf6f4;
+    width: 95%;
     @include glassDesktop(($glassmorphism), ($borderRadiusPic));
 }
 
