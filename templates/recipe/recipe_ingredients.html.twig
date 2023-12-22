@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Steps recipe
+{% block title %}Ingredient
 {% endblock %}
 
 {% block body %}
@@ -9,9 +9,8 @@
     <h2>Les ingrédients de la recette</h2>
 
     <div>
-        {% for ingredient in recipe.ingredients %}
-            <h2>
-                {{ ingredient.nameIngredient }}</h2>
+        {% for recipeIngredient in recipeIngredients %}
+            <p>{{recipeIngredient.quantity}} {{recipeIngredient.unity}} {{recipeIngredient.ingredient.nameIngredient}}
         {% endfor %}
     </div>
 

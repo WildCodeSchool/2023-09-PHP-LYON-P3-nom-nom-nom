@@ -3,38 +3,41 @@
 namespace App\DataFixtures;
 
 use App\Entity\Ingredient;
+use App\Entity\RecipeIngredient;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class IngredientFixtures extends Fixture implements DependentFixtureInterface
+class IngredientFixtures extends Fixture
 {
-    public const INGREDIENT = [
-        ['nameIngredient' => 'Carotte', 'Category' => 'Légume'],
-        ['nameIngredient' => 'Oignon','Category' => 'Légume'],
-        ['nameIngredient' => 'Saucisse de Toulouse','Category' => 'Viande'],
-        ['nameIngredient' => 'Echine de porc','Category' => 'Viande'],
-        ['nameIngredient' => 'Haricot blanc','Category' => 'Légumineuse'],
-        ['nameIngredient' => 'Huile d\'olive','Category' => 'Huile'],
-        ['nameIngredient' => 'Thym','Category' => 'Assaisonnement']
+    public const INGREDIENTS = [
+        ['nameIngredient' => 'Carotte', 'category' => 'Légume'],
+        ['nameIngredient' => 'Oignon','category' => 'Légume'],
+        ['nameIngredient' => 'Tomate','category' => 'Légume'],
+        ['nameIngredient' => 'Salade','category' => 'Légume'],
+        ['nameIngredient' => 'Saucisse de Toulouse','category' => 'Viande'],
+        ['nameIngredient' => 'Echine de porc','category' => 'Viande'],
+        ['nameIngredient' => 'Filet de porc','category' => 'Viande'],
+        ['nameIngredient' => 'Escalope de poulet','category' => 'Viande'],
+        ['nameIngredient' => 'Pain Bao','category' => 'Céréale'],
+        ['nameIngredient' => 'Pain Kebab','category' => 'Céréale'],
+        ['nameIngredient' => 'Haricot blanc','category' => 'Légumineuse'],
+        ['nameIngredient' => 'Cacahouéte','category' => 'Légumineuse'],
+        ['nameIngredient' => 'Huile d\'olive','category' => 'Huile'],
+        ['nameIngredient' => 'Thym','category' => 'Assaisonnement'],
+        ['nameIngredient' => 'Nuoc-mâm','category' => 'Assaisonnement']
     ];
 
     public function load(ObjectManager $manager): void
     {
-        foreach (self::INGREDIENT as $ingredientList) {
-            $ingredient = new Ingredient();
-            $nameIngredient = $ingredientList['nameIngredient'];
-            $ingredient->setNameIngredient($nameIngredient);
-            $ingredient->setCategory($ingredientList['Category']);
-            $manager->persist($ingredient);
-            $manager->flush();
+        foreach (self::INGREDIENTS as $ingredient) {
+            $newIngredient = new Ingredient();
+            $newIngredient->setNameIngredient($ingredient['nameIngredient']);
+            $newIngredient->setCategory($ingredient['category']);
+            $manager->persist($newIngredient);
+            $this->addReference('ingredient_' . $ingredient['nameIngredient'], $newIngredient);
         }
-    }
 
-    public function getDependencies()
-    {
-        return [
-          RecipeFixture::class,
-        ];
+        $manager->flush();
     }
 }

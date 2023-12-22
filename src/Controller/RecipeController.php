@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Recipe;
 use App\Entity\Step;
 use App\Form\RecipeType;
+use App\Repository\RecipeIngredientRepository;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -90,10 +91,15 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/{id}/ingredients', name: 'app_recipe_show_ingredients', methods: ['GET'])]
-    public function showIngredients(Recipe $recipe): Response
-    {
+    public function showIngredients(
+        Recipe $recipe,
+        RecipeIngredientRepository $recipeIngredientRepo
+    ): Response {
+        $recipeIngredients = $recipeIngredientRepo->findBy(['recipe' => $recipe]);
+
         return $this->render("recipe/recipe_ingredients.html.twig", [
-            "recipe" => $recipe,
+            'recipe' => $recipe,
+            'recipeIngredients' => $recipeIngredients
         ]);
     }
 }

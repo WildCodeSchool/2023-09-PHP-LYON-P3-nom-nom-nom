@@ -4,9 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\Recipe;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class RecipeFixture extends Fixture
+class RecipeFixture extends Fixture implements DependentFixtureInterface
 {
     public const RECIPES = [
         [
@@ -32,7 +33,7 @@ class RecipeFixture extends Fixture
             'personNumber' => 2,
             'picture' => 'guabao.png',
             'description' => 'Gouter ces délicieux sandwich chinois',
-        ],
+            ],
     ];
     public function load(ObjectManager $manager): void
     {
@@ -44,10 +45,14 @@ class RecipeFixture extends Fixture
             $recipe->setPersonNumber($recipeFixture['personNumber']);
             $recipe->setPicture($recipeFixture['picture']);
             $recipe->setDescription($recipeFixture['description']);
-
             $manager->persist($recipe);
             $this->addReference('recipe_' . $recipeFixture['nameRecipe'], $recipe);
         }
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [IngredientFixtures::class,];
     }
 }
