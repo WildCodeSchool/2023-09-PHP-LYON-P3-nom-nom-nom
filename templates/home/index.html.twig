@@ -42,7 +42,7 @@
 	<div class="d-flex justify-content-evenly ">
 		{% for recipe in showRecipes %}
 			<div class="position-relative mb-5 pb-">
-				<a class="" href="{{ path('app_recipe_show', { id: recipe.id }) }}">
+				<a href="{{ path('app_recipe_show', { id: recipe.id }) }}">
 					<img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 				</a>
 				<div class="glassmorphism-desktop m-2">
@@ -57,7 +57,7 @@
 
 {# section with CTA #}
 	<div class="position-relative py-5">
-		<img class="w-100 vh-100 object-fit-cover" src="{{ asset('/build/images/background.png') }}"/>
+		<img class="w-100 vh-100 object-fit-cover" src="{{ asset('/build/images/background.png')}}" alt="Photo représentant une table remplie de plats avec une très forte opacité"/>
 		<div class="container text-center position-absolute top-50 start-50 translate-middle">
 			<h1 class="mb-5">Rejoignez notre communauté</h1>
 			<p class="paragraph">A chaque bouchée une nouvelle saveur.</p>
@@ -70,8 +70,8 @@
 	<h3 class="pt-3 m-5 text-center d-none d-md-block">Explorez différentes recettes par catégories</h3>
 
 	<div class="mx-auto container text-center m-5 p-5 d-none d-md-block">
-		<a href="#"><img class="w-25" src="{{ asset('/build/images/entree.png')}}"/></a>
-		<a href="#"><img class="w-25" src="{{ asset('/build/images/plat.png')}}"/></a>
-		<a href="#"><img class="w-25" src="{{ asset('/build/images/dessert.png')}}"/></a>
+		<a href="#"><img class="w-25" src="{{ asset('/build/images/entree.png')}}" alt="Photo présentant un hors d'oeuvre"/></a>
+		<a href="#"><img class="w-25" src="{{ asset('/build/images/plat.png')}}"alt="Photo présentant un plat de résistance"/></a>
+		<a href="#"><img class="w-25" src="{{ asset('/build/images/dessert.png')}}"alt="Photo présentant un dessert"/></a>
 	</div>
 {% endblock %}
