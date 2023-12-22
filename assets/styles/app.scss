@@ -12,6 +12,7 @@ $lineHeightButton: normal;
 
 $fontText: "Noto Sans";
 $fontColorText: #444559;
+$fontColorTextRed: #bf4e40;
 $fontSizeText: 0.9375rem;
 $fontSizeInfosRecipe: 1.2rem;
 $fontStyleText: normal;
@@ -20,10 +21,13 @@ $fontWeightTitle: 800;
 $fontWeightInfos: 1000;
 $lineHeightText: normal;
 $fontSizeTitle: 1.5rem;
+$fontSizeTitleH3: 1.3rem;
 $glassmorphism: blur(9.2px);
 
-$widthPic: 14.94rem;
-$heightPic: 26.3125rem;
+$widthPic: 16rem;
+$heightPic: 29rem;
+$widthPicDesktop: 23rem;
+$heightPicDesktop: 31rem;
 $borderRadiusPic: 1.625rem;
 $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 
@@ -72,6 +76,11 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     border-radius: $borderRadius;
     box-shadow: $boxShadow;
 }
+@mixin myPictureDesktop($x, $y, $boxShadow) {
+    width: $x;
+    height: $y;
+    box-shadow: $boxShadow;
+}
 
 @mixin glass($x, $y, $glassmorphism, $borderRadiusPic) {
     width: $x;
@@ -80,9 +89,12 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     border-radius: $borderRadiusPic;
 }
 
+@mixin glassDesktop($glassmorphism, $borderRadiusPic) {
+    backdrop-filter: $glassmorphism;
+    border-radius: $borderRadiusPic;
+}
 * {
     box-sizing: border-box;
-    margin: 0;
     padding: 0;
     list-style: none;
     scroll-behavior: smooth;
@@ -167,6 +179,16 @@ p {
     @include glass(14.5rem, 9rem, ($glassmorphism), ($borderRadiusPic));
 }
 
+.glassmorphism-desktop {
+    position: absolute;
+    bottom: 2vh;
+    left: 0;
+    text-align: center;
+    color: #faf6f4;
+    width: 95%;
+    @include glassDesktop(($glassmorphism), ($borderRadiusPic));
+}
+
 h2 {
     @include myText(($fontTitle),
         ($fontColorText),
@@ -176,6 +198,16 @@ h2 {
         ($lineHeightText));
 }
 
+h3 {
+    @include myText(
+        ($fontTitle),
+        ($fontColorTextRed),
+        ($fontSizeTitleH3),
+        ($fontStyleText),
+        ($fontWeightTitle),
+        ($lineHeightText)
+    );
+}
 h1 {
     @include myText(($fontTitle),
         ($fontColorText),
@@ -312,6 +344,14 @@ ul {
         ($boxShadowPic));
 }
 
+.pic-recipe-desktop {
+    margin: 15px 0 15px;
+    @include myPictureDesktop(
+        ($widthPicDesktop),
+        ($heightPicDesktop),
+        ($boxShadowPic)
+    );
+}
 //-------------------icon----------------
 .fa-fire,
 .fa-hourglass-half,
