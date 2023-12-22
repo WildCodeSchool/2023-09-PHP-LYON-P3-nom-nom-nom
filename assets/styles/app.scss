@@ -2,6 +2,7 @@
 //--------------------------variable--------------------------
 $backgroundButton: #bf4e40;
 $backgroundButtonDark: #444559;
+$backgroundMainColor: #faf6f4;
 $fontTitle: "Maven Pro";
 $fontColorButton: #fff;
 $fontSizeButton: 0.75rem;
@@ -10,25 +11,30 @@ $fontWeightButton: 700;
 $lineHeightButton: normal;
 
 $fontText: "Noto Sans";
-$fontColorText: #100f0f;
+$fontColorText: #444559;
+$fontColorTextRed: #bf4e40;
 $fontSizeText: 0.9375rem;
+$fontSizeInfosRecipe: 1.2rem;
 $fontStyleText: normal;
-$fontWeightText: 400;
+$fontWeightText: 600;
 $fontWeightTitle: 800;
-$fontWeightInfos: 700;
+$fontWeightInfos: 1000;
 $lineHeightText: normal;
 $fontSizeTitle: 1.5rem;
+$fontSizeTitleH3: 1.3rem;
+$glassmorphism: blur(9.2px);
 
-$widthPic: 13.9375rem;
-$heightPic: 23.3125rem;
+$widthPic: 16rem;
+$heightPic: 29rem;
+$widthPicDesktop: 23rem;
+$heightPicDesktop: 31rem;
 $borderRadiusPic: 1.625rem;
 $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 
 @import "~bootstrap/scss/bootstrap";
 
 // ---------------------------mixin------------------------------
-@mixin myButton(
-    $x,
+@mixin myButton($x,
     $y,
     $radius,
     $color,
@@ -37,8 +43,7 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     $fontSize,
     $fontStyle,
     $fontWeight,
-    $lineHeight
-) {
+    $lineHeight) {
     width: $x;
     height: $y;
     border-radius: $radius;
@@ -51,16 +56,14 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     line-height: $lineHeight;
 }
 
-@mixin myText(
-    $fontFamily,
-    $fontColor,
+@mixin myText($fontFamily,
+    $fontColorText,
     $fontSize,
     $fontStyle,
     $fontWeight,
-    $lineHeight
-) {
+    $lineHeight) {
     font-family: $fontFamily;
-    color: $fontColor;
+    color: $fontColorText;
     font-size: $fontSize;
     font-style: $fontStyle;
     font-weight: $fontWeight;
@@ -73,10 +76,25 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     border-radius: $borderRadius;
     box-shadow: $boxShadow;
 }
+@mixin myPictureDesktop($x, $y, $boxShadow) {
+    width: $x;
+    height: $y;
+    box-shadow: $boxShadow;
+}
 
+@mixin glass($x, $y, $glassmorphism, $borderRadiusPic) {
+    width: $x;
+    height: $y;
+    backdrop-filter: $glassmorphism;
+    border-radius: $borderRadiusPic;
+}
+
+@mixin glassDesktop($glassmorphism, $borderRadiusPic) {
+    backdrop-filter: $glassmorphism;
+    border-radius: $borderRadiusPic;
+}
 * {
     box-sizing: border-box;
-    margin: 0;
     padding: 0;
     list-style: none;
     scroll-behavior: smooth;
@@ -84,32 +102,19 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 }
 
 body {
-    background-color: #faf6f4;
+    background-color: $backgroundMainColor;
+    height: 100vh;
 }
 
 // -----------------------button------------------------------
-.but {
-    @include myButton(
-        8.625rem,
-        1.875rem,
-        0.75rem,
-        ($backgroundButton),
-        ($fontTitle),
-        ($fontColorButton),
-        ($fontSizeButton),
-        ($fontStyleButton),
-        ($fontWeightButton),
-        ($lineHeightButton)
-    );
-}
-
 .btn-primary {
     --bs-btn-border-color: none;
+    background-color: $backgroundButton;
+    --bs-btn-active-bg: #2f5057;
 }
 
 .button-crud {
-    @include myButton(
-        8.625rem,
+    @include myButton(8.625rem,
         1.875rem,
         0.75rem,
         ($backgroundButton),
@@ -118,19 +123,43 @@ body {
         ($fontSizeButton),
         ($fontStyleButton),
         ($fontWeightButton),
-        ($lineHeightButton)
-    );
+        ($lineHeightButton));
+
+    &:hover {
+        background-color: $backgroundButtonDark;
+    }
 }
+
+.button-form {
+    @include myButton(16rem,
+        1.875rem,
+        .75,
+        ($backgroundButton),
+        ($fontTitle),
+        ($fontColorButton),
+        ($fontSizeButton),
+        ($fontStyleButton),
+        ($fontWeightButton),
+        ($lineHeightButton));
+
+    &:hover {
+        background-color: $backgroundButtonDark;
+    }
+}
+
+.button-form-center {
+    display: flex;
+    justify-content: center;
+}
+
 //---------------------------text-----------------------------
 .paragraph {
-    @include myText(
-        ($fontText),
+    @include myText(($fontText),
         ($fontColorText),
         ($fontSizeText),
         ($fontStyleText),
         ($fontWeightText),
-        ($lineHeightText)
-    );
+        ($lineHeightText));
 }
 
 p {
@@ -138,27 +167,57 @@ p {
 }
 
 .infos-recipe {
-    @include myText(
-        ($fontTitle),
+    @include myText(($fontTitle),
         ($fontColorText),
-        ($fontSizeText),
+        ($fontSizeInfosRecipe),
         ($fontStyleText),
         ($fontWeightInfos),
-        ($lineHeightText)
-    );
+        ($lineHeightText));
+}
+
+.glassmorphism {
+    @include glass(14.5rem, 9rem, ($glassmorphism), ($borderRadiusPic));
+}
+
+.glassmorphism-desktop {
+    position: absolute;
+    bottom: 2vh;
+    left: 0;
+    text-align: center;
+    color: #faf6f4;
+    width: 95%;
+    @include glassDesktop(($glassmorphism), ($borderRadiusPic));
 }
 
 h2 {
-    @include myText(
-        ($fontTitle),
+    @include myText(($fontTitle),
         ($fontColorText),
         ($fontSizeTitle),
+        ($fontStyleText),
+        ($fontWeightTitle),
+        ($lineHeightText));
+}
+
+h3 {
+    @include myText(
+        ($fontTitle),
+        ($fontColorTextRed),
+        ($fontSizeTitleH3),
         ($fontStyleText),
         ($fontWeightTitle),
         ($lineHeightText)
     );
 }
-//--------------------navbar-------------------
+h1 {
+    @include myText(($fontTitle),
+        ($fontColorText),
+        ($fontSizeTitle),
+        ($fontStyleText),
+        ($fontWeightTitle),
+        ($lineHeightText));
+}
+
+//--------------------navbar-mobile-------------------
 .fa-solid,
 .fa-regular {
     color: $backgroundButtonDark;
@@ -171,21 +230,103 @@ h2 {
     font-size: 2.2rem;
 }
 
-.nav {
+.navbar-mobile {
     position: fixed;
-    bottom: 5vw;
+    display: flex;
     justify-content: center;
-    width: 100vw;
     align-items: center;
+    background-color: $backgroundMainColor;
+    margin: 0;
+    bottom: 0;
+
+    @include media-breakpoint-up(md) {
+        display: none;
+    }
 }
+
 
 .nav-link {
     padding: 0;
+
+    @include media-breakpoint-up(md) {
+        cursor: pointer;
+    }
 }
 
 ul {
     gap: 3rem;
 }
+
+//--------------------navbar-desktop-------------------//
+.navbar-desktop {
+    @include media-breakpoint-down(md) { 
+        display: none;
+    }
+    
+    @include media-breakpoint-up(md) {
+        z-index: 998;
+        width: 91%;
+        position: fixed;
+        flex-direction: column;
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+        align-items: center;
+        background-color: $backgroundButton;
+        padding: 16px;
+        top: 100vh;
+        transition: top 0.4s ease-in-out;
+    }
+}
+
+.navbar-desktop li{
+    cursor: pointer;
+    color: $backgroundMainColor;
+    font-size: larger;
+    transition: 0.6s;
+    &:hover{
+        font-weight: bold;
+    }
+}
+
+.bento-container{
+   
+    @include media-breakpoint-up(md) {
+        position: fixed;
+        right: 0;
+        top: 0;
+    }
+}
+
+.bento-container img{
+    display: none;
+    
+    @include media-breakpoint-up(md) {
+        z-index: 999;
+        display: block;
+        height: 30px;
+        margin: 15px;
+        cursor: pointer;
+        transition: all 1.2s ease-in-out;
+    }
+    &:hover{
+        height: 38px;
+        transform: rotate(360deg);
+    }
+}
+
+.list-visible{
+    z-index: 998;
+    display: flex;
+    top: 0;
+    height: 100vh;
+}
+
+.icon-visible{
+    z-index: 999;
+    height: 38px;
+    background-color: $backgroundMainColor;
+}
+
 //-------Carrousel----------
 .carousel-dark .carousel-indicators [data-bs-target] {
     background-color: $fontColorButton;
@@ -197,10 +338,17 @@ ul {
 
 .pic-recipe {
     margin: 15px 0 15px;
-    @include myPicture(
-        ($widthPic),
+    @include myPicture(($widthPic),
         ($heightPic),
         ($borderRadiusPic),
+        ($boxShadowPic));
+}
+
+.pic-recipe-desktop {
+    margin: 15px 0 15px;
+    @include myPictureDesktop(
+        ($widthPicDesktop),
+        ($heightPicDesktop),
         ($boxShadowPic)
     );
 }
@@ -210,3 +358,51 @@ ul {
 .fa-user-group {
     color: $backgroundButton;
 }
+
+//----------------------logo in form add----------------------
+.logo-center {
+    display: none;
+}
+
+.logo-add {
+    width: 10.25rem;
+    height: 10rem;
+}
+
+.container-add-form {
+    display: flex;
+    justify-content: center;
+}
+
+.grid-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+}
+
+.col-form-label {
+    text-align: center;
+}
+
+.mb-3:first-child {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.mb-3:nth-child(2) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.mb-3:nth-child(3) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+
+// -----------------------recipe-steps page------------------------
+.recipe-step{
+    width: 60vw;
+}
+
+//-----------------------------------media queries---------------------

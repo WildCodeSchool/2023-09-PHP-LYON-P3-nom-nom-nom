@@ -27,7 +27,7 @@ class StepController extends AbstractController
             $entityManager->persist($step);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_step_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('step/new.html.twig', [

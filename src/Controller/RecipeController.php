@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Recipe;
 use App\Entity\Step;
 use App\Form\RecipeType;
+use App\Form\StepType;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,7 +32,13 @@ class RecipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($recipe->getSteps() as $step) {
+                $step->setRecipe($recipe);
+                $entityManager->persist($step);
+            }
+
             $entityManager->persist($recipe);
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
