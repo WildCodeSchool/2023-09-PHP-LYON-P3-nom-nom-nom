@@ -2,6 +2,7 @@
 //--------------------------variable--------------------------
 $backgroundButton: #bf4e40;
 $backgroundButtonDark: #444559;
+$backgroundMainColor: #faf6f4;
 $fontTitle: "Maven Pro";
 $fontColorButton: #fff;
 $fontSizeButton: 0.75rem;
@@ -89,7 +90,8 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 }
 
 body {
-    background-color: #faf6f4;
+    background-color: $backgroundMainColor;
+    height: 100vh;
 }
 
 // -----------------------button------------------------------
@@ -196,20 +198,101 @@ h1 {
     font-size: 2.2rem;
 }
 
-.nav {
+.navbar-mobile {
     position: fixed;
-    bottom: 5vw;
+    display: flex;
     justify-content: center;
-    width: 100vw;
     align-items: center;
+    background-color: $backgroundMainColor;
+    margin: 0;
+    bottom: 0;
+
+    @include media-breakpoint-up(md) {
+        display: none;
+    }
 }
+
 
 .nav-link {
     padding: 0;
+
+    @include media-breakpoint-up(md) {
+        cursor: pointer;
+    }
 }
 
 ul {
     gap: 3rem;
+}
+
+//--------------------navbar-desktop-------------------//
+.navbar-desktop {
+    @include media-breakpoint-down(md) { 
+        display: none;
+    }
+    
+    @include media-breakpoint-up(md) {
+        z-index: 998;
+        width: 91%;
+        position: fixed;
+        flex-direction: column;
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+        align-items: center;
+        background-color: $backgroundButton;
+        padding: 16px;
+        top: 100vh;
+        transition: top 0.4s ease-in-out;
+    }
+}
+
+.navbar-desktop li{
+    cursor: pointer;
+    color: $backgroundMainColor;
+    font-size: larger;
+    transition: 0.6s;
+    &:hover{
+        font-weight: bold;
+    }
+}
+
+.bento-container{
+   
+    @include media-breakpoint-up(md) {
+        position: fixed;
+        right: 0;
+        top: 0;
+    }
+}
+
+.bento-container img{
+    display: none;
+    
+    @include media-breakpoint-up(md) {
+        z-index: 999;
+        display: block;
+        height: 30px;
+        margin: 15px;
+        cursor: pointer;
+        transition: all 1.2s ease-in-out;
+    }
+    &:hover{
+        height: 38px;
+        transform: rotate(360deg);
+    }
+}
+
+.list-visible{
+    z-index: 998;
+    display: flex;
+    top: 0;
+    height: 100vh;
+}
+
+.icon-visible{
+    z-index: 999;
+    height: 38px;
+    background-color: $backgroundMainColor;
 }
 
 //-------Carrousel----------
