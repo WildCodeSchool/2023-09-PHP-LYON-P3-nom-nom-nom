@@ -20,7 +20,7 @@ class Step
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'steps')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
     private ?Recipe $recipe = null;
 

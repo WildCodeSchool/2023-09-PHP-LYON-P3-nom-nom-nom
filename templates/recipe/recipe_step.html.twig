@@ -1,24 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Steps recipe
+{% block title %}Etapes de la recette
 {% endblock %}
 
 {% block body %}
-	<h1 class="step-recipe">{{recipe.nameRecipe}}</h1>
+	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
 
-	<h2>Les étapes de la recette</h2>
+	<div class="container recipe-step mt-5 d-flex flex-column">
+		<div class="container d-flex flex-column align-items-center p-0">
+			<h1 class="step-recipe text-center mb-3">{{recipe.nameRecipe}}</h1>
 
-	<div>
-		{% for step in recipe.steps %}
-			<h2>
-				Etape
-				{{ step.stepNumber }}</h2>
-			<p>{{ step.description }}</p>
-		{% endfor %}
+			<h2 class="text-center mb-5">Les étapes de la recette</h2>
+		</div>
+		<div>
+			{% for step in recipe.steps %}
+				<h2 class="mb-0">
+					Etape
+					{{ step.stepNumber }}</h2>
+				<p class="mt-0">{{ step.description }}</p>
+			{% endfor %}
+		</div>
+
+		<a href="{{ path('app_recipe_show', {'id': recipe.id}) }}">Retour à la recette</a>
 	</div>
-
-	<a href="{{ path('app_recipe_show', {'id': recipe.id}) }}">Retour à la recette</a>
-
-
 
 {% endblock %}
