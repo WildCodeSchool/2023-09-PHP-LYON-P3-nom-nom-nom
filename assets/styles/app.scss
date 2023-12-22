@@ -33,8 +33,7 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 @import "~bootstrap/scss/bootstrap";
 
 // ---------------------------mixin------------------------------
-@mixin myButton(
-    $x,
+@mixin myButton($x,
     $y,
     $radius,
     $color,
@@ -43,8 +42,7 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     $fontSize,
     $fontStyle,
     $fontWeight,
-    $lineHeight
-) {
+    $lineHeight) {
     width: $x;
     height: $y;
     border-radius: $radius;
@@ -57,14 +55,12 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     line-height: $lineHeight;
 }
 
-@mixin myText(
-    $fontFamily,
+@mixin myText($fontFamily,
     $fontColorText,
     $fontSize,
     $fontStyle,
     $fontWeight,
-    $lineHeight
-) {
+    $lineHeight) {
     font-family: $fontFamily;
     color: $fontColorText;
     font-size: $fontSize;
@@ -109,28 +105,14 @@ body {
 }
 
 // -----------------------button------------------------------
-.but {
-    @include myButton(
-        8.625rem,
-        1.875rem,
-        0.75rem,
-        ($backgroundButton),
-        ($fontTitle),
-        ($fontColorButton),
-        ($fontSizeButton),
-        ($fontStyleButton),
-        ($fontWeightButton),
-        ($lineHeightButton)
-    );
-}
-
 .btn-primary {
     --bs-btn-border-color: none;
+    background-color: $backgroundButton;
+    --bs-btn-active-bg: #2f5057;
 }
 
 .button-crud {
-    @include myButton(
-        8.625rem,
+    @include myButton(8.625rem,
         1.875rem,
         0.75rem,
         ($backgroundButton),
@@ -139,19 +121,43 @@ body {
         ($fontSizeButton),
         ($fontStyleButton),
         ($fontWeightButton),
-        ($lineHeightButton)
-    );
+        ($lineHeightButton));
+
+    &:hover {
+        background-color: $backgroundButtonDark;
+    }
 }
+
+.button-form {
+    @include myButton(16rem,
+        1.875rem,
+        .75,
+        ($backgroundButton),
+        ($fontTitle),
+        ($fontColorButton),
+        ($fontSizeButton),
+        ($fontStyleButton),
+        ($fontWeightButton),
+        ($lineHeightButton));
+
+    &:hover {
+        background-color: $backgroundButtonDark;
+    }
+}
+
+.button-form-center {
+    display: flex;
+    justify-content: center;
+}
+
 //---------------------------text-----------------------------
 .paragraph {
-    @include myText(
-        ($fontText),
+    @include myText(($fontText),
         ($fontColorText),
         ($fontSizeText),
         ($fontStyleText),
         ($fontWeightText),
-        ($lineHeightText)
-    );
+        ($lineHeightText));
 }
 
 p {
@@ -159,14 +165,12 @@ p {
 }
 
 .infos-recipe {
-    @include myText(
-        ($fontTitle),
+    @include myText(($fontTitle),
         ($fontColorText),
         ($fontSizeInfosRecipe),
         ($fontStyleText),
         ($fontWeightInfos),
-        ($lineHeightText)
-    );
+        ($lineHeightText));
 }
 
 .glassmorphism {
@@ -184,14 +188,12 @@ p {
 }
 
 h2 {
-    @include myText(
-        ($fontTitle),
+    @include myText(($fontTitle),
         ($fontColorText),
         ($fontSizeTitle),
         ($fontStyleText),
         ($fontWeightTitle),
-        ($lineHeightText)
-    );
+        ($lineHeightText));
 }
 
 h3 {
@@ -204,6 +206,15 @@ h3 {
         ($lineHeightText)
     );
 }
+h1 {
+    @include myText(($fontTitle),
+        ($fontColorText),
+        ($fontSizeTitle),
+        ($fontStyleText),
+        ($fontWeightTitle),
+        ($lineHeightText));
+}
+
 //--------------------navbar-mobile-------------------
 .fa-solid,
 .fa-regular {
@@ -232,6 +243,7 @@ h3 {
 ul {
     gap: 3rem;
 }
+
 //-------Carrousel----------
 .carousel-dark .carousel-indicators [data-bs-target] {
     background-color: $fontColorButton;
@@ -243,12 +255,10 @@ ul {
 
 .pic-recipe {
     margin: 15px 0 15px;
-    @include myPicture(
-        ($widthPic),
+    @include myPicture(($widthPic),
         ($heightPic),
         ($borderRadiusPic),
-        ($boxShadowPic)
-    );
+        ($boxShadowPic));
 }
 
 .pic-recipe-desktop {
@@ -265,3 +275,51 @@ ul {
 .fa-user-group {
     color: $backgroundButton;
 }
+
+//----------------------logo in form add----------------------
+.logo-center {
+    display: none;
+}
+
+.logo-add {
+    width: 10.25rem;
+    height: 10rem;
+}
+
+.container-add-form {
+    display: flex;
+    justify-content: center;
+}
+
+.grid-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+}
+
+.col-form-label {
+    text-align: center;
+}
+
+.mb-3:first-child {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.mb-3:nth-child(2) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.mb-3:nth-child(3) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+
+// -----------------------recipe-steps page------------------------
+.recipe-step{
+    width: 60vw;
+}
+
+//-----------------------------------media queries---------------------

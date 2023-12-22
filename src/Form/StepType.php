@@ -7,6 +7,7 @@ use App\Entity\Step;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,12 +16,13 @@ class StepType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('stepNumber', NumberType::class)
-            ->add('description')
-            ->add('recipe', EntityType::class, [
-                'class' => Recipe::class,
-        'choice_label' => 'nameRecipe',
+            ->add('stepNumber', NumberType::class, [
+                'label' => 'étape numéro :'
             ])
+            ->add('description', TextareaType::class, [
+                'label' => 'description de l\'étape de votre recette :'
+            ])
+
         ;
     }
 
