@@ -7,6 +7,7 @@ use App\Entity\Step;
 use App\Form\RecipeType;
 use App\Form\StepType;
 use App\Repository\RecipeRepository;
+use App\Repository\StepRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -89,8 +90,12 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/{id}/steps', name: 'app_recipe_show_step', methods: ['GET'])]
-    public function showSteps(Recipe $recipe): Response
+    public function showSteps(Recipe $recipe, StepRepository $stepRepository): Response
     {
+        $stepRepository->findBy(
+            [], // No specific conditions
+            ['stepNumber' => 'ASC'],
+        );
         return $this->render('recipe/recipe_step.html.twig', [
             'recipe' => $recipe,
         ]);
