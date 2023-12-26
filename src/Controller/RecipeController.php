@@ -90,14 +90,20 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/{id}/steps', name: 'app_recipe_show_step', methods: ['GET'])]
-    public function showSteps(Recipe $recipe, StepRepository $stepRepository): Response
-    {
-        $stepRepository->findBy(
-            [], // No specific conditions
+    public function showSteps(
+        Recipe $recipe,
+        string $id,
+        RecipeRepository $recipeRepository,
+        StepRepository $stepRepository
+    ): Response {
+        $recipe = $recipeRepository->findOneBy(['id' => $id]);
+        $steps = $stepRepository->findBy(
+            ['recipe' => $recipe],
             ['stepNumber' => 'ASC'],
         );
         return $this->render('recipe/recipe_step.html.twig', [
             'recipe' => $recipe,
+            'steps' => $steps,
         ]);
     }
 }

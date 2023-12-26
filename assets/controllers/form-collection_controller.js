@@ -12,4 +12,13 @@ export default class extends Controller {
         this.collectionContainerTarget.appendChild(item);
         this.indexValue++;
     }
+
+    // deleteCollectionElement(event)
+    // {
+    //     const item = document.removeElement('li');
+    //     item.innerHTML = this.prototypeValue.replace(/__name__/g, this.indexValue);
+    //     this.collectionContainerTarget.appendChild(item);
+    //     this.indexValue--;
+    // }
+    
 }
