@@ -26,7 +26,7 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
-    public function new(int $number, Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $number = 0;
         $recipe = new Recipe();
@@ -50,6 +50,7 @@ class RecipeController extends AbstractController
         return $this->render('recipe/new.html.twig', [
             'recipe' => $recipe,
             'form' => $form,
+            'number' => $number
         ]);
     }
 
