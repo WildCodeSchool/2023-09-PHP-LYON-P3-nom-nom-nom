@@ -26,8 +26,9 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(int $number, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $number = 0;
         $recipe = new Recipe();
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
@@ -35,6 +36,7 @@ class RecipeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             foreach ($recipe->getSteps() as $step) {
                 $step->setRecipe($recipe);
+                $step->setStepNumber($number += 1);
                 $entityManager->persist($step);
             }
 
