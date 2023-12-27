@@ -33,6 +33,14 @@ class RecipeFixture extends Fixture
             'picture' => 'guabao.png',
             'description' => 'Gouter ces délicieux sandwich chinois',
         ],
+        [
+            'nameRecipe' => 'Gua Bao2',
+            'prepareTime' => 45,
+            'cookingTime' => 60,
+            'personNumber' => 2,
+            'picture' => 'guabao.png',
+            'description' => 'Gouter ces délicieux sandwich chinois',
+        ],
     ];
     public function load(ObjectManager $manager): void
     {
