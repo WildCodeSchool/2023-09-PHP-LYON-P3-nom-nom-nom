@@ -18,7 +18,6 @@ class StepType extends AbstractType
     {
         $builder
             ->add('stepNumber', HiddenType::class, [
-                // 'label' => 'étape numéro :'
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'description de l\'étape de votre recette :'
