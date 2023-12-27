@@ -21,13 +21,4 @@ export default class extends Controller {
             item.remove();
         });
     }
-
-    // deleteCollectionElement(event)
-    // {
-    //     const item = document.removeElement('li');
-    //     item.innerHTML = this.prototypeValue.replace(/__name__/g, this.indexValue);
-    //     this.collectionContainerTarget.appendChild(item);
-    //     this.indexValue--;
-    // }
-    
 }
