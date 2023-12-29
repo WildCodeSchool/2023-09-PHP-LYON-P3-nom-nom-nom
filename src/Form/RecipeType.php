@@ -20,7 +20,7 @@ class RecipeType extends AbstractType
         $builder
             ->add('pictureFile', VichFileType::class, [
                 'required'      => false,
-                'allow_delete'  => true, // not mandatory, default is true
+                'allow_delete'  => false, // not mandatory, default is true
                 'download_uri' => true, // not mandatory, default is true
                 'label' => 'Télecharger une photo illustrant votre recette '
             ])
@@ -33,7 +33,10 @@ class RecipeType extends AbstractType
             ->add('calorie', NumberType::class, [
                 'label' => 'Nombre de calories : '
             ])
-            ->add('date', HiddenType::class)
+            // cette ligne provoque un problème lors de l'édition d'une recette,
+            //il faut peut-être voir avec un formatage de la date ici
+            // ->add('date', HiddenType::class)
+
             ->add('cookingTime', NumberType::class, [
                 'label' => 'Temps de cuisson : '
             ])

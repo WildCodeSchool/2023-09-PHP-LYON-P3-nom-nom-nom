@@ -20,8 +20,8 @@
 				<p class="mt-0">{{ step.description }}</p>
 			{% endfor %}
 		</div>
-
-		<a href="{{ path('app_recipe_show', {'id': recipe.id}) }}">Retour à la recette</a>
+        <a class="container btn button-crud mt-2" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
+		<a class="container btn button-crud mt-2" href="{{ path('app_recipe_show', {'id': recipe.id}) }}">Retour à la recette</a>
 	</div>
 
 {% endblock %}
