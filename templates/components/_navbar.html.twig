@@ -20,18 +20,15 @@
 		</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="#">
-			<i class="fa-solid fa-circle-user"></i>
-		</a>
-	</li>
-	<li>
 		{% if app.user %}
 			{{ app.user.email }}
-			<a href="{{ path('app_logout') }}">
-				Se déconnecter</a>
+			<a class="nav-link" href="#">
+				<i class="fa-solid fa-circle-user"></i>
+			</a>
 		{% else %}
 			<a href="{{ path('app_login') }}">
-				Se connecter</a>
+				<i class="fa-solid fa-circle-user"></i>
+			</a>
 		{% endif %}
 	</li>
 </ul>
@@ -58,9 +55,16 @@
 		</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="#">
+	{% if app.user %}
+			{{ app.user.email }}
+			<a class="nav-link" href="#">
 			Mon profil
 		</a>
+		{% else %}
+			<a class="link-offset-2 link-underline link-underline-opacity-0 nav-link" href="{{ path('app_login') }}">
+				Se connecter</i>
+			</a>
+		{% endif %}
 	</li>
 </ul>
 

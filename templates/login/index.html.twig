@@ -1,21 +1,29 @@
-
 {% extends 'base.html.twig' %}
 
 
-
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    <form action="{{ path('app_login') }}" method="post">
-        <label for="pseudo">Pseudo:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}">
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password">
-
-
-        <button type="submit">login</button>
-    </form>
+	<img src="build\images\fond_login.png" class="opacity-50 w-100 position-absolute" alt="photo de fond présentant un bon plat"/>
+	{% if error %}
+		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+	{% endif %}
+	<div class="d-flex flex-column mb-3 justify-content-center align-items-center">
+    			<img src="/build/images/nomnomlogo.png" alt="logo de nomnomnom" class="logo-add">
+		<div class="w-25">
+			<form action="{{ path('app_login') }}" method="post">
+				<label for="pseudo">Pseudo:</label>
+                </div>
+                <div class="w-25">
+				<input type="text" id="username" name="_username" value="{{ last_username }}">
+			</div>
+			<div class="w-25">
+				<label for="password">Password:</label>
+                </div>
+                <div class="w-25">
+				<input type="password" id="password" name="_password">
+			</div>
+			<div class="w-25">
+				<button type="submit">login</button>
+			</div>
+		</form>
+	</div>
 {% endblock %}
