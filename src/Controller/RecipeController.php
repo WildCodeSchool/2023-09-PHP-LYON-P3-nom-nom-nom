@@ -87,6 +87,7 @@ class RecipeController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $recipe->getId(), $request->request->get('_token'))) {
             $entityManager->remove($recipe);
             $entityManager->flush();
+            $this->addFlash('danger', 'The program has been deleted');
         }
 
         return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
