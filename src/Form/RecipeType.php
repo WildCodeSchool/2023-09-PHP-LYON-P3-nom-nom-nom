@@ -33,10 +33,6 @@ class RecipeType extends AbstractType
             ->add('calorie', NumberType::class, [
                 'label' => 'Nombre de calories : '
             ])
-            // cette ligne provoque un problème lors de l'édition d'une recette,
-            //il faut peut-être voir avec un formatage de la date ici
-            // ->add('date', HiddenType::class)
-
             ->add('cookingTime', NumberType::class, [
                 'label' => 'Temps de cuisson : '
             ])
