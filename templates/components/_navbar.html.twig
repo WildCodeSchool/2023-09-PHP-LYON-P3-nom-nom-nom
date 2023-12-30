@@ -24,6 +24,16 @@
 			<i class="fa-solid fa-circle-user"></i>
 		</a>
 	</li>
+	<li>
+		{% if app.user %}
+			{{ app.user.email }}
+			<a href="{{ path('app_logout') }}">
+				Se déconnecter</a>
+		{% else %}
+			<a href="{{ path('app_login') }}">
+				Se connecter</a>
+		{% endif %}
+	</li>
 </ul>
 
 <ul class="navbar-desktop navbar fixed-bottom justify-content-center" id="navbar-desktop">
