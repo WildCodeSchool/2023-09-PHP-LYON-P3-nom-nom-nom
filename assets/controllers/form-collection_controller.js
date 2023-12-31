@@ -13,7 +13,7 @@ export default class extends Controller {
         this.indexValue++;
 
         const removeFormButton = document.createElement('button');
-        removeFormButton.innerText = 'Delete this tag';
+        removeFormButton.innerText = 'Supprimer cette étape';
         item.append(removeFormButton);
         removeFormButton.addEventListener('click', (e) => {
             e.preventDefault();
