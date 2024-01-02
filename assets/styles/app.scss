@@ -3,6 +3,7 @@
 $backgroundButton: #bf4e40;
 $backgroundButtonDark: #444559;
 $backgroundMainColor: #faf6f4;
+$backgroundColorLogin: #74332B;
 $fontTitle: "Maven Pro";
 $fontColorButton: #fff;
 $fontSizeButton: 0.75rem;
@@ -159,6 +160,23 @@ body {
         ($fontSizeText),
         ($fontStyleText),
         ($fontWeightText),
+        ($lineHeightText));
+}
+.textaccount {
+    @include myText(($fontText),
+        ($fontColorButton),
+        ($fontSizeText),
+        ($fontStyleText),
+        ($fontWeightText),
+        ($lineHeightText));
+}
+
+.noaccount {
+    @include myText(($fontText),
+        ($fontColorButton),
+        ($fontSizeButton),
+        ($fontStyleText),
+        400,
         ($lineHeightText));
 }
 
@@ -404,4 +422,25 @@ ul {
     width: 60vw;
 }
 
-//-----------------------------------media queries---------------------
+//-----------------------------------login mobile ---------------------
+.bg-image{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}  
+
+.bg-fond{
+background-color:rgba(0, 0, 0, 0.65);
+}
+// --------------------------login desktop--------------------
+.back-picture{
+    width: 40%;
+    height: 100vh;
+}
+
+.bg-desktop-login{
+    border-radius: 0 2.5rem 2.5rem 0;
+    box-shadow: 24px 23px 72.5px 0px rgba(0, 0, 0, 0.25);
+    width: 100vw;
+}
+
