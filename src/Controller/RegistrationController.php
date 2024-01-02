@@ -55,7 +55,6 @@ class RegistrationController extends AbstractController
                     ->from(new Address('p3.nomnomnom@gmail.com', 'NomNomNom'))
                     ->to($user->getEmail())
                     ->subject('Veuillez confirmer votre mail')
-                    // ->htmlTemplate('registration/confirmation_email.html.twig')
                     ->html($this->renderView('Registration/confirmation_email.html.twig'))
             );
             // do anything else you need here, like send an email
