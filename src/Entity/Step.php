@@ -63,7 +63,7 @@ class Step
         return $this->stepNumber;
     }
 
-    public function setStepNumber(int $stepNumber): static
+    public function setStepNumber(?int $stepNumber): static
     {
         $this->stepNumber = $stepNumber;
 
