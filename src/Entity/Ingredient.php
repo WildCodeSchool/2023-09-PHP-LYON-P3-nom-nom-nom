@@ -23,9 +23,11 @@ class Ingredient
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
     private ?string $nameIngredient = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
     private ?string $category = null;
 
     #[ORM\Column(nullable: true)]

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Ingredient;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,16 +14,17 @@ class IngredientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nameIngredient')
-            ->add('category')
+            ->add('nameIngredient', TextType::class, [
+                'label' => 'Nom de l\'ingrédient:'])
+            ->add('category', TextType::class, [
+                'label' => 'Categorie de l\'ingrédient:'])
             ->add('isAllergen')
             ->add('pictureFile', VichFileType::class, [
                 'required'      => false,
-                'allow_delete'  => true, // not mandatory, default is true
-                'download_uri' => true, // not mandatory, default is true
-                'label' => 'Télecharger une photo illustrant votre recette ',
-            ])
-        ;
+                'allow_delete'  => true,
+                'download_uri' => true,
+                'label' => 'Télecharger une photo illustrant votre ingrédient ',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
