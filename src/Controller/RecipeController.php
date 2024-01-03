@@ -70,6 +70,24 @@ class RecipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($recipe->getSteps() as $step) {
+                if (!$step->getId()) {
+                    // Si l'étape n'a pas d'identifiant, elle n'est pas persistée
+                    // Obtenez le dernier numéro d'étape pour la recette actuelle
+                    $lastStepNumber = $entityManager->getRepository(Step::class)
+                        ->findLastStepNumberForRecipe($recipe);
+
+                    // Incrémente le dernier numéro d'étape
+                    $newStepNumber = $lastStepNumber + 1;
+
+                    // Définissez le numéro d'étape pour la nouvelle étape
+                    $step->setStepNumber($newStepNumber);
+
+                    // Persistez la nouvelle étape
+                    $entityManager->persist($step);
+                }
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);

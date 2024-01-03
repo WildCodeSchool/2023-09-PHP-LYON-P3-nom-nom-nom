@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Recipe;
 use App\Entity\Step;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -21,6 +22,15 @@ class StepRepository extends ServiceEntityRepository
         parent::__construct($registry, Step::class);
     }
 
+    public function findLastStepNumberForRecipe(Recipe $recipe): int
+    {
+        return $this->createQueryBuilder('s')
+            ->select('MAX(s.stepNumber)')
+            ->andWhere('s.recipe = :recipe')
+            ->setParameter('recipe', $recipe)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 //    /**
 //     * @return Step[] Returns an array of Step objects
 //     */

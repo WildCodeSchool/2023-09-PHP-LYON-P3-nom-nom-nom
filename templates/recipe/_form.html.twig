@@ -11,7 +11,9 @@
 
 </div>
 <div {{ stimulus_controller('form-collection') }} data-form-collection-index-value="{{ form.steps|length }}" data-form-collection-prototype-value="{{ form_widget(form.steps.vars.prototype)|e('html_attr') }}">
-	<ul class="paragraph p-0" {{ stimulus_target('form-collection', 'collectionContainer') }}></ul>
+	<ul class="paragraph p-0" {{ stimulus_target('form-collection', 'collectionContainer') }}>
+	{{ form_row(form.steps) }}
+	</ul>
 	<div class="button-form-center">
 		<button type="button" class="btn btn-primary button-form mt-4 mb-2" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Ajouter une étape</button>
 	</div>
