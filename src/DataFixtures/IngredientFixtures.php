@@ -3,29 +3,27 @@
 namespace App\DataFixtures;
 
 use App\Entity\Ingredient;
-use App\Entity\RecipeIngredient;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class IngredientFixtures extends Fixture
 {
     public const INGREDIENTS = [
-        ['nameIngredient' => 'Carotte', 'category' => 'Légume'],
-        ['nameIngredient' => 'Oignon','category' => 'Légume'],
-        ['nameIngredient' => 'Tomate','category' => 'Légume'],
-        ['nameIngredient' => 'Salade','category' => 'Légume'],
-        ['nameIngredient' => 'Saucisse de Toulouse','category' => 'Viande'],
-        ['nameIngredient' => 'Echine de porc','category' => 'Viande'],
-        ['nameIngredient' => 'Filet de porc','category' => 'Viande'],
-        ['nameIngredient' => 'Escalope de poulet','category' => 'Viande'],
-        ['nameIngredient' => 'Pain Bao','category' => 'Céréale'],
-        ['nameIngredient' => 'Pain Kebab','category' => 'Céréale'],
-        ['nameIngredient' => 'Haricot blanc','category' => 'Légumineuse'],
-        ['nameIngredient' => 'Cacahouéte','category' => 'Légumineuse'],
-        ['nameIngredient' => 'Huile d\'olive','category' => 'Huile'],
-        ['nameIngredient' => 'Thym','category' => 'Assaisonnement'],
-        ['nameIngredient' => 'Nuoc-mâm','category' => 'Assaisonnement']
+        ['nameIngredient' => 'Carotte', 'category' => 'Légume', 'picture' => 'carotte.png'],
+        ['nameIngredient' => 'Oignon','category' => 'Légume', 'picture' => 'oignon.png'],
+        ['nameIngredient' => 'Tomate','category' => 'Légume', 'picture' => 'tomate.png'],
+        ['nameIngredient' => 'Salade','category' => 'Légume', 'picture' => 'laitue.jpeg'],
+        ['nameIngredient' => 'Saucisse de Toulouse','category' => 'Viande', 'picture' => 'saucissedetoulouse.png'],
+        ['nameIngredient' => 'Echine de porc','category' => 'Viande', 'picture' => 'echinedeporc.jpeg'],
+        ['nameIngredient' => 'Filet de porc','category' => 'Viande', 'picture' => 'filetdeporc.jpeg'],
+        ['nameIngredient' => 'Escalope de poulet','category' => 'Viande', 'picture' => 'escalopedepoulet.jpeg'],
+        ['nameIngredient' => 'Pain Bao','category' => 'Céréale', 'picture' => ''],
+        ['nameIngredient' => 'Pain Kebab','category' => 'Céréale', 'picture' => ''],
+        ['nameIngredient' => 'Haricot blanc','category' => 'Légumineuse', 'picture' => 'haricotblanc.jpeg'],
+        ['nameIngredient' => 'Cacahouéte','category' => 'Légumineuse', 'picture' => 'cacahuètes.jpeg'],
+        ['nameIngredient' => 'Huile d\'olive','category' => 'Huile', 'picture' => 'huileolive.jpeg'],
+        ['nameIngredient' => 'Thym','category' => 'Assaisonnement', 'picture' => 'thym.jpeg'],
+        ['nameIngredient' => 'Nuoc-mâm','category' => 'Assaisonnement', 'picture' => '']
     ];
 
     public function load(ObjectManager $manager): void
@@ -34,6 +32,7 @@ class IngredientFixtures extends Fixture
             $newIngredient = new Ingredient();
             $newIngredient->setNameIngredient($ingredient['nameIngredient']);
             $newIngredient->setCategory($ingredient['category']);
+            $newIngredient->setPicture($ingredient['picture']);
             $manager->persist($newIngredient);
             $this->addReference('ingredient_' . $ingredient['nameIngredient'], $newIngredient);
         }

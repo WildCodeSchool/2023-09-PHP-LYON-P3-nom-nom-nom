@@ -4,16 +4,29 @@
 {% endblock %}
 
 {% block body %}
-    <h1 class="step-recipe">{{recipe.nameRecipe}}</h1>
+    <h1 class="pt-5 text-center">{{recipe.nameRecipe}}</h1>
 
-    <h2>Les ingrédients de la recette</h2>
+    <h2 class="pt-5 text-center">Ingrédients</h2>
 
-    <div>
+    <div class="container text-center d-md-none">
+    <div class="row row-cols-2">
         {% for recipeIngredient in recipeIngredients %}
-            <p>{{recipeIngredient.quantity}} {{recipeIngredient.unity}} {{recipeIngredient.ingredient.nameIngredient}}
+            <div class="col">
+            <p>{{recipeIngredient.quantity}} {{recipeIngredient.unity}} {{recipeIngredient.ingredient.nameIngredient}}</p>
+            <img src="{{ asset('build/images/') ~ recipeIngredient.ingredient.picture }}" class="ingredient-mob" alt="photo de {{ recipeIngredient.ingredient.nameIngredient }}" />
+            </div>
         {% endfor %}
     </div>
-
-    <a href="{{ path('app_recipe_show', {'id': recipe.id}) }}">Retour à la recette</a>
-
+    </div>
+    {# version desktop #}
+    <div class="container text-center d-none d-md-block">
+    <div class="row row-cols-3">
+        {% for recipeIngredient in recipeIngredients %}
+            <div class="col">
+            <p>{{recipeIngredient.quantity}} {{recipeIngredient.unity}} {{recipeIngredient.ingredient.nameIngredient}}</p>
+            <img src="{{ asset('build/images/') ~ recipeIngredient.ingredient.picture }}" class="ingredient" alt="photo de {{ recipeIngredient.ingredient.nameIngredient }}" />
+            </div>
+        {% endfor %}
+    </div>
+    </div>
 {% endblock %}

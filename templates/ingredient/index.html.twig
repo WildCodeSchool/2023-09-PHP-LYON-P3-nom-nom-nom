@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des ingrédients{% endblock %}
+
+{% block body %}
+    <h1>Liste des ingrédients</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom de l'ingrédient</th>
+                <th>Categorie</th>
+                <th>Allergène</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ingredient in ingredients %}
+            <tr>
+                <td>{{ ingredient.id }}</td>
+                <td>{{ ingredient.nameIngredient }}</td>
+                <td>{{ ingredient.category }}</td>
+                <td>{{ ingredient.isAllergen }}</td>
+                <td>
+                    {# <a href="{{ path('app_ingredient_show', {'id': ingredient.id}) }}">détail de la recette</a> #}
+                    <a href="{{ path('ingredient_edit', {'id': ingredient.id}) }}">editer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {# <a href="{{ path('app_ingredient_new') }}">Ajouter votre recette</a> #}
+{% endblock %}
