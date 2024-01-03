@@ -13,15 +13,15 @@
 			<h2 class="text-center mb-5">Les étapes de la recette</h2>
 		</div>
 		<div>
-			{% for step in recipe.steps %}
+			{% for step in steps %}
 				<h2 class="mb-0">
 					Etape
 					{{ step.stepNumber }}</h2>
 				<p class="mt-0">{{ step.description }}</p>
 			{% endfor %}
 		</div>
-
-		<a href="{{ path('app_recipe_show', {'id': recipe.id}) }}">Retour à la recette</a>
+        <a class="container btn button-crud mt-2" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
+		<a class="container btn button-crud mt-2" href="{{ path('app_recipe_show', {'id': recipe.id}) }}">Retour à la recette</a>
 	</div>
 
 {% endblock %}

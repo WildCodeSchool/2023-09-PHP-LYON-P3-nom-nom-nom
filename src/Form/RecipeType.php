@@ -22,7 +22,7 @@ class RecipeType extends AbstractType
                 'required'      => false,
                 'allow_delete'  => true, // not mandatory, default is true
                 'download_uri' => true, // not mandatory, default is true
-                'label' => 'Télecharger une photo illustrant votre recette '
+                'label' => 'Télecharger une photo illustrant votre recette ',
             ])
             ->add('nameRecipe', TextType::class, [
                 'label' => 'Nom de la recette : '
@@ -33,7 +33,6 @@ class RecipeType extends AbstractType
             ->add('calorie', NumberType::class, [
                 'label' => 'Nombre de calories : '
             ])
-            ->add('date', HiddenType::class)
             ->add('cookingTime', NumberType::class, [
                 'label' => 'Temps de cuisson : '
             ])
@@ -41,7 +40,7 @@ class RecipeType extends AbstractType
                 'label' => 'Temps de préparation : '
             ])
             ->add('personNumber', NumberType::class, [
-                'label' => 'Pour combien de personne ? '
+                'label' => 'Pour combien de personnes ? '
             ])
             ->add('steps', CollectionType::class, [
                 'entry_type' => StepType::class,

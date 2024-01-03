@@ -3,6 +3,7 @@
 $backgroundButton: #bf4e40;
 $backgroundButtonDark: #444559;
 $backgroundMainColor: #faf6f4;
+$backgroundColorLogin: #74332b;
 $fontTitle: "Maven Pro";
 $fontColorButton: #fff;
 $fontSizeButton: 0.75rem;
@@ -34,7 +35,8 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 @import "~bootstrap/scss/bootstrap";
 
 // ---------------------------mixin------------------------------
-@mixin myButton($x,
+@mixin myButton(
+    $x,
     $y,
     $radius,
     $color,
@@ -43,7 +45,8 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     $fontSize,
     $fontStyle,
     $fontWeight,
-    $lineHeight) {
+    $lineHeight
+) {
     width: $x;
     height: $y;
     border-radius: $radius;
@@ -56,12 +59,14 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     line-height: $lineHeight;
 }
 
-@mixin myText($fontFamily,
+@mixin myText(
+    $fontFamily,
     $fontColorText,
     $fontSize,
     $fontStyle,
     $fontWeight,
-    $lineHeight) {
+    $lineHeight
+) {
     font-family: $fontFamily;
     color: $fontColorText;
     font-size: $fontSize;
@@ -114,8 +119,9 @@ body {
 }
 
 .button-crud {
-    @include myButton(8.625rem,
-        1.875rem,
+    @include myButton(
+        8.625rem,
+        2rem,
         0.75rem,
         ($backgroundButton),
         ($fontTitle),
@@ -123,7 +129,8 @@ body {
         ($fontSizeButton),
         ($fontStyleButton),
         ($fontWeightButton),
-        ($lineHeightButton));
+        ($lineHeightButton)
+    );
 
     &:hover {
         background-color: $backgroundButtonDark;
@@ -131,16 +138,18 @@ body {
 }
 
 .button-form {
-    @include myButton(16rem,
+    @include myButton(
+        16rem,
         1.875rem,
-        .75,
+        0.75,
         ($backgroundButton),
         ($fontTitle),
         ($fontColorButton),
         ($fontSizeButton),
         ($fontStyleButton),
         ($fontWeightButton),
-        ($lineHeightButton));
+        ($lineHeightButton)
+    );
 
     &:hover {
         background-color: $backgroundButtonDark;
@@ -154,12 +163,35 @@ body {
 
 //---------------------------text-----------------------------
 .paragraph {
-    @include myText(($fontText),
+    @include myText(
+        ($fontText),
         ($fontColorText),
         ($fontSizeText),
         ($fontStyleText),
         ($fontWeightText),
-        ($lineHeightText));
+        ($lineHeightText)
+    );
+}
+.textaccount {
+    @include myText(
+        ($fontText),
+        ($fontColorButton),
+        ($fontSizeText),
+        ($fontStyleText),
+        ($fontWeightText),
+        ($lineHeightText)
+    );
+}
+
+.noaccount {
+    @include myText(
+        ($fontText),
+        ($fontColorButton),
+        ($fontSizeButton),
+        ($fontStyleText),
+        400,
+        ($lineHeightText)
+    );
 }
 
 p {
@@ -167,12 +199,14 @@ p {
 }
 
 .infos-recipe {
-    @include myText(($fontTitle),
+    @include myText(
+        ($fontTitle),
         ($fontColorText),
         ($fontSizeInfosRecipe),
         ($fontStyleText),
         ($fontWeightInfos),
-        ($lineHeightText));
+        ($lineHeightText)
+    );
 }
 
 .glassmorphism {
@@ -190,12 +224,14 @@ p {
 }
 
 h2 {
-    @include myText(($fontTitle),
+    @include myText(
+        ($fontTitle),
         ($fontColorText),
         ($fontSizeTitle),
         ($fontStyleText),
         ($fontWeightTitle),
-        ($lineHeightText));
+        ($lineHeightText)
+    );
 }
 
 h3 {
@@ -209,12 +245,14 @@ h3 {
     );
 }
 h1 {
-    @include myText(($fontTitle),
+    @include myText(
+        ($fontTitle),
         ($fontColorText),
         ($fontSizeTitle),
         ($fontStyleText),
         ($fontWeightTitle),
-        ($lineHeightText));
+        ($lineHeightText)
+    );
 }
 
 //--------------------navbar-mobile-------------------
@@ -244,7 +282,6 @@ h1 {
     }
 }
 
-
 .nav-link {
     padding: 0;
 
@@ -259,10 +296,10 @@ ul {
 
 //--------------------navbar-desktop-------------------//
 .navbar-desktop {
-    @include media-breakpoint-down(md) { 
+    @include media-breakpoint-down(md) {
         display: none;
     }
-    
+
     @include media-breakpoint-up(md) {
         z-index: 998;
         width: 91%;
@@ -278,18 +315,17 @@ ul {
     }
 }
 
-.navbar-desktop li{
+.navbar-desktop li {
     cursor: pointer;
     color: $backgroundMainColor;
     font-size: larger;
     transition: 0.6s;
-    &:hover{
+    &:hover {
         font-weight: bold;
     }
 }
 
-.bento-container{
-   
+.bento-container {
     @include media-breakpoint-up(md) {
         position: fixed;
         right: 0;
@@ -297,9 +333,9 @@ ul {
     }
 }
 
-.bento-container img{
+.bento-container img {
     display: none;
-    
+
     @include media-breakpoint-up(md) {
         z-index: 999;
         display: block;
@@ -308,20 +344,20 @@ ul {
         cursor: pointer;
         transition: all 1.2s ease-in-out;
     }
-    &:hover{
+    &:hover {
         height: 38px;
         transform: rotate(360deg);
     }
 }
 
-.list-visible{
+.list-visible {
     z-index: 998;
     display: flex;
     top: 0;
     height: 100vh;
 }
 
-.icon-visible{
+.icon-visible {
     z-index: 999;
     height: 38px;
     background-color: $backgroundMainColor;
@@ -338,10 +374,12 @@ ul {
 
 .pic-recipe {
     margin: 15px 0 15px;
-    @include myPicture(($widthPic),
+    @include myPicture(
+        ($widthPic),
         ($heightPic),
         ($borderRadiusPic),
-        ($boxShadowPic));
+        ($boxShadowPic)
+    );
 }
 
 .pic-recipe-desktop {
@@ -399,10 +437,29 @@ ul {
     grid-column-end: 3;
 }
 
-
 // -----------------------recipe-steps page------------------------
-.recipe-step{
+.recipe-step {
     width: 60vw;
 }
 
-//-----------------------------------media queries---------------------
+//-----------------------------------login mobile ---------------------
+.bg-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-fond {
+    background-color: rgba(0, 0, 0, 0.65);
+}
+// --------------------------login desktop--------------------
+.back-picture {
+    width: 37%;
+    height: 100vh;
+}
+
+.bg-desktop-login {
+    border-radius: 0 2.5rem 2.5rem 0;
+    box-shadow: 24px 23px 72.5px 0px rgba(0, 0, 0, 0.25);
+    width: 100vw;
+}

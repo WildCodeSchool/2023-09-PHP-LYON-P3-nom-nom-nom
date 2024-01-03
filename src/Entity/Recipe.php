@@ -44,7 +44,6 @@ class Recipe
     private ?int $calorie = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\Date(message: 'La date n\'est pas correcte')]
     private ?DateTimeInterface $date = null;
 
     #[ORM\Column]
@@ -59,6 +58,7 @@ class Recipe
     private ?int $prepareTime = null;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, orphanRemoval: true)]
+    #[ORM\OrderBy(["stepNumber" => "ASC"])]
     private Collection $steps;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: RecipeIngredient::class, orphanRemoval: true)]
@@ -186,7 +186,7 @@ class Recipe
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(DatetimeInterface $updatedAt): Recipe
+    public function setUpdatedAt(DateTimeInterface $updatedAt): Recipe
     {
         $this->updatedAt = $updatedAt;
         return $this;
@@ -222,7 +222,7 @@ class Recipe
         return $this->picture;
     }
 
-    public function setPicture(string $picture): static
+    public function setPicture(?string $picture): static
     {
         $this->picture = $picture;
 
