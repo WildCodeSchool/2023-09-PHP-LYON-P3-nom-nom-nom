@@ -58,6 +58,7 @@ class Recipe
     private ?int $prepareTime = null;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, orphanRemoval: true)]
+    #[ORM\OrderBy(["stepNumber" => "ASC"])]
     private Collection $steps;
 
     #[ORM\Column]
