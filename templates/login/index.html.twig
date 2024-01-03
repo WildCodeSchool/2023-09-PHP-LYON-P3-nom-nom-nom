@@ -18,6 +18,9 @@
 						<label class="textaccount mt-2" for="password">Mot de passe</label>
 						<input class="form-control" type="password" id="password" name="_password"/>
 					</div>
+
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
 					<div>
 						<a class="noaccount link-underline link-underline-opacity-0" href="#">Pas de compte? Inscrivez-vous ici</a>
 					</div>
