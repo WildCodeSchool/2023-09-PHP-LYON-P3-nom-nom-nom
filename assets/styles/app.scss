@@ -108,7 +108,8 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 
 body {
     background-color: $backgroundMainColor;
-    height: 100vh;
+    height: 85%;
+    padding-bottom: 15%;
 }
 
 // -----------------------button------------------------------
@@ -308,7 +309,7 @@ ul {
         justify-content: flex-end;
         flex-wrap: nowrap;
         align-items: center;
-        background-color: red;
+        background-color: $backgroundButton;
         padding: 16px;
         top: 200vh;
         transition: top 0.4s ease-in-out;
@@ -360,7 +361,7 @@ ul {
 .icon-visible {
     z-index: 999;
     height: 38px;
-    background-color: $backgroundMainColor;
+    color: $backgroundMainColor;
 }
 
 //-------Carrousel----------
