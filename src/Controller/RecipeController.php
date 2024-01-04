@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Recipe;
 use App\Entity\Step;
 use App\Form\RecipeType;
+use App\Repository\RecipeIngredientRepository;
 use App\Form\StepType;
 use App\Repository\RecipeRepository;
 use App\Repository\StepRepository;
@@ -126,6 +127,19 @@ class RecipeController extends AbstractController
         return $this->render('recipe/recipe_step.html.twig', [
             'recipe' => $recipe,
             'steps' => $steps,
+        ]);
+    }
+
+    #[Route('/{id}/ingredients', name: 'app_recipe_show_ingredients', methods: ['GET'])]
+    public function showIngredients(
+        Recipe $recipe,
+        RecipeIngredientRepository $recipeIngredientRepo
+    ): Response {
+        $recipeIngredients = $recipeIngredientRepo->findBy(['recipe' => $recipe]);
+
+        return $this->render("recipe/recipe_ingredients.html.twig", [
+            'recipe' => $recipe,
+            'recipeIngredients' => $recipeIngredients
         ]);
     }
 }

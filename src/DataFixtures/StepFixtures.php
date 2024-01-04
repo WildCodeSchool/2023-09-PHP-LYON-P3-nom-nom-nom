@@ -4,9 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\Step;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class StepFixtures extends Fixture
+class StepFixtures extends Fixture implements DependentFixtureInterface
 {
     public const STEPS = [
         ['description' => 'il faut préparer tout les ingrédients',
@@ -78,5 +79,12 @@ class StepFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            RecipeFixture::class,
+        ];
     }
 }

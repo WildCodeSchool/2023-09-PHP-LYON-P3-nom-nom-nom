@@ -61,6 +61,10 @@ class Recipe
     #[ORM\OrderBy(["stepNumber" => "ASC"])]
     private Collection $steps;
 
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: RecipeIngredient::class, orphanRemoval: true)]
+    private Collection $ingredients;
+
+
     #[ORM\Column]
     #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
     #[Assert\Positive(message: 'La recette est pour combien de personne?')]
@@ -80,6 +84,7 @@ class Recipe
     private ?File $pictureFile = null;
     public function __construct()
     {
+        $this->ingredients = new ArrayCollection();
         $this->steps = new ArrayCollection();
     }
 
@@ -188,6 +193,23 @@ class Recipe
     }
 
     /**
+     * @return Collection<int, RecipeIngredient>
+     */
+    public function getIngredients(): Collection
+    {
+        return $this->ingredients;
+    }
+
+    public function addIngredient(RecipeIngredient $ingredient): static
+    {
+        if (!$this->ingredients->contains($ingredient)) {
+            $this->ingredients->add($ingredient);
+            $ingredient->setRecipe($this);
+        }
+        return $this;
+    }
+
+    /**
      * @return Collection<int, Step>
      */
     public function getSteps(): Collection
@@ -230,6 +252,18 @@ class Recipe
 
         return $this;
     }
+
+    public function removeIngredient(RecipeIngredient $ingredient): static
+    {
+        if ($this->ingredients->removeElement($ingredient)) {
+            // set the owning side to null (unless already changed)
+            if ($ingredient->getRecipe() === $this) {
+                $ingredient->setRecipe(null);
+            }
+        }
+        return $this;
+    }
+
     public function removeStep(Step $step): static
     {
         if ($this->steps->removeElement($step)) {
