@@ -9,7 +9,7 @@ $fontColorButton: #fff;
 $fontSizeButton: 0.75rem;
 $fontStyleButton: normal;
 $fontWeightButton: 700;
-$lineHeightButton: normal;
+$lineHeightButton: unset;
 
 $fontText: "Noto Sans";
 $fontColorText: #444559;
@@ -200,6 +200,7 @@ p {
 }
 
 .infos-recipe {
+    display: inline;
     @include myText(
         ($fontTitle),
         ($fontColorText),
@@ -391,6 +392,11 @@ ul {
         ($boxShadowPic)
     );
 }
+
+//---------------------picture recipe----------------------//
+.pic-view-recipe {
+    @include myPicture(46rem, 25rem, 1.25rem, ($boxShadowPic));
+}
 //-------------------icon----------------
 .fa-fire,
 .fa-hourglass-half,
@@ -466,17 +472,9 @@ ul {
 }
 // --------------------------ingredient desktop--------------------
 .ingredient {
-    @include myPicture(
-        6.1875rem,
-        6.0625rem,
-        1.25rem,
-        ($boxShadowPic));
+    @include myPicture(6.1875rem, 6.0625rem, 1.25rem, ($boxShadowPic));
 }
 // --------------------------ingredient mobile--------------------
 .ingredient-mob {
-    @include myPicture(
-        4.5rem,
-        4.5rem,
-        1.25rem,
-        ($boxShadowPic));
+    @include myPicture(4.5rem, 4.5rem, 1.25rem, ($boxShadowPic));
 }
