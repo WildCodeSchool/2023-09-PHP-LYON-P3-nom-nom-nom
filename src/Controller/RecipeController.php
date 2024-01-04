@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[Route('/recipe')]
 class RecipeController extends AbstractController
@@ -41,6 +42,7 @@ class RecipeController extends AbstractController
                 $entityManager->persist($step);
             }
 
+            $recipe->setOwner($this->getUser());
             $entityManager->persist($recipe);
 
             $entityManager->flush();
@@ -66,6 +68,11 @@ class RecipeController extends AbstractController
     #[Route('/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
+        if ($this->getUser() !== $recipe->getOwner()) {
+            // If not the owner, throws a 403 Access Denied exception
+            throw $this->createAccessDeniedException('Seul l\'auteur de la recette peut la modifier');
+        }
+
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
 
