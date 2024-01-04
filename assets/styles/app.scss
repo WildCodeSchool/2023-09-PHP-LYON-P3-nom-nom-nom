@@ -308,9 +308,9 @@ ul {
         justify-content: flex-end;
         flex-wrap: nowrap;
         align-items: center;
-        background-color: $backgroundButton;
+        background-color: red;
         padding: 16px;
-        top: 100vh;
+        top: 200vh;
         transition: top 0.4s ease-in-out;
     }
 }
@@ -351,7 +351,7 @@ ul {
 }
 
 .list-visible {
-    z-index: 998;
+    z-index: 999;
     display: flex;
     top: 0;
     height: 100vh;
