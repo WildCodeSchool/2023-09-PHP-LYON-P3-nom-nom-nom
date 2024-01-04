@@ -69,8 +69,9 @@ class RecipeController extends AbstractController
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         if ($this->getUser() !== $recipe->getOwner() && !$this->isGranted('ROLE_ADMIN')) {
-            // If not the owner, throws a 403 Access Denied exception
-            throw $this->createAccessDeniedException('Seul l\'auteur de la recette peut la modifier');
+            $this->addFlash('danger', 'Seul l\'auteur de la recette peut la modifier.');
+
+            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         $form = $this->createForm(RecipeType::class, $recipe);
@@ -112,7 +113,7 @@ class RecipeController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $recipe->getId(), $request->request->get('_token'))) {
             $entityManager->remove($recipe);
             $entityManager->flush();
-            $this->addFlash('danger', 'The program has been deleted');
+            $this->addFlash('danger', 'La recette est supprimée');
         }
 
         return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
