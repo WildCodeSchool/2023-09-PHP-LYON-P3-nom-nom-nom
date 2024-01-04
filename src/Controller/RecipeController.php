@@ -68,7 +68,7 @@ class RecipeController extends AbstractController
     #[Route('/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
-        if ($this->getUser() !== $recipe->getOwner()) {
+        if ($this->getUser() !== $recipe->getOwner() && !$this->isGranted('ROLE_ADMIN')) {
             // If not the owner, throws a 403 Access Denied exception
             throw $this->createAccessDeniedException('Seul l\'auteur de la recette peut la modifier');
         }
