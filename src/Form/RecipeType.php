@@ -2,10 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Ingredient;
 use App\Entity\Recipe;
-use App\Entity\RecipeIngredient;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -44,19 +41,12 @@ class RecipeType extends AbstractType
             ->add('personNumber', NumberType::class, [
                 'label' => 'Pour combien de personnes ? '
             ])
-            // ->add('ingredients', EntityType::class, [
-            //     'class' => Ingredient::class,
-            //     'choice_label' => 'nameIngredient',
-            //     'multiple' => true,
-            //     'expanded' => true,
-            //     'by_reference' => false,
-            //     'label' => 'Ingrédients : '
-            // ])
             ->add('ingredients', CollectionType::class, [
                 'entry_type' => RecipeIngredientType::class,
                 'entry_options' => ['label' => false],
+                'allow_add' => true,
                 'by_reference' => false,
-                'label' => 'Ingrédients : '
+                'label' => false
             ])
             ->add('steps', CollectionType::class, [
                 'entry_type' => StepType::class,
