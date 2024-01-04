@@ -60,7 +60,6 @@ class RecipeController extends AbstractController
     {
         return $this->render('recipe/show.html.twig', [
             'recipe' => $recipe,
-
         ]);
     }
 
