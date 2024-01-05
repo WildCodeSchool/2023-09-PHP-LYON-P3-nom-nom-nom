@@ -41,6 +41,10 @@ class RecipeController extends AbstractController
                 $step->setStepNumber($number += 1);
                 $entityManager->persist($step);
             }
+            foreach ($recipe->getIngredients() as $ingredient) {
+                $ingredient->setRecipe($recipe);
+                $entityManager->persist($ingredient);
+            }
 
             $recipe->setOwner($this->getUser());
             $entityManager->persist($recipe);
@@ -93,6 +97,11 @@ class RecipeController extends AbstractController
 
                     // Persistez la nouvelle étape
                     $entityManager->persist($step);
+                }
+            }
+            foreach ($recipe->getIngredients() as $ingredient) {
+                if (!$ingredient->getId()) {
+                    $entityManager->persist($ingredient);
                 }
             }
 

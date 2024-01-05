@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Recipe;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -41,6 +40,13 @@ class RecipeType extends AbstractType
             ])
             ->add('personNumber', NumberType::class, [
                 'label' => 'Pour combien de personnes ? '
+            ])
+            ->add('ingredients', CollectionType::class, [
+                'entry_type' => RecipeIngredientType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'by_reference' => false,
+                'label' => false
             ])
             ->add('steps', CollectionType::class, [
                 'entry_type' => StepType::class,
