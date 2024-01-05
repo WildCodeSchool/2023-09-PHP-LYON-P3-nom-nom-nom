@@ -39,7 +39,7 @@ class RecipeIngredientType extends AbstractType
                     'grammes' => 'g',
                     'kilogrammes' => 'kg',
                     'pincés' => 'pin',
-                    'tranches' =>'t',
+                    'tranches' => 't',
                     'feuilles' => 'f',
                     'brin' => 'b'
                 ],
