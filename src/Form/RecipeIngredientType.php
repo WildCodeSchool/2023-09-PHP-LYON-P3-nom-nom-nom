@@ -7,6 +7,7 @@ use App\Entity\RecipeIngredient;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,6 +20,7 @@ class RecipeIngredientType extends AbstractType
             ->add('ingredient', EntityType::class, [
                 'class' => Ingredient::class,
                 'choice_label' => 'nameIngredient',
+                'placeholder' => 'choississez un ingredient',
                 'autocomplete' => true,
                 'label' => 'Ingrédient',
             ])
@@ -26,7 +28,22 @@ class RecipeIngredientType extends AbstractType
                 'label' => 'Quantité',
 
             ])
-            ->add('unity', TextType::class, [
+            ->add('unity', ChoiceType::class, [
+                'choices' => [
+                    'choissisez une unité' => '',
+                    'millilitre' => 'ml',
+                    'centilitre' => 'cl',
+                    'décilitre' => 'dl',
+                    'litre' => 'l',
+                    'pièces' => 'pie',
+                    'grammes' => 'g',
+                    'kilogrammes' => 'kg',
+                    'pincés' => 'pin',
+                    'tranches' =>'t',
+                    'feuilles' => 'f',
+                    'brin' => 'b'
+                ],
+                'autocomplete' => true,
                 'label' => 'Unité',
             ]);
     }
