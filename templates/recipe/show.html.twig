@@ -1,60 +1,62 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  Recipe
+	Recipe
 {% endblock %}
 
 {% block body %}
-  <h2 class="mx-auto text-center mt-5 pt-4 text-uppercase w-75">{{ recipe.nameRecipe }}</h2>
-  <div class="container text-center">
-    <div id="carouselExampleIndicators " class="carousel carousel-dark slide">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe object-fit-cover" alt="photo d'un cassoulet" />
-        </div>
-        <div class="carousel-item">
-          <img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe object-fit-cover" alt="photo d'un cassoulet" />
-        </div>
-        <div class="carousel-item">
-          <img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe object-fit-cover" alt="photo d'un cassoulet" />
-        </div>
-      </div>
-      <button class="carousel-control-prev d-none" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-    <div class="row mt-3 pt-2">
-      <div class="col">
-        <i class="fa-solid fa-hourglass-half"></i>
-        <p class="infos-recipe">{{ recipe.prepareTime }}
-          min</p>
-      </div>
-      <div class="col">
-        <i class="fa-solid fa-fire"></i>
-        <p class="infos-recipe">{{ recipe.cookingTime }}
-          min</p>
-      </div>
-      <div class="col">
-        <i class="fa-solid fa-user-group"></i>
-        <p class="infos-recipe">{{ recipe.personNumber }}</p>
-      </div>
-    </div>
-  </div>
-  <div class="container text-center">
-    <div class="d-flex justify-content-center">
-      <a class="container btn button-crud mt-2" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
-      {{ include('recipe/_delete_form.html.twig') }}
-      <a class="container btn button-crud mt-2" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
-    </div>
-  </div>
+	<h2 class="mx-auto text-center mt-5 pt-4 text-uppercase w-75">{{ recipe.nameRecipe }}</h2>
+	<div class="container text-center">
+		<div id="carouselExampleIndicators " class="carousel carousel-dark slide">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe object-fit-cover" alt="photo d'un cassoulet"/>
+				</div>
+				<div class="carousel-item">
+					<img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe object-fit-cover" alt="photo d'un cassoulet"/>
+				</div>
+				<div class="carousel-item">
+					<img src="{{ asset('build/images/') ~ recipe.picture }}" class="pic-recipe object-fit-cover" alt="photo d'un cassoulet"/>
+				</div>
+			</div>
+			<button class="carousel-control-prev d-none" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+		<div class="row mt-3 pt-2">
+			<div class="col">
+				<i class="fa-solid fa-hourglass-half"></i>
+				<p class="infos-recipe">{{ recipe.prepareTime }}
+					min</p>
+			</div>
+			<div class="col">
+				<i class="fa-solid fa-fire"></i>
+				<p class="infos-recipe">{{ recipe.cookingTime }}
+					min</p>
+			</div>
+			<div class="col">
+				<i class="fa-solid fa-user-group"></i>
+				<p class="infos-recipe">{{ recipe.personNumber }}</p>
+			</div>
+		</div>
+	</div>
+	<div class="container text-center">
+		<div class="d-flex justify-content-center">
+			{% if is_granted("ROLE_ADMIN") or is_granted("recipe.owner") %}
+				<a class="container btn button-crud mt-2" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
+				{{ include('recipe/_delete_form.html.twig') }}
+			{% endif %}
+			<a class="container btn button-crud mt-2" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
+		</div>
+	</div>
 {% endblock %}

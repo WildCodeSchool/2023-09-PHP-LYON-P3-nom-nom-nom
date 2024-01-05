@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[Route('/recipe')]
 class RecipeController extends AbstractController
@@ -41,6 +42,7 @@ class RecipeController extends AbstractController
                 $entityManager->persist($step);
             }
 
+            $recipe->setOwner($this->getUser());
             $entityManager->persist($recipe);
 
             $entityManager->flush();
@@ -60,13 +62,18 @@ class RecipeController extends AbstractController
     {
         return $this->render('recipe/show.html.twig', [
             'recipe' => $recipe,
-
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
+        if ($this->getUser() !== $recipe->getOwner() && !$this->isGranted('ROLE_ADMIN')) {
+            $this->addFlash('danger', 'Seul l\'auteur de la recette peut la modifier.');
+
+            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
 
@@ -106,7 +113,7 @@ class RecipeController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $recipe->getId(), $request->request->get('_token'))) {
             $entityManager->remove($recipe);
             $entityManager->flush();
-            $this->addFlash('danger', 'The program has been deleted');
+            $this->addFlash('danger', 'La recette est supprimée');
         }
 
         return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
