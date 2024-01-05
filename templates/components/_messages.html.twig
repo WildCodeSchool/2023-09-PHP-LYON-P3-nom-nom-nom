@@ -1,0 +1,7 @@
+{% for recipe, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ recipe }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
