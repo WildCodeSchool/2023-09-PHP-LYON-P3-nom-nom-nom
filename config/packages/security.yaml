@@ -39,7 +39,6 @@ security:
     access_control:
         - { path: ^/ingredient, roles: ROLE_ADMIN }
         - { path: ^/step, roles: ROLE_ADMIN }
-        - { path: ^/app_recipe_new, roles: ROLE_CONTRIBUTOR }
 
 
     role_hierarchy:
