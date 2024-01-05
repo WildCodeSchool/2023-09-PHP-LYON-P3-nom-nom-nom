@@ -20,38 +20,11 @@
 			<i class="fa-regular fa-heart"></i>
 		</a>
 	</li>
-	{% if app.user %}
-		<li class="btn-group dropup">
-			<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-				<i class="fa-solid fa-circle-user"></i>
-			</a>
-			<ul class="dropdown-menu">
-				<li>
-					<a class="dropdown-item" href="#">Mon profil</a>
-				</li>
-				<li>
-					<a class="link-offset-2 link-underline link-underline-opacity-0 nav-link" href="{{ path('app_logout') }}">
-						Se déconnecter</a>
-				</li>
-			</ul>
-		</li>
-	{% else %}
-		<li class="btn-group dropup">
-			<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-				<i class="fa-solid fa-circle-user"></i>
-			</a>
-			<ul class="dropdown-menu">
-				<li>
-					<a class="link-offset-2 link-underline link-underline-opacity-0 nav-link" href="{{ path('app_login') }}">
-						Se connecter</a>
-				</li>
-				<li>
-					<a class="link-offset-2 link-underline link-underline-opacity-0 nav-link" href="#">
-						S'inscrire</a>
-				</li>
-			</ul>
-		</li>
-	{% endif %}
+	<li class="nav-item">
+		<a class="nav-link" href="{{ path('app_login') }}">
+			<i class="fa-solid fa-circle-user"></i>
+		</a>
+	</li>
 </ul>
 
 {# --------------------------menu bento desktop-------------------- #}

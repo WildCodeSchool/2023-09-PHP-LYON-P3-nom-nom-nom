@@ -296,20 +296,6 @@ ul {
     gap: 3rem;
 }
 
-.dropdown-menu{
-
-    text-align: center;
-    background-color: $backgroundButton;
-    color: $backgroundMainColor;
-    font-size: larger;
-
-    &.dropdown-menu.\show{
-        position: absolute;
-        bottom: 50px;
-        left: -94px;
-    }
-}
-
 //--------------------navbar-desktop-------------------//
 .navbar-desktop {
     @include media-breakpoint-down(md) {
