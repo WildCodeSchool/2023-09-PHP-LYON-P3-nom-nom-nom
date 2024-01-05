@@ -1,0 +1,15 @@
+<div{{attributes}}>
+	<div class="mb-3">
+		<label class="form-label" for="search">
+			Recherchez une recette
+		</label>
+		<input type="search" id="search" class="form-control" value="{{ query }}" data-model="query">
+	</div>
+	{% for recipe in this.recipes %}
+		<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
+		<div class="container-fluid">
+			<h5>{{ recipe.nameRecipe }}</h5>
+			<p class="w-75 container text-center">{{ recipe.description }}</p>
+		</div>
+	{% endfor %}
+</div>

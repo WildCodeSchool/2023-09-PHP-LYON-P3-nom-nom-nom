@@ -19,6 +19,7 @@ class RecipeIngredientType extends AbstractType
             ->add('ingredient', EntityType::class, [
                 'class' => Ingredient::class,
                 'choice_label' => 'nameIngredient',
+                'autocomplete' => true,
                 'label' => 'Ingrédient',
             ])
             ->add('quantity', NumberType::class, [
