@@ -261,7 +261,7 @@ h1 {
 .fa-solid,
 .fa-regular {
     color: $backgroundButtonDark;
-    font-size: 1.32rem;
+    font-size: 1.45rem;
     padding: 0;
 }
 
@@ -285,7 +285,7 @@ h1 {
 }
 
 .nav-link {
-    padding: 0;
+    padding: 8px 0;
 
     @include media-breakpoint-up(md) {
         cursor: pointer;
@@ -294,6 +294,20 @@ h1 {
 
 ul {
     gap: 3rem;
+}
+
+.dropdown-menu{
+
+    text-align: center;
+    background-color: $backgroundButton;
+    color: $backgroundMainColor;
+    font-size: larger;
+
+    &.dropdown-menu.\show{
+        position: absolute;
+        bottom: 50px;
+        left: -94px;
+    }
 }
 
 //--------------------navbar-desktop-------------------//
