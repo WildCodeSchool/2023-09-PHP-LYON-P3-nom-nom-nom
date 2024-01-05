@@ -426,7 +426,7 @@ ul {
 }
 
 .col-form-label {
-    text-align: center;
+    text-align: start;
 }
 
 .mb-3:first-child {
@@ -443,7 +443,20 @@ ul {
     grid-column-start: 1;
     grid-column-end: 3;
 }
-
+.delete-child > {
+    div:first-child {
+        display: none;
+    }
+}
+.mb3 {
+    align-self: center;
+}
+.ingredient-form {
+    width: 33%;
+    @include media-breakpoint-down(md) {
+        width: 100%;
+    }
+}
 // -----------------------recipe-steps page------------------------
 .recipe-step {
     width: 60vw;
