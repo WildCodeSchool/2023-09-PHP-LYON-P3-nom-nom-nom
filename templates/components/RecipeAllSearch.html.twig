@@ -5,11 +5,13 @@
 		</label>
 		<input type="search" id="search" class="form-control" value="{{ query }}" data-model="query">
 	</div>
+	<div class="d-flex flex-wrap">
 	{% for recipe in this.recipes %}
+		<div class="container-fluid w-50">
 		<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
-		<div class="container-fluid">
 			<h5>{{ recipe.nameRecipe }}</h5>
-			<p class="w-75 container text-center">{{ recipe.description }}</p>
+			<p>{{ recipe.description }}</p>
 		</div>
 	{% endfor %}
+	</div>
 </div>

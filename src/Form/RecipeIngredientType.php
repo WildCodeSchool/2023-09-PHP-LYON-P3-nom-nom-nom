@@ -31,17 +31,17 @@ class RecipeIngredientType extends AbstractType
             ->add('unity', ChoiceType::class, [
                 'choices' => [
                     'choissisez une unité' => '',
-                    'millilitre' => 'ml',
-                    'centilitre' => 'cl',
-                    'décilitre' => 'dl',
-                    'litre' => 'l',
-                    'pièces' => 'pie',
-                    'grammes' => 'g',
-                    'kilogrammes' => 'kg',
-                    'pincés' => 'pin',
-                    'tranches' => 't',
-                    'feuilles' => 'f',
-                    'brin' => 'b'
+                    'millilitre(s)' => 'ml',
+                    'centilitre(s)' => 'cl',
+                    'décilitre(s)' => 'dl',
+                    'litre(s)' => 'l',
+                    'pièce(s)' => 'pie',
+                    'gramme(s)' => 'g',
+                    'kilogramme(s)' => 'kg',
+                    'pincé(s)' => 'pin',
+                    'tranche(s)' => 't',
+                    'feuille(s)' => 'f',
+                    'brin(s)' => 'b'
                 ],
                 'autocomplete' => true,
                 'label' => 'Unité',
