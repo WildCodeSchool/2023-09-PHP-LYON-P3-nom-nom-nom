@@ -20,7 +20,7 @@ class RecipeIngredientType extends AbstractType
             ->add('ingredient', EntityType::class, [
                 'class' => Ingredient::class,
                 'choice_label' => 'nameIngredient',
-                'placeholder' => 'choississez un ingredient',
+                'placeholder' => 'choisissez un ingredient',
                 'autocomplete' => true,
                 'label' => 'Ingrédient',
             ])
@@ -30,7 +30,7 @@ class RecipeIngredientType extends AbstractType
             ])
             ->add('unity', ChoiceType::class, [
                 'choices' => [
-                    'choissisez une unité' => '',
+                    'choisissez une unité' => '',
                     'millilitre(s)' => 'ml',
                     'centilitre(s)' => 'cl',
                     'décilitre(s)' => 'dl',
@@ -38,10 +38,12 @@ class RecipeIngredientType extends AbstractType
                     'pièce(s)' => 'pie',
                     'gramme(s)' => 'g',
                     'kilogramme(s)' => 'kg',
-                    'pincé(s)' => 'pin',
+                    'pincée(s)' => 'pin',
                     'tranche(s)' => 't',
                     'feuille(s)' => 'f',
-                    'brin(s)' => 'b'
+                    'brin(s)' => 'b',
+                    'cuillère(s) à soupe' => 'cas',
+                    'cuillère(s) à café' => 'cac'
                 ],
                 'autocomplete' => true,
                 'label' => 'Unité',
