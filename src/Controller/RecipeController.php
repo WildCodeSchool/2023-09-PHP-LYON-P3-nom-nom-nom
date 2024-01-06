@@ -79,10 +79,15 @@ class RecipeController extends AbstractController
     #[Route('/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
-        if ($this->getUser() !== $recipe->getOwner() || !$this->isGranted('ROLE_ADMIN')) {
+        if ($this->getUser() !== $recipe->getOwner() && !$this->isGranted('ROLE_ADMIN')) {
             $this->addFlash('danger', 'Seul l\'auteur de la recette peut la modifier.');
 
             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
+
+        } elseif (!$this->isGranted('ROLE_CONTRIBUTOR')) {
+            $this->addFlash('danger', 'Connecter vous pour éditer une recette.');
+
+             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         $form = $this->createForm(RecipeType::class, $recipe);
