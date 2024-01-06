@@ -21,6 +21,25 @@ class RecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipe::class);
     }
 
+    public function findLikeNameRecipe(string $nameRecipe): array
+    {
+        $result = [];
+
+        if (!empty($nameRecipe)) {
+            $result = $this->createQueryBuilder('r')
+                ->join('r.ingredients', 'ri')
+                ->join('ri.ingredient', 'i')
+                ->andWhere('r.nameRecipe LIKE :nameRecipe')
+                ->orWhere('r.description LIKE :nameRecipe')
+                ->orWhere('i.nameIngredient LIKE :nameRecipe')
+                ->setParameter('nameRecipe', '%' . $nameRecipe . '%')
+                ->orderBy('r.nameRecipe', 'ASC')
+                ->getQuery()
+                ->getResult();
+        }
+
+        return $result;
+    }
 //    /**
 //     * @return Recipe[] Returns an array of Recipe objects
 //     */

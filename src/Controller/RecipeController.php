@@ -6,7 +6,6 @@ use App\Entity\Recipe;
 use App\Entity\Step;
 use App\Form\RecipeType;
 use App\Repository\RecipeIngredientRepository;
-use App\Form\StepType;
 use App\Repository\RecipeRepository;
 use App\Repository\StepRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -57,7 +56,7 @@ class RecipeController extends AbstractController
         return $this->render('recipe/new.html.twig', [
             'recipe' => $recipe,
             'form' => $form,
-            'number' => $number
+            'number' => $number,
         ]);
     }
 
