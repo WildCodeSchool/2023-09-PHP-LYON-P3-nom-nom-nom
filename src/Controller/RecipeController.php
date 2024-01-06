@@ -9,17 +9,22 @@ use App\Repository\RecipeIngredientRepository;
 use App\Form\StepType;
 use App\Repository\RecipeRepository;
 use App\Repository\StepRepository;
+use App\Service\AccessControl;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 
 #[Route('/recipe')]
 class RecipeController extends AbstractController
 {
+    private AccessControl $accessControl;
+    public function __construct(AccessControl $accessControl)
+    {
+        $this->accessControl = $accessControl;
+    }
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
     public function index(RecipeRepository $recipeRepository): Response
     {
@@ -31,10 +36,10 @@ class RecipeController extends AbstractController
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        if (!$this->isGranted('ROLE_CONTRIBUTOR')) {
-            $this->addFlash('danger', 'Connecter vous pour ajouter une recette.');
-
-            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
+        // call the AccessControl service => control if there is a connection
+        $notConnected = $this->accessControl->isNotConnected();
+        if ($notConnected !== null) {
+            return $notConnected;
         }
 
         $number = 0;
@@ -79,15 +84,15 @@ class RecipeController extends AbstractController
     #[Route('/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
-        if ($this->getUser() !== $recipe->getOwner() && !$this->isGranted('ROLE_ADMIN')) {
-            $this->addFlash('danger', 'Seul l\'auteur de la recette peut la modifier.');
-
-            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
-
-        } elseif (!$this->isGranted('ROLE_CONTRIBUTOR')) {
-            $this->addFlash('danger', 'Connecter vous pour éditer une recette.');
-
-             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
+        // call the AccessControl service => control if there is a connection
+        $notConnected = $this->accessControl->isNotConnected();
+        if ($notConnected !== null) {
+            return $notConnected;
+        }
+        // call the AccessControl service => control the owner
+        $notOwner = $this->accessControl->isNotOwner($recipe);
+        if ($notOwner !== null) {
+            return $notOwner;
         }
 
         $form = $this->createForm(RecipeType::class, $recipe);
