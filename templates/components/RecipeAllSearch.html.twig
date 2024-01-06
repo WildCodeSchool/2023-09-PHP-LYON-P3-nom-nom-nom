@@ -5,9 +5,9 @@
 		</label>
 		<input type="search" id="search" class="form-control" value="{{ query }}" data-model="query">
 	</div>
-	<div class="d-flex flex-wrap">
+	<div class="d-flex flex-wrap gap-1 text-center">
 	{% for recipe in this.recipes %}
-		<div class="container-fluid w-50">
+		<div class="container-fluid w-25">
 		<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
 			<h5>{{ recipe.nameRecipe }}</h5>
 			<p>{{ recipe.description }}</p>
