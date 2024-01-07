@@ -17,7 +17,7 @@ class IngredientType extends AbstractType
             ->add('nameIngredient', TextType::class, [
                 'label' => 'Nom de l\'ingrédient '])
             ->add('category', TextType::class, [
-                'label' => 'Categorie de l\'ingrédient '])
+                'label' => 'Catégorie de l\'ingrédient '])
             ->add('isAllergen')
             ->add('pictureFile', VichFileType::class, [
                 'required'      => false,
