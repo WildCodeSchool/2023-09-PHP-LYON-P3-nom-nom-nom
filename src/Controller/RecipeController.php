@@ -8,16 +8,21 @@ use App\Form\RecipeType;
 use App\Repository\RecipeIngredientRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\StepRepository;
+use App\Service\AccessControl;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[Route('/recipe')]
 class RecipeController extends AbstractController
 {
+    private AccessControl $accessControl;
+    public function __construct(AccessControl $accessControl)
+    {
+        $this->accessControl = $accessControl;
+    }
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
     public function index(RecipeRepository $recipeRepository): Response
     {
@@ -29,6 +34,12 @@ class RecipeController extends AbstractController
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        // call the AccessControl service => control if there is a connection
+        $notConnected = $this->accessControl->isNotConnected();
+        if ($notConnected !== null) {
+            return $notConnected;
+        }
+
         $number = 0;
         $recipe = new Recipe();
         $form = $this->createForm(RecipeType::class, $recipe);
@@ -71,10 +82,15 @@ class RecipeController extends AbstractController
     #[Route('/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
-        if ($this->getUser() !== $recipe->getOwner() && !$this->isGranted('ROLE_ADMIN')) {
-            $this->addFlash('danger', 'Seul l\'auteur de la recette peut la modifier.');
-
-            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
+        // call the AccessControl service => control if there is a connection
+        $notConnected = $this->accessControl->isNotConnected();
+        if ($notConnected !== null) {
+            return $notConnected;
+        }
+        // call the AccessControl service => control the owner
+        $notOwner = $this->accessControl->isNotOwner($recipe);
+        if ($notOwner !== null) {
+            return $notOwner;
         }
 
         $form = $this->createForm(RecipeType::class, $recipe);
@@ -118,6 +134,17 @@ class RecipeController extends AbstractController
     #[Route('/{id}', name: 'app_recipe_delete', methods: ['POST'])]
     public function delete(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
+        // call the AccessControl service => control if there is a connection
+        $notConnected = $this->accessControl->isNotConnected();
+        if ($notConnected !== null) {
+            return $notConnected;
+        }
+        // call the AccessControl service => control the owner
+        $notOwner = $this->accessControl->isNotOwner($recipe);
+        if ($notOwner !== null) {
+            return $notOwner;
+        }
+
         if ($this->isCsrfTokenValid('delete' . $recipe->getId(), $request->request->get('_token'))) {
             $entityManager->remove($recipe);
             $entityManager->flush();
