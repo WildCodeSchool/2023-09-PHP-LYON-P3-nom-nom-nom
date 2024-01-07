@@ -10,7 +10,7 @@ class AccessControl extends AbstractController
 {
     public function isNotOwner(Recipe $recipe): ?Response
     {
-        // this method verifes if the user connected is the owner of the recipe AND check ADMIN status
+        // this method cheks if the user connected is the owner of the recipe AND checks ADMIN status
         if ($this->getUser() !== $recipe->getOwner() && !$this->isGranted('ROLE_ADMIN')) {
             $this->addFlash('danger', 'Seul l\'auteur de la recette peut la modifier.');
 
@@ -22,7 +22,7 @@ class AccessControl extends AbstractController
 
     public function isNotConnected(): ?Response
     {
-        // this method verifes if a user is connected AND check ADMIN status
+        // this method checks if a user is connected AND checks ADMIN status
         if (!$this->isGranted('ROLE_CONTRIBUTOR') && !$this->isGranted('ROLE_ADMIN')) {
             $this->addFlash('danger', 'Connecter vous pour accéder à cette ressource.');
 
