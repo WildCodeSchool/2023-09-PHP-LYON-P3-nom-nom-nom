@@ -448,14 +448,35 @@ ul {
         display: none;
     }
 }
-.mb3 {
+.mb-3 {
     align-self: center;
+    align-items: center;
 }
 .ingredient-form {
-    width: 33%;
+    width: 45%;
     @include media-breakpoint-down(md) {
         width: 100%;
     }
+}
+
+button{
+    display: flex;
+    border-color: transparent;
+    padding:0 2rem 0 2rem;
+    align-items: center;
+    text-align: center;
+        @include myButton(
+        max-content,
+        2rem,
+        0.45rem,
+        ($backgroundButton),
+        ($fontTitle),
+        ($fontColorButton),
+        ($fontSizeButton),
+        ($fontStyleButton),
+        ($fontWeightButton),
+        ($lineHeightButton)
+    );
 }
 // -----------------------recipe-steps page------------------------
 .recipe-step {

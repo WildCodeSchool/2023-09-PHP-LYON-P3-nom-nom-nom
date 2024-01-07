@@ -4,15 +4,16 @@
 	{{ form_row(form.pictureFile) }}
 	{{ form_row(form.nameRecipe) }}
 	{{ form_row(form.description) }}
+  {{ form_row(form.personNumber) }}
 	{{ form_row(form.calorie) }}
-	{{ form_row(form.cookingTime) }}
+  {{ form_row(form.cookingTime) }}
 	{{ form_row(form.prepareTime) }}
-	{{ form_row(form.personNumber) }}
+	
 
 </div>
 
 <div {{ stimulus_controller('form-collection') }} data-form-collection-index-value="{{ form.ingredients|length }}" data-form-collection-prototype-value="{{ form_widget(form.ingredients.vars.prototype)|e('html_attr') }}">
-	<ul class="delete-child paragraph justify-content-evenly d-flex flex-wrap container-fluid " {{ stimulus_target('form-collection', 'collectionContainer') }}>
+	<ul class="container-fluid paragraph justify-content-between d-flex flex-wrap delete-child p-0" {{ stimulus_target('form-collection', 'collectionContainer') }}>
 		{{ form_row(form.ingredients) }}
 	</ul>
 	<div class="button-form-center">
