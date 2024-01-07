@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 #[Route('/recipe')]
 class RecipeController extends AbstractController
 {
@@ -136,6 +135,17 @@ class RecipeController extends AbstractController
     #[Route('/{id}', name: 'app_recipe_delete', methods: ['POST'])]
     public function delete(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
+        // call the AccessControl service => control if there is a connection
+        $notConnected = $this->accessControl->isNotConnected();
+        if ($notConnected !== null) {
+            return $notConnected;
+        }
+        // call the AccessControl service => control the owner
+        $notOwner = $this->accessControl->isNotOwner($recipe);
+        if ($notOwner !== null) {
+            return $notOwner;
+        }
+
         if ($this->isCsrfTokenValid('delete' . $recipe->getId(), $request->request->get('_token'))) {
             $entityManager->remove($recipe);
             $entityManager->flush();

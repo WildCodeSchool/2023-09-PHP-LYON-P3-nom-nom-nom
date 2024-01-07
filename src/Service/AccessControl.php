@@ -25,10 +25,10 @@ class AccessControl extends AbstractController
         // this method verifes if a user is connected AND check ADMIN status
         if (!$this->isGranted('ROLE_CONTRIBUTOR') && !$this->isGranted('ROLE_ADMIN')) {
             $this->addFlash('danger', 'Connecter vous pour accéder à cette ressource.');
-        
+
              return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
-        
+
         return null;
     }
 }
