@@ -20,7 +20,7 @@ class StepType extends AbstractType
             ->add('stepNumber', HiddenType::class, [
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'description de l\'étape de votre recette :'
+                'label' => 'Décrivez l\'étape de votre recette'
             ])
 
         ;

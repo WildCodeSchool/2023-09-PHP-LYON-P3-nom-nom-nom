@@ -55,6 +55,8 @@
 	</div>
 </div>
 
+
+
 {# section with CTA #}
 	<div class="position-relative py-5">
 		<img class="w-100 vh-100 object-fit-cover" src="{{ asset('/build/images/background.png')}}" alt="Photo représentant une table remplie de plats avec une très forte opacité"/>
@@ -74,4 +76,7 @@
 		<a href="#"><img class="w-25" src="{{ asset('/build/images/plat.png')}}"alt="Photo présentant un plat de résistance"/></a>
 		<a href="#"><img class="w-25" src="{{ asset('/build/images/dessert.png')}}"alt="Photo présentant un dessert"/></a>
 	</div>
+
+{{ component('RecipeAllSearch') }}
+
 {% endblock %}

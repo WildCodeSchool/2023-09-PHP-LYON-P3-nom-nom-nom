@@ -442,12 +442,13 @@ ul {
 }
 
 .col-form-label {
-    text-align: center;
+    text-align: start;
 }
 
 .mb-3:first-child {
     grid-column-start: 1;
     grid-column-end: 3;
+
 }
 
 .mb-3:nth-child(2) {
@@ -459,7 +460,44 @@ ul {
     grid-column-start: 1;
     grid-column-end: 3;
 }
+.delete-child > {
+    div:first-child {
+        display: none;
+    }
+}
+.mb-3 {
+    align-self: center;
+    align-items: center;
+}
+.ingredient-form {
+    width: 47%;
+    @include media-breakpoint-down(md) {
+        width: 100%;
+    }
+}
 
+button{
+    display: flex;
+    border-color: transparent;
+    padding:0 2rem 0 2rem;
+    align-items: center;
+    text-align: center;
+        @include myButton(
+        max-content,
+        2rem,
+        0.45rem,
+        ($backgroundButton),
+        ($fontTitle),
+        ($fontColorButton),
+        ($fontSizeButton),
+        ($fontStyleButton),
+        ($fontWeightButton),
+        ($lineHeightButton)
+    );
+}
+.form-select{
+   opacity: unset;
+}
 // -----------------------recipe-steps page------------------------
 .recipe-step {
     width: 60vw;

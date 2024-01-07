@@ -25,6 +25,7 @@ export default class extends Controller {
     addCollectionElementIngredient(event)
     {
         const item = document.createElement('li');
+        item.classList.add('ingredient-form');
         item.innerHTML = this.prototypeValue.replace(/__name__/g, this.indexValue);
         this.collectionContainerTarget.appendChild(item);
         this.indexValue++;
