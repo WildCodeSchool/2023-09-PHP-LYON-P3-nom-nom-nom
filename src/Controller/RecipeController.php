@@ -56,8 +56,6 @@ class RecipeController extends AbstractController
                 ->from($this->getParameter('mailer_from'))
                 ->to('you@example.com')
                 ->subject('Une nouvelle recette vient d\'être publiée.')
-                ->text('Envoyée des emails est de nouveau sympa')
-                ->addPart((new DataPart(new File('build/images/nomnomlogo.png', 'r'), 'logo', 'image/png'))->asInline())
                 ->html($this->renderView('recipe/newRecipeEmail.html.twig', ['recipe' => $recipe]));
 
             $mailer->send($email);
