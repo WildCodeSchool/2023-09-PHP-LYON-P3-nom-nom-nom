@@ -56,6 +56,9 @@
 </div>
 
 {# MOBILE section with CTA #}
+
+
+{# section with CTA #}
 	<div class="position-relative py-5">
 	<h1 class="text-center">Rejoignez notre communauté</h1>
 	<p class="paragraph text-center">A chaque bouchée une nouvelle saveur.</p>
@@ -76,4 +79,7 @@
 		<a href="#"><img class="w-25" src="{{ asset('/build/images/plat.png')}}"alt="Photo présentant un plat de résistance"/></a>
 		<a href="#"><img class="w-25" src="{{ asset('/build/images/dessert.png')}}"alt="Photo présentant un dessert"/></a>
 	</div>
+
+{{ component('RecipeAllSearch') }}
+
 {% endblock %}
