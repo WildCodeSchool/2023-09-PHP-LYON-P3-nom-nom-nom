@@ -12,6 +12,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -27,7 +29,7 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, MailerInterface $mailer, EntityManagerInterface $entityManager): Response
     {
         $number = 0;
         $recipe = new Recipe();
@@ -47,6 +49,16 @@ class RecipeController extends AbstractController
 
             $recipe->setOwner($this->getUser());
             $entityManager->persist($recipe);
+
+            // send email to users if a recipe has been created
+            $email = (new Email())
+                ->from('toto@example.com')
+                ->to('you@example.com')
+                ->subject('Une nouvelle recette vient d\'être publiée.')
+                ->text('Envoyée des emails est de nouveau sympa')
+                ->html('<p>Une nouvelle recette vient d\'être publiée');
+
+            $mailer->send($email);
 
             $entityManager->flush();
 
