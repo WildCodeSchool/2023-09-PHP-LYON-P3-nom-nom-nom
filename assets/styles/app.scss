@@ -516,3 +516,9 @@ button{
 .ingredient-mob {
     @include myPicture(4.5rem, 4.5rem, 1.25rem, ($boxShadowPic));
 }
+
+// ------------------------------recipe list--------------------
+.recipe-list{
+    width : 30vw;
+    height: 5vh;
+}

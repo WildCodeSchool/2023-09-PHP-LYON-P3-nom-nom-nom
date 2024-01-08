@@ -5,42 +5,25 @@
 {% block body %}
 {% include 'components/_messages.html.twig' %}
     <h1>Liste des recettes</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>NameRecipe</th>
-                <th>Description</th>
-                <th>Calorie</th>
-                <th>Date</th>
-                <th>CookingTime</th>
-                <th>PrepareTime</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for recipe in recipes %}
-            <tr>
-                <td>{{ recipe.id }}</td>
-                <td>{{ recipe.nameRecipe }}</td>
-                <td>{{ recipe.description }}</td>
-                <td>{{ recipe.calorie }}</td>
-                <td>{{ recipe.date ? recipe.date|date('Y-m-d') : '' }}</td>
-                <td>{{ recipe.cookingTime }}</td>
-                <td>{{ recipe.prepareTime }}</td>
-                <td>
-                    <a href="{{ path('app_recipe_show', {'id': recipe.id}) }}">détail de la recette</a>
-                    <a href="{{ path('app_recipe_edit', {'id': recipe.id}) }}">editer</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+	<div class="d-flex flex-column text-center d-md-none">
+	{% for recipe in recipes %}
+		<div class="container-fluid w-75">
+		<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
+			<h5>{{ recipe.nameRecipe }}</h5>
+			<p>{{ recipe.description }}</p>
+		</div>
+	{% endfor %}
+	</div>
+    <div class="d-none d-md-block">
+	<div class="d-flex flex-wrap gap-1 text-center">
+	{% for recipe in recipes %}
+		<div class="container-fluid recipe-list">
+		<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover w-75" alt="{{ recipe.nameRecipe }}"/></a>
+			<h5>{{ recipe.nameRecipe }}</h5>
+			<p>{{ recipe.description }}</p>
+		</div>
+	{% endfor %}
+	</div>
+</div>
     <a href="{{ path('app_recipe_new') }}">Ajouter votre recette</a>
 {% endblock %}
