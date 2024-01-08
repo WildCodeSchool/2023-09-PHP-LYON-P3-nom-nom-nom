@@ -3,28 +3,33 @@
 {% block title %}Etapes de la recette
 {% endblock %}
 {% block body %}
-	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
+	<img
+	class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
 
-	<div class="container recipe-step mt-5 d-flex flex-column">
-		<div class="container d-flex flex-column align-items-center p-0">
-			<h1 class="step-recipe text-center mb-3">{{recipe.nameRecipe}}</h1>
-			<h2 class="text-center mb-5">Les étapes de la recette</h2>
-		</div>
-		<div>
-			{% for step in steps %}
-				<h2 class="mb-0">
-					Etape
-					{{ step.stepNumber }}</h2>
-				<p class="mt-0">{{ step.description }}</p>
-			{% endfor %}
-		</div>
-	</div>
-	<div class="d-flex justif-content-evenly">
-		{% if is_granted("ROLE_ADMIN") or is_granted("recipe.owner") %}
-			<a class="container btn button-crud mt-2" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
-			{{ include('recipe/_delete_form.html.twig') }}
-		{% endif %}
-		<a class="container btn button-crud mt-2" href="{{ path('app_recipe_show', {'id': recipe.id}) }}">Retour à la recette</a>
-	</div>
+	{# sidebar #}
+	{% include 'components/_sidebarRecipe.html.twig' %}
 
+	<section>
+		<div class="container recipe-step mt-5 d-flex flex-column">
+			<div class="container d-flex flex-column align-items-center p-0">
+				<h1 class="step-recipe text-center mb-3">{{recipe.nameRecipe}}</h1>
+				<h2 class="text-center mb-5">Les étapes de la recette</h2>
+			</div>
+			<div>
+				{% for step in steps %}
+					<h2 class="mb-0">
+						Etape
+						{{ step.stepNumber }}</h2>
+					<p class="mt-0">{{ step.description }}</p>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="d-flex justif-content-evenly">
+			{% if is_granted("ROLE_ADMIN") or is_granted("recipe.owner") %}
+				<a class="container btn button-crud mt-2" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
+				{{ include('recipe/_delete_form.html.twig') }}
+			{% endif %}
+			<a class="container btn button-crud mt-2" href="{{ path('app_recipe_show', {'id': recipe.id}) }}">Retour à la recette</a>
+		</div>
+	</section>
 {% endblock %}
