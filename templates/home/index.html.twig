@@ -55,16 +55,18 @@
 	</div>
 </div>
 
-{# section with CTA #}
+{# MOBILE section with CTA #}
 	<div class="position-relative py-5">
-		<img class="w-100 vh-100 object-fit-cover" src="{{ asset('/build/images/background.png')}}" alt="Photo représentant une table remplie de plats avec une très forte opacité"/>
-		<div class="container text-center position-absolute top-50 start-50 translate-middle">
-			<h1 class="mb-5">Rejoignez notre communauté</h1>
-			<p class="paragraph">A chaque bouchée une nouvelle saveur.</p>
-			<p class="container-fluid mt-4 px-4 paragraph">Rejoignez notre communauté culinaire et transformez chaque repas en une expérience mémorable, où la passion de la cuisine se marie harmonieusement avec le plaisir de créer des souvenirs délicieux.</p>
-			<a href="#" type="button" class="btn button-crud mt-1 mb-5" tabindex="-1" role="button" aria-disabled="true">Rejoignez-nous</a>
+	<h1 class="text-center">Rejoignez notre communauté</h1>
+	<p class="paragraph text-center">A chaque bouchée une nouvelle saveur.</p>
+		<img class="w-100 vh-75 object-fit-cover" src="{{ asset('/build/images/background.png')}}" alt="Photo représentant une table remplie de plats avec une très forte opacité"/>
+		<div class="container text-center position-absolute bottom-0 start-0">
+			<p class="container-sm paragraph">Rejoignez notre communauté culinaire et transformez chaque repas en une expérience mémorable, où la passion de la cuisine se marie harmonieusement avec le plaisir de créer des souvenirs délicieux.</p>
+			<a class="btn button-crud mt-2 mb-5 " href="#" type="button" tabindex="-1" role="button" aria-disabled="true">Rejoignez-nous</a>
 		</div>
 	</div>
+
+{# DESKTOP section with CTA #}
 
 {# DESKTOP - Accessing categories #}
 	<h3 class="pt-3 m-5 text-center d-none d-md-block">Explorez différentes recettes par catégories</h3>
