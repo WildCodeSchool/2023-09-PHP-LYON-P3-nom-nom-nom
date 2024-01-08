@@ -400,7 +400,7 @@ ul {
 //-------------------icon----------------
 .fa-fire,
 .fa-hourglass-half,
-.fa-user-group {
+.fa-user-group{
     color: $backgroundButton;
 }
 
@@ -516,3 +516,19 @@ button{
 .ingredient-mob {
     @include myPicture(4.5rem, 4.5rem, 1.25rem, ($boxShadowPic));
 }
+
+// ----------------show------------------
+nav
+{
+    float: left;
+    width: 4rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+}
+
+// section
+// {
+//     margin-left: 4vw;
+// }
