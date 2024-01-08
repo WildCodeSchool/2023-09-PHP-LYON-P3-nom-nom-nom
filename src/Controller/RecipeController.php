@@ -14,8 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Part\DataPart;
+use Symfony\Component\Mime\Part\File;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[Route('/recipe')]
 class RecipeController extends AbstractController
@@ -52,11 +53,12 @@ class RecipeController extends AbstractController
 
             // send email to users if a recipe has been created
             $email = (new Email())
-                ->from('toto@example.com')
+                ->from($this->getParameter('mailer_from'))
                 ->to('you@example.com')
                 ->subject('Une nouvelle recette vient d\'être publiée.')
                 ->text('Envoyée des emails est de nouveau sympa')
-                ->html('<p>Une nouvelle recette vient d\'être publiée');
+                ->addPart((new DataPart(new File('build/images/nomnomlogo.png', 'r'), 'logo', 'image/png'))->asInline())
+                ->html($this->renderView('recipe/newRecipeEmail.html.twig', ['recipe' => $recipe]));
 
             $mailer->send($email);
 
