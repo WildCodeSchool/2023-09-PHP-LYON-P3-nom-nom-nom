@@ -23,18 +23,18 @@ icon.addEventListener("click", function () {
 // Fonction pour changer la couleur de l'icône en fonction de la page active
 function changeIconColor() {
     // Récupérer le chemin de la page actuelle
-    var currentPath = window.location.pathname;
+    let currentPath = window.location.pathname;
 
     // Sélectionner toutes les balises <a> dans le menu
-    var menuLinks = document.querySelectorAll('.vh-100 a');
+    const menuLinks = document.querySelectorAll('.vh-100 a');
 
     // Parcourir les liens du menu
     menuLinks.forEach(function(link) {
         // Récupérer le chemin du lien
-        var linkPath = link.getAttribute('href');
+        const linkPath = link.getAttribute('href');
 
         // Récupérer l'icône à l'intérieur du lien
-        var icon = link.querySelector('i');
+        const icon = link.querySelector('i');
 
         // Vérifier si le chemin du lien correspond à la page actuelle
         if (currentPath === linkPath) {
