@@ -7,6 +7,7 @@ $backgroundColorLogin: #74332b;
 $fontTitle: "Maven Pro";
 $fontColorButton: #fff;
 $fontSizeButton: 0.75rem;
+$fontSizeButtonBig: 1.2rem;
 $fontStyleButton: normal;
 $fontWeightButton: 700;
 $lineHeightButton: unset;
@@ -139,14 +140,18 @@ body {
 }
 
 .button-crud-big {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
     @include myButton(
         12rem,
-        6rem,
+        4rem,
         0.75rem,
         ($backgroundButton),
         ($fontTitle),
         ($fontColorButton),
-        ($fontSizeButton),
+        ($fontSizeButtonBig),
         ($fontStyleButton),
         ($fontWeightButton),
         ($lineHeightButton)
