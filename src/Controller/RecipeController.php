@@ -14,8 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
-use Symfony\Component\Mime\Part\DataPart;
-use Symfony\Component\Mime\Part\File;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/recipe')]
@@ -56,7 +54,7 @@ class RecipeController extends AbstractController
                 ->from($this->getParameter('mailer_from'))
                 ->to('you@example.com')
                 ->subject('Une nouvelle recette vient d\'être publiée.')
-                ->html($this->renderView('recipe/newRecipeEmail.html.twig', ['recipe' => $recipe]));
+                ->html($this->renderView('emails/newRecipeEmail.html.twig', ['recipe' => $recipe]));
 
             $mailer->send($email);
 

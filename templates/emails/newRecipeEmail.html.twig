@@ -1,0 +1,39 @@
+{% extends 'baseEmail.html.twig' %}
+
+{% block body %}
+	<h3 class="text-center mt-3 mb-5">La recette
+		<strong>{{ recipe.nameRecipe|capitalize }}</strong>
+		vient d'être publiée</h3>
+
+	<div class="container">
+		<p class="mb-2">Bonjour,</p>
+		<p class="mt-2">La recette
+			<strong>{{ recipe.nameRecipe|capitalize }}</strong>
+			a été publiée.</p>
+		<p>Cette recette a été préparée pour
+			{{ recipe.personNumber }}
+			{% if recipe.personNumber > 1 %}
+				personnes.
+			{% else %}
+				personne.
+			{% endif %}</p>
+		<p>Elle a un temps de préparation de
+			{{ recipe.prepareTime }} minutes
+			et un temps de cuission de
+			{{ recipe.cookingTime }} minutes.</p>
+
+		<div class="mt-2 mb-2">
+			{% if recipe.description %}
+				<p>Voici une petite description de l'auteur :</p>
+				<p>{{ recipe.description|capitalize }}</p>
+			{% endif %}
+		</div>
+
+		<div class="mt-5">
+			<p>Bon appétit !</p>
+			<p class="fs-5">L'équipe Nom-Nom</p>
+		</div>
+	</div>
+
+
+{% endblock %}
