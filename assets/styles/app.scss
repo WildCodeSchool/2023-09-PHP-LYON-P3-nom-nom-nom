@@ -7,6 +7,7 @@ $backgroundColorLogin: #74332b;
 $fontTitle: "Maven Pro";
 $fontColorButton: #fff;
 $fontSizeButton: 0.75rem;
+$fontSizeButtonBig: 1.2rem;
 $fontStyleButton: normal;
 $fontWeightButton: 700;
 $lineHeightButton: unset;
@@ -128,6 +129,29 @@ body {
         ($fontTitle),
         ($fontColorButton),
         ($fontSizeButton),
+        ($fontStyleButton),
+        ($fontWeightButton),
+        ($lineHeightButton)
+    );
+
+    &:hover {
+        background-color: $backgroundButtonDark;
+    }
+}
+
+.button-crud-big {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    @include myButton(
+        12rem,
+        4rem,
+        0.75rem,
+        ($backgroundButton),
+        ($fontTitle),
+        ($fontColorButton),
+        ($fontSizeButtonBig),
         ($fontStyleButton),
         ($fontWeightButton),
         ($lineHeightButton)
@@ -403,6 +427,7 @@ ul {
 .fa-user-group{
     color: $backgroundButton;
 }
+//---------------CTA Home-----------------------//
 
 //----------------------logo in form add----------------------
 .logo-center {
@@ -432,7 +457,6 @@ ul {
 .mb-3:first-child {
     grid-column-start: 1;
     grid-column-end: 3;
-
 }
 
 .mb-3:nth-child(2) {
@@ -460,13 +484,13 @@ ul {
     }
 }
 
-button{
+.delete-ingredient {
     display: flex;
     border-color: transparent;
-    padding:0 2rem 0 2rem;
+    padding: 0 2rem 0 2rem;
     align-items: center;
     text-align: center;
-        @include myButton(
+    @include myButton(
         max-content,
         2rem,
         0.45rem,
@@ -479,9 +503,7 @@ button{
         ($lineHeightButton)
     );
 }
-.form-select{
-   opacity: unset;
-}
+
 // -----------------------recipe-steps page------------------------
 .recipe-step {
     width: 60vw;

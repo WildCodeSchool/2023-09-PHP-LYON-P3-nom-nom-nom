@@ -1,10 +1,11 @@
 <div{{attributes}}>
-	<div class="mb-3">
+	<div class="mb-3 w-75 mx-auto ">
 		<label class="form-label" for="search">
-			Recherchez une recette
+			<h2>Rechercher une recette</h2>
 		</label>
 		<input type="search" id="search" class="form-control" value="{{ query }}" data-model="query">
 	</div>
+	{# MOBILE - search #}
 	<div class="d-flex flex-column text-center d-md-none">
 	{% for recipe in this.recipes %}
 		<div class="container-fluid w-75">
@@ -14,7 +15,8 @@
 		</div>
 	{% endfor %}
 	</div>
-<div class="d-none d-md-block">
+	{# DESKTOP - search #}
+	<div class="d-none d-md-block">
 	<div class="d-flex flex-wrap gap-1 text-center">
 	{% for recipe in this.recipes %}
 		<div class="container-fluid w-25">
