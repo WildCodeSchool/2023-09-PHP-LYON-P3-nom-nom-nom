@@ -35,9 +35,11 @@ class RecipeController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         // call the AccessControl service => control if there is a connection
-        $notConnected = $this->accessControl->isNotConnected();
-        if ($notConnected !== null) {
-            return $notConnected;
+        $userLoggedIn = $this->accessControl->checkIfUserLoggedIn();
+        if ($userLoggedIn !== true) {
+            $this->addFlash('danger', 'Connecter vous pour accéder à cette ressource.');
+
+            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         $number = 0;
