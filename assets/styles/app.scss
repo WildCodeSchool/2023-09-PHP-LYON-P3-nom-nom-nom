@@ -7,6 +7,7 @@ $backgroundColorLogin: #74332b;
 $fontTitle: "Maven Pro";
 $fontColorButton: #fff;
 $fontSizeButton: 0.75rem;
+$fontSizeButtonBig: 1.2rem;
 $fontStyleButton: normal;
 $fontWeightButton: 700;
 $lineHeightButton: unset;
@@ -151,6 +152,27 @@ body {
         flex-direction:row;
         justify-content: space-evenly;
         margin: 32px 0 24px;
+
+.button-crud-big {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    @include myButton(
+        12rem,
+        4rem,
+        0.75rem,
+        ($backgroundButton),
+        ($fontTitle),
+        ($fontColorButton),
+        ($fontSizeButtonBig),
+        ($fontStyleButton),
+        ($fontWeightButton),
+        ($lineHeightButton)
+    );
+
+    &:hover {
+        background-color: $backgroundButtonDark;
     }
 }
 
@@ -312,6 +334,17 @@ ul {
     gap: 3rem;
 }
 
+.color-count{
+    @include myText(
+        ($fontTitle),
+        ($fontColorText),
+        ($fontSizeTitleH3),
+        ($fontStyleText),
+        ($fontWeightTitle),
+        ($lineHeightText)
+    );
+}
+
 //--------------------navbar-desktop-------------------//
 .navbar-desktop {
     @include media-breakpoint-down(md) {
@@ -416,9 +449,10 @@ ul {
 //-------------------icon----------------
 .fa-fire,
 .fa-hourglass-half,
-.fa-user-group {
+.fa-user-group{
     color: $backgroundButton;
 }
+//---------------CTA Home-----------------------//
 
 //----------------------logo in form add----------------------
 .logo-center {
@@ -448,7 +482,6 @@ ul {
 .mb-3:first-child {
     grid-column-start: 1;
     grid-column-end: 3;
-
 }
 
 .mb-3:nth-child(2) {
@@ -476,13 +509,13 @@ ul {
     }
 }
 
-button{
+.delete-ingredient {
     display: flex;
     border-color: transparent;
-    padding:0 2rem 0 2rem;
+    padding: 0 2rem 0 2rem;
     align-items: center;
     text-align: center;
-        @include myButton(
+    @include myButton(
         max-content,
         2rem,
         0.45rem,
@@ -495,9 +528,7 @@ button{
         ($lineHeightButton)
     );
 }
-.form-select{
-   opacity: unset;
-}
+
 // -----------------------recipe-steps page------------------------
 .recipe-step {
     width: 60vw;
@@ -531,4 +562,40 @@ button{
 // --------------------------ingredient mobile--------------------
 .ingredient-mob {
     @include myPicture(4.5rem, 4.5rem, 1.25rem, ($boxShadowPic));
+}
+
+// ------------------------------recipe list--------------------
+.recipe-list{
+    width : 20vw;
+}
+
+.pic-recipe-list {
+    height: 15.68rem;
+    width: auto;
+    border-radius: 1.25rem;
+    box-shadow: 0px 4px 9px 3px rgba(171, 136, 125, 0.47);
+}
+
+.pic-recipe-list-mobile {
+    height: 4.5rem;
+    width: auto;
+    border-radius: 1.25rem;
+    box-shadow: 0px 4px 9px 3px rgba(171, 136, 125, 0.47);
+}
+
+.recipe-list-mobile{
+    width : 30vw;
+}
+// ----------------show------------------
+nav
+{
+    width: 4rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+}
+
+.recipe-crud{
+    margin-left: 4rem;
 }
