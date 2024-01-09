@@ -85,14 +85,18 @@ class RecipeController extends AbstractController
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         // call the AccessControl service => control if there is a connection
-        $notConnected = $this->accessControl->isNotConnected();
-        if ($notConnected !== null) {
-            return $notConnected;
+        $userLoggedIn = $this->accessControl->checkIfUserLoggedIn();
+        if ($userLoggedIn !== true) {
+            $this->addFlash('danger', 'Connecter vous pour accéder à cette ressource.');
+
+            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
         // call the AccessControl service => control the owner
-        $notOwner = $this->accessControl->isNotOwner($recipe);
-        if ($notOwner !== null) {
-            return $notOwner;
+        $userLoggedIsAuthor = $this->accessControl->checkIfLoggedUserIsAuthor($recipe);
+        if ($userLoggedIsAuthor !== true) {
+            $this->addFlash('danger', 'Seul l\'auteur de la recette peut la modifier.');
+
+            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         $form = $this->createForm(RecipeType::class, $recipe);
@@ -137,14 +141,18 @@ class RecipeController extends AbstractController
     public function delete(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         // call the AccessControl service => control if there is a connection
-        $notConnected = $this->accessControl->isNotConnected();
-        if ($notConnected !== null) {
-            return $notConnected;
+        $userLoggedIn = $this->accessControl->checkIfUserLoggedIn();
+        if ($userLoggedIn !== true) {
+            $this->addFlash('danger', 'Connecter vous pour accéder à cette ressource.');
+
+            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
         // call the AccessControl service => control the owner
-        $notOwner = $this->accessControl->isNotOwner($recipe);
-        if ($notOwner !== null) {
-            return $notOwner;
+        $userLoggedIsAuthor = $this->accessControl->checkIfLoggedUserIsAuthor($recipe);
+        if ($userLoggedIsAuthor !== true) {
+            $this->addFlash('danger', 'Seul l\'auteur de la recette peut la modifier.');
+
+            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         if ($this->isCsrfTokenValid('delete' . $recipe->getId(), $request->request->get('_token'))) {
