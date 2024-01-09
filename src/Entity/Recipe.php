@@ -108,7 +108,7 @@ class Recipe
 
     public function setNameRecipe(string $nameRecipe): static
     {
-        $this->nameRecipe = $nameRecipe;
+        $this->nameRecipe = ucfirst($nameRecipe);
 
         return $this;
     }
