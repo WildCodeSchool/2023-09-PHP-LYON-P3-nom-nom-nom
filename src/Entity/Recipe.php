@@ -120,7 +120,7 @@ class Recipe
 
     public function setDescription(?string $description): static
     {
-        $this->description = $description;
+        $this->description = ucfirst($description);
 
         return $this;
     }
