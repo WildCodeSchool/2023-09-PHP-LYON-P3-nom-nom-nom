@@ -296,6 +296,17 @@ ul {
     gap: 3rem;
 }
 
+.color-count{
+    @include myText(
+        ($fontTitle),
+        ($fontColorText),
+        ($fontSizeTitleH3),
+        ($fontStyleText),
+        ($fontWeightTitle),
+        ($lineHeightText)
+    );
+}
+
 //--------------------navbar-desktop-------------------//
 .navbar-desktop {
     @include media-breakpoint-down(md) {
@@ -519,6 +530,23 @@ button{
 
 // ------------------------------recipe list--------------------
 .recipe-list{
+    width : 20vw;
+}
+
+.pic-recipe-list {
+    height: 15.68rem;
+    width: auto;
+    border-radius: 1.25rem;
+    box-shadow: 0px 4px 9px 3px rgba(171, 136, 125, 0.47);
+}
+
+.pic-recipe-list-mobile {
+    height: 4.5rem;
+    width: auto;
+    border-radius: 1.25rem;
+    box-shadow: 0px 4px 9px 3px rgba(171, 136, 125, 0.47);
+}
+
+.recipe-list-mobile{
     width : 30vw;
-    height: 5vh;
 }

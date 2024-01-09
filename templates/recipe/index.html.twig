@@ -1,29 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des recettes{% endblock %}
+{% block title %}Liste des recettes
+{% endblock %}
 
 {% block body %}
-{% include 'components/_messages.html.twig' %}
-    <h1>Liste des recettes</h1>
-	<div class="d-flex flex-column text-center d-md-none">
-	{% for recipe in recipes %}
-		<div class="container-fluid w-75">
-		<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
-			<h5>{{ recipe.nameRecipe }}</h5>
-			<p>{{ recipe.description }}</p>
-		</div>
-	{% endfor %}
+	{% include 'components/_messages.html.twig' %}
+	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-home.png') }}"/>
+	<h1 class="text-center mt-2">LISTE DES RECETTES</h1>
+	<h3 class="color-count text-center mb-5">
+		Retrouvez ici la liste de nos
+		{{ count_recipes }}
+		recettes</h3>
+	<div class="d-flex flex-wrap gap-1 text-center d-md-none">
+		{% for recipe in recipes %}
+			<div class="container-fluid recipe-list-mobile mb-2">
+				<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list-mobile object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}"/></a>
+				<h5>{{ recipe.nameRecipe }}</h5>
+			</div>
+		{% endfor %}
 	</div>
-    <div class="d-none d-md-block">
-	<div class="d-flex flex-wrap gap-1 text-center">
-	{% for recipe in recipes %}
-		<div class="container-fluid recipe-list">
-		<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover w-75" alt="{{ recipe.nameRecipe }}"/></a>
-			<h5>{{ recipe.nameRecipe }}</h5>
-			<p>{{ recipe.description }}</p>
+	<div class="d-none d-md-block">
+		<div class="d-flex flex-wrap gap-1 text-center mb-2">
+			{% for recipe in recipes %}
+				<div class="container-fluid recipe-list">
+					<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list object-fit-cover w-75 mb-3" alt="{{ recipe.nameRecipe }}"/></a>
+					<h5>{{ recipe.nameRecipe }}</h5>
+				</div>
+			{% endfor %}
 		</div>
-	{% endfor %}
 	</div>
-</div>
-    <a href="{{ path('app_recipe_new') }}">Ajouter votre recette</a>
+    {% if app.user %}
+	<div class="d-flex justify-content-center">
+		<a class="container btn button-form center mt-2" href="{{ path('app_recipe_new') }}" role="button">Ajouter votre recette</a>
+	</div>
+    {% endif %}
 {% endblock %}
