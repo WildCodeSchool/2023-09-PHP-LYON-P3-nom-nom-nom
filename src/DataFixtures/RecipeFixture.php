@@ -17,6 +17,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'personNumber' => 2,
             'picture' => 'cassoulet.png',
             'description' => 'Découvrez le fameux cassoulet Toulousain... ',
+            'category' => 'category_Plat'
         ],
         [
             'nameRecipe' => 'Donnër Kebab',
@@ -25,6 +26,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'personNumber' => 2,
             'picture' => 'kebab.png',
             'description' => 'Réaliser un kebab aussi bon que dans un snack',
+            'category' => 'category_Plat'
         ],
         [
             'nameRecipe' => 'Gua Bao',
@@ -33,6 +35,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'personNumber' => 2,
             'picture' => 'guabao.png',
             'description' => 'Gouter ces délicieux sandwich chinois',
+            'category' => 'category_Plat'
         ],
         [
             'nameRecipe' => 'Gua Bao2',
@@ -41,6 +44,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'personNumber' => 2,
             'picture' => 'guabao.png',
             'description' => 'Gouter ces délicieux sandwich chinois',
+            'category' => 'category_Plat'
         ],
     ];
     public function load(ObjectManager $manager): void
@@ -53,6 +57,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             $recipe->setPersonNumber($recipeFixture['personNumber']);
             $recipe->setPicture($recipeFixture['picture']);
             $recipe->setDescription($recipeFixture['description']);
+            $recipe->setCategory($this->getReference($recipeFixture['category']));
             $manager->persist($recipe);
             $this->addReference('recipe_' . $recipeFixture['nameRecipe'], $recipe);
         }
