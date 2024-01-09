@@ -63,6 +63,8 @@ class RecipeController extends AbstractController
 
             $entityManager->flush();
 
+            $this->addFlash('success', 'Votre recette a bien été ajoutée.');
+
             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
 
