@@ -516,3 +516,10 @@ button{
 .ingredient-mob {
     @include myPicture(4.5rem, 4.5rem, 1.25rem, ($boxShadowPic));
 }
+
+// -------------------------- user page --------------------
+.user-avatar {
+    text-align: center;
+    margin: auto;
+    display: flex;
+}
