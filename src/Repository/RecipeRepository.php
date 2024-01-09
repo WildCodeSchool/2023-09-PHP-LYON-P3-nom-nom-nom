@@ -41,7 +41,7 @@ class RecipeRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function countRecipe(): int
+    public function countRecipes(): int
     {
         $count = $this->createQueryBuilder('r')
             ->select('count(r.id)')

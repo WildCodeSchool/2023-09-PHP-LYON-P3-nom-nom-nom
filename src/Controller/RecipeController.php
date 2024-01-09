@@ -24,7 +24,7 @@ class RecipeController extends AbstractController
 
         return $this->render('recipe/index.html.twig', [
             'recipes' => $recipeRepository->findAll(),
-            'count_recipes' => $recipeRepository->countRecipe()
+            'countRecipes' => $recipeRepository->countRecipes()
         ]);
     }
 

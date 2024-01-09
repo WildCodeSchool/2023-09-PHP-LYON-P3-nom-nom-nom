@@ -21,7 +21,7 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'showRecipes' => $showRecipes,
-            'count_recipes' => $recipeRepository->countRecipe()
+            'countRecipes' => $recipeRepository->countRecipes()
         ]);
     }
 }
