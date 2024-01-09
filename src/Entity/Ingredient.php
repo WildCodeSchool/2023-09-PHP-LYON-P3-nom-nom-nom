@@ -66,7 +66,7 @@ class Ingredient
 
     public function setNameIngredient(string $nameIngredient): static
     {
-        $this->nameIngredient = $nameIngredient;
+        $this->nameIngredient = ucfirst($nameIngredient);
 
         return $this;
     }

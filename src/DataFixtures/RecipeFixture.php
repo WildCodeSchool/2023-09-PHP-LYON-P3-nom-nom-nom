@@ -35,12 +35,22 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'description' => 'Gouter ces délicieux sandwich chinois',
         ],
         [
-            'nameRecipe' => 'Gua Bao2',
+            'nameRecipe' => 'poulet aux haricots blancs',
             'prepareTime' => 45,
             'cookingTime' => 60,
             'personNumber' => 2,
-            'picture' => 'guabao.png',
-            'description' => 'Gouter ces délicieux sandwich chinois',
+            'picture' => 'poulet_haricot.jpeg',
+            'description' => 'Un délicieux plat de poulet aux haricots blancs agrément
+            d\'une délicieuse salade, d\'huile d\'olives et d\'oignons',
+        ],
+        [
+            'nameRecipe' => 'sandwich au poulet',
+            'prepareTime' => 15,
+            'cookingTime' => 10,
+            'personNumber' => 2,
+            'picture' => 'sandwich.jpeg',
+            'description' => 'Un délicieux sandwich au poulet auquels ont a 
+            rajouté des oignons, de la salade, des tomates',
         ],
     ];
     public function load(ObjectManager $manager): void
