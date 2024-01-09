@@ -411,7 +411,7 @@ ul {
 //-------------------icon----------------
 .fa-fire,
 .fa-hourglass-half,
-.fa-user-group {
+.fa-user-group{
     color: $backgroundButton;
 }
 
@@ -549,4 +549,18 @@ button{
 
 .recipe-list-mobile{
     width : 30vw;
+}
+// ----------------show------------------
+nav
+{
+    float: left;
+    width: 4rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+}
+
+.recipe-crud{
+    margin-left: 4rem;
 }

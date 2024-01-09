@@ -18,3 +18,34 @@ icon.addEventListener("click", function () {
 	list.classList.toggle("list-visible");
 	icon.classList.toggle("icon-visible");
 });
+
+// Fonction pour changer la couleur de l'icône en fonction de la page active
+// Fonction pour changer la couleur de l'icône en fonction de la page active
+function changeIconColor() {
+    // Récupérer le chemin de la page actuelle
+    let currentPath = window.location.pathname;
+
+    // Sélectionner toutes les balises <a> dans le menu
+    const menuLinks = document.querySelectorAll('.vh-100 a');
+
+    // Parcourir les liens du menu
+    menuLinks.forEach(function(link) {
+        // Récupérer le chemin du lien
+        const linkPath = link.getAttribute('href');
+
+        // Récupérer l'icône à l'intérieur du lien
+        const icon = link.querySelector('i');
+
+        // Vérifier si le chemin du lien correspond à la page actuelle
+        if (currentPath === linkPath) {
+            // Changer la couleur de l'icône (par exemple, rouge)
+            icon.style.color = '#bf4e40';
+        } else {
+            // Rétablir la couleur par défaut (par exemple, noir)
+            icon.style.color = '#444559';
+        }
+    });
+}
+
+// Appeler la fonction au chargement de la page
+document.addEventListener('DOMContentLoaded', changeIconColor);
