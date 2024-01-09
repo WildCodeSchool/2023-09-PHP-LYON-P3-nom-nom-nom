@@ -444,7 +444,7 @@ ul {
     grid-column-start: 1;
     grid-column-end: 3;
 }
-.delete-child > {
+.delete-child > form:nth-child(2) > div > ul > {
     div:first-child {
         display: none;
     }
