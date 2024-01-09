@@ -30,9 +30,10 @@ class RecipeType extends AbstractType
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-        'choice_label' => 'name',
-        'multiple' => true,
-        'expanded' => false,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'expanded' => false,
+                'label' => 'C\'est un(e) '
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Un commentaire sur votre recette ?'
