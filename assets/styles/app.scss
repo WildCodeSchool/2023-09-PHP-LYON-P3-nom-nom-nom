@@ -140,10 +140,10 @@ body {
 }
 
 .button-crud-big {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
-    text-align:center;
+    text-align: center;
     @include myButton(
         12rem,
         4rem,
@@ -424,7 +424,7 @@ ul {
 //-------------------icon----------------
 .fa-fire,
 .fa-hourglass-half,
-.fa-user-group{
+.fa-user-group {
     color: $backgroundButton;
 }
 //---------------CTA Home-----------------------//
@@ -468,9 +468,9 @@ ul {
     grid-column-start: 1;
     grid-column-end: 3;
 }
-.delete-child > form:nth-child(2) > div > ul > {
+.delete-child form div ul div.mb-3.row {
     div:first-child {
-        display: none;
+        display:none;
     }
 }
 .mb-3 {
@@ -540,16 +540,14 @@ ul {
 }
 
 // ----------------show------------------
-nav
-{
+nav {
     float: left;
     width: 4rem;
     display: flex;
     justify-content: center;
     text-align: center;
-
 }
 
-.recipe-crud{
+.recipe-crud {
     margin-left: 4rem;
 }
