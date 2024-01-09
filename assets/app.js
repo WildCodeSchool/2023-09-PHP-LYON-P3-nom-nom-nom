@@ -18,3 +18,14 @@ icon.addEventListener("click", function () {
 	list.classList.toggle("list-visible");
 	icon.classList.toggle("icon-visible");
 });
+
+document.addEventListener("click", function (event){
+	// listen if click inside the navbar
+	const isClickInsideNavabr = list.contains(event.target); 
+	// listen if click on the bento
+	const isClickOnIcon = icon.contains(event.target);
+
+	if (!isClickInsideNavabr && !isClickOnIcon) {
+		list.classList.remove("list-visible");
+	}
+})
