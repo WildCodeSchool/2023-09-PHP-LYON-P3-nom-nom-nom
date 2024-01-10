@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Recipe;
 use App\Entity\Step;
 use App\Form\RecipeType;
+use App\Repository\CategoryRepository;
 use App\Repository\RecipeIngredientRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\StepRepository;
@@ -24,12 +26,14 @@ class RecipeController extends AbstractController
         $this->accessControl = $accessControl;
     }
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
-    public function index(RecipeRepository $recipeRepository): Response
+    public function index(RecipeRepository $recipeRepository, CategoryRepository $categoryRepository): Response
     {
-
+        $categories = $categoryRepository->findAll();
+        $category = $recipeRepository->findAll();
         return $this->render('recipe/index.html.twig', [
-            'recipes' => $recipeRepository->findAll(),
-            'countRecipes' => $recipeRepository->countRecipes()
+            'recipes' => $recipeRepository->findBy(['category' => $category]),
+            'countRecipes' => $recipeRepository->countRecipes(),
+            'categories' => $categories
         ]);
     }
 
