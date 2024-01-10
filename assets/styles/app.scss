@@ -109,7 +109,6 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 
 body {
     background-color: $backgroundMainColor;
-    height: 85%;
     padding-bottom: 15%;
 }
 
@@ -138,6 +137,21 @@ body {
         background-color: $backgroundButtonDark;
     }
 }
+
+.crud-button-block{
+    @include media-breakpoint-down(md) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 16px 0 24px;
+    }
+
+    @include media-breakpoint-up(md) {
+        display: flex;
+        flex-direction:row;
+        justify-content: space-evenly;
+        margin: 32px 0 24px;
 
 .button-crud-big {
     display:flex;
@@ -285,7 +299,7 @@ h1 {
 .fa-solid,
 .fa-regular {
     color: $backgroundButtonDark;
-    font-size: 1.32rem;
+    font-size: 1.45rem;
     padding: 0;
 }
 
@@ -309,7 +323,7 @@ h1 {
 }
 
 .nav-link {
-    padding: 0;
+    padding: 8px 0;
 
     @include media-breakpoint-up(md) {
         cursor: pointer;

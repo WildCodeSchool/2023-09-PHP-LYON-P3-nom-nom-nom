@@ -50,18 +50,12 @@
 
 		</div>
 
-		{# BOUTONS CRUD #}
-		<div class="container text-center">
-
-			<div class="row">
-				<div class="col">
-					<a class="container btn button-crud mt-2" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
-				</div>
-				<div class="col">{{ include('recipe/_delete_form.html.twig') }}</div>
-				<div class="col">
-					<a class="container btn button-crud mt-2" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
-				</div>
-			</div>
-		</div>
+	{# BOUTONS CRUD #}
+	<div class="crud-button-block">
+		{% if is_granted("ROLE_CONTRIBUTOR") %}
+			<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
+			{{ include('recipe/_delete_form.html.twig') }}
+		{% endif %}
+		<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
 	</div>
 {% endblock %}
