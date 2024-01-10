@@ -468,10 +468,8 @@ ul {
     grid-column-start: 1;
     grid-column-end: 3;
 }
-.delete-child form div ul div.mb-3.row {
-    div:first-child {
-        display:none;
-    }
+.delete-child div ul > div.mb-3.row:first-child {
+    display: none;
 }
 .mb-3 {
     align-self: center;
