@@ -1,23 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Inscription
+{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
 
-    <h1>S'enregistrer</h1>
+	{# --------------------------fond mobile--------------------------------- #}
+	<div class="bg-image vh-100 d-md-none container" style="background-image: url('build/images/fond_login.png');">
+		{% for flash_error in app.flashes('verify_email_error') %}
+			<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+		{% endfor %}
+		<div class="register-container textaccount d-flex flex-column align-items-center vh-100">
+			<img src="/build/images/nomnomlogo.png" alt="logo de nomnomnom" class="logo-add mt-5"/>
 
-    {{ form_errors(registrationForm) }}
+			{{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.pseudo) }}
-        {{ form_row(registrationForm.plainPassword, {
+			{{ form_start(registrationForm) }}
+			{{ form_row(registrationForm.pseudo) }}
+			{{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+			{{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Enregistrer</button>
-    {{ form_end(registrationForm) }}
+			<button type="submit" class="container btn button-crud mt-3">S'inscrire</button>
+			{{ form_end(registrationForm) }}
+		</div>
+	</div>
 {% endblock %}

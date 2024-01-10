@@ -562,6 +562,13 @@ ul {
     box-shadow: 24px 23px 72.5px 0px rgba(0, 0, 0, 0.25);
     width: 100vw;
 }
+
+// --------------------------register mobile --------------------
+
+.register-container{
+    color: $backgroundMainColor;
+}
+
 // --------------------------ingredient desktop--------------------
 .ingredient {
     @include myPicture(6.1875rem, 6.0625rem, 1.25rem, ($boxShadowPic));
