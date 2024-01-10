@@ -152,8 +152,14 @@ body {
         flex-direction: row;
         justify-content: space-evenly;
         margin: 32px 0 24px;
+<<<<<<< HEAD
     }
 }
+=======
+        }
+    }
+
+>>>>>>> f9972c71940e9d768b63c70ab9ab5039e972f2c7
 .button-crud-big {
     display: flex;
     justify-content: center;
@@ -494,8 +500,20 @@ ul {
     grid-column-start: 1;
     grid-column-end: 3;
 }
+<<<<<<< HEAD
 .delete-child div ul > div.mb-3.row:first-child {
     display: none;
+=======
+
+.mb-3:nth-child(4) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+.delete-child > {
+    div:first-child {
+        display: none;
+    }
+>>>>>>> f9972c71940e9d768b63c70ab9ab5039e972f2c7
 }
 .mb-3 {
     align-self: center;
