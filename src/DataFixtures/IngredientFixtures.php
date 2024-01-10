@@ -23,7 +23,8 @@ class IngredientFixtures extends Fixture
         ['nameIngredient' => 'Cacahouéte','category' => 'Légumineuse', 'picture' => 'cacahuètes.jpeg'],
         ['nameIngredient' => 'Huile d\'olive','category' => 'Huile', 'picture' => 'huileolive.jpeg'],
         ['nameIngredient' => 'Thym','category' => 'Assaisonnement', 'picture' => 'thym.jpeg'],
-        ['nameIngredient' => 'Nuoc-mâm','category' => 'Assaisonnement', 'picture' => '']
+        ['nameIngredient' => 'Nuoc-mâm','category' => 'Assaisonnement', 'picture' => 'nuoc-mam.jpeg'],
+        ['nameIngredient' => 'Pain','category' => 'Céréale', 'picture' => 'baguette_pain.jpeg']
     ];
 
     public function load(ObjectManager $manager): void

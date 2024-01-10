@@ -8,47 +8,54 @@
 	{# Cover #}
 	<img
 	class="w-100 object-fit-cover d-none d-md-block" src="/build/images/background-pages.png">
+
+	{# sidebar #}
+	{% include 'components/_sidebarRecipe.html.twig' %}
+
 	{# Titre #}
-	<h2 class="mx-auto text-center py-3 text-uppercase w-75">{{ recipe.nameRecipe }}</h2>
+	<section>
+		<h2 class="mx-auto text-center py-3 text-uppercase w-75">{{ recipe.nameRecipe }}</h2>
 
-	{# MOBILE - Photo #}
-	<div class="container text-center">
-		<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-md-none pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
-	</div>
-	{# DESKTOP - Photo #}
-	<img
-	src="{{ asset('build/images/') ~ recipe.picture }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
+		{# MOBILE - Photo #}
+		<div class="container text-center">
+			<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-md-none pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
+		</div>
+		{# DESKTOP - Photo #}
+		<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 
-
+	</section>
 	{# INFOS recette #}
-	<div class="container text-center">
-		<div class="row mt-3 pt-2">
+	<div class="recipe-crud">
+		<div class="container text-center">
+			<div class="row mt-3 pt-2">
 
-			<div class="col">
-				<i class="fa-solid fa-hourglass-half"></i>
-				<p class="infos-recipe">
-					{{ recipe.prepareTime }}
-					min</p>
-			</div>
+				<div class="col">
+					<p>Temps de préparation</p>
+					<p class="infos-recipe">
+						{{ recipe.prepareTime }}
+						min</p>
+				</div>
 
-			<div class="col">
-				<i class="fa-solid fa-fire"></i>
-				<p class="infos-recipe">{{ recipe.cookingTime }}
-					min</p>
-			</div>
-			<div class="col">
-				<i class="fa-solid fa-user-group"></i>
-				<p class="infos-recipe">{{ recipe.personNumber }}</p>
+				<div class="col">
+					<p>Temps de cuisson</p>
+					<p class="infos-recipe">{{ recipe.cookingTime }}
+						min</p>
+				</div>
+				<div class="col">
+					<p>Nombre de personne(s)</p>
+					<p class="infos-recipe">{{ recipe.personNumber }}</p>
+				</div>
+
 			</div>
 
 		</div>
 
-	</div>
-
 	{# BOUTONS CRUD #}
-	<div class="mx-auto d-flex justify-content-around">
-		<a class="container btn button-crud mt-2" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
-		{{ include('recipe/_delete_form.html.twig') }}
-		<a class="container btn button-crud mt-2" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
+	<div class="crud-button-block">
+		{% if is_granted("ROLE_CONTRIBUTOR") %}
+			<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
+			{{ include('recipe/_delete_form.html.twig') }}
+		{% endif %}
+		<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
 	</div>
 {% endblock %}
