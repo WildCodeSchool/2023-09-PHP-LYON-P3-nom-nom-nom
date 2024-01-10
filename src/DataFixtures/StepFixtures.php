@@ -44,28 +44,21 @@ class StepFixtures extends Fixture implements DependentFixtureInterface
         'recipe' => 'recipe_Gua Bao',
         'stepNumber' => 5],
         ['description' => 'il faut faire la pâte avec de l\'eau et de la farine',
-        'recipe' => 'recipe_Gua Bao2',
+        'recipe' => 'recipe_sandwich au poulet',
         'stepNumber' => 1],
-        ['description' => 'il faut préparer la farce et la faire mariner',
-        'recipe' => 'recipe_Gua Bao2',
+        ['description' => 'il faut faire cuire le pain. Quand la croute est dur et moelleuse, le sortir du four',
+        'recipe' => 'recipe_sandwich au poulet',
         'stepNumber' => 2],
-        ['description' => 'il faut la faire cuire',
-        'recipe' => 'recipe_Gua Bao2',
+        ['description' => 'bien couper son filet de poulet et ses accompagnements',
+        'recipe' => 'recipe_sandwich au poulet',
         'stepNumber' => 3],
-        ['description' => 'il faut mettre la farce et l\'oeuf dans la pâte et la fermer',
-        'recipe' => 'recipe_Gua Bao2',
+        ['description' => 'mettre le tout dans le pain après l\'avoir ouvert',
+        'recipe' => 'recipe_sandwich au poulet',
         'stepNumber' => 4],
-        ['description' => 'il faut faire cuire le bao à la vapeur pendant 20/25 minutes',
-        'recipe' => 'recipe_Gua Bao2',
+        ['description' => 'assaissoner à votre goût',
+        'recipe' => 'recipe_sandwich au poulet',
         'stepNumber' => 5],
-        ['description' => 'on les sert avec de la bonne sauce',
-        'recipe' => 'recipe_Gua Bao2',
-        'stepNumber' => 7],
-        ['description' => 'quand ils sont chaud on les enlève',
-        'recipe' => 'recipe_Gua Bao2',
-        'stepNumber' => 6],
-
-    ];
+        ];
     public function load(ObjectManager $manager): void
     {
         foreach (self::STEPS as $stepFixture) {

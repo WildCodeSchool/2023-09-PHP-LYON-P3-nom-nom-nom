@@ -44,6 +44,14 @@ class RecipeIngredientFixtures extends Fixture implements DependentFixtureInterf
         'recipe' => 'recipe_Donnër Kebab'],
         ['quantity' => 10, 'unity' => 'cl', 'ingredient' => 'ingredient_Huile d\'olive',
         'recipe' => 'recipe_Donnër Kebab'],
+        ['quantity' => 1, 'unity' => 'pièce(s)', 'ingredient' => 'ingredient_Pain',
+        'recipe' => 'recipe_sandwich au poulet'],
+        ['quantity' => 10, 'unity' => 'tranche(s)', 'ingredient' => 'ingredient_Escalope de poulet',
+        'recipe' => 'recipe_sandwich au poulet'],
+        ['quantity' => 4, 'unity' => 'pièce(s)', 'ingredient' => 'ingredient_Escalope de poulet',
+        'recipe' => 'recipe_poulet aux haricots blancs'],
+        ['quantity' => 100, 'unity' => 'g', 'ingredient' => 'ingredient_Huile d\'olive',
+        'recipe' => 'recipe_poulet aux haricots blancs'],
     ];
 
     public function load(ObjectManager $manager): void

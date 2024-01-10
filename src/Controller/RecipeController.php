@@ -8,27 +8,42 @@ use App\Form\RecipeType;
 use App\Repository\RecipeIngredientRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\StepRepository;
+use App\Service\AccessControl;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[Route('/recipe')]
 class RecipeController extends AbstractController
 {
+    private AccessControl $accessControl;
+    public function __construct(AccessControl $accessControl)
+    {
+        $this->accessControl = $accessControl;
+    }
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
     public function index(RecipeRepository $recipeRepository): Response
     {
+
         return $this->render('recipe/index.html.twig', [
             'recipes' => $recipeRepository->findAll(),
+            'countRecipes' => $recipeRepository->countRecipes()
         ]);
     }
 
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        // call the AccessControl service => control if there is a connection
+        $userLoggedIn = $this->accessControl->checkIfUserLoggedIn();
+        if ($userLoggedIn !== true) {
+            $this->addFlash('danger', 'Connecter vous pour accéder à cette ressource.');
+
+            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         $number = 0;
         $recipe = new Recipe();
         $form = $this->createForm(RecipeType::class, $recipe);
@@ -49,6 +64,8 @@ class RecipeController extends AbstractController
             $entityManager->persist($recipe);
 
             $entityManager->flush();
+
+            $this->addFlash('success', 'Votre recette a bien été ajoutée.');
 
             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -71,7 +88,16 @@ class RecipeController extends AbstractController
     #[Route('/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
-        if ($this->getUser() !== $recipe->getOwner() && !$this->isGranted('ROLE_ADMIN')) {
+        // call the AccessControl service => control if there is a connection
+        $userLoggedIn = $this->accessControl->checkIfUserLoggedIn();
+        if ($userLoggedIn !== true) {
+            $this->addFlash('danger', 'Connecter vous pour accéder à cette ressource.');
+
+            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
+        }
+        // call the AccessControl service => control the owner
+        $userLoggedIsAuthor = $this->accessControl->checkIfLoggedUserIsAuthor($recipe);
+        if ($userLoggedIsAuthor !== true) {
             $this->addFlash('danger', 'Seul l\'auteur de la recette peut la modifier.');
 
             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
@@ -118,6 +144,21 @@ class RecipeController extends AbstractController
     #[Route('/{id}', name: 'app_recipe_delete', methods: ['POST'])]
     public function delete(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
+        // call the AccessControl service => control if there is a connection
+        $userLoggedIn = $this->accessControl->checkIfUserLoggedIn();
+        if ($userLoggedIn !== true) {
+            $this->addFlash('danger', 'Connecter vous pour accéder à cette ressource.');
+
+            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
+        }
+        // call the AccessControl service => control the owner
+        $userLoggedIsAuthor = $this->accessControl->checkIfLoggedUserIsAuthor($recipe);
+        if ($userLoggedIsAuthor !== true) {
+            $this->addFlash('danger', 'Seul l\'auteur de la recette peut la modifier.');
+
+            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         if ($this->isCsrfTokenValid('delete' . $recipe->getId(), $request->request->get('_token'))) {
             $entityManager->remove($recipe);
             $entityManager->flush();
