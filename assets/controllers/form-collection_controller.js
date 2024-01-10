@@ -36,9 +36,17 @@ export default class extends Controller {
       item.remove();
     });
   }
+
+  // Permet de supprimer un ingrédient en prennant en compte la <li> la plus proche dans twig
   removeIngredient(event) {
     event.preventDefault();
     let ingredientElement = event.target.closest('li');
     ingredientElement.remove();
+  }
+  //  Permet de supprimer une étape en prennant en compte la <li> la plus proche dans twig
+  removeStep(event) {
+    event.preventDefault();
+    let stepElement = event.target.closest('li');
+    stepElement.remove();
   }
 }

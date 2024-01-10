@@ -23,7 +23,12 @@
 </div>
 <div {{ stimulus_controller('form-collection') }} data-form-collection-index-value="{{ form.steps|length }}" data-form-collection-prototype-value="{{ form_widget(form.steps.vars.prototype)|e('html_attr') }}">
     <ul class="paragraph p-0" {{ stimulus_target('form-collection', 'collectionContainer') }}>
-        {{ form_row(form.steps) }}
+       {% for stepForm in form.steps %}
+            <li class="ingredient-item">
+               {{ form_row(stepForm) }}
+    <button type="button" class="btn btn-danger btn-sm" data-action="form-collection#removeStep">Supprimer</button>
+            </li>
+    {% endfor %}
     </ul>
     <div class="button-form-center">
         <button type="button" class="btn btn-primary button-form mt-1 mb-2" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Ajouter une étape</button>

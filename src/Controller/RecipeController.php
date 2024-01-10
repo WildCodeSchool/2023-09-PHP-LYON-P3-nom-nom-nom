@@ -9,6 +9,7 @@ use App\Repository\RecipeIngredientRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\StepRepository;
 use App\Service\AccessControl;
+use App\Service\DeleteButtonService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,9 +20,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class RecipeController extends AbstractController
 {
     private AccessControl $accessControl;
-    public function __construct(AccessControl $accessControl)
+    private DeleteButtonService $deleteButtonService;
+
+    public function __construct(AccessControl $accessControl, DeleteButtonService $deleteButtonService)
     {
         $this->accessControl = $accessControl;
+        $this->deleteButtonService = $deleteButtonService;
     }
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
     public function index(RecipeRepository $recipeRepository): Response
@@ -119,13 +123,12 @@ class RecipeController extends AbstractController
                 }
             }
             foreach ($recipe->getIngredients() as $ingredient) {
-                if ($ingredient->getQuantity() === null) {
-                    $recipe->removeIngredient($ingredient);
-                }
                 if (!$ingredient->getId()) {
                     $entityManager->persist($ingredient);
                 }
             }
+            $this->deleteButtonService->deleteIngredients($recipe);
+            $this->deleteButtonService->deleteSteps($recipe);
 
             $entityManager->flush();
 
