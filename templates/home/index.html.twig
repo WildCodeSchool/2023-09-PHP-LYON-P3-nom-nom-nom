@@ -99,10 +99,17 @@
 	{# DESKTOP - Accessing categories #}
 	<h3 class="pt-3 m-5 text-center d-none d-md-block">Explorez différentes recettes par catégories</h3>
 
-	<div class="mx-auto container text-center m-5 p-5 d-none d-md-block">
-		<a href="#"><img class="w-25" src="{{ asset('/build/images/entree.png')}}" alt="Photo présentant un hors d'oeuvre"/></a>
-		<a href="#"><img class="w-25" src="{{ asset('/build/images/plat.png')}}" alt="Photo présentant un plat de résistance"/></a>
-		<a href="#"><img class="w-25" src="{{ asset('/build/images/dessert.png')}}" alt="Photo présentant un dessert"/></a>
+<div class="d-flex flex-wrap justify-content-evenly text-center">
+
+{% for category in categories %}
+		<div class="w-25 mb-3 mx-2">
+		<a href="{{ path('app_category_show', { id: category.id }) }}">
+			<img class="w-100 pic-category-recipe object-fit" src="{{ asset('build/images/' ~ category.picture) }}" alt="Photo présentant un(e) {{ category.name }}"/>
+		</a>
+		<h3 class="mt-2">{{ category.name }}</h3>
+		</div>
+
+		{% endfor %}
 	</div>
 
 	{{ component('RecipeAllSearch') }}
