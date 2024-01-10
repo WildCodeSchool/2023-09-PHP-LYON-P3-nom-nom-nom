@@ -43,8 +43,8 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 60,
             'personNumber' => 2,
             'picture' => 'poulet_haricot.jpeg',
-            'description' => 'Un délicieux plat de poulet aux haricots blancs agrément
-            d\'une délicieuse salade, d\'huile d\'olives et d\'oignons',
+            'description' => 'Un délicieux plat de poulet aux haricots blancs agrémenté d\'une délicieuse salade, d\'huile d\'olives et d\'oignons',
+            'category' => 'category_Plat'
         ],
         [
             'nameRecipe' => 'sandwich au poulet',
@@ -52,8 +52,8 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'sandwich.jpeg',
-            'description' => 'Un délicieux sandwich au poulet auquels ont a 
-            rajouté des oignons, de la salade, des tomates',
+            'description' => 'Un délicieux sandwich au poulet auquels ont a rajouté des oignons, de la salade, des tomates',
+            'category' => 'category_Plat'
         ],
     ];
     public function load(ObjectManager $manager): void

@@ -10,7 +10,6 @@ export default class extends Controller {
     item.innerHTML = this.prototypeValue.replace(/__name__/g, this.indexValue);
     this.collectionContainerTarget.appendChild(item);
     this.indexValue++;
-
     const removeFormButton = document.createElement("button");
     removeFormButton.classList.add("delete-ingredient");
     removeFormButton.innerText = "Supprimer cette étape";
@@ -21,14 +20,12 @@ export default class extends Controller {
       item.remove();
     });
   }
-
   addCollectionElementIngredient(event) {
     const item = document.createElement("li");
     item.classList.add("ingredient-form");
     item.innerHTML = this.prototypeValue.replace(/__name__/g, this.indexValue);
     this.collectionContainerTarget.appendChild(item);
     this.indexValue++;
-
     const removeFormButton = document.createElement("button");
     removeFormButton.classList.add("delete-ingredient");
     removeFormButton.innerText = "Supprimer cet ingrédient";
@@ -39,5 +36,9 @@ export default class extends Controller {
       item.remove();
     });
   }
+  removeIngredient(event) {
+    event.preventDefault();
+    let ingredientElement = event.target.closest('li');
+    ingredientElement.remove();
+  }
 }
-    

@@ -61,3 +61,5 @@ function changeIconColor() {
 
 // Appeler la fonction au chargement de la page
 document.addEventListener('DOMContentLoaded', changeIconColor);
+
+

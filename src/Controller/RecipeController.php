@@ -92,17 +92,14 @@ class RecipeController extends AbstractController
         $userLoggedIn = $this->accessControl->checkIfUserLoggedIn();
         if ($userLoggedIn !== true) {
             $this->addFlash('danger', 'Connecter vous pour accéder à cette ressource.');
-
             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
         // call the AccessControl service => control the owner
         $userLoggedIsAuthor = $this->accessControl->checkIfLoggedUserIsAuthor($recipe);
         if ($userLoggedIsAuthor !== true) {
             $this->addFlash('danger', 'Seul l\'auteur de la recette peut la modifier.');
-
             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
-
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
 
@@ -113,18 +110,18 @@ class RecipeController extends AbstractController
                     // Obtenez le dernier numéro d'étape pour la recette actuelle
                     $lastStepNumber = $entityManager->getRepository(Step::class)
                         ->findLastStepNumberForRecipe($recipe);
-
                     // Incrémente le dernier numéro d'étape
                     $newStepNumber = $lastStepNumber + 1;
-
                     // Définissez le numéro d'étape pour la nouvelle étape
                     $step->setStepNumber($newStepNumber);
-
                     // Persistez la nouvelle étape
                     $entityManager->persist($step);
                 }
             }
             foreach ($recipe->getIngredients() as $ingredient) {
+                if ($ingredient->getQuantity() === null) {
+                    $recipe->removeIngredient($ingredient);
+                }
                 if (!$ingredient->getId()) {
                     $entityManager->persist($ingredient);
                 }
