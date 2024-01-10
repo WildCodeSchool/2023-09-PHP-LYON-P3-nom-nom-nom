@@ -65,7 +65,6 @@ class StepFixtures extends Fixture implements DependentFixtureInterface
             $step = new Step();
             $step->setDescription($stepFixture['description']);
             $step->setRecipe($this->getReference($stepFixture['recipe']));
-            ;
             $step->setStepNumber($stepFixture['stepNumber']);
 
             $manager->persist($step);
