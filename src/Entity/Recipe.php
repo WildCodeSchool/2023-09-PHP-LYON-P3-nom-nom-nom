@@ -85,6 +85,10 @@ class Recipe
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     private ?User $owner = null;
+    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
@@ -287,6 +291,17 @@ class Recipe
     {
         $this->owner = $owner;
 
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
         return $this;
     }
 }
