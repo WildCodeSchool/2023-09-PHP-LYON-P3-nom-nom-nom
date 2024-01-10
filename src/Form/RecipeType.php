@@ -42,10 +42,10 @@ class RecipeType extends AbstractType
                 'label' => 'Nombre de calories'
             ])
             ->add('cookingTime', NumberType::class, [
-                'label' => 'Temps de cuisson'
+                'label' => 'Temps de cuisson (min)'
             ])
             ->add('prepareTime', NumberType::class, [
-                'label' => 'Temps de préparation'
+                'label' => 'Temps de préparation (min)'
             ])
             ->add('personNumber', NumberType::class, [
                 'label' => 'Nombre de personnes'

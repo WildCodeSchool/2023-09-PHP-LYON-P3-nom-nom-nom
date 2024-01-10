@@ -5,8 +5,7 @@
 {% endblock %}
 
 {% block body %}
-	<img
-	class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-home.png') }}"/>
+	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-home.png') }}"/>
 
 	<h2 class="pt-5 text-center ">Découvrez les 3 dernières recettes</h2>
 
@@ -38,45 +37,73 @@
 	</div>
 
 	{# DESKTOP - last 3 recipies#}
-<div class="d-none d-md-block">
-	<div class="d-flex justify-content-evenly ">
-		{% for recipe in showRecipes %}
-			<div class="position-relative mb-5">
-				<a href="{{ path('app_recipe_show', { id: recipe.id }) }}">
-					<img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
-				</a>
-				<div class="glassmorphism-desktop m-2">
-					<h5 class="p-2">{{ recipe.nameRecipe }}</h5>
-					<p class="container text-center">{{ recipe.description }}</p>
+	<div class="d-none d-md-block">
+		<div class="d-flex justify-content-evenly ">
+			{% for recipe in showRecipes %}
+				<div class="position-relative mb-5">
+					<a href="{{ path('app_recipe_show', { id: recipe.id }) }}">
+						<img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
+					</a>
+					<div class="glassmorphism-desktop m-2">
+						<h5 class="p-2">{{ recipe.nameRecipe }}</h5>
+						<p class="container text-center">{{ recipe.description }}</p>
+					</div>
 				</div>
-			</div>
-
-		{% endfor %}
+			{% endfor %}
+		</div>
 	</div>
-</div>
 
-
-
-{# section with CTA #}
+	<div class="d-flex justify-content-center">
+		<a href="{{ path('app_recipe_index') }}" class="color-count link-offset-2 link-underline link-underline-opacity-0">Découvrez toutes nos recettes ici</a>
+	</div>
+	{# section with CTA #}
 	<div class="position-relative py-5">
 		<img class="w-100 vh-100 object-fit-cover" src="{{ asset('/build/images/background.png')}}" alt="Photo représentant une table remplie de plats avec une très forte opacité"/>
 		<div class="container text-center position-absolute top-50 start-50 translate-middle">
 			<h1 class="mb-5">Rejoignez notre communauté</h1>
 			<p class="paragraph">A chaque bouchée une nouvelle saveur.</p>
 			<p class="container-fluid mt-4 px-4 paragraph">Rejoignez notre communauté culinaire et transformez chaque repas en une expérience mémorable, où la passion de la cuisine se marie harmonieusement avec le plaisir de créer des souvenirs délicieux.</p>
-			<a href="#" type="button" class="btn button-crud mt-1 mb-5" tabindex="-1" role="button" aria-disabled="true">Rejoignez-nous</a>
+			<h3 class="color-count">Aujourd'hui, nous vous proposons
+				{{ countRecipes }}
+				recettes. Rejoignez-nous afin de partager les votres.</h3>
+			<div class="mt-2">
+				<a href="#" type="button" class="btn button-crud mt-1 mb-5" tabindex="-1" role="button" aria-disabled="true">Rejoignez-nous</a>
+			</div>
 		</div>
 	</div>
 
-{# DESKTOP - Accessing categories #}
+	{# MOBILE - section with CTA #}
+	<div class="position-relative py-5 d-md-none ">
+		<img class="object-fit-cover w-100 opacity-50" src="{{ asset('/build/images/background-mobile.png')}}" alt="Photo représentant une table remplie de plats avec une très forte opacité"/>
+		<div class="container text-center position-absolute top-50 start-50 translate-middle">
+			<h1 class="my-5">Rejoignez notre communauté</h1>
+			<p class="paragraph">A chaque bouchée une nouvelle saveur.</p>
+			<p class="container-fluid mt-4 px-4 paragraph">Rejoignez notre communauté culinaire et transformez chaque repas en une expérience mémorable, où la passion de la cuisine se marie harmonieusement avec le plaisir de créer des souvenirs délicieux.</p>
+			<a href="#" type="button" class="btn button-crud-big mx-auto mt-5 mb-5" tabindex="-1" role="button" aria-disabled="true">Rejoignez-nous</a>
+		</div>
+	</div>
+	{# DESKTOP section with CTA #}
+	<div class="d-none d-md-block">
+		<div class="position-relative">
+			<img class="vw-100 object-fit-cover opacity-50" src=" {{ asset('/build/images/background.png')}} " alt=" photo représentant une table remplie de plats avec une très forte opacité"/>
+			<div class=" container text-center position-absolute top-50 start-50 translate-middle">
+				<h1 class="my-5">Rejoignez notre communauté</h1>
+				<p class="paragraph">A chaque bouchée une nouvelle saveur.</p>
+				<p class="container-fluid mt-4 px-4 paragraph">Rejoignez notre communauté culinaire et transformez chaque repas en une expérience mémorable, où la passion de la cuisine se marie harmonieusement avec le plaisir de créer des souvenirs délicieux.</p>
+				<a href="#" type="button" class="mx-auto btn button-crud-big mt-4" tabindex="-1" role="button" aria-disabled="true">Rejoignez-nous</a>
+			</div>
+		</div>
+	</div>
+
+
+	{# DESKTOP - Accessing categories #}
 	<h3 class="pt-3 m-5 text-center d-none d-md-block">Explorez différentes recettes par catégories</h3>
 
 	<div class="mx-auto container text-center m-5 p-5 d-none d-md-block">
 		<a href="#"><img class="w-25" src="{{ asset('/build/images/entree.png')}}" alt="Photo présentant un hors d'oeuvre"/></a>
-		<a href="#"><img class="w-25" src="{{ asset('/build/images/plat.png')}}"alt="Photo présentant un plat de résistance"/></a>
-		<a href="#"><img class="w-25" src="{{ asset('/build/images/dessert.png')}}"alt="Photo présentant un dessert"/></a>
+		<a href="#"><img class="w-25" src="{{ asset('/build/images/plat.png')}}" alt="Photo présentant un plat de résistance"/></a>
+		<a href="#"><img class="w-25" src="{{ asset('/build/images/dessert.png')}}" alt="Photo présentant un dessert"/></a>
 	</div>
 
-{{ component('RecipeAllSearch') }}
-
+	{{ component('RecipeAllSearch') }}
 {% endblock %}

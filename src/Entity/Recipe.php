@@ -112,7 +112,7 @@ class Recipe
 
     public function setNameRecipe(string $nameRecipe): static
     {
-        $this->nameRecipe = $nameRecipe;
+        $this->nameRecipe = ucfirst($nameRecipe);
 
         return $this;
     }
@@ -124,7 +124,7 @@ class Recipe
 
     public function setDescription(?string $description): static
     {
-        $this->description = $description;
+        $this->description = ucfirst($description);
 
         return $this;
     }
