@@ -19,13 +19,13 @@ class HomeController extends AbstractController
             ['id' => 'DESC'],
             3 // Limit to 3 recipes
         );
-        $countRecipes = $recipeRepository->countRecipes();
+        $totalRecipes = $recipeRepository->countRecipes();
 
         $categories = $categoryRepository->findAll();
 
         return $this->render('home/index.html.twig', [
             'showRecipes' => $showRecipes,
-            'countRecipes' => $countRecipes,
+            'totalRecipes' => $totalRecipes,
             'categories' => $categories
         ]);
     }

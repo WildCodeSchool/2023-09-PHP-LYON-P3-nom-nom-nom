@@ -27,11 +27,11 @@ class RecipeController extends AbstractController
     public function index(RecipeRepository $recipeRepository): Response
     {
         $recipes = $recipeRepository->findAll();
-        $countRecipes = $recipeRepository->countRecipes();
+        $totalRecipes = $recipeRepository->countRecipes();
 
         return $this->render('recipe/index.html.twig', [
             'recipes' => $recipes,
-            'countRecipes' => $countRecipes
+            'totalRecipes' => $totalRecipes
         ]);
     }
 
