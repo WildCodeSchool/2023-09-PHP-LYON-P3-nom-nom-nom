@@ -308,6 +308,16 @@ h1 {
         ($lineHeightText)
     );
 }
+.password-lost{
+    @include myText(
+        ($fontTitle),
+        ($fontColorTextRed),
+        ($fontSizeTitle),
+        ($fontStyleText),
+        ($fontWeightTitle),
+        ($lineHeightText)
+    );
+}
 
 //--------------------navbar-mobile-------------------
 .fa-solid,

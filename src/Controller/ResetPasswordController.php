@@ -59,9 +59,10 @@ class ResetPasswordController extends AbstractController
     #[Route('/check-email', name: 'app_check_email')]
     public function checkEmail(): Response
     {
+        $resetToken = $this->getTokenObjectFromSession();
         // Generate a fake token if the user does not exist or someone hit this page directly.
         // This prevents exposing whether or not a user was found with the given email address or not
-        if (null === ($resetToken = $this->getTokenObjectFromSession())) {
+        if (null === $resetToken) {
             $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
         }
 
