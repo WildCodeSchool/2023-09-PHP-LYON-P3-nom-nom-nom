@@ -132,10 +132,11 @@ body {
         ($fontWeightButton),
         ($lineHeightButton)
     );
+    
+
 
     &:hover {
-        background-color: $backgroundButtonDark;
-        color: $backgroundMainColor;
+        background-color: $backgroundButton;
     }
 }
 
@@ -175,7 +176,7 @@ body {
     );
 
     &:hover {
-        background-color: $backgroundButtonDark;
+        background-color: $backgroundButton;
     }
 }
 
@@ -194,7 +195,7 @@ body {
     );
 
     &:hover {
-        background-color: $backgroundButtonDark;
+        background-color: $backgroundButton;
     }
 }
 
@@ -517,6 +518,7 @@ ul {
 //     display: none;
 // }
 
+
 .mb-3 {
     align-self: center;
     align-items: center;
@@ -539,7 +541,7 @@ ul {
         max-content,
         2rem,
         0.45rem,
-        ($backgroundButton),
+        ($backgroundButtonDark),
         ($fontTitle),
         ($fontColorButton),
         ($fontSizeButton),

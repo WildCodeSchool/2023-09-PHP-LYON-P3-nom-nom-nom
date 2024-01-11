@@ -10,11 +10,11 @@
 	{{ form_row(form.prepareTime) }}
 </div>
 <div {{ stimulus_controller('form-collection') }} data-form-collection-index-value="{{ form.ingredients|length }}" data-form-collection-prototype-value="{{ form_widget(form.ingredients.vars.prototype)|e('html_attr') }}">
-	<ul class="container-fluid paragr ph justify-content-between d-flex flex-wrap p-0" {{ stimulus_target('form-collection', 'collectionContainer') }}>
+	<ul class="container-fluid paragraph justify-content-evenly d-flex flex-wrap" {{ stimulus_target('form-collection', 'collectionContainer') }}>
 		{% for ingredient in form.ingredients %}
-			<li>
-				{{ form_widget(ingredient) }}
-				<button type="button" class="btn btn-primary button-form mt-4 mb-2" data-action="form-collection#removeIngredient">Supprimer</button>
+			<li class="ingredient-form">
+				{{ form(ingredient) }}
+				<button type="button" data-action="form-collection#removeIngredient">Supprimer</button>
 			</li>
 		{% endfor %}
 	</ul>
@@ -27,8 +27,8 @@
 	<ul class="paragraph p-0" {{ stimulus_target('form-collection', 'collectionContainer') }}>
 		{% for stepForm in form.steps %}
 			<li>
-				{{ form_widget(stepForm) }}
-				<button type="button" class="btn btn-primary button-form mt-4 mb-2" data-action="form-collection#removeStep">Supprimer</button>
+				{{ form(stepForm) }}
+				<button type="button" data-action="form-collection#removeStep">Supprimer</button>
 			</li>
 		{% endfor %}
 	</ul>
