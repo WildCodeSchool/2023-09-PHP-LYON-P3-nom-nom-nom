@@ -1,15 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des recettes
+{% block title %}
+	Catégorie
 {% endblock %}
 
 {% block body %}
-	{% include 'components/_messages.html.twig' %}
+	{# Cover #}
+
 	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
-	<h1 class="text-center mt-2">LISTE DES RECETTES</h1>
+	<h1 class="text-center mt-2"> Liste des {{ category.name }} </h1>
 	<h3 class="color-count text-center mb-5">
 		Découvrez nos
-		{{ totalRecipes }}
+		{{ totalRecipesByCategory }}
 		recettes et savourez-les !!!</h3>
 	<div class="d-flex flex-wrap gap-1 text-center d-md-none">
 		{% for recipe in recipes %}
@@ -29,9 +31,4 @@
 			{% endfor %}
 		</div>
 	</div>
-    {% if app.user %}
-	<div class="d-flex justify-content-center">
-		<a class="container btn button-form center mt-2" href="{{ path('app_recipe_new') }}" role="button">Ajouter votre recette</a>
-	</div>
-    {% endif %}
 {% endblock %}
