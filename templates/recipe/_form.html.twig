@@ -1,21 +1,22 @@
 {{ form_start(form) }}
-
 <div class="mt-3 grid-form gap-2">
 	{{ form_row(form.pictureFile) }}
 	{{ form_row(form.nameRecipe) }}
 	{{ form_row(form.category) }}
 	{{ form_row(form.description) }}
-  	{{ form_row(form.personNumber) }}
+	{{ form_row(form.personNumber) }}
 	{{ form_row(form.calorie) }}
-  	{{ form_row(form.cookingTime) }}
+	{{ form_row(form.cookingTime) }}
 	{{ form_row(form.prepareTime) }}
-	
-
 </div>
-
 <div {{ stimulus_controller('form-collection') }} data-form-collection-index-value="{{ form.ingredients|length }}" data-form-collection-prototype-value="{{ form_widget(form.ingredients.vars.prototype)|e('html_attr') }}">
-	<ul class="container-fluid paragraph justify-content-between d-flex flex-wrap delete-child p-0" {{ stimulus_target('form-collection', 'collectionContainer') }}>
-		{{ form_row(form.ingredients) }}
+	<ul class="container-fluid paragraph justify-content-between d-flex flex-wrap p-0" {{ stimulus_target('form-collection', 'collectionContainer') }}>
+		{% for ingredient in form.ingredients %}
+			<li class="ingredient-item">
+				{{ form_row(ingredient) }}
+				<button type="button" class="btn btn-danger btn-sm" data-action="form-collection#removeIngredient">Supprimer</button>
+			</li>
+		{% endfor %}
 	</ul>
 	<div class="button-form-center">
 		<button type="button" class="btn btn-primary button-form mt-4 mb-3" {{ stimulus_action('form-collection', 'addCollectionElementIngredient') }}>Ajouter un ingrédient</button>
@@ -23,7 +24,12 @@
 </div>
 <div {{ stimulus_controller('form-collection') }} data-form-collection-index-value="{{ form.steps|length }}" data-form-collection-prototype-value="{{ form_widget(form.steps.vars.prototype)|e('html_attr') }}">
 	<ul class="paragraph p-0" {{ stimulus_target('form-collection', 'collectionContainer') }}>
-		{{ form_row(form.steps) }}
+		{% for stepForm in form.steps %}
+			<li class="ingredient-item">
+				{{ form_row(stepForm) }}
+				<button type="button" class="btn btn-danger btn-sm" data-action="form-collection#removeStep">Supprimer</button>
+			</li>
+		{% endfor %}
 	</ul>
 	<div class="button-form-center">
 		<button type="button" class="btn btn-primary button-form mt-1 mb-2" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Ajouter une étape</button>

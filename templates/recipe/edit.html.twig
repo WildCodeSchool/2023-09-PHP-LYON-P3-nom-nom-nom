@@ -1,19 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Editer une recette{% endblock %}
+{% block title %}Editer une recette
+{% endblock %}
 
 {% block body %}
-    <h1 class="mt-2 mb-2 text-center">Editer une recette</h1>
+	<img class="w-100 object-fit-cover d-none d-md-block " src="/build/images/background-pages.png">
+	<div class="container-fluid mt-4 px-4 paragraph w-75">
+    <h1 class="my-2 text-center">Editer une recette</h1>
 
-    <div class="container-fluid w-100 mt-4 px-4 paragraph">
-        <div class="container-add-form">
-                <img src="/build/images/nomnomlogo.png" alt="logo de nomnomnom" class="logo-add">
-        </div>
+	<div class="mx-auto paragraph gap-2">
+		{{ include('recipe/_form.html.twig', {'button_label': 'Editer la recette'}) }}</div>
 
-    {{ include('recipe/_form.html.twig', {'button_label': 'Editer la recette'}) }}
+	<a class="container btn button-crud mt-2 button-form-center" href="{{ path('app_recipe_index') }}">Liste des recettes</a>
 
-    <a class="container btn button-crud mt-2 button-form-center" href="{{ path('app_recipe_index') }}">Liste des recettes</a>
-
-    {{ include('recipe/_delete_form.html.twig') }}
+	{{ include('recipe/_delete_form.html.twig') }}
     </div>
-{% endblock %}
+</div>{% endblock %}

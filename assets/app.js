@@ -37,7 +37,7 @@ function changeIconColor() {
     let currentPath = window.location.pathname;
 
     // Sélectionner toutes les balises <a> dans le menu
-    const menuLinks = document.querySelectorAll('.vh-100 a');
+    const menuLinks = document.querySelectorAll('.h-100 a');
 
     // Parcourir les liens du menu
     menuLinks.forEach(function(link) {
@@ -60,3 +60,5 @@ function changeIconColor() {
 
 // Appeler la fonction au chargement de la page
 document.addEventListener('DOMContentLoaded', changeIconColor);
+
+

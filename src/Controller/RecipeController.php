@@ -2,13 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Recipe;
 use App\Entity\Step;
 use App\Form\RecipeType;
+use App\Repository\CategoryRepository;
 use App\Repository\RecipeIngredientRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\StepRepository;
 use App\Service\AccessControl;
+use App\Service\DeleteButtonService;
+use App\Service\UpdateNumberService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,18 +25,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class RecipeController extends AbstractController
 {
     private AccessControl $accessControl;
-    public function __construct(AccessControl $accessControl)
-    {
+    private DeleteButtonService $deleteButtonService;
+    private UpdateNumberService $updateNumberService;
+
+    public function __construct(
+        AccessControl $accessControl,
+        DeleteButtonService $deleteButtonService,
+        UpdateNumberService $updateNumberService,
+    ) {
         $this->accessControl = $accessControl;
+        $this->deleteButtonService = $deleteButtonService;
+        $this->updateNumberService = $updateNumberService;
     }
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
-    public function index(RecipeRepository $recipeRepository): Response
+    public function index(RecipeRepository $recipeRepository, CategoryRepository $categoryRepository): Response
     {
-        $recipes = $recipeRepository->findAll();
+        $categories = $categoryRepository->findAll();
         $totalRecipes = $recipeRepository->countRecipes();
 
         return $this->render('recipe/index.html.twig', [
-            'recipes' => $recipes,
+            'categories' => $categories,
             'totalRecipes' => $totalRecipes
         ]);
     }
@@ -105,17 +117,14 @@ class RecipeController extends AbstractController
         $userLoggedIn = $this->accessControl->checkIfUserLoggedIn();
         if ($userLoggedIn !== true) {
             $this->addFlash('danger', 'Connecter vous pour accéder à cette ressource.');
-
             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
         // call the AccessControl service => control the owner
         $userLoggedIsAuthor = $this->accessControl->checkIfLoggedUserIsAuthor($recipe);
         if ($userLoggedIsAuthor !== true) {
             $this->addFlash('danger', 'Seul l\'auteur de la recette peut la modifier.');
-
             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
-
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
 
@@ -126,13 +135,10 @@ class RecipeController extends AbstractController
                     // Obtenez le dernier numéro d'étape pour la recette actuelle
                     $lastStepNumber = $entityManager->getRepository(Step::class)
                         ->findLastStepNumberForRecipe($recipe);
-
                     // Incrémente le dernier numéro d'étape
                     $newStepNumber = $lastStepNumber + 1;
-
                     // Définissez le numéro d'étape pour la nouvelle étape
                     $step->setStepNumber($newStepNumber);
-
                     // Persistez la nouvelle étape
                     $entityManager->persist($step);
                 }
@@ -142,10 +148,13 @@ class RecipeController extends AbstractController
                     $entityManager->persist($ingredient);
                 }
             }
-
+            //utilisation des services afin de supprimer ingrédients et étapes
+            $this->deleteButtonService->deleteIngredients($recipe);
+            $this->deleteButtonService->deleteSteps($recipe);
+            $this->updateNumberService->updateStepsNumber($recipe);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_recipe_show', ['id' => $recipe->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('recipe/edit.html.twig', [
