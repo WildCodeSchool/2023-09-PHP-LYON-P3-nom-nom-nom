@@ -40,7 +40,7 @@ class RegistrationController extends AbstractController
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
 
@@ -50,12 +50,14 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation(
                 'app_verify_email',
-                $user,
+                $user->getId(),
+                $user->getEmail(),
+                ['id' => $user->getId()],
                 (new TemplatedEmail())
                     ->from(new Address('p3.nomnomnom@gmail.com', 'NomNomNom'))
                     ->to($user->getEmail())
                     ->subject('Veuillez confirmer votre mail')
-                    ->html($this->renderView('Registration/confirmation_email.html.twig'))
+                    ->html($this->renderView('registration/confirmation_email.html.twig'))
             );
             // do anything else you need here, like send an email
 
