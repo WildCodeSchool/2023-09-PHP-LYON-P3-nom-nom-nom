@@ -29,9 +29,8 @@ class RecipeController extends AbstractController
     public function index(RecipeRepository $recipeRepository, CategoryRepository $categoryRepository): Response
     {
         $categories = $categoryRepository->findAll();
-        $category = $recipeRepository->findAll();
+
         return $this->render('recipe/index.html.twig', [
-            'recipes' => $recipeRepository->findBy(['category' => $category]),
             'countRecipes' => $recipeRepository->countRecipes(),
             'categories' => $categories
         ]);

@@ -15,12 +15,14 @@
 	<div class="d-md-none text-center">
 		{% for category in categories %}
 			<h2 class="category-in-recipe mt-3">{{ category.name }}</h2>
-			<div class="d-flex flex-wrap gap-1 text-center">
+			<div class="d-flex flex-wrap gap-1 justify-content-center text-center">
 				{% for recipe in category.recipes %}
 					<div class="container-fluid recipe-list-mobile mb-2">
 						<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list-mobile object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}"/></a>
 						<h5>{{ recipe.nameRecipe }}</h5>
 					</div>
+											{% else %}
+							<p>Aucune recette dans cette catégorie actuellement.</p>
 				{% endfor %}
 			</div>
 		{% endfor %}
@@ -29,12 +31,14 @@
 		<div class="text-center mb-2">
 			{% for category in categories %}
 				<h2 class="category-in-recipe mt-3">{{ category.name }}</h2>
-				<div class="d-flex flex-wrap gap-1 text-center">
+				<div class="d-flex flex-wrap justify-content-center gap-1 text-center">
 					{% for recipe in category.recipes %}
 						<div class="container-fluid recipe-list">
 							<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list object-fit-cover w-75 mb-3" alt="{{ recipe.nameRecipe }}"/></a>
 							<h5>{{ recipe.nameRecipe }}</h5>
 						</div>
+						{% else %}
+							<p>Aucune recette dans cette catégorie actuellement.</p>
 					{% endfor %}
 				</div>
 			{% endfor %}
