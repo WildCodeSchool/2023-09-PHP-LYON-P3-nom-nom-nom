@@ -5,10 +5,10 @@ namespace App\Service;
 use App\Entity\Recipe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class RenumberSteps extends AbstractController
+class RenumberStepsService extends AbstractController
 {
 
-    private function RenumberSteps(Recipe $recipe)
+    private function renumberSteps(Recipe $recipe): void
     {
         $steps = $recipe->getSteps();
         $stepNumber = 1;

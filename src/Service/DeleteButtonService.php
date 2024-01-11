@@ -25,14 +25,4 @@ class DeleteButtonService extends AbstractController
             }
         }
     }
-
-    private function stepsReset(Recipe $recipe)
-    {
-        $steps = $recipe->getSteps();
-        $stepNumber = 1;
-
-        foreach ($steps as $step) {
-            $step->setStepNumber($stepNumber++);
-        }
-    }
 }
