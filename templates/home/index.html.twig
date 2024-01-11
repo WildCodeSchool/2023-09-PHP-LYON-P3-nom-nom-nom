@@ -57,7 +57,7 @@
 	<div class="position-relative py-5 d-md-none ">
 		<img class="object-fit-cover w-100 opacity-50" src="{{ asset('/build/images/background-mobile.png')}}" alt="Photo représentant une table remplie de plats avec une très forte opacité"/>
 		<div class="container text-center position-absolute top-50 start-50 translate-middle">
-			<h1 class="color-count">Aujourd'hui, </br> nous vous proposons {{ countRecipes }} recettes.</br> Rejoignez notre communauté</h1>
+			<h1 class="color-count">Aujourd'hui, </br> nous vous proposons {{ totalRecipes }} recettes.</br> Rejoignez notre communauté</h1>
 			<p class="paragraph">A chaque bouchée une nouvelle saveur.</p>
 			<p class="container-fluid mt-4 px-4 paragraph">Rejoignez notre communauté culinaire et transformez chaque repas en une expérience mémorable, où la passion de la cuisine se marie harmonieusement avec le plaisir de créer des souvenirs délicieux.</p>
 			<a href="#" type="button" class="btn button-crud-big mx-auto mt-5 mb-3" tabindex="-1" role="button" aria-disabled="true">Rejoignez-nous</a>
@@ -70,7 +70,7 @@
 		<img class="vw-100 object-fit-cover opacity-50" src=" {{ asset('/build/images/background.png')}} " alt=" photo représentant une table remplie de plats avec une très forte opacité"/>
 		<div class="container text-center position-absolute top-50 start-50 translate-middle">
 			<h1 class="color-count">
-			Aujourd'hui, nous vous proposons {{ countRecipes }} recettes.</br>
+			Aujourd'hui, nous vous proposons {{ totalRecipes }} recettes.</br>
 				Rejoignez notre communauté </h1>
 				<p class="paragraph">A chaque bouchée une nouvelle saveur.</p>
 				<p class="container-fluid mt-4 px-4 paragraph w-75">Rejoignez notre communauté culinaire et transformez chaque repas en une expérience mémorable, où la passion de la cuisine se marie harmonieusement avec le plaisir de créer des souvenirs délicieux.</p>
@@ -82,12 +82,17 @@
 {# DESKTOP - Accessing categories #}
 <h3 class="pt-3 m-5 text-center d-none d-md-block">Explorez différentes recettes par catégories</h3>
 
-<div class="mx-auto container text-center m-5 p-5 d-none d-md-block">
-	<a href="#"><img class="w-25" src="{{ asset('/build/images/entree.png')}}" alt="Photo présentant un hors d'oeuvre"/></a>
-	<a href="#"><img class="w-25" src="{{ asset('/build/images/plat.png')}}" alt="Photo présentant un plat de résistance"/></a>
-	<a href="#"><img class="w-25" src="{{ asset('/build/images/dessert.png')}}" alt="Photo présentant un dessert"/></a>
-</div>
+<div class="mx-auto w-75 d-flex flex-wrap justify-content-evenly text-center">
 
+{% for category in categories %}
+		<div class="w-25 mb-3 mx-2">
+		<a href="{{ path('app_category_show', { id: category.id }) }}">
+			<img class="w-100 pic-category-recipe object-fit" src="{{ asset('build/images/' ~ category.picture) }}" alt="Photo présentant un(e) {{ category.name }}"/>
+		</a>
+		<h3 class="mt-2">{{ category.name }}</h3>
+		</div>
+
+		{% endfor %}
+	</div>
 {{ component('RecipeAllSearch') }}
-
 {% endblock %}

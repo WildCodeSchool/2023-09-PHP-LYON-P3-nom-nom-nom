@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
 use App\Repository\RecipeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,17 +12,21 @@ class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
 
-    public function index(RecipeRepository $recipeRepository): Response
+    public function index(RecipeRepository $recipeRepository, CategoryRepository $categoryRepository): Response
     {
         $showRecipes = $recipeRepository->findBy(
             [], // No specific conditions
             ['id' => 'DESC'],
             3 // Limit to 3 recipes
         );
+        $totalRecipes = $recipeRepository->countRecipes();
+
+        $categories = $categoryRepository->findAll();
 
         return $this->render('home/index.html.twig', [
             'showRecipes' => $showRecipes,
-            'countRecipes' => $recipeRepository->countRecipes()
+            'totalRecipes' => $totalRecipes,
+            'categories' => $categories
         ]);
     }
 }
