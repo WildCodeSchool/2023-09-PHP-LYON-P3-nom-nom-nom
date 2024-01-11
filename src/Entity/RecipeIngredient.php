@@ -13,7 +13,7 @@ class RecipeIngredient
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $quantity = null;
 
     #[ORM\Column(length: 50)]
@@ -37,7 +37,7 @@ class RecipeIngredient
         return $this->quantity;
     }
 
-    public function setQuantity(int $quantity): static
+    public function setQuantity(?int $quantity): static
     {
         $this->quantity = $quantity;
 
