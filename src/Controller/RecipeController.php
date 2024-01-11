@@ -26,10 +26,12 @@ class RecipeController extends AbstractController
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
     public function index(RecipeRepository $recipeRepository): Response
     {
+        $recipes = $recipeRepository->findAll();
+        $countRecipes = $recipeRepository->countRecipes();
 
         return $this->render('recipe/index.html.twig', [
-            'recipes' => $recipeRepository->findAll(),
-            'countRecipes' => $recipeRepository->countRecipes()
+            'recipes' => $recipes,
+            'countRecipes' => $countRecipes
         ]);
     }
 

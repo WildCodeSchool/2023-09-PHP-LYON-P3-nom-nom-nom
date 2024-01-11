@@ -56,7 +56,7 @@ class RecipeRepository extends ServiceEntityRepository
         return $count;
     }
 
-    public function countRecipeByCategory(Category $category): int
+    public function countRecipeByCat(Category $category): int
     {
         //cette fonction compte les recettes par categorie
         $countByCategory = $this->createQueryBuilder('r')
