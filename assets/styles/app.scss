@@ -277,6 +277,17 @@ h2 {
     );
 }
 
+.category-in-recipe {
+    @include myText(
+        ($fontTitle),
+        ($fontColorTextRed),
+        ($fontSizeTitle),
+        ($fontStyleText),
+        ($fontWeightTitle),
+        ($lineHeightText)
+    );
+}
+
 h3 {
     @include myText(
         ($fontTitle),
