@@ -20,12 +20,12 @@ class CategoryController extends AbstractController
     ): Response {
         $category = $categoryRepository->findOneBy(['id' => $id]);
         $recipes = $recipeRepository->findBy(['category' => $category], ['nameRecipe' => 'ASC']);
-        $countRecipesByCat = $recipeRepository->countRecipeByCat($category);
+        $totalRecipesByCat = $recipeRepository->countRecipeByCat($category);
 
         return $this->render('category/show.html.twig', [
             'category' => $category,
             'recipes' => $recipes,
-            'countRecipesByCategory' => $countRecipesByCat,
+            'totalRecipesByCategory' => $totalRecipesByCat,
         ]);
     }
 }
