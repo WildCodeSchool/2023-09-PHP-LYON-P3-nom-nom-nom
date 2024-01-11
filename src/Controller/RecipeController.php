@@ -22,13 +22,16 @@ class RecipeController extends AbstractController
 {
     private AccessControl $accessControl;
     private DeleteButtonService $deleteButtonService;
-    private RenumberStepsService $renumberSteps;
+    private RenumberStepsService $renumberStepsService;
 
-    public function __construct(AccessControl $accessControl, DeleteButtonService $deleteButtonService, RenumberStepsService $renumberStepsService )
-    {
+    public function __construct(
+        AccessControl $accessControl,
+        DeleteButtonService $deleteButtonService,
+        RenumberStepsService $renumberStepsService
+    ) {
         $this->accessControl = $accessControl;
         $this->deleteButtonService = $deleteButtonService;
-        $this->renumberSteps = $renumberStepsService;
+        $this->renumberStepsService = $renumberStepsService;
     }
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
     public function index(RecipeRepository $recipeRepository): Response
@@ -133,7 +136,7 @@ class RecipeController extends AbstractController
             //utilisation des services afin de supprimer ingrédients et étapes
             $this->deleteButtonService->deleteIngredients($recipe);
             $this->deleteButtonService->deleteSteps($recipe);
-
+            $this->renumberStepsService->renumberSteps($recipe);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);

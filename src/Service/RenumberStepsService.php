@@ -7,8 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class RenumberStepsService extends AbstractController
 {
-
-    private function renumberSteps(Recipe $recipe): void
+    public function renumberSteps(Recipe $recipe): void
     {
         $steps = $recipe->getSteps();
         $stepNumber = 1;
