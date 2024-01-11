@@ -132,8 +132,6 @@ body {
         ($fontWeightButton),
         ($lineHeightButton)
     );
-    
-
 
     &:hover {
         background-color: $backgroundButton;
@@ -200,6 +198,11 @@ body {
 }
 
 .button-form-center {
+    display: flex;
+    justify-content:center ;
+}
+
+.button-form-end {
     display: flex;
     justify-content:flex-end ;
 }

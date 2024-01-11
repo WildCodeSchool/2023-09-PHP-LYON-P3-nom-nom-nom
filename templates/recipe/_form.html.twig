@@ -13,12 +13,12 @@
 	<ul class="container-fluid paragraph justify-content-evenly d-flex flex-wrap" {{ stimulus_target('form-collection', 'collectionContainer') }}>
 		{% for ingredient in form.ingredients %}
 			<li class="ingredient-form">
-				{{ form(ingredient) }}
-				<button type="button" data-action="form-collection#removeIngredient">Supprimer</button>
+				{{ form_widget(ingredient) }}
+				<button type="button" class="btn btn-primary button-form-black mt-4 mb-2" data-action="form-collection#removeIngredient">Supprimer</button>
 			</li>
 		{% endfor %}
 	</ul>
-	<div class="button-form-center py-5 my-2">
+	<div class="button-form-end  py-5 my-2">
 		<button type="button" class="btn btn-primary button-form mt-4 mb-3" {{ stimulus_action('form-collection', 'addCollectionElementIngredient') }}>Ajouter un ingrédient</button>
 	</div>
 </div>
@@ -28,18 +28,18 @@
 		{% for stepForm in form.steps %}
 			<li>
 				{{ form(stepForm) }}
-				<button type="button" data-action="form-collection#removeStep">Supprimer</button>
+				<button type="button" class="btn btn-primary button-form-black mt-4 mb-2" data-action="form-collection#removeStep">Supprimer</button>
 			</li>
 		{% endfor %}
 	</ul>
 
-	<div class="button-form-center pt-5 my-2">
+	<div class="button-form-end  pt-5 my-2">
 		<button type="button" class="btn btn-primary button-form mt-1 mb-2" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Ajouter une étape</button>
 	</div>
 
 </div>
 
-<div class="button-form-center">
+<div class="button-form-end ">
 	<button class="btn btn-primary button-form mt-4 mb-2">{{ button_label|default('Publier votre recette') }}</button>
 </div>
 {{ form_end(form) }}
