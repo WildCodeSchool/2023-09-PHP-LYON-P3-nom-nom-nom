@@ -139,7 +139,7 @@ class RecipeController extends AbstractController
             $this->renumberStepsService->renumberSteps($recipe);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_recipe_show', ['id' => $recipe->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('recipe/edit.html.twig', [
