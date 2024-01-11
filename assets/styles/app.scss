@@ -109,7 +109,9 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 
 body {
     background-color: $backgroundMainColor;
-    padding-bottom: 15%;
+    @include media-breakpoint-down(md) {
+           padding-bottom: 15%;
+    }
 }
 
 // -----------------------button------------------------------
@@ -134,8 +136,7 @@ body {
     );
 
     &:hover {
-        background-color: $backgroundButtonDark;
-        color: $backgroundMainColor;
+        background-color: $backgroundButton;
     }
 }
 
@@ -175,7 +176,7 @@ body {
     );
 
     &:hover {
-        background-color: $backgroundButtonDark;
+        background-color: $backgroundButton;
     }
 }
 
@@ -194,13 +195,38 @@ body {
     );
 
     &:hover {
+        background-color: $backgroundButton;
+    }
+}
+
+.button-form-black {
+    @include myButton(
+        16rem,
+        1.875rem,
+        0.75,
+        ($backgroundButtonDark),
+        ($fontTitle),
+        ($fontColorButton),
+        ($fontSizeButton),
+        ($fontStyleButton),
+        ($fontWeightButton),
+        ($lineHeightButton)
+    );
+
+    &:hover {
         background-color: $backgroundButtonDark;
+        color: #faf6f4;
     }
 }
 
 .button-form-center {
     display: flex;
-    justify-content: center;
+    justify-content:center ;
+}
+
+.button-form-end {
+    display: flex;
+    justify-content:flex-end ;
 }
 
 //---------------------------text-----------------------------
@@ -427,7 +453,13 @@ ul {
     height: 38px;
     color: $backgroundMainColor;
 }
+//-------sidebar----
 
+.padding-sidebar{
+    @include media-breakpoint-up(md) {
+padding-left: 3vw;
+}
+}
 //-------Carrousel----------
 .carousel-dark .carousel-indicators [data-bs-target] {
     background-color: $fontColorButton;
@@ -513,10 +545,6 @@ ul {
     grid-column-end: 3;
 }
 
-.delete-child div ul > div.mb-3.row:first-child {
-    display: none;
-}
-
 .mb-3 {
     align-self: center;
     align-items: center;
@@ -524,8 +552,6 @@ ul {
 
 .ingredient-form {
     width: 47%;
-    display: flex;
-    flex-direction: row;
     @include media-breakpoint-down(md) {
         width: 100%;
     }
@@ -541,7 +567,7 @@ ul {
         max-content,
         2rem,
         0.45rem,
-        ($backgroundButton),
+        ($backgroundButtonDark),
         ($fontTitle),
         ($fontColorButton),
         ($fontSizeButton),
