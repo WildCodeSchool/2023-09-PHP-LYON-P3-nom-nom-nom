@@ -52,7 +52,7 @@
 			{% endfor %}
 		</div>
 	</div>
-
+<div class="pb-5"{{ component('RecipeAllSearch') }}</div>
 	{# MOBILE - section with CTA #}
 	<div class="position-relative py-5 d-md-none ">
 		<img class="object-fit-cover w-100 opacity-50" src="{{ asset('/build/images/background-mobile.png')}}" alt="Photo représentant une table remplie de plats avec une très forte opacité"/>
@@ -94,5 +94,5 @@
 
 		{% endfor %}
 	</div>
-{{ component('RecipeAllSearch') }}
+
 {% endblock %}
