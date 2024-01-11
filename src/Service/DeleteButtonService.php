@@ -16,13 +16,23 @@ class DeleteButtonService extends AbstractController
             }
         }
     }
-//permet de supprimer l'étape' si son état est "null" après soumission du formulaire
+    //permet de supprimer l'étape' si son état est "null" après soumission du formulaire
     public function deleteSteps(Recipe $recipe): void
     {
         foreach ($recipe->getSteps() as $step) {
             if ($step->getStepNumber() === null) {
                 $recipe->removeStep($step);
             }
+        }
+    }
+
+    private function stepsReset(Recipe $recipe)
+    {
+        $steps = $recipe->getSteps();
+        $stepNumber = 1;
+
+        foreach ($steps as $step) {
+            $step->setStepNumber($stepNumber++);
         }
     }
 }

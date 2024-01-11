@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Service;
+
+use App\Entity\Recipe;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class RenumberSteps extends AbstractController
+{
+
+    private function RenumberSteps(Recipe $recipe)
+    {
+        $steps = $recipe->getSteps();
+        $stepNumber = 1;
+
+        foreach ($steps as $step) {
+            $step->setStepNumber($stepNumber++);
+        }
+    }
+}
