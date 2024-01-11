@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Changer votre mot de passe{% endblock %}
+
+{% block body %}
+	<img
+	class="w-100 object-fit-cover d-none d-md-block" src="/build/images/background-pages.png"/>
+
+    <h1>Changer votre mot de passe</h1>
+
+    {{ form_start(resetForm) }}
+        {{ form_row(resetForm.plainPassword) }}
+        <button class="btn btn-primary">Réinitialiser votre mot de passe</button>
+    {{ form_end(resetForm) }}
+{% endblock %}
