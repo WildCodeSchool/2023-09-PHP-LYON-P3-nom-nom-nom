@@ -11,22 +11,28 @@ class CategoryFixtures extends Fixture
 {
     public const CATEGORIES = [
         [
-            'name' => 'Entrée',
+            'name' => 'Entrées',
+            'picture' => 'entree.png',
         ],
         [
-            'name' => 'Plat',
+            'name' => 'Plats',
+            'picture' => 'plat.png',
         ],
         [
-            'name' => 'Dessert',
+            'name' => 'Desserts',
+            'picture' => 'dessert.png',
         ],
         [
-            'name' => 'Apéritif',
+            'name' => 'Apéritifs',
+            'picture' => 'aperitif.png',
         ],
         [
-            'name' => 'Entremet',
+            'name' => 'Entremets',
+            'picture' => 'entremet.png',
         ],
         [
-            'name' => 'Coktail',
+            'name' => 'Cocktails',
+            'picture' => 'cocktail.png',
         ],
     ];
 
@@ -35,6 +41,7 @@ class CategoryFixtures extends Fixture
         foreach (self::CATEGORIES as $categoryFixture) {
             $category = new Category();
             $category->setName($categoryFixture['name']);
+            $category->setPicture($categoryFixture['picture']);
             $manager->persist($category);
             $this->addReference('category_' . $categoryFixture['name'], $category);
         }

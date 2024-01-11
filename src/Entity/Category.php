@@ -20,6 +20,8 @@ class Category
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Recipe::class)]
     private Collection $recipes;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $picture = null;
 
     public function __construct()
     {
@@ -70,6 +72,17 @@ class Category
             }
         }
 
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): static
+    {
+        $this->picture = $picture;
         return $this;
     }
 }

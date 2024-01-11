@@ -29,9 +29,8 @@ document.addEventListener("click", function (event){
 	if (!isClickInsideNavabr && !isClickOnIcon) {
 		list.classList.remove("list-visible");
 	}
-})
+});
 
-// Fonction pour changer la couleur de l'icône en fonction de la page active
 // Fonction pour changer la couleur de l'icône en fonction de la page active
 function changeIconColor() {
     // Récupérer le chemin de la page actuelle
