@@ -21,7 +21,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/recipe')]
+#[Route('/recettes')]
 class RecipeController extends AbstractController
 {
     private AccessControl $accessControl;

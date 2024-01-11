@@ -200,7 +200,7 @@ body {
 
 .button-form-center {
     display: flex;
-    justify-content: center;
+    justify-content:flex-end ;
 }
 
 //---------------------------text-----------------------------
@@ -513,9 +513,9 @@ ul {
     grid-column-end: 3;
 }
 
-.delete-child div ul > div.mb-3.row:first-child {
-    display: none;
-}
+// .delete-child div ul li > div.mb-3.row:first-child {
+//     display: none;
+// }
 
 .mb-3 {
     align-self: center;
@@ -524,8 +524,6 @@ ul {
 
 .ingredient-form {
     width: 47%;
-    display: flex;
-    flex-direction: row;
     @include media-breakpoint-down(md) {
         width: 100%;
     }
