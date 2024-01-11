@@ -12,7 +12,7 @@ use App\Repository\RecipeRepository;
 use App\Repository\StepRepository;
 use App\Service\AccessControl;
 use App\Service\DeleteButtonService;
-use App\Service\RenumberStepsService;
+use App\Service\UpdateNumberService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,16 +26,16 @@ class RecipeController extends AbstractController
 {
     private AccessControl $accessControl;
     private DeleteButtonService $deleteButtonService;
-    private RenumberStepsService $renumberStepsService;
+    private UpdateNumberService $updateNumberService;
 
     public function __construct(
         AccessControl $accessControl,
         DeleteButtonService $deleteButtonService,
-        RenumberStepsService $renumberStepsService
+        UpdateNumberService $updateNumberService,
     ) {
         $this->accessControl = $accessControl;
         $this->deleteButtonService = $deleteButtonService;
-        $this->renumberStepsService = $renumberStepsService;
+        $this->updateNumberService = $updateNumberService;
     }
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
     public function index(RecipeRepository $recipeRepository, CategoryRepository $categoryRepository): Response
@@ -151,7 +151,7 @@ class RecipeController extends AbstractController
             //utilisation des services afin de supprimer ingrédients et étapes
             $this->deleteButtonService->deleteIngredients($recipe);
             $this->deleteButtonService->deleteSteps($recipe);
-            $this->renumberStepsService->renumberSteps($recipe);
+            $this->updateNumberService->updateStepsNumber($recipe);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_recipe_show', ['id' => $recipe->getId()], Response::HTTP_SEE_OTHER);
