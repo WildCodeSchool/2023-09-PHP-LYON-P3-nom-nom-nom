@@ -197,6 +197,26 @@ body {
     }
 }
 
+.button-form-black {
+    @include myButton(
+        16rem,
+        1.875rem,
+        0.75,
+        ($backgroundButtonDark),
+        ($fontTitle),
+        ($fontColorButton),
+        ($fontSizeButton),
+        ($fontStyleButton),
+        ($fontWeightButton),
+        ($lineHeightButton)
+    );
+
+    &:hover {
+        background-color: $backgroundButtonDark;
+        color: #faf6f4;
+    }
+}
+
 .button-form-center {
     display: flex;
     justify-content:center ;
