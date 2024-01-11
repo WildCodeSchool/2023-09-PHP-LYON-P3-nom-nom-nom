@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Recipe;
 use App\Entity\Step;
 use App\Form\RecipeType;
+use App\Repository\CategoryRepository;
 use App\Repository\RecipeIngredientRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\StepRepository;
@@ -15,6 +17,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/recipe')]
@@ -34,19 +38,19 @@ class RecipeController extends AbstractController
         $this->renumberStepsService = $renumberStepsService;
     }
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
-    public function index(RecipeRepository $recipeRepository): Response
+    public function index(RecipeRepository $recipeRepository, CategoryRepository $categoryRepository): Response
     {
-        $recipes = $recipeRepository->findAll();
+        $categories = $categoryRepository->findAll();
         $totalRecipes = $recipeRepository->countRecipes();
 
         return $this->render('recipe/index.html.twig', [
-            'recipes' => $recipes,
+            'categories' => $categories,
             'totalRecipes' => $totalRecipes
         ]);
     }
 
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, MailerInterface $mailer, EntityManagerInterface $entityManager): Response
     {
         // call the AccessControl service => control if there is a connection
         $userLoggedIn = $this->accessControl->checkIfUserLoggedIn();
@@ -74,6 +78,15 @@ class RecipeController extends AbstractController
 
             $recipe->setOwner($this->getUser());
             $entityManager->persist($recipe);
+
+            // send email to users if a recipe has been created
+            $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to('you@example.com')
+                ->subject('Une nouvelle recette vient d\'être publiée.')
+                ->html($this->renderView('emails/newRecipeEmail.html.twig', ['recipe' => $recipe]));
+
+            $mailer->send($email);
 
             $entityManager->flush();
 
