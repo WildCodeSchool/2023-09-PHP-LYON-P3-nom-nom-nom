@@ -345,7 +345,7 @@ h1 {
     );
 }
 
-.d-flex form div label{
+.lost-password form div label{
     @include myText(
         ($fontText),
         ($fontColorButton),
@@ -775,12 +775,15 @@ nav {
     background-repeat: no-repeat;
 }
 
-.d-flex form{
+.lost-password form{
     display: flex;
     flex-direction: column;
     align-items: end;
 }
 
-.d-flex form div{
+.lost-password form div{
     width: 100%;
+}
+.lost-password form div label {
+    width : 75%;
 }

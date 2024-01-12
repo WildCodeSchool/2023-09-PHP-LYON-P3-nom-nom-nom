@@ -1,15 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Password Reset Email Sent{% endblock %}
+{% block title %}Mail envoyé{% endblock %}
 
 {% block body %}
 
 	<div class="bg-forgot-password h-100 w-100" style="background-image: url('/build/images/background_login.png')">
-		{% for flash_error in app.flashes('reset_password_error') %}
-			<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-		{% endfor %}
 		<div class="d-flex flex-column align-items-center justify-content-center vh-100">
-			<div class="d-flex h-75 w-50 flex-column align-items-center justify-content-md-evenly">
+			<div class="lost-password d-flex h-75 w-50 flex-column align-items-center justify-content-md-evenly">
 				<img src="/build/images/logo_white_500.png" alt="logo de nomnomnom" class="logo-add"/>
 				<h1 class="text-center lost">Mail envoyé</h1>
 
