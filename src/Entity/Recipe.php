@@ -44,7 +44,6 @@ class Recipe
     private ?int $calorie = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\Date(message: 'La date n\'est pas correcte')]
     private ?DateTimeInterface $date = null;
 
     #[ORM\Column]
@@ -59,7 +58,12 @@ class Recipe
     private ?int $prepareTime = null;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, orphanRemoval: true)]
+    #[ORM\OrderBy(["stepNumber" => "ASC"])]
     private Collection $steps;
+
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: RecipeIngredient::class, orphanRemoval: true)]
+    private Collection $ingredients;
+
 
     #[ORM\Column]
     #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
@@ -78,8 +82,16 @@ class Recipe
         mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
     )]
     private ?File $pictureFile = null;
+
+    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    private ?User $owner = null;
+    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+
     public function __construct()
     {
+        $this->ingredients = new ArrayCollection();
         $this->steps = new ArrayCollection();
     }
 
@@ -100,7 +112,7 @@ class Recipe
 
     public function setNameRecipe(string $nameRecipe): static
     {
-        $this->nameRecipe = $nameRecipe;
+        $this->nameRecipe = ucfirst($nameRecipe);
 
         return $this;
     }
@@ -112,7 +124,7 @@ class Recipe
 
     public function setDescription(?string $description): static
     {
-        $this->description = $description;
+        $this->description = ucfirst($description);
 
         return $this;
     }
@@ -181,9 +193,26 @@ class Recipe
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(DatetimeInterface $updatedAt): Recipe
+    public function setUpdatedAt(DateTimeInterface $updatedAt): Recipe
     {
         $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RecipeIngredient>
+     */
+    public function getIngredients(): Collection
+    {
+        return $this->ingredients;
+    }
+
+    public function addIngredient(RecipeIngredient $ingredient): static
+    {
+        if (!$this->ingredients->contains($ingredient)) {
+            $this->ingredients->add($ingredient);
+            $ingredient->setRecipe($this);
+        }
         return $this;
     }
 
@@ -200,7 +229,7 @@ class Recipe
         return $this->picture;
     }
 
-    public function setPicture(string $picture): static
+    public function setPicture(?string $picture): static
     {
         $this->picture = $picture;
 
@@ -230,6 +259,18 @@ class Recipe
 
         return $this;
     }
+
+    public function removeIngredient(RecipeIngredient $ingredient): static
+    {
+        if ($this->ingredients->removeElement($ingredient)) {
+            // set the owning side to null (unless already changed)
+            if ($ingredient->getRecipe() === $this) {
+                $ingredient->setRecipe(null);
+            }
+        }
+        return $this;
+    }
+
     public function removeStep(Step $step): static
     {
         if ($this->steps->removeElement($step)) {
@@ -238,6 +279,29 @@ class Recipe
                 $step->setRecipe(null);
             }
         }
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): static
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
         return $this;
     }
 }

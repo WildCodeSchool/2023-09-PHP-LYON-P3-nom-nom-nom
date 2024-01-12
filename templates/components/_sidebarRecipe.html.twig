@@ -1,0 +1,13 @@
+<nav class="h-100 position-absolute top-25 padding-sidebar">
+	<ul class="h-75 d-flex flex-column justify-content-center p-0 m-0">
+		<li>
+			<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><i class="fa-solid fa-book"></i></a>
+		</li>
+		<li>
+			<a href="{{ path('app_recipe_show_ingredients', { id: recipe.id }) }}"><i class="fa-solid fa-carrot"></i></a>
+		</li>
+		<li>
+			<a href="{{ path('app_recipe_show_step', { id: recipe.id }) }}"><i class="fa-solid fa-list-check"></i></a>
+		</li>
+	</ul>
+</nav>

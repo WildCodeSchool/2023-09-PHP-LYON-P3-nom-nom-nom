@@ -15,7 +15,7 @@ class Step
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
     private ?string $description = null;
 
@@ -24,7 +24,7 @@ class Step
     #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
     private ?Recipe $recipe = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
     #[Assert\Positive(message: 'Le numéro d\'étape ne peut pas être négatif')]
     private ?int $stepNumber = null;
@@ -39,9 +39,9 @@ class Step
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(?string $description): static
     {
-        $this->description = $description;
+        $this->description = ucfirst($description);
 
         return $this;
     }
@@ -63,7 +63,7 @@ class Step
         return $this->stepNumber;
     }
 
-    public function setStepNumber(int $stepNumber): static
+    public function setStepNumber(?int $stepNumber): static
     {
         $this->stepNumber = $stepNumber;
 

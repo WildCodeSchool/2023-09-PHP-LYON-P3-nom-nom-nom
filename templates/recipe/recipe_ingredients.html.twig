@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ingredient
+{% endblock %}
+{% block body %}
+	<img
+	class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
+
+	{# sidebar #}
+	{% include 'components/_sidebarRecipe.html.twig' %}
+	<section>
+		<h2 class="mx-auto text-center py-3 text-uppercase w-75">{{ recipe.nameRecipe }}</h2>
+
+		
+		{# DESKTOP - Photo #}
+		<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
+
+	</section>
+
+	<section>
+		<h2 class="pt-5 text-center">Ingrédients</h2>
+		<div class="ps-5 w-75 container text-center d-md-none">
+			<div class="row row-cols-2">
+				{% for recipeIngredient in recipeIngredients %}
+					<div class="col">
+						<p>
+						<strong>{{recipeIngredient.ingredient.nameIngredient}}</strong></br>
+							{{recipeIngredient.quantity}}
+							{{recipeIngredient.unity}}
+						</p>
+						<img src="{{ asset('build/images/') ~ recipeIngredient.ingredient.picture }}" class="ingredient-mob" alt="photo de {{ recipeIngredient.ingredient.nameIngredient }}"/>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		{# version desktop #}
+		<div class="w-50 container text-center d-none d-md-block">
+			<div class="row row-cols-3">
+				{% for recipeIngredient in recipeIngredients %}
+					<div class="col">
+						<p>
+						<strong>{{recipeIngredient.ingredient.nameIngredient}}</strong></br>
+						{{recipeIngredient.quantity}}
+						{{recipeIngredient.unity}}
+							
+						</p>
+						<img src="{{ asset('build/images/') ~ recipeIngredient.ingredient.picture }}" class="ingredient" alt="photo de {{ recipeIngredient.ingredient.nameIngredient }}"/>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+	<div class="crud-button-block ">
+		{% if is_granted("ROLE_ADMIN") or is_granted("recipe.owner") %}
+			<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
+			{{ include('recipe/_delete_form.html.twig') }}
+		{% endif %}
+		<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
+	</div>
+
+{% endblock %}

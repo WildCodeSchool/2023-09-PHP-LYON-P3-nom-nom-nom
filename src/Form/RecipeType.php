@@ -2,10 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Recipe;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,28 +21,41 @@ class RecipeType extends AbstractType
         $builder
             ->add('pictureFile', VichFileType::class, [
                 'required'      => false,
-                'allow_delete'  => true, // not mandatory, default is true
-                'download_uri' => true, // not mandatory, default is true
-                'label' => 'Télecharger une photo illustrant votre recette '
+                'allow_delete'  => false, // not mandatory, default is true
+                'download_uri' => false, // not mandatory, default is true
+                'label' => 'Télecharger une photo illustrant votre recette',
             ])
             ->add('nameRecipe', TextType::class, [
-                'label' => 'Nom de la recette : '
+                'label' => 'Nom de la recette'
+            ])
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'expanded' => false,
+                'label' => 'C\'est un(e) '
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Un commentaire sur votre recette ? '
+                'label' => 'Un commentaire sur votre recette ?'
             ])
             ->add('calorie', NumberType::class, [
-                'label' => 'Nombre de calories : '
+                'label' => 'Nombre de calories'
             ])
-            ->add('date', HiddenType::class)
             ->add('cookingTime', NumberType::class, [
-                'label' => 'Temps de cuisson : '
+                'label' => 'Temps de cuisson (min)'
             ])
             ->add('prepareTime', NumberType::class, [
-                'label' => 'Temps de préparation : '
+                'label' => 'Temps de préparation (min)'
             ])
             ->add('personNumber', NumberType::class, [
-                'label' => 'Pour combien de personne ? '
+                'label' => 'Nombre de personnes'
+            ])
+            ->add('ingredients', CollectionType::class, [
+                'entry_type' => RecipeIngredientType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'by_reference' => false,
+                'label' => false
             ])
             ->add('steps', CollectionType::class, [
                 'entry_type' => StepType::class,

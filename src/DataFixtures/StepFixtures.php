@@ -4,9 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\Step;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class StepFixtures extends Fixture
+class StepFixtures extends Fixture implements DependentFixtureInterface
 {
     public const STEPS = [
         ['description' => 'il faut préparer tout les ingrédients',
@@ -42,20 +43,40 @@ class StepFixtures extends Fixture
         ['description' => 'il faut faire cuire le bao à la vapeur pendant 20/25 minutes',
         'recipe' => 'recipe_Gua Bao',
         'stepNumber' => 5],
-
-    ];
+        ['description' => 'il faut faire la pâte avec de l\'eau et de la farine',
+        'recipe' => 'recipe_sandwich au poulet',
+        'stepNumber' => 1],
+        ['description' => 'il faut faire cuire le pain. Quand la croute est dur et moelleuse, le sortir du four',
+        'recipe' => 'recipe_sandwich au poulet',
+        'stepNumber' => 2],
+        ['description' => 'bien couper son filet de poulet et ses accompagnements',
+        'recipe' => 'recipe_sandwich au poulet',
+        'stepNumber' => 3],
+        ['description' => 'mettre le tout dans le pain après l\'avoir ouvert',
+        'recipe' => 'recipe_sandwich au poulet',
+        'stepNumber' => 4],
+        ['description' => 'assaissoner à votre goût',
+        'recipe' => 'recipe_sandwich au poulet',
+        'stepNumber' => 5],
+        ];
     public function load(ObjectManager $manager): void
     {
         foreach (self::STEPS as $stepFixture) {
             $step = new Step();
             $step->setDescription($stepFixture['description']);
             $step->setRecipe($this->getReference($stepFixture['recipe']));
-            ;
             $step->setStepNumber($stepFixture['stepNumber']);
 
             $manager->persist($step);
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            RecipeFixture::class,
+        ];
     }
 }

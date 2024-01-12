@@ -1,45 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des recettes{% endblock %}
+{% block title %}Liste des recettes
+{% endblock %}
 
 {% block body %}
-    <h1>Liste des recettes</h1>
+	{% include 'components/_messages.html.twig' %}
+	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
+	<h1 class="text-center mt-2">LISTE DES RECETTES</h1>
+	<h3 class="color-count text-center mb-5">
+		Découvrez nos
+		{{ totalRecipes }}
+		recettes et savourez-les !!!</h3>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>NameRecipe</th>
-                <th>Description</th>
-                <th>Calorie</th>
-                <th>Date</th>
-                <th>CookingTime</th>
-                <th>PrepareTime</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for recipe in recipes %}
-            <tr>
-                <td>{{ recipe.id }}</td>
-                <td>{{ recipe.nameRecipe }}</td>
-                <td>{{ recipe.description }}</td>
-                <td>{{ recipe.calorie }}</td>
-                <td>{{ recipe.date ? recipe.date|date('Y-m-d') : '' }}</td>
-                <td>{{ recipe.cookingTime }}</td>
-                <td>{{ recipe.prepareTime }}</td>
-                <td>
-                    <a href="{{ path('app_recipe_show', {'id': recipe.id}) }}">détail de la recette</a>
-                    <a href="{{ path('app_recipe_edit', {'id': recipe.id}) }}">editer</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_recipe_new') }}">Ajouter votre recette</a>
+	<div class="d-md-none text-center">
+		{% for category in categories %}
+			<h2 class="category-in-recipe mt-3">{{ category.name }}</h2>
+			<div class="d-flex flex-wrap gap-1 justify-content-center text-center">
+				{% for recipe in category.recipes %}
+					<div class="container-fluid recipe-list-mobile mb-2">
+						<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list-mobile object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
+						<h5>{{ recipe.nameRecipe }}</h5>
+					</div>
+											{% else %}
+							<p>Aucune recette dans cette catégorie actuellement.</p>
+				{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
+	<div class="d-none d-md-block">
+		<div class="text-center mb-2">
+			{% for category in categories %}
+				<h2 class="category-in-recipe mt-3">{{ category.name }}</h2>
+				<div class="d-flex flex-wrap justify-content-center gap-1 text-center">
+					{% for recipe in category.recipes %}
+						<div class="container-fluid recipe-list">
+							<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list object-fit-cover w-75 mb-3" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
+							<h5>{{ recipe.nameRecipe }}</h5>
+						</div>
+						{% else %}
+							<p>Aucune recette dans cette catégorie actuellement.</p>
+					{% endfor %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% if app.user %}
+		<div class="d-flex justify-content-center">
+			<a class="container btn button-form center mt-2" href="{{ path('app_recipe_new') }}" role="button">Ajouter votre recette</a>
+		</div>
+	{% endif %}
 {% endblock %}

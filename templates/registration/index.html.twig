@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bonjour nouveau gourmet!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>Bonjour {{ controller_name }}! ✅</h1>
+{# A personnaliser quand on fera la feature sur l'enregistrement #}
+    Ce message vient de:
+    <ul>
+        <li>xxx <code><a href="{{ 'C:/Users/DO Nhu Ngoc/Documents/wildcodeschool/P3/2023-09-PHP-LYON-P3-nom-nom-nom/src/Controller/RegistrationController.php'|file_link(0) }}">xxxx</a></code></li>
+        <li>xxx <code><a href="{{ 'C:/Users/DO Nhu Ngoc/Documents/wildcodeschool/P3/2023-09-PHP-LYON-P3-nom-nom-nom/templates/registration/index.html.twig'|file_link(0) }}">xxxx</a></code></li>
+    </ul>
+</div>
+{% endblock %}

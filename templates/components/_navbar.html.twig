@@ -1,11 +1,12 @@
-<ul class="navbar-mobile navbar fixed-bottom justify-content-center" id="navbar-mobile">
+{# -------------------------navbar mobile------------------------ #}
+<ul class="navbar-mobile navbar fixed-bottom" id="navbar-mobile">
 	<li class="nav-item">
 		<a class="nav-link active" aria-current="page" href="{{path('app_home')}}">
 			<i class="fa-solid fa-house-chimney"></i>
 		</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="#">
+		<a class="nav-link" href="{{path('app_recipe_index')}}">
 			<i class="fa-solid fa-utensils"></i>
 		</a>
 	</li>
@@ -20,40 +21,41 @@
 		</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="#">
+		<a class="nav-link" href="{{ path('app_login') }}">
 			<i class="fa-solid fa-circle-user"></i>
 		</a>
 	</li>
 </ul>
 
+{# --------------------------menu bento desktop-------------------- #}
 <ul class="navbar-desktop navbar fixed-bottom justify-content-center" id="navbar-desktop">
 	<li class="nav-item">
-		<a class="nav-link active" aria-current="page" href="{{path('app_home')}}">
-			Accueil
-		</a>
+		<a class="nav-link active" aria-current="page" href="{{path('app_home')}}">Accueil</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="#">
-			Recettes
-		</a>
+		<a class="nav-link" href="{{path('app_recipe_index')}}">Recettes</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="{{path('app_recipe_new')}}">
-			Ajouter une recette
-		</a>
+		<a class="nav-link" href="{{path('app_recipe_new')}}">Ajouter une recette</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="#">
-			Favoris
-		</a>
+		<a class="nav-link" href="#">Favoris</a>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="#">
-			Mon profil
-		</a>
-	</li>
+	{% if app.user %}
+		<li class="nav-item">
+			<a class="nav-link" href="{{path('app_profile')}}">Mon profil</a>
+		</li>
+		<li class="nav-item">
+			<a class="link-offset-2 link-underline link-underline-opacity-0 nav-link" href="{{ path('app_logout') }}">
+				Se déconnecter</a>
+		</li>
+	{% else %}
+		<li class="nav-item">
+			<a class="link-offset-2 link-underline link-underline-opacity-0 nav-link" href="{{ path('app_login') }}">
+				Se connecter</a>
+		</li>
+	{% endif %}
 </ul>
-
-<div class="bento-container">
+<div class="z-3 bento-container">
 	<img src="{{ asset('build/images/menu_bento.png') }}" alt="menu bento" class="menu-bento" id="bento">
 </div>

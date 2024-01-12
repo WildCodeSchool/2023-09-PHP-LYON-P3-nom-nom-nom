@@ -2,26 +2,41 @@
 
 {% block title %}Etapes de la recette
 {% endblock %}
-
 {% block body %}
-	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
+	<img
+	class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
 
-	<div class="container recipe-step mt-5 d-flex flex-column">
-		<div class="container d-flex flex-column align-items-center p-0">
-			<h1 class="step-recipe text-center mb-3">{{recipe.nameRecipe}}</h1>
+	{# sidebar #}
+	{% include 'components/_sidebarRecipe.html.twig' %}
+	<section>
+		<h2 class="mx-auto text-center py-3 text-uppercase w-75">{{ recipe.nameRecipe }}</h2>
 
-			<h2 class="text-center mb-5">Les étapes de la recette</h2>
+			{# DESKTOP - Photo #}
+		<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
+
+	</section>
+
+	<section>
+		<div class="container recipe-step ps-5 mt-5 d-flex flex-column">
+			<div class="container d-flex flex-column align-items-center p-0">
+				<h2 class="text-center mb-5">Les étapes de la recette</h2>
+			</div>
+			<div>
+				{% for step in steps %}
+					<h2 class="mb-0">
+						Etape
+						{{ step.stepNumber }}</h2>
+					<p class="mt-0">{{ step.description }}</p>
+				{% endfor %}
+			</div>
 		</div>
-		<div>
-			{% for step in recipe.steps %}
-				<h2 class="mb-0">
-					Etape
-					{{ step.stepNumber }}</h2>
-				<p class="mt-0">{{ step.description }}</p>
-			{% endfor %}
-		</div>
-
-		<a href="{{ path('app_recipe_show', {'id': recipe.id}) }}">Retour à la recette</a>
+		</section>
+	<div class="crud-button-block ">
+		{% if is_granted("ROLE_ADMIN") or is_granted("recipe.owner") %}
+			<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
+			{{ include('recipe/_delete_form.html.twig') }}
+		{% endif %}
+		<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
 	</div>
-
+	
 {% endblock %}
