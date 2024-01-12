@@ -110,7 +110,7 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 body {
     background-color: $backgroundMainColor;
     @include media-breakpoint-down(md) {
-           padding-bottom: 15%;
+           padding-bottom: 25%;
     }
 }
 

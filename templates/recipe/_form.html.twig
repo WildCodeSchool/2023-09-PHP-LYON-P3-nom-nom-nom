@@ -27,7 +27,7 @@
 	<ul class="paragraph p-0" {{ stimulus_target('form-collection', 'collectionContainer') }}>
 		{% for stepForm in form.steps %}
 			<li>
-				{{ form(stepForm) }}
+				{{ form_row(stepForm) }}
 				<button type="button" class="btn btn-primary button-form-black mb-5" data-action="form-collection#removeStep">Supprimer</button>
 			</li>
 		{% endfor %}
