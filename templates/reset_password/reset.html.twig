@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Changer votre mot de passe
+{% endblock %}
+
+{% block body %}
+	<div class="bg-forgot-password h-100 w-100" style="background-image: url('/build/images/background_login.png')">
+		<div class="d-flex flex-column align-items-center justify-content-center vh-100">
+			<div class="lost-password d-flex h-75 w-50 flex-column align-items-center justify-content-md-evenly">
+				<img src="/build/images/logo_white_500.png" alt="logo de nomnomnom" class="logo-add"/>
+				<h1 class="text-center lost">Nouveau mot de passe</h1>
+				{{ form_start(resetForm) }}
+				{{ form_row(resetForm.plainPassword) }}
+				<button class="btn btn-primary">Réinitialiser votre mot de passe</button>
+				{{ form_end(resetForm) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

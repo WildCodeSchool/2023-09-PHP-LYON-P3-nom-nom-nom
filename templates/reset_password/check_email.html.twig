@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mail envoyé{% endblock %}
+
+{% block body %}
+
+	<div class="bg-forgot-password h-100 w-100" style="background-image: url('/build/images/background_login.png')">
+		<div class="d-flex flex-column align-items-center justify-content-center vh-100">
+			<div class="lost-password d-flex h-75 w-50 flex-column align-items-center justify-content-md-evenly">
+				<img src="/build/images/logo_white_500.png" alt="logo de nomnomnom" class="logo-add"/>
+				<h1 class="text-center lost">Mail envoyé</h1>
+				<div class="text-center">
+					<p class="noaccount">
+						Si votre mail correspond à un compte existant, alors, un mail vous a été envoyé avec lien
+                        contenant le lien que vous pouvez utiliser pour réinitialiser votre mot de passe.<br>
+                        Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+					</p>
+                    <p class="noaccount">Si vous n'avez pas reçu le mail, vérifiez vos spams ou <a class="noaccount link-underline link-underline-opacity-0" href="{{ path('app_forgot_password_request') }}">cliquez ici
+                    </a> pour en envoyer un nouveau.</p>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+{% endblock %}
