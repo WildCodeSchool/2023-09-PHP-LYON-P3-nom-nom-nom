@@ -6,24 +6,60 @@
 {% block body %}
 
 	{# --------------------------fond mobile--------------------------------- #}
-	<div class="bg-image vh-100 d-md-none container" style="background-image: url('build/images/fond_login.png');">
-		{% for flash_error in app.flashes('verify_email_error') %}
-			<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-		{% endfor %}
-		<div class="register-container textaccount d-flex flex-column align-items-center vh-100">
-			<img src="/build/images/nomnomlogo.png" alt="logo de nomnomnom" class="logo-add mt-5"/>
+	<div class="bg-image h-100 d-md-none" style="background-image: url('build/images/fond_login.png');">
+		<div class="bg-fond h-100">
+			{% for flash_error in app.flashes('verify_email_error') %}
+				<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+			{% endfor %}
+			<div class="container textaccount d-flex flex-column align-items-center vh-100 w-75">
+				<img src="/build/images/nomnomlogo.png" alt="logo de nomnomnom" class="logo-add mt-5"/>
 
-			{{ form_errors(registrationForm) }}
+				{{ form_errors(registrationForm) }}
 
-			{{ form_start(registrationForm) }}
-			{{ form_row(registrationForm.pseudo) }}
-			{{ form_row(registrationForm.password, {
+				{{ form_start(registrationForm) }}
+				{{ form_row(registrationForm.lastname) }}
+				{{ form_row(registrationForm.firstname) }}
+				{{ form_row(registrationForm.pseudo) }}
+				{{ form_row(registrationForm.email) }}
+				{{ form_row(registrationForm.password, {
             label: 'Password'
         }) }}
-			{{ form_row(registrationForm.agreeTerms) }}
+				{{ form_row(registrationForm.agreeTerms) }}
 
-			<button type="submit" class="container btn button-crud mt-3">S'inscrire</button>
-			{{ form_end(registrationForm) }}
+				<button type="submit" class="btn button-crud button-form-center mx-auto">S'inscrire</button>
+				{{ form_end(registrationForm) }}
+			</div>
 		</div>
 	</div>
+
+{# ----------------------------fond desktop----------------------------- #}
+<div class="container-fluid d-none d-md-block p-0 m-0">
+	<div class="row row-cols">
+		<img src="/build/images/photo_register.jpg" alt="photo d'un plat" class="object-fit-cover back-picture col-md-5 p-0"/>
+		<div class="col-md-7 p-0 ">
+			<div class="bg-desktop-login bg-image h-100 w-100" style="background-image: url('/build/images/background_login.png');">
+				{% for flash_error in app.flashes('verify_email_error') %}
+					<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+				{% endfor %}
+				<div class="d-flex h-75 flex-column align-items-center justify-content-md-evenly">
+					<img src="/build/images/logo_white_500.png" alt="logo de nomnomnom" class="logo-add "/>
+					{{ form_errors(registrationForm) }}
+
+					{{ form_start(registrationForm) }}
+					{{ form_row(registrationForm.lastname) }}
+					{{ form_row(registrationForm.firstname) }}
+					{{ form_row(registrationForm.pseudo) }}
+					{{ form_row(registrationForm.email) }}
+					{{ form_row(registrationForm.password, {
+            			label: 'Password'
+        			}) }}
+					{{ form_row(registrationForm.agreeTerms) }}
+
+					<button type="submit" class="btn button-crud button-form-center mx-auto">S'inscrire</button>
+					{{ form_end(registrationForm) }}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}
