@@ -604,8 +604,82 @@ padding-left: 3vw;
     width: 100vw;
 }
 
-// --------------------------register mobile --------------------
+// --------------------------register form --------------------
 
+.background-register{
+    @include media-breakpoint-down(md){
+        background-image: url('/assets/images/fond_login_opacity.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+    }
+    @include media-breakpoint-up(md){
+        background-image: none;
+    }
+}
+
+.register-container{
+    display: flex;
+    width: 90%;
+}
+
+.register-picture-form{
+    @include media-breakpoint-down(md){
+        display: none;
+    }
+    @include media-breakpoint-up(md){
+        display: block;
+    }
+}
+
+.register-logo{
+    width: 10.25rem;
+    height: 10rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 32px;
+    @include media-breakpoint-down(md){
+        background-image: url('/assets/images/nomnomlogo.png');
+
+    }
+    @include media-breakpoint-up(md){
+        background-image: url('/assets/images/logo_white_500.png');
+    }
+}
+
+.register-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    
+    @include media-breakpoint-up(md){
+        background-image: url('/assets/images/background_login.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 100vw;
+        border-radius: 0 2.5rem 2.5rem 0;
+        box-shadow: 24px 23px 72.5px 0px rgba(0, 0, 0, 0.25);
+    }
+}
+
+.col-form-label
+{
+    @include media-breakpoint-up(sm){
+        width: 34em;
+    }
+}
+
+.register-button:hover
+{
+    background-color: $backgroundButtonDark;
+}
 
 // --------------------------ingredient desktop--------------------
 .ingredient {

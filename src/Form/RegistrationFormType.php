@@ -33,7 +33,7 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Nom d\'utilisateur'
             ])
             ->add('password')
-            ->add('password',RepeatedType::class, [
+            ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe ne correspondent pas.',
                 'options' => ['attr' => ['class' => 'password']],
