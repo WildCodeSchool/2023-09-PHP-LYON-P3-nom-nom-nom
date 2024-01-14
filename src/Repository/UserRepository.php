@@ -39,6 +39,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
     }
+    public function countLikersByRecipe(Recipe $recipe): int
+    {
+        //cette fonction compte toutes les recettes
+        $countLikersByRecipe = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->andWhere(':recipe MEMBER OF u.favoritelist')
+            ->setParameter('recipe', $recipe)
+            ->getQuery()
+            ->getSingleScalarResult();
 
-
+        return $countLikersByRecipe;
+    }
 }

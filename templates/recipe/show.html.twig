@@ -23,6 +23,11 @@
 		{# DESKTOP - Photo #}
 		<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 
+		<p class="paragraph text-center">aimé par {{ totalLikers }} {% if totalLikers > 1 %}
+				personnes.
+			{% else %}
+				personne.
+			{% endif %}<p>
 	</section>
 	{# INFOS recette #}
 	<div class="recipe-crud">
