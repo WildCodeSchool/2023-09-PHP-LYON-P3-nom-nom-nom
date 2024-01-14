@@ -89,10 +89,14 @@ class Recipe
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoritelist')]
+    private Collection $likers;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
         $this->steps = new ArrayCollection();
+        $this->likers = new ArrayCollection();
     }
 
     #[ORM\PrePersist]
@@ -302,6 +306,33 @@ class Recipe
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+        return $this;
+    }
+
+        /**
+     * @return Collection<int, User>
+     */
+    public function getLikers(): Collection
+    {
+        return $this->likers;
+    }
+
+    public function addLiker(User $user): self
+    {
+        if (!$this->likers->contains($user)) {
+            $this->likers->add($user);
+            $user->addToFavoritelist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLiker(User $user): self
+    {
+        if ($this->likers->removeElement($user)) {
+            $user->removeFromFavoritelist($this);
+        }
+
         return $this;
     }
 }

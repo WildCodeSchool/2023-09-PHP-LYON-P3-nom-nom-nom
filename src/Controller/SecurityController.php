@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Repository\UserRepository;
+use App\Repository\RecipeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,12 +18,14 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route('my-profil/favorites', name: 'app_profile_favorites_recipes')]
-    public function favoritesRecipes(): Response
+    #[Route('my-profil/favorite', name: 'app_profile_favorite_recipes')]
+    public function favoriteRecipes(RecipeRepository $recipeRepository): Response
     {
         $user = $this->getUser();
-        return $this->render('security/profile-favorites.html.twig', [
+        $totalFAvoriteRecipes = $recipeRepository->countFavoriteRecipes($user);
+        return $this->render('security/profile_favorite.html.twig', [
             'user' => $user,
+            'totalFAvoriteRecipes' => $totalFAvoriteRecipes
         ]);
     }
 }
