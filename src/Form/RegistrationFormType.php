@@ -21,16 +21,23 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('lastname', TextType::class, [
-                'label' => 'Nom'
+                'label' => 'Nom',
+                'attr' => [
+                    'placeholder' => 'Dubois',
+                ],
             ])
             ->add('firstname', TextType::class, [
-                'label' => 'Prénom'
+                'label' => 'Prénom',
+                'attr' => [
+                    'placeholder' => 'Julien',
+                ],
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Adresse mail'
+                'label' => 'Adresse mail',
             ])
             ->add('pseudo', TextType::class, [
-                'label' => 'Nom d\'utilisateur'
+                'label' => 'Nom d\'utilisateur',
+                'help' => 'Entrez votre pseudo'
             ])
             ->add('password')
             ->add('password', RepeatedType::class, [
@@ -38,7 +45,9 @@ class RegistrationFormType extends AbstractType
                 'invalid_message' => 'Les mots de passe ne correspondent pas.',
                 'options' => ['attr' => ['class' => 'password']],
                 'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
+                'first_options'  => ['label' => 'Mot de passe',
+                                    'help' => 'Doit contenir 12 caractères minimum'
+            ],
                 'second_options' => ['label' => 'Confirmation du mot de passe'],
             ])
             ->add('agreeTerms', CheckboxType::class, [
