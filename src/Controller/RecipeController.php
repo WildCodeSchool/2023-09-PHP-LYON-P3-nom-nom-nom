@@ -10,6 +10,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\RecipeIngredientRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\StepRepository;
+use App\Repository\UserRepository;
 use App\Service\AccessControl;
 use App\Service\DeleteButtonService;
 use App\Service\UpdateNumberService;
@@ -103,10 +104,12 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_recipe_show', methods: ['GET'])]
-    public function show(Recipe $recipe): Response
+    public function show(Recipe $recipe, UserRepository $userRepository): Response
     {
+        $totalLikers = $userRepository->countLikersByRecipe($recipe);
         return $this->render('recipe/show.html.twig', [
             'recipe' => $recipe,
+            'totalLikers' => $totalLikers
         ]);
     }
 

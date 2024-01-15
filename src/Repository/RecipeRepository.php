@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use App\Entity\Recipe;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
@@ -67,5 +68,18 @@ class RecipeRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
 
             return $countByCategory;
+    }
+
+    public function countFavoriteRecipes(User $user): int
+    {
+        //cette fonction compte toutes les recettes
+        $countFavRecipes = $this->createQueryBuilder('r')
+            ->select('count(r.id)')
+            ->andWhere(':user MEMBER OF r.likers')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $countFavRecipes;
     }
 }

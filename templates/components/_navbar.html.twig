@@ -16,7 +16,7 @@
 		</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="#">
+		<a class="nav-link" href="{{ path('app_profile_favorite_recipes') }}">
 			<i class="fa-regular fa-heart"></i>
 		</a>
 	</li>
@@ -39,7 +39,7 @@
 		<a class="nav-link" href="{{path('app_recipe_new')}}">Ajouter une recette</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="#">Favoris</a>
+		<a class="nav-link" href="{{ path('app_profile_favorite_recipes') }}">Favoris</a>
 	</li>
 	{% if app.user %}
 		<li class="nav-item">

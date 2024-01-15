@@ -50,9 +50,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Recipe::class)]
     private Collection $recipes;
 
+    #[ORM\ManyToMany(targetEntity: Recipe::class)]
+    #[ORM\JoinTable(name:'favoriteList')]
+    private Collection $favoriteList;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
+        $this->favoriteList = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -197,6 +202,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $recipe->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Recipe>
+     */
+    public function getFavoriteList(): Collection
+    {
+        return $this->favoriteList;
+    }
+
+    public function addToFavoriteList(Recipe $recipe): self
+    {
+        if (!$this->favoriteList->contains($recipe)) {
+            $this->favoriteList->add($recipe);
+        }
+
+        return $this;
+    }
+
+    public function removeFromFavoriteList(Recipe $recipe): self
+    {
+        $this->favoriteList->removeElement($recipe);
 
         return $this;
     }
