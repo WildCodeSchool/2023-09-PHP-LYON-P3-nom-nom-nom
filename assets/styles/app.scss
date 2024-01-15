@@ -255,7 +255,7 @@ body {
     @include myText(
         ($fontText),
         ($fontColorButton),
-        ($fontSizeButton),
+        ($fontSizeText),
         ($fontStyleText),
         400,
         ($lineHeightText)
@@ -331,6 +331,27 @@ h1 {
         ($fontSizeTitle),
         ($fontStyleText),
         ($fontWeightTitle),
+        ($lineHeightText)
+    );
+}
+.lost{
+    @include myText(
+        ($fontTitle),
+        ($fontColorButton),
+        ($fontSizeTitle),
+        ($fontStyleText),
+        ($fontWeightTitle),
+        ($lineHeightText)
+    );
+}
+
+.lost-password form div label{
+    @include myText(
+        ($fontText),
+        ($fontColorButton),
+        ($fontSizeText),
+        ($fontStyleText),
+        400,
         ($lineHeightText)
     );
 }
@@ -823,4 +844,24 @@ nav {
 .pic-category-recipe{
     box-shadow: $boxShadowPic;
     border-radius: $borderRadiusPic;
+}
+
+// ------------------forgot password----------------
+.bg-forgot-password{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.lost-password form{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.lost-password form div{
+    width: 100%;
+}
+.lost-password form div label {
+    width : 75%;
 }
