@@ -304,6 +304,7 @@ h2 {
 }
 
 .category-in-recipe {
+    text-decoration:none;
     @include myText(
         ($fontTitle),
         ($fontColorTextRed),

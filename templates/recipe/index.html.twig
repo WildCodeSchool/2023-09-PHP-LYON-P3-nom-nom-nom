@@ -11,7 +11,7 @@
 		Découvrez nos
 		{{ totalRecipes }}
 		recettes et savourez-les !!!</h3>
-
+{# MOBILE #}
 	<div class="d-md-none text-center">
 		{% for category in categories %}
 			<h2 class="category-in-recipe mt-3">{{ category.name }}</h2>
@@ -21,21 +21,29 @@
 						<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list-mobile object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
 						<h5>{{ recipe.nameRecipe }}</h5>
 					</div>
-											{% else %}
+						{% else %}
 							<p>Aucune recette dans cette catégorie actuellement.</p>
 				{% endfor %}
 			</div>
 		{% endfor %}
 	</div>
+
+{# DESKTOP #}
 	<div class="d-none d-md-block">
-		<div class="text-center mb-2">
+		<div class="text-center mb-5 ">
 			{% for category in categories %}
-				<h2 class="category-in-recipe mt-3">{{ category.name }}</h2>
-				<div class="d-flex flex-wrap justify-content-center gap-1 text-center">
+			<a href="{{ path('app_category_show', { id: category.id }) }}" class="link-underline link-underline-opacity-0">
+				<h2 class="category-in-recipe mt-3">{{ category.name }}</h2></a>
+				<div class="gap-5 row-gap-3 d-flex flex-wrap justify-content-center">
 					{% for recipe in category.recipes %}
-						<div class="container-fluid recipe-list">
-							<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list object-fit-cover w-75 mb-3" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
-							<h5>{{ recipe.nameRecipe }}</h5>
+						<div>
+							<a href="{{ path('app_recipe_show', { id: recipe.id }) }}">
+							<img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
+								<div class="position-relative ">
+									<div class="glassmorphism-desktop m-2 py-2">
+										<h5>{{ recipe.nameRecipe }}</h5>
+									</div>
+								</div>
 						</div>
 						{% else %}
 							<p>Aucune recette dans cette catégorie actuellement.</p>
@@ -44,6 +52,7 @@
 			{% endfor %}
 		</div>
 	</div>
+	
 	{% if app.user %}
 		<div class="d-flex justify-content-center">
 			<a class="container btn button-form center mt-2" href="{{ path('app_recipe_new') }}" role="button">Ajouter votre recette</a>

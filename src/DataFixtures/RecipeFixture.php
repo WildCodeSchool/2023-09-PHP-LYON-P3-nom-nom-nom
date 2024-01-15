@@ -57,6 +57,56 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             rajouté des oignons, de la salade, des tomates',
             'category' => 'category_Entrées'
         ],
+        [
+            'nameRecipe' => 'sandwich à la mortadelle',
+            'prepareTime' => 15,
+            'cookingTime' => 10,
+            'personNumber' => 2,
+            'picture' => 'sandwich.jpeg',
+            'description' => 'Un délicieux sandwich à la mortadelle auquels ont a 
+            rajouté des oignons, de la salade, des tomates',
+            'category' => 'category_Entrées'
+        ],
+        [
+            'nameRecipe' => 'sandwich au jambon beurre',
+            'prepareTime' => 15,
+            'cookingTime' => 10,
+            'personNumber' => 2,
+            'picture' => 'sandwich.jpeg',
+            'description' => 'Un délicieux sandwich au jambon beurre auquels ont a 
+            rajouté des oignons, de la salade, des tomates',
+            'category' => 'category_Entrées'
+        ],
+        [
+            'nameRecipe' => 'sandwich à la coppa',
+            'prepareTime' => 15,
+            'cookingTime' => 10,
+            'personNumber' => 2,
+            'picture' => 'sandwich.jpeg',
+            'description' => 'Un délicieux sandwich à la coppa auquels ont a 
+            rajouté des oignons, de la salade, des tomates',
+            'category' => 'category_Entrées'
+        ],
+        [
+            'nameRecipe' => 'sandwich au jambon cru',
+            'prepareTime' => 15,
+            'cookingTime' => 10,
+            'personNumber' => 2,
+            'picture' => 'sandwich.jpeg',
+            'description' => 'Un délicieux sandwich au jambon cru auquels ont a 
+            rajouté des oignons, de la salade, des tomates',
+            'category' => 'category_Entrées'
+        ],
+        [
+            'nameRecipe' => 'sandwich au thon',
+            'prepareTime' => 15,
+            'cookingTime' => 10,
+            'personNumber' => 2,
+            'picture' => 'sandwich.jpeg',
+            'description' => 'Un délicieux sandwich au thon auquels ont a 
+            rajouté des oignons, de la salade, des tomates',
+            'category' => 'category_Entrées'
+        ],
     ];
     public function load(ObjectManager $manager): void
     {
