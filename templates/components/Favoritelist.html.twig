@@ -1,0 +1,12 @@
+<div{{attributes}}>
+{# -----------------pour afficher le composant pour aimer la recette---------------------- #}
+	<button class="btn p-0" data-action="live#action" data-action-name="toggle">
+		{% if app.user %}
+			{% if app.user.favoriteList.contains(this.recipe) %}
+				<i class="bi bi-heart-fill"></i>
+			{% else %}
+				<i class="bi bi-heart"></i>
+			{% endif %}
+		{% endif %}
+	</button>
+</div>

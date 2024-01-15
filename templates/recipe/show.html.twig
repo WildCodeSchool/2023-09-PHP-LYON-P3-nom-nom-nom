@@ -23,19 +23,31 @@
 		{# DESKTOP - Photo #}
 		<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 
+		<p class="paragraph text-center">{% if totalLikers > 1 %}
+				recette aimée par {{ totalLikers }} Gastronomnoms.
+			{% elseif totalLikers == 1 %}
+				recette aimée par {{ totalLikers }} Gastronomnom.
+			{% else %}
+			Soyez le 1er Gastronomnom à aimer cette recette.
+			{% endif %}
+			{% if app.user %}
+			{% else %}
+			<br>
+			<a class="paragraph link-underline link-underline-opacity-0" href="{{ path('app_login') }}">
+			Connectez-vous pour aimer cette recette.
+		</a>
+			{% endif %}<p>
 	</section>
 	{# INFOS recette #}
 	<div class="recipe-crud">
 		<div class="container text-center">
 			<div class="row mt-3 pt-2">
-
 				<div class="col">
 					<p>Temps de préparation</p>
 					<p class="infos-recipe">
 						{{ recipe.prepareTime }}
 						min</p>
 				</div>
-
 				<div class="col">
 					<p>Temps de cuisson</p>
 					<p class="infos-recipe">{{ recipe.cookingTime }}
@@ -45,9 +57,7 @@
 					<p>Nombre de personne(s)</p>
 					<p class="infos-recipe">{{ recipe.personNumber }}</p>
 				</div>
-
 			</div>
-
 		</div>
 
 	{# BOUTONS CRUD #}
