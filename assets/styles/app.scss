@@ -516,8 +516,13 @@ padding-left: 3vw;
 //-------------------icon----------------
 .fa-fire,
 .fa-hourglass-half,
-.fa-user-group, .bi-heart-fill {
+.fa-user-group {
     color: $backgroundButton;
+}
+
+.bi-heart-fill {
+    color: $backgroundButton;
+    font-size: 2rem;
 }
 //---------------CTA Home-----------------------//
 
