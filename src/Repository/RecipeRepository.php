@@ -27,16 +27,12 @@ class RecipeRepository extends ServiceEntityRepository
     public function findLikeNameRecipe(string $nameRecipe): array
     {
         // cette fonction est utilisé pour la recherche des recettes.
-        //Elle recherche les recettes en fonction du nom, description et ingrédient
+        //Elle recherche les recettes en fonction du nom du nom de la recette
         $result = [];
 
         if (!empty($nameRecipe)) {
             $result = $this->createQueryBuilder('r')
-                ->join('r.ingredients', 'ri')
-                ->join('ri.ingredient', 'i')
                 ->andWhere('r.nameRecipe LIKE :nameRecipe')
-                ->orWhere('r.description LIKE :nameRecipe')
-                ->orWhere('i.nameIngredient LIKE :nameRecipe')
                 ->setParameter('nameRecipe', '%' . $nameRecipe . '%')
                 ->orderBy('r.nameRecipe', 'ASC')
                 ->getQuery()
