@@ -51,13 +51,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $recipes;
 
     #[ORM\ManyToMany(targetEntity: Recipe::class)]
-    #[ORM\JoinTable(name:'favoritelist')]
-    private Collection $favoritelist;
+    #[ORM\JoinTable(name:'favoriteList')]
+    private Collection $favoriteList;
 
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
-        $this->favoritelist = new ArrayCollection();
+        $this->favoriteList = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -209,23 +209,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Recipe>
      */
-    public function getFavoritelist(): Collection
+    public function getFavoriteList(): Collection
     {
-        return $this->favoritelist;
+        return $this->favoriteList;
     }
 
-    public function addToFavoritelist(Recipe $recipe): self
+    public function addToFavoriteList(Recipe $recipe): self
     {
-        if (!$this->favoritelist->contains($recipe)) {
-            $this->favoritelist->add($recipe);
+        if (!$this->favoriteList->contains($recipe)) {
+            $this->favoriteList->add($recipe);
         }
 
         return $this;
     }
 
-    public function removeFromFavoritelist(Recipe $recipe): self
+    public function removeFromFavoriteList(Recipe $recipe): self
     {
-        $this->favoritelist->removeElement($recipe);
+        $this->favoriteList->removeElement($recipe);
 
         return $this;
     }

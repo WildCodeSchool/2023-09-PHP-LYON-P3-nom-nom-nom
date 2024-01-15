@@ -22,10 +22,10 @@ class SecurityController extends AbstractController
     public function favoriteRecipes(RecipeRepository $recipeRepository): Response
     {
         $user = $this->getUser();
-        $totalFAvoriteRecipes = $recipeRepository->countFavoriteRecipes($user);
+        $totalFavoriteRecipes = $recipeRepository->countFavoriteRecipes($user);
         return $this->render('security/profile_favorite.html.twig', [
             'user' => $user,
-            'totalFAvoriteRecipes' => $totalFAvoriteRecipes
+            'totalFavoriteRecipes' => $totalFavoriteRecipes
         ]);
     }
 }

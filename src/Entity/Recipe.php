@@ -89,7 +89,7 @@ class Recipe
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoritelist')]
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoriteList')]
     private Collection $likers;
 
     public function __construct()
@@ -321,7 +321,7 @@ class Recipe
     {
         if (!$this->likers->contains($user)) {
             $this->likers->add($user);
-            $user->addToFavoritelist($this);
+            $user->addToFavoriteList($this);
         }
 
         return $this;
@@ -330,7 +330,7 @@ class Recipe
     public function removeLiker(User $user): self
     {
         if ($this->likers->removeElement($user)) {
-            $user->removeFromFavoritelist($this);
+            $user->removeFromFavoriteList($this);
         }
 
         return $this;

@@ -44,7 +44,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         //cette fonction compte toutes les recettes
         $countLikersByRecipe = $this->createQueryBuilder('u')
             ->select('count(u.id)')
-            ->andWhere(':recipe MEMBER OF u.favoritelist')
+            ->andWhere(':recipe MEMBER OF u.favoriteList')
             ->setParameter('recipe', $recipe)
             ->getQuery()
             ->getSingleScalarResult();

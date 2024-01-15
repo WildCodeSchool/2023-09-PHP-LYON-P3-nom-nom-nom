@@ -12,7 +12,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 
 #[AsLiveComponent]
-final class Favoritelist
+final class FavoriteList
 {
     use DefaultActionTrait;
 
@@ -30,10 +30,10 @@ final class Favoritelist
     {
      /** @var User $user */
         $user = $this->security->getUser();
-        if ($user->getFavoritelist()->contains($this->recipe)) {
-            $user->removeFromFavoritelist($this->recipe);
+        if ($user->getFavoriteList()->contains($this->recipe)) {
+            $user->removeFromFavoriteList($this->recipe);
         } else {
-            $user->addToFavoritelist($this->recipe);
+            $user->addToFavoriteList($this->recipe);
         }
         $this->entityManager->flush();
     }
