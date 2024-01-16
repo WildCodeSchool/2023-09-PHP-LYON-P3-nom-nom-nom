@@ -165,7 +165,7 @@ class RecipeController extends AbstractController
             $this->updateNumberService->updateStepsNumber($recipe);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_recipe_show', ['id' => $recipe->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_recipe_show', ['slug' => $recipe->getSlug()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('recipe/edit.html.twig', [

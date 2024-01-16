@@ -21,7 +21,7 @@
 			<div class="carousel-inner">
 				{% for key, recipe in showRecipes %}
 					<div class="carousel-item {% if key == 0 %} active {% endif %}">
-						<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
+						<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
 						<div class="container-fluid carousel-caption d-md-block glassmorphism">
 							<h5>{{ recipe.nameRecipe }}</h5>
 							<p class="w-75 container text-center">{{ recipe.description }}</p>
@@ -47,7 +47,7 @@
 		<div class="d-flex justify-content-evenly ">
 			{% for recipe in showRecipes %}
 				<div class="position-relative mb-5">
-					<a href="{{ path('app_recipe_show', { id: recipe.id }) }}">
+					<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}">
 						<img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 					</a>
 					<div class="glassmorphism-desktop m-2">
