@@ -28,7 +28,7 @@ class RecipeIngredientFixtures extends Fixture implements DependentFixtureInterf
         'recipe' => 'recipe_Gua Bao'],
         ['quantity' => 500, 'unity' => 'grammes', 'ingredient' => 'ingredient_Filet de porc',
         'recipe' => 'recipe_Gua Bao'],
-        ['quantity' => 50, 'unity' => 'grammes', 'ingredient' => 'ingredient_Cacahouéte',
+        ['quantity' => 50, 'unity' => 'grammes', 'ingredient' => 'ingredient_Cacahuète',
         'recipe' => 'recipe_Gua Bao'],
         ['quantity' => 2, 'unity' => 'cuillère à soupe', 'ingredient' => 'ingredient_Nuoc-mâm',
         'recipe' => 'recipe_Gua Bao'],
