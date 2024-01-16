@@ -6,9 +6,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use App\Service\AccessControl;
 
 class LoginController extends AbstractController
 {
+    private AccessControl $accessControl;
+    public function __construct(
+        AccessControl $accessControl,
+    ) {
+        $this->accessControl = $accessControl;
+    }
+
     #[Route('/login', name: 'app_login')]
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
@@ -17,6 +25,9 @@ class LoginController extends AbstractController
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+
+        $this->addFlash('success', 'Bienvenue sur NomNomNom');
+
 
         return $this->render('login/index.html.twig', [
             'last_username' => $lastUsername,
