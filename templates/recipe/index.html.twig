@@ -7,34 +7,36 @@
 	{% include 'components/_messages.html.twig' %}
 	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
 	<h1 class="text-center mt-2">LISTE DES RECETTES</h1>
-	<h3 class="color-count text-center mb-5">
+	<h3 class="w-75 mx-auto color-count text-center mb-5">
 		Découvrez nos
 		{{ totalRecipes }}
 		recettes et savourez-les !!!</h3>
 
 {# MOBILE #}
-	<div class="d-md-none text-center">
+
+	<div class="d-md-none">
 		{% for category in categories %}
-			<h2 class="category-in-recipe mt-3">{{ category.name }}</h2>
-			 
-			<div class="mx-auto d-flex overflow-x-auto">
+			<h2 class="category-in-recipe mt-3 text-center">{{ category.name }}</h2>
+			 <div class="d-flex overflow-x-auto">
 				{% for recipe in category.recipes %}
-					<div class="position-relative">
-					<div class="container">
-					
-						<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
+					<div class="position-relative ms-3 mb-3">
+						<div class="container">
+							<a href="{{ path('app_recipe_show', { id: recipe.id }) }}">
+							<img src="{{ asset('build/images/' ~ recipe.picture) }}" 
+							class="pic-recipe object-fit-cover mb-2" 
+							alt="{{ recipe.nameRecipe }}" 
+							loading="lazy"/></a>
 							<div class="container-fluid carousel-caption glassmorphism-mobile-categories">
 								<h5 class="w-75 container text-center">{{ recipe.nameRecipe }}</h5>
 							</div>
 						</div>
 					</div>
-				{% else %}
-					<p>Aucune recette dans cette catégorie actuellement.</p>
-					</div>
+					{% else %}
+						<p class="container text-center">Aucune recette dans cette catégorie actuellement.</p>
 				{% endfor %}
 			</div>
-				
 		{% endfor %}
+	</div>		
 
 
 {# DESKTOP #}
@@ -55,7 +57,7 @@
 								</div>
 						</div>
 						{% else %}
-							<p>Aucune recette dans cette catégorie actuellement.</p>
+							<p >Aucune recette dans cette catégorie actuellement.</p>
 					{% endfor %}
 				</div>
 			{% endfor %}
