@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Ingredient;
 use App\Entity\RecipeIngredient;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -23,6 +25,10 @@ class RecipeIngredientType extends AbstractType
                 'placeholder' => 'choisissez un ingredient',
                 'autocomplete' => true,
                 'label' => 'Ingrédient',
+                'query_builder' => function (EntityRepository $er): QueryBuilder {
+                    return $er->createQueryBuilder('i')
+                        ->orderBy('i.nameIngredient', 'ASC');
+                },
             ])
             ->add('quantity', NumberType::class, [
                 'label' => 'Quantité',
