@@ -62,4 +62,11 @@ function changeIconColor() {
 // Appeler la fonction au chargement de la page
 document.addEventListener('DOMContentLoaded', changeIconColor);
 
+setTimeout(function() {
+    const flashMessage = document.querySelector('div.alert');
+    if (flashMessage) {
+        flashMessage.remove();
+    }
+}, 3000);
+
 
