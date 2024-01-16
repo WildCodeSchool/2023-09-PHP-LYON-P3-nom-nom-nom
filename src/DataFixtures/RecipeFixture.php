@@ -62,7 +62,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'prepareTime' => 15,
             'cookingTime' => 10,
             'personNumber' => 2,
-            'picture' => 'sandwich.jpeg',
+            'picture' => 'sandwich-mortadelle.png',
             'description' => 'Un délicieux sandwich à la mortadelle auquels ont a 
             rajouté des oignons, de la salade, des tomates',
             'category' => 'category_Entrées'
@@ -72,7 +72,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'prepareTime' => 15,
             'cookingTime' => 10,
             'personNumber' => 2,
-            'picture' => 'sandwich.jpeg',
+            'picture' => 'sandwich-jambonbeurre.png',
             'description' => 'Un délicieux sandwich au jambon beurre auquels ont a 
             rajouté des oignons, de la salade, des tomates',
             'category' => 'category_Entrées'
@@ -82,7 +82,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'prepareTime' => 15,
             'cookingTime' => 10,
             'personNumber' => 2,
-            'picture' => 'sandwich.jpeg',
+            'picture' => 'sandwich-coppa.png',
             'description' => 'Un délicieux sandwich à la coppa auquels ont a 
             rajouté des oignons, de la salade, des tomates',
             'category' => 'category_Entrées'
@@ -92,7 +92,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'prepareTime' => 15,
             'cookingTime' => 10,
             'personNumber' => 2,
-            'picture' => 'sandwich.jpeg',
+            'picture' => 'sandwich-jamboncrue.png',
             'description' => 'Un délicieux sandwich au jambon cru auquels ont a 
             rajouté des oignons, de la salade, des tomates',
             'category' => 'category_Entrées'
@@ -102,7 +102,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'prepareTime' => 15,
             'cookingTime' => 10,
             'personNumber' => 2,
-            'picture' => 'sandwich.jpeg',
+            'picture' => 'sandwich-thon.png',
             'description' => 'Un délicieux sandwich au thon auquels ont a 
             rajouté des oignons, de la salade, des tomates',
             'category' => 'category_Entrées'
