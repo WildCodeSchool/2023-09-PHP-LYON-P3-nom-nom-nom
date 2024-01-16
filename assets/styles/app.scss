@@ -82,6 +82,7 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     border-radius: $borderRadius;
     box-shadow: $boxShadow;
 }
+
 @mixin myPictureDesktop($x, $y, $boxShadow) {
     width: $x;
     height: $y;
@@ -99,6 +100,7 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     backdrop-filter: $glassmorphism;
     border-radius: $borderRadiusPic;
 }
+
 * {
     box-sizing: border-box;
     padding: 0;
@@ -109,8 +111,9 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 
 body {
     background-color: $backgroundMainColor;
+
     @include media-breakpoint-down(md) {
-           padding-bottom: 25%;
+        padding-bottom: 25%;
     }
 }
 
@@ -221,12 +224,12 @@ body {
 
 .button-form-center {
     display: flex;
-    justify-content:center ;
+    justify-content: center;
 }
 
 .button-form-end {
     display: flex;
-    justify-content:flex-end ;
+    justify-content: flex-end;
 }
 
 //---------------------------text-----------------------------
@@ -240,6 +243,7 @@ body {
         ($lineHeightText)
     );
 }
+
 .textaccount {
     @include myText(
         ($fontText),
@@ -304,7 +308,7 @@ h2 {
 }
 
 .category-in-recipe {
-    text-decoration:none;
+    text-decoration: none;
     @include myText(
         ($fontTitle),
         ($fontColorTextRed),
@@ -325,6 +329,7 @@ h3 {
         ($lineHeightText)
     );
 }
+
 h1 {
     @include myText(
         ($fontTitle),
@@ -335,7 +340,8 @@ h1 {
         ($lineHeightText)
     );
 }
-.lost{
+
+.lost {
     @include myText(
         ($fontTitle),
         ($fontColorButton),
@@ -346,7 +352,7 @@ h1 {
     );
 }
 
-.lost-password form div label{
+.lost-password form div label {
     @include myText(
         ($fontText),
         ($fontColorButton),
@@ -433,6 +439,7 @@ ul {
     color: $backgroundMainColor;
     font-size: larger;
     transition: 0.6s;
+
     &:hover {
         font-weight: bold;
     }
@@ -457,6 +464,7 @@ ul {
         cursor: pointer;
         transition: all 1.2s ease-in-out;
     }
+
     &:hover {
         height: 38px;
         transform: rotate(360deg);
@@ -475,13 +483,15 @@ ul {
     height: 38px;
     color: $backgroundMainColor;
 }
+
 //-------sidebar----
 
-.padding-sidebar{
+.padding-sidebar {
     @include media-breakpoint-up(md) {
-padding-left: 3vw;
+        padding-left: 3vw;
+    }
 }
-}
+
 //-------Carrousel----------
 .carousel-dark .carousel-indicators [data-bs-target] {
     background-color: $fontColorButton;
@@ -514,6 +524,7 @@ padding-left: 3vw;
 .pic-view-recipe {
     @include myPicture(46rem, 25rem, 1.25rem, ($boxShadowPic));
 }
+
 //-------------------icon----------------
 .fa-fire,
 .fa-hourglass-half,
@@ -525,6 +536,7 @@ padding-left: 3vw;
     color: $backgroundButton;
     font-size: 2rem;
 }
+
 //---------------CTA Home-----------------------//
 
 //----------------------logo in form add----------------------
@@ -579,6 +591,7 @@ padding-left: 3vw;
 
 .ingredient-form {
     width: 47%;
+
     @include media-breakpoint-down(md) {
         width: 100%;
     }
@@ -619,6 +632,7 @@ padding-left: 3vw;
 .bg-fond {
     background-color: rgba(0, 0, 0, 0.65);
 }
+
 // --------------------------login desktop--------------------
 .back-picture {
     width: 37%;
@@ -630,10 +644,12 @@ padding-left: 3vw;
     box-shadow: 24px 23px 72.5px 0px rgba(0, 0, 0, 0.25);
     width: 100vw;
 }
+
 // --------------------------ingredient desktop--------------------
 .ingredient {
     @include myPicture(6.1875rem, 6.0625rem, 1.25rem, ($boxShadowPic));
 }
+
 // --------------------------ingredient mobile--------------------
 .ingredient-mob {
     @include myPicture(4.5rem, 4.5rem, 1.25rem, ($boxShadowPic));
@@ -641,27 +657,28 @@ padding-left: 3vw;
 
 // -------------------------- user page --------------------
 .user-avatar {
-    @include media-breakpoint-down(md){
+    @include media-breakpoint-down(md) {
         text-align: center;
         margin: 18px auto;
         display: flex;
         width: 60%;
     }
-    @include media-breakpoint-up(md){
+
+    @include media-breakpoint-up(md) {
         width: 25em;
     }
 }
 
-.logout-link{
+.logout-link {
     margin-left: 38px;
 }
 
-.user-card:nth-of-type(2){
+.user-card:nth-of-type(2) {
     margin-top: 38px;
 }
 
-.user-card{
-    @include media-breakpoint-up(md){
+.user-card {
+    @include media-breakpoint-up(md) {
         background-color: $backgroundButton;
         border-radius: 18px;
         color: $backgroundMainColor;
@@ -672,31 +689,33 @@ padding-left: 3vw;
     }
 }
 
-.user-card h4{
-    @include media-breakpoint-down(md){
+.user-card h4 {
+    @include media-breakpoint-down(md) {
         text-align: center;
         font-weight: 600;
         font-size: x-large;
     }
-    @include media-breakpoint-up(md){
+
+    @include media-breakpoint-up(md) {
         text-align: center;
         font-size: xx-large;
         font-weight: 600;
     }
 }
 
-.user-card p{
+.user-card p {
     text-align: center;
     margin: 0;
     font-size: large;
 }
 
-.user-container{
-    @include media-breakpoint-down(md){
+.user-container {
+    @include media-breakpoint-down(md) {
         display: flex;
         flex-direction: column;
     }
-    @include media-breakpoint-up(md){
+
+    @include media-breakpoint-up(md) {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -704,11 +723,12 @@ padding-left: 3vw;
     }
 }
 
-.container-card-button{
-    @include media-breakpoint-down(md){
+.container-card-button {
+    @include media-breakpoint-down(md) {
         width: auto;
     }
-    @include media-breakpoint-up(md){
+
+    @include media-breakpoint-up(md) {
         display: flex;
         flex-direction: column;
         width: 23em;
@@ -716,14 +736,15 @@ padding-left: 3vw;
     }
 }
 
-.user-button{
-    @include media-breakpoint-down(md){
+.user-button {
+    @include media-breakpoint-down(md) {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-top: 38px;
     }
-    @include media-breakpoint-up(md){
+
+    @include media-breakpoint-up(md) {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -755,6 +776,7 @@ padding-left: 3vw;
 .recipe-list-mobile {
     width: 30vw;
 }
+
 // ----------------show------------------
 nav {
     float: left;
@@ -769,27 +791,58 @@ nav {
 }
 
 // ------------------home----------------------
-.pic-category-recipe{
+.pic-category-recipe {
     box-shadow: $boxShadowPic;
     border-radius: $borderRadiusPic;
 }
 
 // ------------------forgot password----------------
-.bg-forgot-password{
+.bg-forgot-password {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-.lost-password form{
+.lost-password form {
     display: flex;
     flex-direction: column;
     align-items: end;
 }
 
-.lost-password form div{
+.lost-password form div {
     width: 100%;
 }
+
 .lost-password form div label {
-    width : 75%;
+    width: 75%;
+}
+
+// -----------------------pagination--------------
+
+.page,
+.previous,
+.next,
+.last,
+.first {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-family: $fontText;
+    border-style: solid;
+    border-width: 1px;
+    a {
+        color: $fontColorText;
+        text-decoration: none;
+    }
+    &:hover {
+        color: $fontColorTextRed;
+    }
+}
+
+.current {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-family: $fontText;
+    color: $fontColorTextRed;
+    border-style: solid;
+    border-width: 1px;
 }
