@@ -10,6 +10,7 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const icon = document.querySelector(".bento-container");
 const list = document.querySelector(".navbar-desktop");
