@@ -27,7 +27,7 @@ class RecipeRepository extends ServiceEntityRepository
     public function findLikeNameRecipe(string $nameRecipe): array
     {
         // cette fonction est utilisé pour la recherche des recettes.
-        //Elle recherche les recettes en fonction du nom du nom de la recette
+        //Elle recherche les recettes en fonction du nom de la recette
         $result = [];
 
         if (!empty($nameRecipe)) {
