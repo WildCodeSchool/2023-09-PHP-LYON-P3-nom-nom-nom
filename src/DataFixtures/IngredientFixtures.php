@@ -20,7 +20,7 @@ class IngredientFixtures extends Fixture
         ['nameIngredient' => 'Pain Bao','category' => 'Céréale', 'picture' => 'bao.webp'],
         ['nameIngredient' => 'Pain Kebab','category' => 'Céréale', 'picture' => 'pain-kebab.jpg'],
         ['nameIngredient' => 'Haricot blanc','category' => 'Légumineuse', 'picture' => 'haricotblanc.jpeg'],
-        ['nameIngredient' => 'Cacahouéte','category' => 'Légumineuse', 'picture' => 'cacahuètes.jpeg'],
+        ['nameIngredient' => 'Cacahuète','category' => 'Légumineuse', 'picture' => 'cacahuètes.jpeg'],
         ['nameIngredient' => 'Huile d\'olive','category' => 'Huile', 'picture' => 'huileolive.jpeg'],
         ['nameIngredient' => 'Thym','category' => 'Assaisonnement', 'picture' => 'thym.jpeg'],
         ['nameIngredient' => 'Nuoc-mâm','category' => 'Assaisonnement', 'picture' => 'nuoc-mam.jpeg'],
