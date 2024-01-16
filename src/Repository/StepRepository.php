@@ -22,7 +22,7 @@ class StepRepository extends ServiceEntityRepository
         parent::__construct($registry, Step::class);
     }
 
-    public function findLastStepNumberForRecipe(Recipe $recipe): int
+    public function findLastStepNumberForRecipe(Recipe $recipe): ?int
     {
         return $this->createQueryBuilder('s')
             ->select('MAX(s.stepNumber)')
