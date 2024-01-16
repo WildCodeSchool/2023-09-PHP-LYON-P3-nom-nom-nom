@@ -37,7 +37,9 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('pseudo', TextType::class, [
                 'label' => 'Nom d\'utilisateur',
-                'help' => 'Entrez votre pseudo'
+                'attr' => [
+                    'placeholder' => 'Entrer votrez pseudo',
+                ],
             ])
             ->add('password')
             ->add('password', RepeatedType::class, [
@@ -46,7 +48,6 @@ class RegistrationFormType extends AbstractType
                 'options' => ['attr' => ['class' => 'password']],
                 'required' => true,
                 'first_options'  => ['label' => 'Mot de passe',
-                                    'help' => 'Doit contenir 12 caractères minimum'
                 ],
                 'second_options' => ['label' => 'Confirmation du mot de passe'],
             ])
