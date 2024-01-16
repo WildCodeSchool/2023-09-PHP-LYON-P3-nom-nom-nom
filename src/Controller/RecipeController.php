@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/recettes')]
 class RecipeController extends AbstractController
@@ -51,8 +52,12 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, MailerInterface $mailer, EntityManagerInterface $entityManager): Response
-    {
+    public function new(
+        Request $request,
+        MailerInterface $mailer,
+        EntityManagerInterface $entityManager,
+        SluggerInterface $slugger
+    ): Response {
         // call the AccessControl service => control if there is a connection
         $userLoggedIn = $this->accessControl->checkIfUserLoggedIn();
         if ($userLoggedIn !== true) {
@@ -67,6 +72,8 @@ class RecipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugger->slug($recipe->getNameRecipe());
+            $recipe->setSlug($slug);
             foreach ($recipe->getSteps() as $step) {
                 $step->setRecipe($recipe);
                 $step->setStepNumber($number += 1);
