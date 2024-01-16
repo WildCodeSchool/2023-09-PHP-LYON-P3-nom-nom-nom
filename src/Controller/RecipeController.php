@@ -110,17 +110,18 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_recipe_show', methods: ['GET'])]
+    #[Route('/{slug}', name: 'app_recipe_show', methods: ['GET'])]
     public function show(Recipe $recipe, UserRepository $userRepository): Response
     {
         $totalLikers = $userRepository->countLikersByRecipe($recipe);
         return $this->render('recipe/show.html.twig', [
             'recipe' => $recipe,
+            'slug' => $recipe->getSlug(),
             'totalLikers' => $totalLikers
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
+    #[Route('/{slug}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         // call the AccessControl service => control if there is a connection
@@ -173,7 +174,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_recipe_delete', methods: ['POST'])]
+    #[Route('/{slug}', name: 'app_recipe_delete', methods: ['POST'])]
     public function delete(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         // call the AccessControl service => control if there is a connection
