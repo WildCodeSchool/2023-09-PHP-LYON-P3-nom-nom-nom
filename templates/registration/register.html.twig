@@ -4,11 +4,11 @@
 {% endblock %}
 
 {% block body %}
-	<div class="background-register">
-		{% for flash_error in app.flashes('verify_email_error') %}
-			<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-		{% endfor %}
-		<div class="register-container">
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
+	<div class="register-container">
+		<div class="bg-fond h-100">
 			<img src="/build/images/photo_register.jpg" alt="photo d'un plat" class="register-picture-form object-fit-cover col-md-5 p-0">
 			<div class="register-form container textaccount">
 				<div class="register-logo"></div>

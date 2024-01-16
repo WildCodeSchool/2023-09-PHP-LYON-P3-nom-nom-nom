@@ -47,7 +47,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'first_options'  => ['label' => 'Mot de passe',
                                     'help' => 'Doit contenir 12 caractères minimum'
-            ],
+                ],
                 'second_options' => ['label' => 'Confirmation du mot de passe'],
             ])
             ->add('agreeTerms', CheckboxType::class, [

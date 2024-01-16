@@ -616,7 +616,13 @@ padding-left: 3vw;
 }
 
 .bg-fond {
-    background-color: rgba(0, 0, 0, 0.65);
+    @include media-breakpoint-down(md) {
+        background-color: rgba(0, 0, 0, 0.65);
+            }
+
+    @include media-breakpoint-up(md) {
+        display: none;
+    }
 }
 // --------------------------login desktop--------------------
 .back-picture {
@@ -632,45 +638,16 @@ padding-left: 3vw;
 
 // --------------------------register form --------------------
 
-.background-register {
+.register-container{ 
     @include media-breakpoint-down(md) {
-        background-image: url('/assets/images/fond_login_opacity.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        height: 100vh;
-        position: relative;
         display: flex;
-        align-items: center;
-        justify-content: center;
-
-        &::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background-color: rgba(255, 255, 255, 0.65); /* Opacité pour l'image de fond */
-            z-index: -1;
-        }
+        flex-direction: column;
     }
 
     @include media-breakpoint-up(md) {
-        background-image: none;
+        display: flex;
+        flex-direction: row;
     }
-}
-
-.register-form-container {
-    background-image: url('/assets/images/fond_login_opacity.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    display: flex;
-    width: 90%;
-    position: relative;
-    z-index: 2;
 }
 
 .register-picture-form {
@@ -679,28 +656,31 @@ padding-left: 3vw;
     }
 
     @include media-breakpoint-up(md) {
-        width: 50%; /* Ajustez selon vos besoins */
+        width: 50%;
     }
 }
 
 .register-form {
-    background-image: url('/assets/images/fond_login_opacity.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    position: relative;
-    z-index: 2;
+    @include media-breakpoint-down(md) {
+        background-image: url('/assets/images/fond_login.png');
+        background-color: rgba(0, 0, 0, 0.65);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        position: relative;
+        z-index: 2;
+        padding: 20px;
+    }
 
-    padding: 20px; /* Ajustez selon vos besoins */
 
     @include media-breakpoint-up(md) {
-        width: 50%; /* Ajustez selon vos besoins */
+        width: 50%;
         background-image: url('/assets/images/background_login.png');
         background-size: cover;
         background-position: center;
