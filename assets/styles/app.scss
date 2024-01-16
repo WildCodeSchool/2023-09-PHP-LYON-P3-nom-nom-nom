@@ -296,6 +296,10 @@ p {
     @include glassDesktop(($glassmorphism), ($borderRadiusPic));
 }
 
+.glassmorphism-mobile-categories {
+    @include glass(11rem, auto, ($glassmorphism), ($borderRadiusPic));
+}
+
 h2 {
     @include myText(
         ($fontTitle),
@@ -761,13 +765,6 @@ ul {
 
 .pic-recipe-list {
     height: 15.68rem;
-    width: auto;
-    border-radius: 1.25rem;
-    box-shadow: 0px 4px 9px 3px rgba(171, 136, 125, 0.47);
-}
-
-.pic-recipe-list-mobile {
-    height: 4.5rem;
     width: auto;
     border-radius: 1.25rem;
     box-shadow: 0px 4px 9px 3px rgba(171, 136, 125, 0.47);

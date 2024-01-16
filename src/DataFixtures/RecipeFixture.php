@@ -107,6 +107,24 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             rajouté des oignons, de la salade, des tomates',
             'category' => 'category_Entrées'
         ],
+        [
+            'nameRecipe' => 'salade niçoise',
+            'prepareTime' => 15,
+            'cookingTime' => 10,
+            'personNumber' => 2,
+            'picture' => 'salade-nicoise.png',
+            'description' => 'Une salade niçoise digne des plus grandes salade',
+            'category' => 'category_Entrées'
+        ],
+        [
+            'nameRecipe' => 'Osso buco',
+            'prepareTime' => 15,
+            'cookingTime' => 10,
+            'personNumber' => 2,
+            'picture' => 'salade-nicoise.png',
+            'description' => 'Une salade niçoise digne des plus grandes salade',
+            'category' => 'category_Entrées'
+        ],
     ];
     public function load(ObjectManager $manager): void
     {
