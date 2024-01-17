@@ -4,10 +4,10 @@
 			<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><i class="fa-solid fa-book"></i></a>
 		</li>
 		<li>
-			<a href="{{ path('app_recipe_show_ingredients', { id: recipe.id }) }}"><i class="fa-solid fa-carrot"></i></a>
+			<a href="{{ path('app_recipe_show_ingredients', { slug: recipe.slug }) }}"><i class="fa-solid fa-carrot"></i></a>
 		</li>
 		<li>
-			<a href="{{ path('app_recipe_show_step', { id: recipe.id }) }}"><i class="fa-solid fa-list-check"></i></a>
+			<a href="{{ path('app_recipe_show_step', { slug: recipe.slug }) }}"><i class="fa-solid fa-list-check"></i></a>
 		</li>
 		</li> {{ component ('FavoriteList', {recipe: recipe}) }}
 		</li>

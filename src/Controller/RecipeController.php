@@ -201,25 +201,25 @@ class RecipeController extends AbstractController
         return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/steps', name: 'app_recipe_show_step', methods: ['GET'])]
+    #[Route('/{slug}/steps', name: 'app_recipe_show_step', methods: ['GET'])]
     public function showSteps(
         Recipe $recipe,
-        string $id,
         RecipeRepository $recipeRepository,
         StepRepository $stepRepository
     ): Response {
-        $recipe = $recipeRepository->findOneBy(['id' => $id]);
+        $recipe = $recipeRepository->findOneBy(['slug' => $recipe->getSlug()]);
         $steps = $stepRepository->findBy(
             ['recipe' => $recipe],
             ['stepNumber' => 'ASC'],
         );
         return $this->render('recipe/recipe_step.html.twig', [
             'recipe' => $recipe,
+            'slug' => $recipe->getSlug(),
             'steps' => $steps,
         ]);
     }
 
-    #[Route('/{id}/ingredients', name: 'app_recipe_show_ingredients', methods: ['GET'])]
+    #[Route('/{slug}/ingredients', name: 'app_recipe_show_ingredients', methods: ['GET'])]
     public function showIngredients(
         Recipe $recipe,
         RecipeIngredientRepository $recipeIngredientRepo
@@ -228,6 +228,7 @@ class RecipeController extends AbstractController
 
         return $this->render("recipe/recipe_ingredients.html.twig", [
             'recipe' => $recipe,
+            'slug' => $recipe->getSlug(),
             'recipeIngredients' => $recipeIngredients
         ]);
     }
