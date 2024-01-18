@@ -388,6 +388,7 @@ h1 {
     background-color: $backgroundMainColor;
     margin: 0;
     bottom: 0;
+    
 
     @include media-breakpoint-up(md) {
         display: none;
