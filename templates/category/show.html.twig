@@ -19,7 +19,7 @@
 	<div class="d-flex flex-wrap gap-1 text-center d-md-none">
 		{% for recipe in paginations %}
 			<div class="container-fluid recipe-list-mobile mb-2">
-				<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list-mobile object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}"/></a>
+				<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list-mobile object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}"/></a>
 				<h5>{{ recipe.nameRecipe }}</h5>
 			</div>
 		{% endfor %}
@@ -28,7 +28,7 @@
 		<div class="d-flex flex-wrap gap-1 text-center mb-2">
 			{% for recipe in paginations %}
 				<div class="container-fluid recipe-list">
-					<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list object-fit-cover w-75 mb-3" alt="{{ recipe.nameRecipe }}"/></a>
+					<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list object-fit-cover w-75 mb-3" alt="{{ recipe.nameRecipe }}"/></a>
 					<h5>{{ recipe.nameRecipe }}</h5>
 				</div>
 			{% endfor %}

@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/recettes')]
 class RecipeController extends AbstractController
@@ -51,8 +52,12 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, MailerInterface $mailer, EntityManagerInterface $entityManager): Response
-    {
+    public function new(
+        Request $request,
+        MailerInterface $mailer,
+        EntityManagerInterface $entityManager,
+        SluggerInterface $slugger
+    ): Response {
         // call the AccessControl service => control if there is a connection
         $userLoggedIn = $this->accessControl->checkIfUserLoggedIn();
         if ($userLoggedIn !== true) {
@@ -67,6 +72,8 @@ class RecipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugger->slug($recipe->getNameRecipe());
+            $recipe->setSlug($slug);
             foreach ($recipe->getSteps() as $step) {
                 $step->setRecipe($recipe);
                 $step->setStepNumber($number += 1);
@@ -103,17 +110,18 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_recipe_show', methods: ['GET'])]
+    #[Route('/{slug}', name: 'app_recipe_show', methods: ['GET'])]
     public function show(Recipe $recipe, UserRepository $userRepository): Response
     {
         $totalLikers = $userRepository->countLikersByRecipe($recipe);
         return $this->render('recipe/show.html.twig', [
             'recipe' => $recipe,
+            'slug' => $recipe->getSlug(),
             'totalLikers' => $totalLikers
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
+    #[Route('/{slug}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         // call the AccessControl service => control if there is a connection
@@ -157,7 +165,7 @@ class RecipeController extends AbstractController
             $this->updateNumberService->updateStepsNumber($recipe);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_recipe_show', ['id' => $recipe->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_recipe_show', ['slug' => $recipe->getSlug()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('recipe/edit.html.twig', [
@@ -166,7 +174,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_recipe_delete', methods: ['POST'])]
+    #[Route('/{slug}', name: 'app_recipe_delete', methods: ['POST'])]
     public function delete(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         // call the AccessControl service => control if there is a connection
@@ -193,25 +201,25 @@ class RecipeController extends AbstractController
         return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/steps', name: 'app_recipe_show_step', methods: ['GET'])]
+    #[Route('/{slug}/steps', name: 'app_recipe_show_step', methods: ['GET'])]
     public function showSteps(
         Recipe $recipe,
-        string $id,
         RecipeRepository $recipeRepository,
         StepRepository $stepRepository
     ): Response {
-        $recipe = $recipeRepository->findOneBy(['id' => $id]);
+        $recipe = $recipeRepository->findOneBy(['slug' => $recipe->getSlug()]);
         $steps = $stepRepository->findBy(
             ['recipe' => $recipe],
             ['stepNumber' => 'ASC'],
         );
         return $this->render('recipe/recipe_step.html.twig', [
             'recipe' => $recipe,
+            'slug' => $recipe->getSlug(),
             'steps' => $steps,
         ]);
     }
 
-    #[Route('/{id}/ingredients', name: 'app_recipe_show_ingredients', methods: ['GET'])]
+    #[Route('/{slug}/ingredients', name: 'app_recipe_show_ingredients', methods: ['GET'])]
     public function showIngredients(
         Recipe $recipe,
         RecipeIngredientRepository $recipeIngredientRepo
@@ -220,6 +228,7 @@ class RecipeController extends AbstractController
 
         return $this->render("recipe/recipe_ingredients.html.twig", [
             'recipe' => $recipe,
+            'slug' => $recipe->getSlug(),
             'recipeIngredients' => $recipeIngredients
         ]);
     }
