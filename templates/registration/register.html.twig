@@ -1,23 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Inscription
+{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
+	<div class="register-container">
+		<img src="/build/images/photo_register.jpg" alt="photo d'un plat" class="register-picture-form object-fit-cover col-md-5 p-0">
+		<div class="register-form container textaccount">
+			<div class="register-logo"></div>
+			{{ form_errors(registrationForm) }}
 
-    <h1>S'enregistrer</h1>
-
-    {{ form_errors(registrationForm) }}
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.pseudo) }}
-        {{ form_row(registrationForm.plainPassword, {
+			{{ form_start(registrationForm) }}
+			{{ form_row(registrationForm.lastname) }}
+			{{ form_row(registrationForm.firstname) }}
+			{{ form_row(registrationForm.pseudo) }}
+			{{ form_row(registrationForm.email) }}
+			{{ form_row(registrationForm.password, {
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+			{{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Enregistrer</button>
-    {{ form_end(registrationForm) }}
+			<button type="submit" class="btn button-crud button-form-center register-button mx-auto">S'inscrire</button>
+			{{ form_end(registrationForm) }}
+		</div>
+	</div>
 {% endblock %}

@@ -589,7 +589,7 @@ ul {
 }
 
 .bg-fond {
-    background-color: rgba(0, 0, 0, 0.65);
+        background-color: rgba(0, 0, 0, 0.65);
 }
 
 // --------------------------login desktop--------------------
@@ -602,6 +602,92 @@ ul {
     border-radius: 0 2.5rem 2.5rem 0;
     box-shadow: 24px 23px 72.5px 0px rgba(0, 0, 0, 0.25);
     width: 100vw;
+}
+
+// --------------------------register form --------------------
+
+.register-container{ 
+    @include media-breakpoint-down(md) {
+        display: flex;
+        flex-direction: column;
+    }
+
+    @include media-breakpoint-up(md) {
+        display: flex;
+        flex-direction: row;
+        width: 92%;
+    }
+}
+
+.register-picture-form {
+    @include media-breakpoint-down(md) {
+        display: none;
+    }
+}
+
+.register-form {
+    @include media-breakpoint-down(md) {
+        background-image: url('/assets/images/fond_login.png');
+        background-color: rgba(0, 0, 0, 0.65);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        position: relative;
+        padding: 20px;
+    }
+
+    @include media-breakpoint-up(md) {
+        background-image: url('/assets/images/background_login.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 0 2.5rem 2.5rem 0;
+        box-shadow: 24px 23px 72.5px 0px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.register-logo {
+    width: 10.5rem;
+    height: 10rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    @include media-breakpoint-down(md) {
+        background-image: url('/assets/images/nomnomlogo.png');
+    }
+
+    @include media-breakpoint-up(md) {
+        background-image: url('/assets/images/logo_white_500.png');
+        margin-bottom: 16px;
+    }
+}
+
+.register-form .mb-3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 22em;
+}
+
+.col-form-label {
+    @include media-breakpoint-up(sm) {
+        width: 18em;
+    }
+}
+
+.register-button:hover {
+    background-color: $backgroundButtonDark;
 }
 
 // --------------------------ingredient desktop--------------------
