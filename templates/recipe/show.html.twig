@@ -23,20 +23,27 @@
 		{# DESKTOP - Photo #}
 		<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 
-		<p class="paragraph text-center">{% if totalLikers > 1 %}
-				recette aimée par {{ totalLikers }} Gastronomnoms.
+		<p class="paragraph text-center">
+			{% if totalLikers > 1 %}
+				recette aimée par
+				{{ totalLikers }}
+				Gastronomnoms.
 			{% elseif totalLikers == 1 %}
-				recette aimée par {{ totalLikers }} Gastronomnom.
+				recette aimée par
+				{{ totalLikers }}
+				Gastronomnom.
 			{% else %}
-			Soyez le 1er Gastronomnom à aimer cette recette.
+				Soyez le 1er Gastronomnom à aimer cette recette.
 			{% endif %}
 			{% if app.user %}
-			{% else %}
-			<br>
-			<a class="paragraph link-underline link-underline-opacity-0" href="{{ path('app_login') }}">
-			Connectez-vous pour aimer cette recette.
-		</a>
-			{% endif %}<p>
+				{% else %}
+					<br>
+					<a class="paragraph link-underline link-underline-opacity-0" href="{{ path('app_login') }}">
+						Connectez-vous pour aimer cette recette.
+					</a>
+			{% endif %}
+		</p>
+		<p></p>
 	</section>
 	{# INFOS recette #}
 	<div>
@@ -60,12 +67,35 @@
 			</div>
 		</div>
 
-	{# BOUTONS CRUD #}
-	<div class="crud-button-block">
-		{% if is_granted("ROLE_CONTRIBUTOR") %}
-			<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
-			{{ include('recipe/_delete_form.html.twig') }}
+		{# BOUTONS CRUD #}
+		<div class="crud-button-block">
+			{% if is_granted("ROLE_CONTRIBUTOR") %}
+				<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
+				{{ include('recipe/_delete_form.html.twig') }}
+			{% endif %}
+			<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
+		</div>
+
+		<h3>Commentaires sur la recette</h3>
+		{% for comment in recipe.comments %}
+			<p class="paragraph">{{ comment.comment }}</p>
+			<p class="paragraph">Note : {{ comment.note }}
+			</p>
+			<p class="paragraph">{{ comment.commentator.pseudo }}</p>
+		{% endfor %}
+	</div>
+	<div>
+		{% if app.user %}
+			{# <a href="{{ path('app_comment_new') }}">
+				Ajouter un commentaire</a> #}
+				{# {{ form_start(comment_form ) }}
+    {{ form_widget(comment_form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(comment_form) }} #}
+{{ form (comment_form ) }}
+		{% else %}
+			<a href="{{ path('app_login') }}">
+				Se connecter pour commenter</a>
 		{% endif %}
-		<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
 	</div>
 {% endblock %}

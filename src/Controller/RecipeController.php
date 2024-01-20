@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Comment;
 use App\Entity\Recipe;
 use App\Entity\Step;
+use App\Form\CommentType;
 use App\Form\RecipeType;
 use App\Repository\CategoryRepository;
+use App\Repository\CommentRepository;
 use App\Repository\RecipeIngredientRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\StepRepository;
@@ -33,6 +36,7 @@ class RecipeController extends AbstractController
         AccessControl $accessControl,
         DeleteButtonService $deleteButtonService,
         UpdateNumberService $updateNumberService,
+        // EntityManagerInterface $entityManager,
     ) {
         $this->accessControl = $accessControl;
         $this->deleteButtonService = $deleteButtonService;
@@ -104,12 +108,29 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_recipe_show', methods: ['GET'])]
-    public function show(Recipe $recipe, UserRepository $userRepository): Response
-    {
+    public function show(
+        Request $request,
+        Recipe $recipe,
+        UserRepository $userRepository,
+        CommentRepository $commentRepository
+    ): Response {
+        // $comment = new Comment();
+        // $commentForm = $this->createForm(CommentType::class, $comment);
+
+        // if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+        //     $comment->setRecipe($recipe);
+        //     $this->entityManager->persist($comment);
+        //     dd($comment);
+        //     $this->entityManager->flush();
+
+        //     return $this->redirectToRoute('app_recipe_show', [$recipe->getId()]);
+        // }
+
         $totalLikers = $userRepository->countLikersByRecipe($recipe);
         return $this->render('recipe/show.html.twig', [
             'recipe' => $recipe,
-            'totalLikers' => $totalLikers
+            'totalLikers' => $totalLikers,
+            // 'comment_form' => $commentForm
         ]);
     }
 

@@ -91,12 +91,15 @@ class Recipe
 
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoriteList')]
     private Collection $likers;
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Comment::class)]
+    private Collection $comments;
 
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
         $this->steps = new ArrayCollection();
         $this->likers = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     #[ORM\PrePersist]
@@ -335,4 +338,34 @@ class Recipe
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+//     public function addComment(Comment $comment): static
+//     {
+//         if (!$this->comments->contains($comment)) {
+//             $this->comments->add($comment);
+//             $comment->setRecipe($this);
+//         }
+
+//         return $this;
+//     }
+
+//     public function removeComment(Comment $comment): static
+//     {
+//         if ($this->comments->removeElement($comment)) {
+// // set the owning side to null (unless already changed)
+//             if ($comment->getRecipe() === $this) {
+//                 $comment->setRecipe(null);
+//             }
+//         }
+
+//         return $this;
+//     }
 }
