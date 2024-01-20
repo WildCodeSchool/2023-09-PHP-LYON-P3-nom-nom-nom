@@ -91,6 +91,9 @@ class Recipe
 
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoriteList')]
     private Collection $likers;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Comment::class)]
     private Collection $comments;
 
@@ -335,6 +338,18 @@ class Recipe
         if ($this->likers->removeElement($user)) {
             $user->removeFromFavoriteList($this);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

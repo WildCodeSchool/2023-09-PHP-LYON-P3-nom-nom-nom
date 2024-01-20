@@ -6,9 +6,13 @@ use App\Entity\Recipe;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class RecipeFixture extends Fixture implements DependentFixtureInterface
 {
+    public function __construct(private SluggerInterface $slugger)
+    {
+    }
     public const RECIPES = [
         [
             'nameRecipe' => 'Cassoulet Toulousain',
@@ -63,6 +67,8 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
         foreach (self::RECIPES as $recipeFixture) {
             $recipe = new Recipe();
             $recipe->setNameRecipe($recipeFixture['nameRecipe']);
+            $slug = $this->slugger->slug($recipeFixture['nameRecipe']);
+            $recipe->setSlug($slug);
             $recipe->setPrepareTime($recipeFixture['prepareTime']);
             $recipe->setCookingTime($recipeFixture['cookingTime']);
             $recipe->setPersonNumber($recipeFixture['personNumber']);

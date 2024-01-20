@@ -1,0 +1,21 @@
+{% extends 'baseEmail.html.twig' %}
+
+{% block body %}
+	<h3 class="text-center mt-3 mb-5">Bonjour! Veuillez confirmer votre adresse mail!</h3>
+
+	<div class="container">
+		<p class="mb-2">Bonjour,</p>
+		<p>
+			Veuillez confirmer votre adresse mail en cliquant sur le lien suivant :
+			<br><br>
+			<a href="{{ signedUrl|raw }}">Confirmer votre mail</a>.
+											    Ce lien expire dans
+			{{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+		</p>
+
+		<div class="mt-5">
+			<p>Bon appétit !</p>
+			<p class="fs-5">L'équipe Nom-Nom</p>
+		</div>
+	</div>
+{% endblock %}

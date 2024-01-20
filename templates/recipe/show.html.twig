@@ -67,6 +67,7 @@
 			</div>
 		</div>
 
+<<<<<<< HEAD
 		{# BOUTONS CRUD #}
 		<div class="crud-button-block">
 			{% if is_granted("ROLE_CONTRIBUTOR") %}
@@ -96,6 +97,13 @@
 		{% else %}
 			<a href="{{ path('app_login') }}">
 				Se connecter pour commenter</a>
+=======
+	{# BOUTONS CRUD #}
+	<div class="crud-button-block">
+		{% if is_granted("ROLE_CONTRIBUTOR") %}
+			<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { slug: recipe.slug }) }}">Editer la recette</a>
+			{{ include('recipe/_delete_form.html.twig') }}
+>>>>>>> 4da54f43ae0571aefa4d18a8875a07c4128aed9b
 		{% endif %}
 	</div>
 {% endblock %}
