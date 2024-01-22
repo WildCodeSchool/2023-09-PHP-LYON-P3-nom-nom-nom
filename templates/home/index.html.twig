@@ -21,7 +21,7 @@
 			<div class="carousel-inner">
 				{% for key, recipe in showRecipes %}
 					<div class="carousel-item {% if key == 0 %} active {% endif %}">
-						<a href="{{ path('app_recipe_show', { id: recipe.id }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
+						<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
 						<div class="container-fluid carousel-caption d-md-block glassmorphism">
 							<h5>{{ recipe.nameRecipe }}</h5>
 							<p class="w-75 container text-center">{{ recipe.description }}</p>
@@ -47,7 +47,7 @@
 		<div class="d-flex justify-content-evenly ">
 			{% for recipe in showRecipes %}
 				<div class="position-relative mb-5">
-					<a href="{{ path('app_recipe_show', { id: recipe.id }) }}">
+					<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}">
 						<img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 					</a>
 					<div class="glassmorphism-desktop m-2">
@@ -66,7 +66,7 @@
 			<h1 class="color-count">Aujourd'hui, </br> nous vous proposons {{ totalRecipes }} recettes.</br> Rejoignez notre communauté</h1>
 			<p class="paragraph">A chaque bouchée une nouvelle saveur.</p>
 			<p class="container-fluid mt-4 px-4 paragraph">Rejoignez notre communauté culinaire et transformez chaque repas en une expérience mémorable, où la passion de la cuisine se marie harmonieusement avec le plaisir de créer des souvenirs délicieux.</p>
-			<a href="#" type="button" class="btn button-crud-big mx-auto mt-5 mb-3" tabindex="-1" role="button" aria-disabled="true">Rejoignez-nous</a>
+			<a href="{{ path('app_register') }}" type="button" class="btn button-crud-big mx-auto mt-5 mb-3" tabindex="-1" role="button" aria-disabled="true">Rejoignez-nous</a>
 		</div>
 	</div>
 
@@ -80,7 +80,7 @@
 				Rejoignez notre communauté </h1>
 				<p class="paragraph">A chaque bouchée une nouvelle saveur.</p>
 				<p class="container-fluid mt-4 px-4 paragraph w-75">Rejoignez notre communauté culinaire et transformez chaque repas en une expérience mémorable, où la passion de la cuisine se marie harmonieusement avec le plaisir de créer des souvenirs délicieux.</p>
-				<a href="#" type="button" class="mx-auto btn button-crud-big mt-5" tabindex="-1" role="button" aria-disabled="true">Rejoignez-nous</a>
+				<a href="{{ path('app_register') }}" type="button" class="mx-auto btn button-crud-big mt-5" tabindex="-1" role="button" aria-disabled="true">Rejoignez-nous</a>
 		</div>
 	</div>
 </div>
