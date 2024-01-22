@@ -1,40 +1,57 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Catégorie
+	Catégorie
 {% endblock %}
 
 {% block body %}
-    {# Cover #}
+	{# Cover #}
 
-    <img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
-    <h1 class="text-center mt-2">
-        Liste des
-        {{ category.name }}
-    </h1>
-    <h3 class="color-count text-center mb-5">
-        Découvrez nos
-        {{ totalRecipesByCategory }}
-        recettes et savourez-les !!!</h3>
-    <div class="d-flex flex-wrap gap-1 text-center d-md-none">
-        {% for recipe in paginations %}
-            <div class="container-fluid recipe-list-mobile mb-2">
-                <a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list-mobile object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}"/></a>
-                <h5>{{ recipe.nameRecipe }}</h5>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="d-none d-md-block">
-        <div class="d-flex flex-wrap gap-1 text-center mb-2">
-            {% for recipe in paginations %}
-                <div class="container-fluid recipe-list">
-                    <a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list object-fit-cover w-75 mb-3" alt="{{ recipe.nameRecipe }}"/></a>
-                    <h5>{{ recipe.nameRecipe }}</h5>
-                </div>
-            {% endfor %}
-        </div>
-        <div class="d-flex justify-content-center gap-1">
-            {{ knp_pagination_render(paginations) }}
-        </div>
-    </div>
+	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
+
+	<h1 class="text-center mt-2">
+		Liste des
+		{{ category.name }}
+	</h1>
+	
+	<h3 class="mx-auto w-75 color-count text-center mb-5">
+		Découvrez nos
+		{{ totalRecipesByCategory }}
+		recettes et savourez-les !!!
+	</h3>
+
+{# MOBILE #}
+<div class="d-md-none">
+	<div class="d-flex flex-wrap gap-1 text-center">
+		{% for recipe in paginations %}
+			<div class="position-relative mx-auto">
+				<div class="container m-0 mb-4 p-0">
+					<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="mx-auto recipe-list-mobile object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}"/></a>
+					<h5>{{ recipe.nameRecipe }}</h5>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+{# DESKTOP #}
+	<div class="d-none d-md-block">
+		<div class="w-75 mx-auto d-flex flex-wrap gap-1 text-center mb-2 justify-content-center">
+			{% for recipe in paginations %}
+				<div class="position-relative">
+						<div class="gap-5 row-gap-3 d-flex flex-wrap justify-content-center">
+							<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
+								<div class="glassmorphism-desktop m-2 py-2">
+									<h5>{{ recipe.nameRecipe }}</h5>
+								</div>
+						</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<div class="d-flex justify-content-center gap-1 mb-5">
+		{{ knp_pagination_render(paginations) }}
+	</div>
+
 {% endblock %}

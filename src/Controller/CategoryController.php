@@ -10,17 +10,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route('/category')]
+#[Route('/Categories')]
 class CategoryController extends AbstractController
 {
-    #[Route('/{id}', name: 'app_category_show', methods: ['GET'])]
+    #[Route('/{slug}', name: 'app_category_show', methods: ['GET'])]
     public function show(
         Category $id,
         CategoryRepository $categoryRepository,
         RecipeRepository $recipeRepository,
         Request $request,
-        PaginatorInterface $paginator
+        PaginatorInterface $paginator,
     ): Response {
         $category = $categoryRepository->findOneBy(['id' => $id]);
         $recipes = $recipeRepository->findBy(['category' => $category], ['nameRecipe' => 'ASC']);
@@ -35,6 +36,7 @@ class CategoryController extends AbstractController
         return $this->render('category/show.html.twig', [
             'category' => $category,
             'recipes' => $recipes,
+            'slug' => $category->getSlug(),
             'totalRecipesByCategory' => $totalRecipesByCat,
             'paginations' => $paginations
         ]);

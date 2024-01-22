@@ -12,59 +12,59 @@
 		{{ totalRecipes }}
 		recettes et savourez-les !!!</h3>
 
-{# MOBILE #}
+	{# MOBILE #}
 	<div class="d-md-none">
 		{% for category in categories %}
 			<h2 class="category-in-recipe mt-3 text-center">{{ category.name }}</h2>
-			<a href="{{ path('app_category_show', { id: category.id }) }}">
-			<strong>Voir toutes les {{ category.name }}</strong></a>
-			 <div class="d-flex overflow-x-auto">
+			<a href="{{ path('app_category_show',{ slug: category.slug }) }}">
+				<strong>Voir toutes les
+					{{ category.name }}</strong>
+			</a>
+			<div class="d-flex overflow-x-auto">
 				{% for recipe in recipes[category.id] %}
 					<div class="position-relative ms-3 mb-3">
 						<div class="container">
 							<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}">
-							<img src="{{ asset('build/images/' ~ recipe.picture) }}" 
-							class="pic-recipe object-fit-cover mb-2" 
-							alt="{{ recipe.nameRecipe }}" 
-							loading="lazy"/></a>
+								<img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
 							<div class="container-fluid carousel-caption glassmorphism-mobile-categories">
 								<h5 class="w-75 container text-center">{{ recipe.nameRecipe }}</h5>
 							</div>
 						</div>
 					</div>
-					{% else %}
-						<p class="container text-center">Aucune recette dans cette catégorie actuellement.</p>
+				{% else %}
+					<p class="container text-center">Aucune recette dans cette catégorie actuellement.</p>
 				{% endfor %}
 			</div>
 		{% endfor %}
-	</div>		
+	</div>
 
 
-{# DESKTOP #}
+	{# DESKTOP #}
 	<div class="d-none d-md-block">
 		<div class="text-center mb-5 ">
 			{% for category in categories %}
-			<a href="{{ path('app_category_show', { id: category.id }) }}" class="link-underline link-underline-opacity-0">
-				<h2 class="category-in-recipe mt-3">{{ category.name }}</h2></a>
-				<div class="gap-5 row-gap-3 d-flex flex-wrap justify-content-center">
+				<a href="{{ path('app_category_show', { slug: category.slug }) }}" class="link-underline link-underline-opacity-0">
+					<h2 class="category-in-recipe mt-3">{{ category.name }}</h2>
+				</a>
+				<div class="w-75 mx-auto gap-1 row-gap-3 d-flex flex-wrap justify-content-center">
 					{% for recipe in recipes[category.id] %}
 						<div>
 							<a href="{{ path('app_recipe_show',{ slug: recipe.slug }) }}">
-							 <img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
-								<div class="position-relative ">
-									<div class="glassmorphism-desktop m-2 py-2">
-										<h5>{{ recipe.nameRecipe }}</h5>
-									</div>
+								<img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
+							<div class="position-relative ">
+								<div class="glassmorphism-desktop m-2 py-2">
+									<h5>{{ recipe.nameRecipe }}</h5>
 								</div>
+							</div>
 						</div>
-						{% else %}
-							<p >Aucune recette dans cette catégorie actuellement.</p>
+					{% else %}
+						<p>Aucune recette dans cette catégorie actuellement.</p>
 					{% endfor %}
 				</div>
 			{% endfor %}
 		</div>
 	</div>
-	
+
 	{% if app.user %}
 		<div class="d-flex justify-content-center">
 			<a class="container btn button-form center mt-2" href="{{ path('app_recipe_new') }}" role="button">Ajouter votre recette</a>
