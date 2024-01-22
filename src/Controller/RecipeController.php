@@ -23,7 +23,7 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route('/recettes')]
+#[Route('/Recettes')]
 class RecipeController extends AbstractController
 {
     private AccessControl $accessControl;
@@ -43,11 +43,23 @@ class RecipeController extends AbstractController
     public function index(RecipeRepository $recipeRepository, CategoryRepository $categoryRepository): Response
     {
         $categories = $categoryRepository->findAll();
+        $recipes = [];
+
+        foreach ($categories as $category) {
+            // Fetch only 6 recipes for each category
+            $recipes[$category->getId()] = $recipeRepository->findBy(
+                ['category' => $category],
+                ['id' => 'DESC'],
+                6
+            );
+        }
+
         $totalRecipes = $recipeRepository->countRecipes();
 
         return $this->render('recipe/index.html.twig', [
             'categories' => $categories,
-            'totalRecipes' => $totalRecipes
+            'totalRecipes' => $totalRecipes,
+            'recipes' => $recipes,
         ]);
     }
 
@@ -201,7 +213,7 @@ class RecipeController extends AbstractController
         return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{slug}/steps', name: 'app_recipe_show_step', methods: ['GET'])]
+    #[Route('/{slug}/Etapes', name: 'app_recipe_show_step', methods: ['GET'])]
     public function showSteps(
         Recipe $recipe,
         RecipeRepository $recipeRepository,
@@ -219,7 +231,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}/ingredients', name: 'app_recipe_show_ingredients', methods: ['GET'])]
+    #[Route('/{slug}/Ingredients', name: 'app_recipe_show_ingredients', methods: ['GET'])]
     public function showIngredients(
         Recipe $recipe,
         RecipeIngredientRepository $recipeIngredientRepo
