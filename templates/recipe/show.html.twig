@@ -74,28 +74,60 @@
 				{{ include('recipe/_delete_form.html.twig') }}
 			{% endif %}
 		</div>
-		<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
+		<div class="d-flex justify-content-center">
+			<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
+		</div>
+	</div>
+	<h3 class="mt-3 text-center">Qu'en pense nos Gastronomnoms ?</h3>
+	<div class="container d-md-none">
+		{% for comment in recipe.comments %}
+			<div class="card mx-auto mb-2 w-75">
+				<div class="card-body text-center">
+					<h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
+					<h6 class="card-subtitle mb-2 text-body-secondary">Note :
+						{{ comment.note }}</h6>
+					<p class="card-text">{{ comment.comment }}</p>
+				</div>
+			</div>
+		{% endfor %}
 	</div>
 
-	<h3>Qu'en pense les Gastronomnoms ?</h3>
-	{% for comment in recipe.comments %}
-		<p class="paragraph">{{ comment.comment }}</p>
-		<p class="paragraph">Note :
-			{{ comment.note }}
-		</p>
-		<p class="paragraph">{{ comment.commentator.pseudo }}</p>
-	{% endfor %}
-</div>
-<div>
-	{% if app.user %}
+	<div class="d-none d-md-block">
+		<div class="d-flex gap-5 justify-content-evenly flex-wrap">
+			{% for comment in recipe.comments %}
 
+				<div class="card w-25">
+					<div class="card-body text-center">
+						<h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
+						<h6 class="card-subtitle mb-2 text-body-secondary">Note :
+							{{ comment.note }}</h6>
+						<p class="card-text">{{ comment.comment }}</p>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% if app.user %}
+	<div class="comment container w-50">
 		{{ form_start(commentForm ) }}
 		{{ form_widget(commentForm) }}
 		{{ form_end(commentForm) }}
 
-			{% else %}
-				<a href="{{ path('app_login') }}">
-					Se connecter pour commenter
-				</a>
-		{% endif %}
-	{% endblock %}
+	</div>
+{% else %}
+	<div class="d-flex justify-content-center d-md-none">
+	<a class="btn button-crud w-75 mt-3" href="{{ path('app_login') }}">
+		Se connecter pour commenter
+	</a>
+	</div>
+	<div class="d-none d-md-block">
+	<div class="d-flex justify-content-center">
+	<a class="btn button-crud w-25 mt-3" href="{{ path('app_login') }}">
+		Se connecter pour commenter
+	</a>
+	</div>
+	</div>
+{% endif %}
+{% endblock %}
