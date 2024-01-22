@@ -13,12 +13,13 @@
 		recettes et savourez-les !!!</h3>
 
 {# MOBILE #}
-
 	<div class="d-md-none">
 		{% for category in categories %}
 			<h2 class="category-in-recipe mt-3 text-center">{{ category.name }}</h2>
+			<a href="{{ path('app_category_show', { id: category.id }) }}">
+			<strong>Voir toutes les {{ category.name }}</strong></a>
 			 <div class="d-flex overflow-x-auto">
-				{% for recipe in category.recipes %}
+				{% for recipe in recipes[category.id] %}
 					<div class="position-relative ms-3 mb-3">
 						<div class="container">
 							<a href="{{ path('app_recipe_show', { id: recipe.id }) }}">
@@ -46,7 +47,7 @@
 			<a href="{{ path('app_category_show', { id: category.id }) }}" class="link-underline link-underline-opacity-0">
 				<h2 class="category-in-recipe mt-3">{{ category.name }}</h2></a>
 				<div class="gap-5 row-gap-3 d-flex flex-wrap justify-content-center">
-					{% for recipe in category.recipes %}
+					{% for recipe in recipes[category.id] %}
 						<div>
 							<a href="{{ path('app_recipe_show', { id: recipe.id }) }}">
 							<img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
