@@ -33,10 +33,12 @@ class CategoryController extends AbstractController
             6
         );
 
+        $slug = $category->getSlug();
+
         return $this->render('category/show.html.twig', [
             'category' => $category,
             'recipes' => $recipes,
-            'slug' => $category->getSlug(),
+            'slug' => $slug,
             'totalRecipesByCategory' => $totalRecipesByCat,
             'paginations' => $paginations
         ]);
