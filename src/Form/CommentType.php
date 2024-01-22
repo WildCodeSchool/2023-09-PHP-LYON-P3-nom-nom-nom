@@ -23,8 +23,6 @@ class CommentType extends AbstractType
             ->add('note', TypeTextType::class, [
                 'label' => 'Notez la recette (sur 5)'
             ])
-            ->add('commentator', null, ['choice_label' => 'pseudo',])
-            // ->add('recipe', null, ['choice_label' => 'name_recipe',])
             ->add('Publiez', SubmitType::class)
         ;
     }

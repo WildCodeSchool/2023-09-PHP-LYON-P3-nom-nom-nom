@@ -67,43 +67,35 @@
 			</div>
 		</div>
 
-<<<<<<< HEAD
 		{# BOUTONS CRUD #}
 		<div class="crud-button-block">
 			{% if is_granted("ROLE_CONTRIBUTOR") %}
-				<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
+				<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { slug: recipe.slug }) }}">Editer la recette</a>
 				{{ include('recipe/_delete_form.html.twig') }}
 			{% endif %}
-			<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
 		</div>
+		<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
+	</div>
 
-		<h3>Commentaires sur la recette</h3>
-		{% for comment in recipe.comments %}
-			<p class="paragraph">{{ comment.comment }}</p>
-			<p class="paragraph">Note : {{ comment.note }}
-			</p>
-			<p class="paragraph">{{ comment.commentator.pseudo }}</p>
-		{% endfor %}
-	</div>
-	<div>
-		{% if app.user %}
-			{# <a href="{{ path('app_comment_new') }}">
-				Ajouter un commentaire</a> #}
-				{# {{ form_start(comment_form ) }}
-    {{ form_widget(comment_form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(comment_form) }} #}
-{{ form (comment_form ) }}
-		{% else %}
-			<a href="{{ path('app_login') }}">
-				Se connecter pour commenter</a>
-=======
-	{# BOUTONS CRUD #}
-	<div class="crud-button-block">
-		{% if is_granted("ROLE_CONTRIBUTOR") %}
-			<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { slug: recipe.slug }) }}">Editer la recette</a>
-			{{ include('recipe/_delete_form.html.twig') }}
->>>>>>> 4da54f43ae0571aefa4d18a8875a07c4128aed9b
+	<h3>Qu'en pense les Gastronomnoms ?</h3>
+	{% for comment in recipe.comments %}
+		<p class="paragraph">{{ comment.comment }}</p>
+		<p class="paragraph">Note :
+			{{ comment.note }}
+		</p>
+		<p class="paragraph">{{ comment.commentator.pseudo }}</p>
+	{% endfor %}
+</div>
+<div>
+	{% if app.user %}
+
+		{{ form_start(commentForm ) }}
+		{{ form_widget(commentForm) }}
+		{{ form_end(commentForm) }}
+
+			{% else %}
+				<a href="{{ path('app_login') }}">
+					Se connecter pour commenter
+				</a>
 		{% endif %}
-	</div>
-{% endblock %}
+	{% endblock %}

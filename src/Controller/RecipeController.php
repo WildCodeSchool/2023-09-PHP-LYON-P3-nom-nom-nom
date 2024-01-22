@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\Recipe;
 use App\Entity\Step;
@@ -37,7 +36,6 @@ class RecipeController extends AbstractController
         AccessControl $accessControl,
         DeleteButtonService $deleteButtonService,
         UpdateNumberService $updateNumberService,
-        // EntityManagerInterface $entityManager,
     ) {
         $this->accessControl = $accessControl;
         $this->deleteButtonService = $deleteButtonService;
@@ -114,31 +112,40 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}', name: 'app_recipe_show', methods: ['GET'])]
+    #[Route('/{slug}', name: 'app_recipe_show', methods: ['GET', 'POST'])]
     public function show(
         Request $request,
         Recipe $recipe,
         UserRepository $userRepository,
-        CommentRepository $commentRepository
+        CommentRepository $commentRepository,
+        EntityManagerInterface $entityManager,
     ): Response {
-        // $comment = new Comment();
-        // $commentForm = $this->createForm(CommentType::class, $comment);
 
-        // if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-        //     $comment->setRecipe($recipe);
-        //     $this->entityManager->persist($comment);
-        //     dd($comment);
-        //     $this->entityManager->flush();
 
-        //     return $this->redirectToRoute('app_recipe_show', [$recipe->getId()]);
-        // }
-
+        $comments = $commentRepository->findBy(['recipe' => $recipe]);
         $totalLikers = $userRepository->countLikersByRecipe($recipe);
+
+        $comment = new Comment();
+
+        $commentForm = $this->createForm(CommentType::class, $comment);
+        $comment->setRecipe($recipe);
+        $comment->setCommentator($this->getUser());
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_recipe_show', ['slug' => $recipe->getSlug()], Response::HTTP_SEE_OTHER);
+        }
+
+
         return $this->render('recipe/show.html.twig', [
             'recipe' => $recipe,
             'slug' => $recipe->getSlug(),
             'totalLikers' => $totalLikers,
-            // 'comment_form' => $commentForm
+            'commentForm' => $commentForm,
+            'comments' => $comments
         ]);
     }
 
@@ -195,7 +202,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}', name: 'app_recipe_delete', methods: ['POST'])]
+    #[Route('/{slug}/delete', name: 'app_recipe_delete', methods: ['POST'])]
     public function delete(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         // call the AccessControl service => control if there is a connection
@@ -220,37 +227,5 @@ class RecipeController extends AbstractController
         }
 
         return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-    #[Route('/{slug}/steps', name: 'app_recipe_show_step', methods: ['GET'])]
-    public function showSteps(
-        Recipe $recipe,
-        RecipeRepository $recipeRepository,
-        StepRepository $stepRepository
-    ): Response {
-        $recipe = $recipeRepository->findOneBy(['slug' => $recipe->getSlug()]);
-        $steps = $stepRepository->findBy(
-            ['recipe' => $recipe],
-            ['stepNumber' => 'ASC'],
-        );
-        return $this->render('recipe/recipe_step.html.twig', [
-            'recipe' => $recipe,
-            'slug' => $recipe->getSlug(),
-            'steps' => $steps,
-        ]);
-    }
-
-    #[Route('/{slug}/ingredients', name: 'app_recipe_show_ingredients', methods: ['GET'])]
-    public function showIngredients(
-        Recipe $recipe,
-        RecipeIngredientRepository $recipeIngredientRepo
-    ): Response {
-        $recipeIngredients = $recipeIngredientRepo->findBy(['recipe' => $recipe]);
-
-        return $this->render("recipe/recipe_ingredients.html.twig", [
-            'recipe' => $recipe,
-            'slug' => $recipe->getSlug(),
-            'recipeIngredients' => $recipeIngredients
-        ]);
     }
 }
