@@ -23,20 +23,26 @@
 		{# DESKTOP - Photo #}
 		<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 
-		<p class="paragraph text-center">{% if totalLikers > 1 %}
-				recette aimée par {{ totalLikers }} Gastronomnoms.
+		<p class="paragraph text-center">
+			{% if totalLikers > 1 %}
+				recette aimée par
+				{{ totalLikers }}
+				Gastronomnoms.
 			{% elseif totalLikers == 1 %}
-				recette aimée par {{ totalLikers }} Gastronomnom.
+				recette aimée par
+				{{ totalLikers }}
+				Gastronomnom.
 			{% else %}
-			Soyez le 1er Gastronomnom à aimer cette recette.
+				Soyez le 1er Gastronomnom à aimer cette recette.
 			{% endif %}
 			{% if app.user %}
-			{% else %}
-			<br>
-			<a class="paragraph link-underline link-underline-opacity-0" href="{{ path('app_login') }}">
-			Connectez-vous pour aimer cette recette.
-		</a>
-			{% endif %}<p>
+				{% else %}
+					<br>
+					<a class="paragraph link-underline link-underline-opacity-0" href="{{ path('app_login') }}">
+						Connectez-vous pour aimer cette recette.
+					</a>
+			{% endif %}
+		</p>
 	</section>
 	{# INFOS recette #}
 	<div>
@@ -60,12 +66,68 @@
 			</div>
 		</div>
 
-	{# BOUTONS CRUD #}
-	<div class="crud-button-block">
-		{% if is_granted("ROLE_CONTRIBUTOR") %}
-			<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { slug: recipe.slug }) }}">Editer la recette</a>
-			{{ include('recipe/_delete_form.html.twig') }}
+		{# BOUTONS CRUD #}
+		<div class="crud-button-block">
+			{% if is_granted("ROLE_CONTRIBUTOR") %}
+				<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { slug: recipe.slug }) }}">Editer la recette</a>
+				{{ include('recipe/_delete_form.html.twig') }}
+				<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
+			{% endif %}
+		</div>
+		{# ------------------------commentaire---------------------------- #}
+
+		{% if app.user %}
+			<div class="comment container w-50">
+				{{ form_start(commentForm ) }}
+				{{ form_widget(commentForm) }}
+				{{ form_end(commentForm) }}
+			</div>
+		{% else %}
+
+			<div class="d-flex justify-content-around d-md-none">
+				<a class="btn button-crud w-75 mt-3" href="{{ path('app_login') }}">
+					Se connecter pour commenter
+				</a>
+			</div>
+			<div class="d-none d-md-block">
+				<div class="d-flex justify-content-center">
+					<a class="btn button-crud w-25 mt-3" href="{{ path('app_login') }}">
+						Se connecter pour commenter
+					</a>
+				</div>
+			</div>
 		{% endif %}
-		<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
+	</div>
+	<h3 class="mt-3 text-center">Qu'en pense nos Gastronomnoms ?</h3>
+	<p class="paragraph text-center">Note moyenne donnée par nos Gastronomnoms :
+		{{ totalNote }}</p>
+	<div class="container d-md-none">
+		{% for comment in recipe.comments %}
+			<div class="card mx-auto mb-2 w-75">
+				<div class="card-body text-center">
+					<h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
+					<h6 class="card-subtitle mb-2 text-body-secondary">Note :
+						{{ comment.note }}</h6>
+					<p class="card-text">{{ comment.comment }}</p>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+	<div class="d-none d-md-block">
+		<div class="d-flex gap-5 justify-content-evenly flex-wrap">
+			{% for comment in recipe.comments %}
+				<div class="card w-25">
+					<div class="card-body">
+						<h5 class="card-title">Posté par :
+							{{ comment.commentator.pseudo }}</h5>
+						<h6 class="card-subtitle mb-2 text-body-secondary">Note :
+							{{ comment.note }}</h6>
+						<p class="card-text">Commentaire :
+							<br>{{ comment.comment }}</p>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
 	</div>
 {% endblock %}
