@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use App\Repository\RecipeRepository;
+use App\Service\ImageService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +23,7 @@ class CategoryController extends AbstractController
         RecipeRepository $recipeRepository,
         Request $request,
         PaginatorInterface $paginator,
+        ImageService $imageService
     ): Response {
         $category = $categoryRepository->findOneBy(['id' => $id]);
         $recipes = $recipeRepository->findBy(['category' => $category], ['nameRecipe' => 'ASC']);
@@ -32,7 +34,7 @@ class CategoryController extends AbstractController
             $request->query->getInt('page', 1),
             6
         );
-
+        $imagePaths = $imageService->verifyFilesRecipePictures($recipes);
         $slug = $category->getSlug();
 
         return $this->render('category/show.html.twig', [
@@ -40,7 +42,8 @@ class CategoryController extends AbstractController
             'recipes' => $recipes,
             'slug' => $slug,
             'totalRecipesByCategory' => $totalRecipesByCat,
-            'paginations' => $paginations
+            'paginations' => $paginations,
+            'imagePaths' => $imagePaths,
         ]);
     }
 }

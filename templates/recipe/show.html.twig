@@ -18,10 +18,10 @@
 
 		{# MOBILE - Photo #}
 		<div class="ps-5 container text-center">
-			<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-md-none pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
+			<img src="{{ asset(imagePath) }}" class="d-md-none pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 		</div>
 		{# DESKTOP - Photo #}
-		<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
+		<img src="{{ asset(imagePath) }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 
 		<p class="paragraph text-center">
 			{% if totalLikers > 1 %}

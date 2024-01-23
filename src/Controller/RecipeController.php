@@ -15,6 +15,7 @@ use App\Repository\StepRepository;
 use App\Repository\UserRepository;
 use App\Service\AccessControl;
 use App\Service\DeleteButtonService;
+use App\Service\ImageService;
 use App\Service\UpdateNumberService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,8 +43,11 @@ class RecipeController extends AbstractController
         $this->updateNumberService = $updateNumberService;
     }
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
-    public function index(RecipeRepository $recipeRepository, CategoryRepository $categoryRepository): Response
-    {
+    public function index(
+        RecipeRepository $recipeRepository,
+        CategoryRepository $categoryRepository,
+        // ImageService $imageService
+    ): Response {
         $categories = $categoryRepository->findAll();
         $recipes = [];
 
@@ -54,14 +58,17 @@ class RecipeController extends AbstractController
                 ['id' => 'DESC'],
                 6
             );
-        }
+            // $recipes = $recipeRepository->findBy(['category' => $category], ['id' => 'DESC'], 6);
 
+            // $imagePaths[$category->getId()] = $imageService->verifyFilesRecipePictures($recipes);
+        }
         $totalRecipes = $recipeRepository->countRecipes();
 
         return $this->render('recipe/index.html.twig', [
             'categories' => $categories,
             'totalRecipes' => $totalRecipes,
             'recipes' => $recipes,
+            // 'imagePaths' => $imagePaths,
         ]);
     }
 
@@ -131,12 +138,16 @@ class RecipeController extends AbstractController
         UserRepository $userRepository,
         CommentRepository $commentRepository,
         EntityManagerInterface $entityManager,
+        ImageService $imageService,
     ): Response {
 
 
         $comments = $commentRepository->findBy(['recipe' => $recipe]);
         $totalLikers = $userRepository->countLikersByRecipe($recipe);
         $totalNote = $commentRepository->averageNote($recipe);
+
+
+        $imagePath = $imageService->verifyFileRecipePicture($recipe);
 
         $comment = new Comment();
 
@@ -159,7 +170,8 @@ class RecipeController extends AbstractController
             'totalLikers' => $totalLikers,
             'commentForm' => $commentForm,
             'comments' => $comments,
-            'totalNote' => $totalNote
+            'totalNote' => $totalNote,
+            'imagePath' => $imagePath,
         ]);
     }
 
