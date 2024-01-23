@@ -23,9 +23,10 @@ class RecipeStepController extends AbstractController
             ['recipe' => $recipe],
             ['stepNumber' => 'ASC'],
         );
+        $slug = $recipe->getSlug();
         return $this->render('recipe/recipe_step.html.twig', [
             'recipe' => $recipe,
-            'slug' => $recipe->getSlug(),
+            'slug' => $slug,
             'steps' => $steps,
         ]);
     }

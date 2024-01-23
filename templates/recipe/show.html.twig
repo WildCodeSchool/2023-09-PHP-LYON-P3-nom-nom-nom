@@ -43,7 +43,6 @@
 					</a>
 			{% endif %}
 		</p>
-		<p></p>
 	</section>
 	{# INFOS recette #}
 	<div>
@@ -75,7 +74,7 @@
 				<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
 			{% endif %}
 		</div>
-{# ------------------------commentaire---------------------------- #}
+		{# ------------------------commentaire---------------------------- #}
 
 		{% if app.user %}
 			<div class="comment container w-50">
@@ -99,37 +98,36 @@
 			</div>
 		{% endif %}
 	</div>
-</div>
-<h3 class="mt-3 text-center">Qu'en pense nos Gastronomnoms ?</h3>
-<p class="paragraph text-center">Note moyenne donnée par nos Gastronomnoms :
-	{{ totalNote }}</p>
-<div class="container d-md-none">
-	{% for comment in recipe.comments %}
-		<div class="card mx-auto mb-2 w-75">
-			<div class="card-body text-center">
-				<h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
-				<h6 class="card-subtitle mb-2 text-body-secondary">Note :
-					{{ comment.note }}</h6>
-				<p class="card-text">{{ comment.comment }}</p>
-			</div>
-		</div>
-	{% endfor %}
-</div>
-
-<div class="d-none d-md-block">
-	<div class="d-flex gap-5 justify-content-evenly flex-wrap">
+	<h3 class="mt-3 text-center">Qu'en pense nos Gastronomnoms ?</h3>
+	<p class="paragraph text-center">Note moyenne donnée par nos Gastronomnoms :
+		{{ totalNote }}</p>
+	<div class="container d-md-none">
 		{% for comment in recipe.comments %}
-
-			<div class="card w-25">
-				<div class="card-body">
-					<h5 class="card-title">Posté par :
-						{{ comment.commentator.pseudo }}</h5>
+			<div class="card mx-auto mb-2 w-75">
+				<div class="card-body text-center">
+					<h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
 					<h6 class="card-subtitle mb-2 text-body-secondary">Note :
 						{{ comment.note }}</h6>
-					<p class="card-text">Commentaire :
-						<br>{{ comment.comment }}</p>
+					<p class="card-text">{{ comment.comment }}</p>
 				</div>
 			</div>
 		{% endfor %}
 	</div>
-</div></div>{% endblock %}
+
+	<div class="d-none d-md-block">
+		<div class="d-flex gap-5 justify-content-evenly flex-wrap">
+			{% for comment in recipe.comments %}
+				<div class="card w-25">
+					<div class="card-body">
+						<h5 class="card-title">Posté par :
+							{{ comment.commentator.pseudo }}</h5>
+						<h6 class="card-subtitle mb-2 text-body-secondary">Note :
+							{{ comment.note }}</h6>
+						<p class="card-text">Commentaire :
+							<br>{{ comment.comment }}</p>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

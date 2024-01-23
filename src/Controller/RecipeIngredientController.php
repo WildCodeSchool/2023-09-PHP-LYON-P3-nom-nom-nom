@@ -18,9 +18,11 @@ class RecipeIngredientController extends AbstractController
     ): Response {
         $recipeIngredients = $recipeIngredientRepo->findBy(['recipe' => $recipe]);
 
+        $slug = $recipe->getSlug();
+
         return $this->render("recipe/recipe_ingredients.html.twig", [
             'recipe' => $recipe,
-            'slug' => $recipe->getSlug(),
+            'slug' => $slug,
             'recipeIngredients' => $recipeIngredients
         ]);
     }

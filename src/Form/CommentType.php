@@ -3,9 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Comment;
-// use App\Entity\Recipe;
-// use App\Entity\user;
-// use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
