@@ -124,6 +124,7 @@ class RecipeController extends AbstractController
 
         $comments = $commentRepository->findBy(['recipe' => $recipe]);
         $totalLikers = $userRepository->countLikersByRecipe($recipe);
+        $totalNote = $commentRepository->averageNote($recipe);
 
         $comment = new Comment();
 
@@ -145,7 +146,8 @@ class RecipeController extends AbstractController
             'slug' => $recipe->getSlug(),
             'totalLikers' => $totalLikers,
             'commentForm' => $commentForm,
-            'comments' => $comments
+            'comments' => $comments,
+            'totalNote' => $totalNote
         ]);
     }
 
