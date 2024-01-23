@@ -25,7 +25,7 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route('/recettes')]
+#[Route('/Recettes')]
 class RecipeController extends AbstractController
 {
     private AccessControl $accessControl;
@@ -45,11 +45,23 @@ class RecipeController extends AbstractController
     public function index(RecipeRepository $recipeRepository, CategoryRepository $categoryRepository): Response
     {
         $categories = $categoryRepository->findAll();
+        $recipes = [];
+
+        foreach ($categories as $category) {
+            // Fetch only 6 recipes for each category
+            $recipes[$category->getId()] = $recipeRepository->findBy(
+                ['category' => $category],
+                ['id' => 'DESC'],
+                6
+            );
+        }
+
         $totalRecipes = $recipeRepository->countRecipes();
 
         return $this->render('recipe/index.html.twig', [
             'categories' => $categories,
-            'totalRecipes' => $totalRecipes
+            'totalRecipes' => $totalRecipes,
+            'recipes' => $recipes,
         ]);
     }
 

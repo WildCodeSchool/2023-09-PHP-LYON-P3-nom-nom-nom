@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/recettes')]
 class RecipeIngredientController extends AbstractController
 {
-    #[Route('/{slug}/ingredients', name: 'app_recipe_show_ingredients', methods: ['GET'])]
+    #[Route('/{slug}/Ingredients', name: 'app_recipe_show_ingredients', methods: ['GET'])]
     public function showIngredients(
         Recipe $recipe,
         RecipeIngredientRepository $recipeIngredientRepo

@@ -22,6 +22,8 @@ class Category
     private Collection $recipes;
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
 
     public function __construct()
     {
@@ -83,6 +85,17 @@ class Category
     public function setPicture(?string $picture): static
     {
         $this->picture = $picture;
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
         return $this;
     }
 }

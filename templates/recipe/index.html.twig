@@ -7,43 +7,64 @@
 	{% include 'components/_messages.html.twig' %}
 	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
 	<h1 class="text-center mt-2">LISTE DES RECETTES</h1>
-	<h3 class="color-count text-center mb-5">
+	<h3 class="w-75 mx-auto color-count text-center mb-5">
 		Découvrez nos
 		{{ totalRecipes }}
 		recettes et savourez-les !!!</h3>
 
-	<div class="d-md-none text-center">
+	{# MOBILE #}
+	<div class="d-md-none">
 		{% for category in categories %}
-			<h2 class="category-in-recipe mt-3">{{ category.name }}</h2>
-			<div class="d-flex flex-wrap gap-1 justify-content-center text-center">
-				{% for recipe in category.recipes %}
-					<div class="container-fluid recipe-list-mobile mb-2">
-						<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list-mobile object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
-						<h5>{{ recipe.nameRecipe }}</h5>
+			<h2 class="category-in-recipe mt-3 text-center">{{ category.name }}</h2>
+			<a href="{{ path('app_category_show',{ slug: category.slug }) }}">
+				<strong>Voir toutes les
+					{{ category.name }}</strong>
+			</a>
+			<div class="d-flex overflow-x-auto">
+				{% for recipe in recipes[category.id] %}
+					<div class="position-relative ms-3 mb-3">
+						<div class="container">
+							<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}">
+								<img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
+							<div class="container-fluid carousel-caption glassmorphism-mobile-categories">
+								<h5 class="w-75 container text-center">{{ recipe.nameRecipe }}</h5>
+							</div>
+						</div>
 					</div>
-											{% else %}
-							<p>Aucune recette dans cette catégorie actuellement.</p>
+				{% else %}
+					<p class="container text-center">Aucune recette dans cette catégorie actuellement.</p>
 				{% endfor %}
 			</div>
 		{% endfor %}
 	</div>
+
+
+	{# DESKTOP #}
 	<div class="d-none d-md-block">
-		<div class="text-center mb-2">
+		<div class="text-center mb-5 ">
 			{% for category in categories %}
-				<h2 class="category-in-recipe mt-3">{{ category.name }}</h2>
-				<div class="d-flex flex-wrap justify-content-center gap-1 text-center">
-					{% for recipe in category.recipes %}
-						<div class="container-fluid recipe-list">
-							<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-list object-fit-cover w-75 mb-3" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
-							<h5>{{ recipe.nameRecipe }}</h5>
+				<a href="{{ path('app_category_show', { slug: category.slug }) }}" class="link-underline link-underline-opacity-0">
+					<h2 class="category-in-recipe mt-3">{{ category.name }}</h2>
+				</a>
+				<div class="w-75 mx-auto gap-1 row-gap-3 d-flex flex-wrap justify-content-center">
+					{% for recipe in recipes[category.id] %}
+						<div>
+							<a href="{{ path('app_recipe_show',{ slug: recipe.slug }) }}">
+								<img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
+							<div class="position-relative ">
+								<div class="glassmorphism-desktop m-2 py-2">
+									<h5>{{ recipe.nameRecipe }}</h5>
+								</div>
+							</div>
 						</div>
-						{% else %}
-							<p>Aucune recette dans cette catégorie actuellement.</p>
+					{% else %}
+						<p>Aucune recette dans cette catégorie actuellement.</p>
 					{% endfor %}
 				</div>
 			{% endfor %}
 		</div>
 	</div>
+
 	{% if app.user %}
 		<div class="d-flex justify-content-center">
 			<a class="container btn button-form center mt-2" href="{{ path('app_recipe_new') }}" role="button">Ajouter votre recette</a>
