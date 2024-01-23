@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/step')]
+#[Route('/Etapes')]
 #[IsGranted('ROLE_ADMIN')]
 class StepController extends AbstractController
 {

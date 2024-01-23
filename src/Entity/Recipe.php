@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
+use App\Traits\ImageUploadTrait;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -24,6 +25,8 @@ use Symfony\Component\HttpFoundation\File\File;
 )]
 class Recipe
 {
+    use ImageUploadTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -74,14 +77,14 @@ class Recipe
     private ?DateTimeInterface $updatedAt = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $picture = null;
+    protected ?string $picture = null;
 
     #[Vich\UploadableField(mapping: 'picture_file', fileNameProperty: 'picture')]
     #[Assert\File(
         maxSize: '2M',
         mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
     )]
-    private ?File $pictureFile = null;
+    protected ?File $pictureFile = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     private ?User $owner = null;
@@ -94,12 +97,15 @@ class Recipe
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Comment::class, cascade: ['remove'])]
+    private Collection $comments;
 
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
         $this->steps = new ArrayCollection();
         $this->likers = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     #[ORM\PrePersist]
@@ -231,32 +237,6 @@ class Recipe
         return $this->steps;
     }
 
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?string $picture): static
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
-    public function setPictureFile(File $image = null): Recipe
-    {
-        $this->pictureFile = $image;
-        if ($image) {
-            $this->updatedAt = new DateTime('now');
-        }
-        return $this;
-    }
-
-    public function getPictureFile(): ?File
-    {
-        return $this->pictureFile;
-    }
-
     public function addStep(Step $step): static
     {
         if (!$this->steps->contains($step)) {
@@ -347,6 +327,36 @@ class Recipe
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+// set the owning side to null (unless already changed)
+            if ($comment->getRecipe() === $this) {
+                $comment->setRecipe(null);
+            }
+        }
 
         return $this;
     }

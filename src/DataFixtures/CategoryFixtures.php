@@ -6,9 +6,13 @@ use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class CategoryFixtures extends Fixture
 {
+    public function __construct(private SluggerInterface $slugger)
+    {
+    }
     public const CATEGORIES = [
         [
             'name' => 'Entrées',
@@ -41,6 +45,8 @@ class CategoryFixtures extends Fixture
         foreach (self::CATEGORIES as $categoryFixture) {
             $category = new Category();
             $category->setName($categoryFixture['name']);
+            $slug = $this->slugger->slug($categoryFixture['name']);
+            $category->setSlug($slug);
             $category->setPicture($categoryFixture['picture']);
             $manager->persist($category);
             $this->addReference('category_' . $categoryFixture['name'], $category);
