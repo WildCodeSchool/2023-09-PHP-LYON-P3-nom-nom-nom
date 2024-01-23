@@ -43,4 +43,26 @@ class RecipeTest extends KernelTestCase
 
         $this->assertCount(1, $errors);
     }
+
+    public function testTooLongNameRecipe(): void
+    {
+        self::bootKernel();
+        $container = static::getContainer();
+
+        $recipe = $this->getRecipeFields();
+
+        $recipe->setNameRecipe('Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Mauris ex quam, rutrum vel venenatis et, sollicitudin eget nisl. Mauris vel rutrum massa.
+        Morbi mattis, leo vel faucibus imperdiet, lorem neque rhoncus turpis, ac hendrerit augue tortor a justo.
+        Ut eu neque urna. Duis ultricies non nulla tincidunt interdum.
+        Donec dapibus, tellus id sollicitudin mollis, risus ante iaculis turpis, at ultrices leo nulla in nulla.
+        In hac habitasse platea dictumst. Sed eget felis sagittis, suscipit ante at, laoreet neque.
+        Morbi placerat felis sit amet felis lacinia consequat.
+        Quisque metus enim, consequat scelerisque dapibus at, dictum eget sapien.
+        Praesent justo nulla, sodales quis.');
+
+        $errors = $container->get('validator')->validate($recipe);
+
+        $this->assertCount(1, $errors);
+    }
 }
