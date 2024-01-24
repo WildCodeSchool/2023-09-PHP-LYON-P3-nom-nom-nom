@@ -46,11 +46,11 @@ class RecipeController extends AbstractController
     public function index(
         RecipeRepository $recipeRepository,
         CategoryRepository $categoryRepository,
-        // ImageService $imageService
+        ImageService $imageService
     ): Response {
-        $categories = $categoryRepository->findAll();
         $recipes = [];
-
+        $imagePaths = [];
+        $categories = $categoryRepository->findAll();
         foreach ($categories as $category) {
             // Fetch only 6 recipes for each category
             $recipes[$category->getId()] = $recipeRepository->findBy(
@@ -58,17 +58,19 @@ class RecipeController extends AbstractController
                 ['id' => 'DESC'],
                 6
             );
-            // $recipes = $recipeRepository->findBy(['category' => $category], ['id' => 'DESC'], 6);
-
-            // $imagePaths[$category->getId()] = $imageService->verifyFilesRecipePictures($recipes);
+            // dd($recipes);
+            $imagePaths[$category->getId()] = $imageService
+            ->verifyFilesRecipePictureIndex($recipes[$category->getId()]);
+            // dd($imagePaths);
         }
         $totalRecipes = $recipeRepository->countRecipes();
+
 
         return $this->render('recipe/index.html.twig', [
             'categories' => $categories,
             'totalRecipes' => $totalRecipes,
             'recipes' => $recipes,
-            // 'imagePaths' => $imagePaths,
+            'imagePaths' => $imagePaths,
         ]);
     }
 

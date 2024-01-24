@@ -34,6 +34,7 @@ class ImageService extends AbstractController
 
     public function verifyFilesRecipePictures(array $recipes): array
     {
+
         $imagePaths = [];
 
         foreach ($recipes as $recipe) {
@@ -53,5 +54,24 @@ class ImageService extends AbstractController
         }
 
         return $imagePaths;
+    }
+
+    public function verifyFilesRecipePictureIndex(array $recipes): array
+    {
+            $imagePaths = [];
+        foreach ($recipes as $recipe) {
+            // Make sure $recipe is an instance of Recipe
+            if ($recipe instanceof Recipe) {
+                $imagePathBuild = '/build/images/' . $recipe->getPicture();
+                $imageExistsInBuild = $this->filesystem->exists($this->getParameter('kernel.project_dir') .
+                '/public/' . $imagePathBuild);
+                if ($imageExistsInBuild) {
+                    $imagePaths[$recipe->getId()] = $imagePathBuild;
+                } else {
+                    $imagePaths[$recipe->getId()] = '/uploads/images/pictures/' . $recipe->getPicture();
+                }
+            }
+        }
+            return $imagePaths;
     }
 }
