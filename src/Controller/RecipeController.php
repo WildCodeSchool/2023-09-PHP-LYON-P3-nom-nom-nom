@@ -58,10 +58,8 @@ class RecipeController extends AbstractController
                 ['id' => 'DESC'],
                 6
             );
-            // dd($recipes);
             $imagePaths[$category->getId()] = $imageService
             ->verifyFilesRecipePictureIndex($recipes[$category->getId()]);
-            // dd($imagePaths);
         }
         $totalRecipes = $recipeRepository->countRecipes();
         return $this->render('recipe/index.html.twig', [

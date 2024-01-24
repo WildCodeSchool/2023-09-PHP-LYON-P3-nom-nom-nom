@@ -18,15 +18,18 @@ class RecipeIngredientController extends AbstractController
         RecipeIngredientRepository $recipeIngredientRepo,
         ImageService $imageService,
     ): Response {
+        $imageingredPaths = [];
         $recipeIngredients = $recipeIngredientRepo->findBy(['recipe' => $recipe]);
         $imagePath = $imageService->verifyFileRecipePicture($recipe);
         $slug = $recipe->getSlug();
+        $imageingredPaths = $imageService->verifyFilesIngredientsPictures($recipeIngredients);
 
         return $this->render("recipe/recipe_ingredients.html.twig", [
             'recipe' => $recipe,
             'slug' => $slug,
             'recipeIngredients' => $recipeIngredients,
             'imagePath' => $imagePath,
+            'imageingredientsPaths' => $imageingredPaths
         ]);
     }
 }

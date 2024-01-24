@@ -99,4 +99,27 @@ class ImageService extends AbstractController
 
         return $imagePaths;
     }
+    public function verifyFilesIngredientsPictures(array $recipeIngredients): array
+    {
+
+        $imagePaths = [];
+
+        foreach ($recipeIngredients as $recipeIngredient) {
+            $imagePathBuild = '/build/images/' . $recipeIngredient->getIngredient()->getPicture();
+            $imageExistsInBuild = $this->filesystem->exists($this->getParameter('kernel.project_dir') .
+            '/public/' . $imagePathBuild);
+            $imagePathUpload = '/uploads/images/pictures/' . $recipeIngredient->getIngredient()->getPicture();
+            $imageExistsInUpload = $this->filesystem->exists($this->getParameter('kernel.project_dir') .
+            '/public/' . $imagePathUpload);
+            if ($imageExistsInBuild) {
+                $imagePaths[] = $imagePathBuild;
+            } elseif ($imageExistsInUpload) {
+                $imagePaths[] = $imagePathUpload;
+            } else {
+                $imagePaths[] = 'pas d\'image';
+            }
+        }
+
+        return $imagePaths;
+    }
 }
