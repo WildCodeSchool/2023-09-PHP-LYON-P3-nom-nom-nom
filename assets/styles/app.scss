@@ -244,6 +244,19 @@ body {
     );
 }
 
+.lien {
+    &:hover{
+        @include myText(
+        ($fontText),
+        ($fontColorTextRed),
+        ($fontSizeText),
+        ($fontStyleText),
+        ($fontWeightText),
+        ($lineHeightText)
+    );
+    }
+}
+
 .textaccount {
     @include myText(
         ($fontText),
@@ -264,6 +277,16 @@ body {
         400,
         ($lineHeightText)
     );
+    &:hover {
+        @include myText(
+            ($fontText),
+            black,
+            ($fontSizeText),
+            ($fontStyleText),
+            400,
+            ($lineHeightText)
+        );
+    }
 }
 
 p {
@@ -321,6 +344,16 @@ h2 {
         ($fontWeightTitle),
         ($lineHeightText)
     );
+    &:hover {
+        @include myText(
+        ($fontTitle),
+        ($fontColorText),
+        ($fontSizeTitle),
+        ($fontStyleText),
+        ($fontWeightTitle),
+        ($lineHeightText)
+        );
+    }
 }
 
 h3 {
@@ -937,4 +970,22 @@ nav {
 
 .comment form div div div{
     width: 100%;
+}
+
+.comment form div div div .btn {
+    @include myButton(
+        8.625rem,
+        2rem,
+        0.75rem,
+        ($backgroundButton),
+        ($fontTitle),
+        ($fontColorButton),
+        ($fontSizeButton),
+        ($fontStyleButton),
+        ($fontWeightButton),
+        ($lineHeightButton)
+    );
+    &:hover {
+        background-color: $backgroundButton;
+    }
 }
