@@ -15,7 +15,6 @@ use App\Repository\StepRepository;
 use App\Repository\UserRepository;
 use App\Service\AccessControl;
 use App\Service\DeleteButtonService;
-use App\Service\ImageService;
 use App\Service\UpdateNumberService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,10 +45,8 @@ class RecipeController extends AbstractController
     public function index(
         RecipeRepository $recipeRepository,
         CategoryRepository $categoryRepository,
-        ImageService $imageService
     ): Response {
         $recipes = [];
-        $imagePaths = [];
         $categories = $categoryRepository->findAll();
         foreach ($categories as $category) {
             // Fetch only 6 recipes for each category
@@ -58,15 +55,12 @@ class RecipeController extends AbstractController
                 ['id' => 'DESC'],
                 6
             );
-            $imagePaths[$category->getId()] = $imageService
-            ->verifyFilesRecipePictureIndex($recipes[$category->getId()]);
         }
         $totalRecipes = $recipeRepository->countRecipes();
         return $this->render('recipe/index.html.twig', [
             'categories' => $categories,
             'totalRecipes' => $totalRecipes,
             'recipes' => $recipes,
-            'imagePaths' => $imagePaths,
         ]);
     }
 
@@ -136,7 +130,6 @@ class RecipeController extends AbstractController
         UserRepository $userRepository,
         CommentRepository $commentRepository,
         EntityManagerInterface $entityManager,
-        ImageService $imageService,
     ): Response {
 
 
@@ -144,8 +137,6 @@ class RecipeController extends AbstractController
         $totalLikers = $userRepository->countLikersByRecipe($recipe);
         $totalNote = $commentRepository->averageNote($recipe);
 
-
-        $imagePath = $imageService->verifyFileRecipePicture($recipe);
 
         $comment = new Comment();
 
@@ -169,7 +160,6 @@ class RecipeController extends AbstractController
             'commentForm' => $commentForm,
             'comments' => $comments,
             'totalNote' => $totalNote,
-            'imagePath' => $imagePath,
         ]);
     }
 

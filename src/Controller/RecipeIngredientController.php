@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Recipe;
 use App\Repository\RecipeIngredientRepository;
-use App\Service\ImageService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,20 +15,14 @@ class RecipeIngredientController extends AbstractController
     public function showIngredients(
         Recipe $recipe,
         RecipeIngredientRepository $recipeIngredientRepo,
-        ImageService $imageService,
     ): Response {
-        $imageingredPaths = [];
         $recipeIngredients = $recipeIngredientRepo->findBy(['recipe' => $recipe]);
-        $imagePath = $imageService->verifyFileRecipePicture($recipe);
         $slug = $recipe->getSlug();
-        $imageingredPaths = $imageService->verifyFilesIngredientsPictures($recipeIngredients);
 
         return $this->render("recipe/recipe_ingredients.html.twig", [
             'recipe' => $recipe,
             'slug' => $slug,
             'recipeIngredients' => $recipeIngredients,
-            'imagePath' => $imagePath,
-            'imageingredientsPaths' => $imageingredPaths
         ]);
     }
 }
