@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\UserEditType;
 use App\Repository\RecipeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,12 +24,30 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/edit', name: 'app_profile_edit')]
-    public function editProfile(): Response
+    public function editProfile(Request $request): Response
     {
         $user = $this->getUser();
+
+        $form = $this->createForm(UserEditType::class, $user);
+        $form->handleRequest($request);
+
         return $this->render('security/profile_edit.html.twig', [
             'user' => $user,
+            'form' => $form,
         ]);
+    }
+
+    #[Route('/delete', name: 'app_profile_delete')]
+    public function deleteProfile(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    {
+
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($user);
+            $entityManager->flush();
+            $this->addFlash('danger', 'Votre compte a été supprimé');
+        }
+
+        return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/favorite', name: 'app_profile_favorite_recipes')]

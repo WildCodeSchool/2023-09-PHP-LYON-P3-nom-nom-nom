@@ -11,18 +11,15 @@
 	<div class="user-container">
 		<img class="object-fit-cover user-avatar" src="{{ asset('build/images/user.png') }}" alt="Photo de l'avatar Nom-Nom"/>
 		<div class="container-card-button">
-			<div class="user-card">
-				<h4>Pseudo</h4>
-				<p>{{app.user.pseudo}}</p>
-			</div>
-			<div class="user-card">
-				<h4>Mail</h4>
-				<p class="user-paragraph">{{app.user.email}}</p>
+			<div class="mx-auto paragraph gap-2">
+				{{ include('security/_form.html.twig', {'button_label': 'Editer la recette'}) }}
 			</div>
 			<div class="user-button">
 				<a href="{{ path('app_profile') }}" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Annuler</a>
 				<a href="#" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Valider</a>
-				<a href="#" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Supprimer</a>
+				<div class="d-flex justify-content-end">
+					{{ include('security/_delete_form.html.twig') }}
+				</div>
 			</div>
 		</div>
 	</div>
