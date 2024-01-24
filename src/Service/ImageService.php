@@ -19,12 +19,12 @@ class ImageService extends AbstractController
     public function verifyFileRecipePicture(Recipe $recipe): string
     {
 
-        // Vérifier si le fichier existe dans public/build/images
+        // Vérifie si le fichier existe dans public/build/images
         $imagePathBuild = '/build/images/' . $recipe->getPicture();
         $imageExistsInBuild = $this->filesystem->exists($this->getParameter('kernel.project_dir') .
         '/public/' . $imagePathBuild);
 
-        // Votre logique pour déterminer le chemin de l'image
+        //Logique pour déterminer le chemin de l'image
         if ($imageExistsInBuild) {
             $imagePath = $imagePathBuild;
         } else {
@@ -59,9 +59,9 @@ class ImageService extends AbstractController
 
     public function verifyFilesRecipePictureIndex(array $recipes): array
     {
-            $imagePaths = [];
+        $imagePaths = [];
         foreach ($recipes as $recipe) {
-            // Make sure $recipe is an instance of Recipe
+            // Vérfie que $recipe est une instance de Recipe
             if ($recipe instanceof Recipe) {
                 $imagePathBuild = '/build/images/' . $recipe->getPicture();
                 $imageExistsInBuild = $this->filesystem->exists($this->getParameter('kernel.project_dir') .
