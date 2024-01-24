@@ -29,11 +29,11 @@ class CategoryController extends AbstractController
         $recipes = $recipeRepository->findBy(['category' => $category], ['nameRecipe' => 'ASC']);
         $totalRecipesByCat = $recipeRepository->countRecipeByCat($category);
 
-        $paginations = $paginator->paginate(
-            $recipes,
-            $request->query->getInt('page', 1),
-            6
-        );
+        // $paginations = $paginator->paginate(
+        //     $recipes,
+        //     $request->query->getInt('page', 1),
+        //     6
+        // );
         $imagePaths = $imageService->verifyFilesRecipePictures($recipes);
         $slug = $category->getSlug();
 
@@ -42,7 +42,7 @@ class CategoryController extends AbstractController
             'recipes' => $recipes,
             'slug' => $slug,
             'totalRecipesByCategory' => $totalRecipesByCat,
-            'paginations' => $paginations,
+
             'imagePaths' => $imagePaths,
         ]);
     }

@@ -50,7 +50,7 @@
 					{% for recipe in recipes[category.id] %}
 						<div>
 							<a href="{{ path('app_recipe_show',{ slug: recipe.slug }) }}">
-								<img src="{{ asset(imagePaths[category.id][recipe.id]) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
+								<img src="{{ asset(imagePaths[category.id][recipe.id]) }}" class="lazy-content pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
 							<div class="position-relative ">
 								<div class="glassmorphism-desktop m-2 py-2">
 									<h5>{{ recipe.nameRecipe }}</h5>

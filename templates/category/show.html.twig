@@ -23,7 +23,8 @@
 {# MOBILE #}
 <div class="d-md-none">
 	<div class="d-flex flex-wrap gap-1 text-center">
-		{% for key, recipe in paginations %}
+		{# {% for key, recipe in paginations %} #}
+		{% for key, recipe in category.recipes %}
 			<div class="position-relative mx-auto">
 				<div class="container m-0 mb-4 p-0">
 					<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset(imagePaths[key]) }}" class="mx-auto recipe-list-mobile object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}"/></a>
@@ -37,10 +38,11 @@
 {# DESKTOP #}
 	<div class="d-none d-md-block">
 		<div class="w-75 mx-auto d-flex flex-wrap gap-1 text-center mb-2 justify-content-center">
-			{% for key, recipe in paginations %}
+			{# {% for key, recipe in paginations %} #}
+			{% for key, recipe in category.recipes %}
 				<div class="position-relative">
 						<div class="gap-5 row-gap-3 d-flex flex-wrap justify-content-center">
-							<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset(imagePaths[key]) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
+							<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset(imagePaths[key]) }}" class="lazy-content pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
 								<div class="glassmorphism-desktop m-2 py-2">
 									<h5>{{ recipe.nameRecipe }}</h5>
 								</div>
@@ -50,8 +52,8 @@
 		</div>
 	</div>
 
-	<div class="d-flex justify-content-center gap-1 mb-5">
+	{# <div class="d-flex justify-content-center gap-1 mb-5">
 		{{ knp_pagination_render(paginations) }}
-	</div>
+	</div> #}
 
 {% endblock %}
