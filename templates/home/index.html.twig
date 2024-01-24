@@ -95,10 +95,10 @@
 
 <div class="mx-auto d-flex flex-wrap justify-content-center text-center">
 
-{% for category in categories %}
+{% for key, category in categories %}
 		<div class="w-25 mb-3 mx-2">
 		<a href="{{ path('app_category_show', { slug: category.slug }) }}">
-			<img class="w-75 pic-category-recipe object-fit" src="{{ asset('build/images/' ~ category.picture) }}" alt="Photo présentant un(e) {{ category.name }}"/>
+			<img class="w-75 pic-category-recipe object-fit" src="{{ asset(imageCategoryPaths[key]) }}" alt="Photo présentant un(e) {{ category.name }}"/>
 		</a>
 		<h3 class="mt-2">{{ category.name }}</h3>
 		</div>

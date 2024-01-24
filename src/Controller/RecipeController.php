@@ -64,8 +64,6 @@ class RecipeController extends AbstractController
             // dd($imagePaths);
         }
         $totalRecipes = $recipeRepository->countRecipes();
-
-
         return $this->render('recipe/index.html.twig', [
             'categories' => $categories,
             'totalRecipes' => $totalRecipes,

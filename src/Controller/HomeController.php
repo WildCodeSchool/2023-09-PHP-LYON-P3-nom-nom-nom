@@ -30,12 +30,14 @@ class HomeController extends AbstractController
         $totalRecipes = $recipeRepository->countRecipes();
 
         $categories = $categoryRepository->findAll();
+        $imageCategoryPaths = $imageService->verifyFilesCategoriesPictures($categories);
 
         return $this->render('home/index.html.twig', [
             'showRecipes' => $showRecipes,
             'totalRecipes' => $totalRecipes,
             'categories' => $categories,
             'imagePaths' => $imagePaths,
+            'imageCategoryPaths' => $imageCategoryPaths
         ]);
     }
 }
