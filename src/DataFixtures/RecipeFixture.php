@@ -264,6 +264,50 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'description' => 'Carpaccio de boeuf et parmesan' ,
             'category' => 'category_Apéritifs'
         ],
+        [
+            'nameRecipe' => 'Crème brulée au fois gras',
+            'prepareTime' => 15,
+            'cookingTime' => 10,
+            'personNumber' => 2,
+            'picture' => 'flan.png',
+            'description' => 'Une délicieuse crème brulée au fois gras',
+            'category' => 'category_Entrées'
+        ],
+        [
+            'nameRecipe' => 'Croustillant camembert',
+            'prepareTime' => 15,
+            'cookingTime' => 10,
+            'personNumber' => 2,
+            'picture' => 'camembert.png',
+            'description' => 'Un croustillant camembert ',
+            'category' => 'category_Entrées'
+        ],
+        [
+            'nameRecipe' => 'Tartare de Saumon',
+            'prepareTime' => 15,
+            'cookingTime' => 10,
+            'personNumber' => 2,
+            'picture' => 'tartare-saumon.png',
+            'description' => 'Le fameux tartare de daurade',
+            'category' => 'category_Entrées'
+        ],
+        [
+            'nameRecipe' => 'Gaspaccio d\'asperges',
+            'prepareTime' => 15,
+            'cookingTime' => 10,
+            'personNumber' => 2,
+            'picture' => 'soupe.png',
+            'description' => 'Le gaspaccio d\'asperges délicieux',
+            'category' => 'category_Entrées'
+        ],[
+            'nameRecipe' => 'Oeufs fumés au bacon',
+            'prepareTime' => 15,
+            'cookingTime' => 10,
+            'personNumber' => 2,
+            'picture' => 'oeuf.png',
+            'description' => 'Une recette simple et efficace',
+            'category' => 'category_Entrées'
+        ],
     ];
     public function load(ObjectManager $manager): void
     {

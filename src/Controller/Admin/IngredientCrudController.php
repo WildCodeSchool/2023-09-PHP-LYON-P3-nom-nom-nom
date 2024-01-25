@@ -19,16 +19,11 @@ class IngredientCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
             TextField::new('nameIngredient'),
             TextField::new('category'),
             BooleanField::new('isAllergen'),
-            ImageField::new('picture')->setBasePath('build/images/')
-            ->onlyOnIndex(),
-            ImageField::new('picture')->setUploadDir('assets/images/')
-            ->onlyOnForms(),
-            ImageField::new('picture')->setBasePath('uploads/images/')
-            ->onlyOnForms(),
+            ImageField::new('picture')->setBasePath('uploads/images/pictures/')
+            ->setUploadDir('public/uploads/images/pictures'),
         ];
     }
 }
