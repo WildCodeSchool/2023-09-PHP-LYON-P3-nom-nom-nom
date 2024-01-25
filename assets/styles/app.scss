@@ -106,7 +106,6 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     padding: 0;
     list-style: none;
     scroll-behavior: smooth;
-    text-decoration: none;
 }
 
 body {
@@ -972,7 +971,7 @@ nav {
     width: 100%;
 }
 
-.comment form div div div .btn {
+.comment form div div div .btn-primary {
     @include myButton(
         8.625rem,
         2rem,
@@ -986,6 +985,6 @@ nav {
         ($lineHeightButton)
     );
     &:hover {
-        background-color: $backgroundButton;
+        color: $fontColorText;
     }
 }
