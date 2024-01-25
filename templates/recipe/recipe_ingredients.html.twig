@@ -13,7 +13,7 @@
 
 		
 		{# DESKTOP - Photo #}
-		<img src="{{ asset(imagePath) }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
+		<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 
 	</section>
 
@@ -21,14 +21,14 @@
 		<h2 class="pt-5 text-center">Ingrédients</h2>
 		<div class="ps-5 w-75 container text-center d-md-none">
 			<div class="row row-gap-4 row-cols-2 align-items-end">
-				{% for key, recipeIngredient in recipeIngredients %}
+				{% for recipeIngredient in recipeIngredients %}
 					<div class="p-2 g-col-6">
 						<p>
 						<strong>{{recipeIngredient.ingredient.nameIngredient}}</strong></br>
 							{{recipeIngredient.quantity}}
 							{{recipeIngredient.unity}}
 						</p>
-						<img src="{{ asset(imageingredientsPaths[key]) }}" class="ingredient-mob" alt="photo de {{ recipeIngredient.ingredient.nameIngredient }}"/>
+						<img src="{{ asset('uploads/images/pictures/') ~ recipeIngredient.ingredient.picture }}" class="ingredient-mob" alt="photo de {{ recipeIngredient.ingredient.nameIngredient }}"/>
 					</div>
 				{% endfor %}
 			</div>
@@ -36,7 +36,7 @@
 		{# version desktop #}
 		<div class="w-50 container text-center d-none d-md-block">
 			<div class="row row-cols-3">
-				{% for key, recipeIngredient in recipeIngredients %}
+				{% for recipeIngredient in recipeIngredients %}
 					<div class="p-5 g-col-6">
 						<p>
 						<strong>{{recipeIngredient.ingredient.nameIngredient}}</strong></br>
@@ -44,7 +44,7 @@
 						{{recipeIngredient.unity}}
 							
 						</p>
-						<img src="{{ asset(imageingredientsPaths[key]) }}" class="ingredient" alt="photo de {{ recipeIngredient.ingredient.nameIngredient }}"/>
+						<img src="{{ asset('uploads/images/pictures/') ~ recipeIngredient.ingredient.picture }}" class="ingredient" alt="photo de {{ recipeIngredient.ingredient.nameIngredient }}"/>
 					</div>
 				{% endfor %}
 			</div>
