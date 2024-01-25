@@ -9,7 +9,7 @@
 	<div class="d-flex flex-column text-center d-md-none">
 	{% for recipe in this.recipes %}
 		<div class="container-fluid w-75">
-		<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
+		<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
 			<h5>{{ recipe.nameRecipe }}</h5>
 			<p>{{ recipe.description }}</p>
 		</div>
@@ -21,7 +21,7 @@
 	<div class="d-flex flex-wrap gap-1 text-center">
 	{% for recipe in this.recipes %}
 		<div class="container-fluid w-25">
-		<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
+		<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
 			<h5>{{ recipe.nameRecipe }}</h5>
 			<p>{{ recipe.description }}</p>
 		</div>

@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Recipe;
 use App\Repository\RecipeRepository;
 use App\Repository\StepRepository;
-use App\Service\ImageService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,10 +17,8 @@ class RecipeStepController extends AbstractController
         Recipe $recipe,
         RecipeRepository $recipeRepository,
         StepRepository $stepRepository,
-        ImageService $imageService,
     ): Response {
         $recipe = $recipeRepository->findOneBy(['slug' => $recipe->getSlug()]);
-        $imagePath = $imageService->verifyFileRecipePicture($recipe);
         $steps = $stepRepository->findBy(
             ['recipe' => $recipe],
             ['stepNumber' => 'ASC'],
@@ -31,7 +28,6 @@ class RecipeStepController extends AbstractController
             'recipe' => $recipe,
             'slug' => $slug,
             'steps' => $steps,
-            'imagePath' => $imagePath,
         ]);
     }
 }
