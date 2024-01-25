@@ -24,12 +24,16 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/edit', name: 'app_profile_edit')]
-    public function editProfile(Request $request): Response
+    public function editProfile(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        $user = $this->getUser();
 
         $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
 
         return $this->render('security/profile_edit.html.twig', [
             'user' => $user,
