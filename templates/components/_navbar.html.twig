@@ -46,10 +46,10 @@
 	<li class="nav-item">
 		<a class="nav-link" href="{{path('app_recipe_new')}}">Ajouter une recette</a>
 	</li>
+	{% if app.user %}
 	<li class="nav-item">
 		<a class="nav-link" href="{{ path('app_profile_favorite_recipes') }}">Favoris</a>
 	</li>
-	{% if app.user %}
 		<li class="nav-item">
 			<a class="nav-link" href="{{path('app_profile')}}">Mon profil</a>
 		</li>
