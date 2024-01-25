@@ -78,4 +78,16 @@ class RecipeRepository extends ServiceEntityRepository
 
         return $countFavRecipes;
     }
+    public function countMyRecipes(User $user): int
+    {
+        //cette fonction compte toutes les recettes
+        $countMyRecipes = $this->createQueryBuilder('r')
+            ->select('count(r.id)')
+            ->andWhere(':user = r.owner')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $countMyRecipes;
+    }
 }

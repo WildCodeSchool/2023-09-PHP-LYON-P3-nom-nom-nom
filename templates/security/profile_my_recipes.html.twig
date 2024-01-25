@@ -5,13 +5,30 @@
 
 {% block body %}
 	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
-	<h1 class="text-center fs-1 mt-4">Mes {{ totalFavoriteRecipes }} recettes favorites</h1>
+	{% if totalMyRecipes > 1 %}
+		<h1 class="text-center fs-1 mt-4">Mes {{ totalMyRecipes }} recettes postées</h1>
+	{% elseif totalMyRecipes == 1 %}
+		<h1 class="text-center fs-1 mt-4">Ma recette postée</h1>
+	{% else %}
+		<h1 class="text-center fs-1 mt-4">Cher Gastronomnom, vous n'avez pas encore partagé de recette</h1>
+		<a class="d-flex justify-content-center mt-4 paragraph lien link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_login') }}">
+			Partagez votre 1ère recette
+		</a>
+	{% endif %}
+			{% if app.user %}
+				{% else %}
+					<br>
+					<a class="paragraph lien link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_profile_my_recipes') }}">
+						Connectez-vous pour aimer cette recette.
+					</a>
+			{% endif %}
+
 	<div class="d-flex justify-content-center">
 		<img class="object-fit-cover user-avatar" src="{{ asset('build/images/user.png') }}" alt="Photo de l'avatar Nom-Nom"/>
 	</div>
 	{# -----------------------mobile---------------------------------- #}
 	<div class="d-md-none text-center">
-		{% for recipe in user.favoriteList %}
+		{% for recipe in user.recipes %}
 			<div class="position-relative">
 				<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
 				<div class="container-fluid carousel-caption d-md-block glassmorphism">
@@ -25,7 +42,7 @@
 	{# --------------------desktop-------------------- #}
 	<div class="d-none d-md-block">
 		<div class="d-flex flex-wrap justify-content-evenly text-center mb-2">
-			{% for recipe in user.favoriteList %}
+			{% for recipe in user.recipes %}
 				<div class="position-relative mb-5">
 					<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}">
 						<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
@@ -40,6 +57,6 @@
 	</div>
 	<div class="user-button">
 		<a href="{{ path('app_profile') }}" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Mon profil</a>
-		<a href="{{ path('app_profile_my_recipes') }}" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Mes recettes</a>
+		<a href="{{ path('app_profile_favorite_recipes') }}" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Mes favoris</a>
 	</div>
 {% endblock %}

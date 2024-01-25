@@ -28,4 +28,15 @@ class SecurityController extends AbstractController
             'totalFavoriteRecipes' => $totalFavoriteRecipes
         ]);
     }
+
+    #[Route('my-profil/my-recipes', name: 'app_profile_my_recipes')]
+    public function myRecipes(RecipeRepository $recipeRepository): Response
+    {
+        $user = $this->getUser();
+        $totalMyRecipes = $recipeRepository->countMyRecipes($user);
+        return $this->render('security/profile_my_recipes.html.twig', [
+            'user' => $user,
+            'totalMyRecipes' => $totalMyRecipes
+        ]);
+    }
 }
