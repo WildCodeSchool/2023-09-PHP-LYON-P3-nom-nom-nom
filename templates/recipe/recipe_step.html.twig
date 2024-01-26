@@ -12,7 +12,7 @@
 		<h2 class="mx-auto text-center py-3 text-uppercase w-75">{{ recipe.nameRecipe }}</h2>
 
 			{# DESKTOP - Photo #}
-		<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
+		<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 
 	</section>
 

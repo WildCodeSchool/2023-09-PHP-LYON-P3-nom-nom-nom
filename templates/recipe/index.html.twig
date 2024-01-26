@@ -25,7 +25,7 @@
 					<div class="position-relative ms-3 mb-3">
 						<div class="container">
 							<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}">
-								<img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
+								<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
 							<div class="container-fluid carousel-caption glassmorphism-mobile-categories">
 								<h5 class="w-75 container text-center">{{ recipe.nameRecipe }}</h5>
 							</div>
@@ -43,14 +43,14 @@
 	<div class="d-none d-md-block">
 		<div class="text-center mb-5 ">
 			{% for category in categories %}
-				<a href="{{ path('app_category_show', { slug: category.slug }) }}" class="link-underline link-underline-opacity-0">
+				<a href="{{ path('app_category_show', { slug: category.slug }) }}" class="link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover">
 					<h2 class="category-in-recipe mt-3">{{ category.name }}</h2>
 				</a>
 				<div class="w-75 mx-auto gap-1 row-gap-3 d-flex flex-wrap justify-content-center">
 					{% for recipe in recipes[category.id] %}
 						<div>
 							<a href="{{ path('app_recipe_show',{ slug: recipe.slug }) }}">
-								<img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
+								<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
 							<div class="position-relative ">
 								<div class="glassmorphism-desktop m-2 py-2">
 									<h5>{{ recipe.nameRecipe }}</h5>

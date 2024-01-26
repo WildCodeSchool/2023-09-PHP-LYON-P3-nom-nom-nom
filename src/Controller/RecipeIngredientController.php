@@ -14,16 +14,15 @@ class RecipeIngredientController extends AbstractController
     #[Route('/{slug}/Ingredients', name: 'app_recipe_show_ingredients', methods: ['GET'])]
     public function showIngredients(
         Recipe $recipe,
-        RecipeIngredientRepository $recipeIngredientRepo
+        RecipeIngredientRepository $recipeIngredientRepo,
     ): Response {
         $recipeIngredients = $recipeIngredientRepo->findBy(['recipe' => $recipe]);
-
         $slug = $recipe->getSlug();
 
         return $this->render("recipe/recipe_ingredients.html.twig", [
             'recipe' => $recipe,
             'slug' => $slug,
-            'recipeIngredients' => $recipeIngredients
+            'recipeIngredients' => $recipeIngredients,
         ]);
     }
 }

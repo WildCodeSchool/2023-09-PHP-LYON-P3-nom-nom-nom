@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/Categories')]
 class CategoryController extends AbstractController
@@ -32,7 +31,6 @@ class CategoryController extends AbstractController
             $request->query->getInt('page', 1),
             6
         );
-
         $slug = $category->getSlug();
 
         return $this->render('category/show.html.twig', [
@@ -40,7 +38,7 @@ class CategoryController extends AbstractController
             'recipes' => $recipes,
             'slug' => $slug,
             'totalRecipesByCategory' => $totalRecipesByCat,
-            'paginations' => $paginations
+            'paginations' => $paginations,
         ]);
     }
 }

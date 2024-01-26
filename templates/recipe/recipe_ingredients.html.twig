@@ -13,7 +13,7 @@
 
 		
 		{# DESKTOP - Photo #}
-		<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
+		<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 
 	</section>
 
@@ -28,7 +28,7 @@
 							{{recipeIngredient.quantity}}
 							{{recipeIngredient.unity}}
 						</p>
-						<img src="{{ asset('build/images/') ~ recipeIngredient.ingredient.picture }}" class="ingredient-mob" alt="photo de {{ recipeIngredient.ingredient.nameIngredient }}"/>
+						<img src="{{ asset('uploads/images/pictures/') ~ recipeIngredient.ingredient.picture }}" class="ingredient-mob" alt="photo de {{ recipeIngredient.ingredient.nameIngredient }}"/>
 					</div>
 				{% endfor %}
 			</div>
@@ -44,7 +44,7 @@
 						{{recipeIngredient.unity}}
 							
 						</p>
-						<img src="{{ asset('build/images/') ~ recipeIngredient.ingredient.picture }}" class="ingredient" alt="photo de {{ recipeIngredient.ingredient.nameIngredient }}"/>
+						<img src="{{ asset('uploads/images/pictures/') ~ recipeIngredient.ingredient.picture }}" class="ingredient" alt="photo de {{ recipeIngredient.ingredient.nameIngredient }}"/>
 					</div>
 				{% endfor %}
 			</div>

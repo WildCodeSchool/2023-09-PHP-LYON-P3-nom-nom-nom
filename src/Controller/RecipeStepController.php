@@ -16,7 +16,7 @@ class RecipeStepController extends AbstractController
     public function showSteps(
         Recipe $recipe,
         RecipeRepository $recipeRepository,
-        StepRepository $stepRepository
+        StepRepository $stepRepository,
     ): Response {
         $recipe = $recipeRepository->findOneBy(['slug' => $recipe->getSlug()]);
         $steps = $stepRepository->findBy(

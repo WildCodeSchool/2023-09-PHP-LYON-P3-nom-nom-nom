@@ -26,7 +26,7 @@
 		{% for recipe in paginations %}
 			<div class="position-relative mx-auto">
 				<div class="container m-0 mb-4 p-0">
-					<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="mx-auto recipe-list-mobile object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}"/></a>
+					<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="mx-auto recipe-list-mobile object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}"/></a>
 					<h5>{{ recipe.nameRecipe }}</h5>
 				</div>
 			</div>
@@ -40,7 +40,7 @@
 			{% for recipe in paginations %}
 				<div class="position-relative">
 						<div class="gap-5 row-gap-3 d-flex flex-wrap justify-content-center">
-							<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('build/images/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
+							<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
 								<div class="glassmorphism-desktop m-2 py-2">
 									<h5>{{ recipe.nameRecipe }}</h5>
 								</div>

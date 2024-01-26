@@ -62,7 +62,7 @@ class Recipe
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, orphanRemoval: true)]
     #[ORM\OrderBy(["stepNumber" => "ASC"])]
-    private Collection $steps;
+    protected Collection $steps;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: RecipeIngredient::class, orphanRemoval: true)]
     private Collection $ingredients;

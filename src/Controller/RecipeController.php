@@ -9,9 +9,7 @@ use App\Form\CommentType;
 use App\Form\RecipeType;
 use App\Repository\CategoryRepository;
 use App\Repository\CommentRepository;
-use App\Repository\RecipeIngredientRepository;
 use App\Repository\RecipeRepository;
-use App\Repository\StepRepository;
 use App\Repository\UserRepository;
 use App\Service\AccessControl;
 use App\Service\DeleteButtonService;
@@ -42,11 +40,12 @@ class RecipeController extends AbstractController
         $this->updateNumberService = $updateNumberService;
     }
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
-    public function index(RecipeRepository $recipeRepository, CategoryRepository $categoryRepository): Response
-    {
-        $categories = $categoryRepository->findAll();
+    public function index(
+        RecipeRepository $recipeRepository,
+        CategoryRepository $categoryRepository,
+    ): Response {
         $recipes = [];
-
+        $categories = $categoryRepository->findAll();
         foreach ($categories as $category) {
             // Fetch only 6 recipes for each category
             $recipes[$category->getId()] = $recipeRepository->findBy(
@@ -55,9 +54,7 @@ class RecipeController extends AbstractController
                 6
             );
         }
-
         $totalRecipes = $recipeRepository->countRecipes();
-
         return $this->render('recipe/index.html.twig', [
             'categories' => $categories,
             'totalRecipes' => $totalRecipes,
@@ -138,6 +135,7 @@ class RecipeController extends AbstractController
         $totalLikers = $userRepository->countLikersByRecipe($recipe);
         $totalNote = $commentRepository->averageNote($recipe);
 
+
         $comment = new Comment();
 
         $commentForm = $this->createForm(CommentType::class, $comment);
@@ -159,7 +157,7 @@ class RecipeController extends AbstractController
             'totalLikers' => $totalLikers,
             'commentForm' => $commentForm,
             'comments' => $comments,
-            'totalNote' => $totalNote
+            'totalNote' => $totalNote,
         ]);
     }
 
