@@ -41,13 +41,13 @@ class RegistrationFormType extends AbstractType
                     'placeholder' => 'Entrer votrez pseudo',
                 ],
             ])
-            ->add('password')
+            ->add('password',)
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe ne correspondent pas.',
                 'options' => ['attr' => ['class' => 'password']],
                 'required' => true,
-                'first_options'  => ['label' => 'Mot de passe',
+                'first_options'  => ['label' => 'Mot de passe (8 caractères minimum)',
                 ],
                 'second_options' => ['label' => 'Confirmation du mot de passe'],
             ])
