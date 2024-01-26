@@ -12,7 +12,7 @@
 		<h2 class="mx-auto text-center py-3 text-uppercase w-75">{{ recipe.nameRecipe }}</h2>
 
 			{# DESKTOP - Photo #}
-		<img src="{{ asset('build/images/') ~ recipe.picture }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
+		<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 
 	</section>
 
@@ -33,7 +33,7 @@
 		</section>
 	<div class="crud-button-block ">
 		{% if is_granted("ROLE_ADMIN") or is_granted("recipe.owner") %}
-			<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { id: recipe.id }) }}">Editer la recette</a>
+			<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { slug: recipe.slug }) }}">Editer la recette</a>
 			{{ include('recipe/_delete_form.html.twig') }}
 		{% endif %}
 		<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>

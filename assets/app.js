@@ -10,6 +10,7 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const icon = document.querySelector(".bento-container");
 const list = document.querySelector(".navbar-desktop");
@@ -60,5 +61,15 @@ function changeIconColor() {
 
 // Appeler la fonction au chargement de la page
 document.addEventListener('DOMContentLoaded', changeIconColor);
+
+setTimeout(function() {
+    const flashMessage = document.querySelector('div.alert');
+    if (flashMessage) {
+        flashMessage.remove();
+    }
+}, 3000);
+
+
+
 
 

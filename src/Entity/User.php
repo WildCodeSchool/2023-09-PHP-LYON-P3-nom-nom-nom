@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(
@@ -24,6 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank(message: 'Vous devez entrer un pseudo.')]
     private ?string $pseudo = null;
 
     #[ORM\Column]
@@ -33,15 +35,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Length(
+        min: 8,
+        max: 50,
+        minMessage: 'Votre mot de passe doit avoir au minimum {{ limit }} caractères.',
+        maxMessage: 'Votre mot de passe ne doit pas dépasser {{ limit }} caractères.',
+    )]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Vous devez entrer votre nom.')]
+    #[Assert\Length(
+        min: 3,
+        max: 20,
+        minMessage: 'Votre Nom de famille doit avoir au minimum {{ limit }} caractères.',
+        maxMessage: 'Votre Nom de famille ne doit pas dépasser {{ limit }} caractères.',
+    )]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message: 'Vous devez entrer votre prénom.')]
+    #[Assert\Length(
+        min: 3,
+        max: 20,
+        minMessage: 'Votre prénom doit avoir au minimum {{ limit }} caractères.',
+        maxMessage: 'Votre prénom de passe ne doit pas dépasser {{ limit }} caractères.',
+    )]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Vous devez entrer votre mail.')]
+    #[Assert\Email(
+        message: 'Le mail {{ value }} n\'est pas valide.',
+    )]
     private ?string $email = null;
 
     #[ORM\Column(type: 'boolean')]
@@ -50,9 +76,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Recipe::class)]
     private Collection $recipes;
 
+    #[ORM\ManyToMany(targetEntity: Recipe::class)]
+    #[ORM\JoinTable(name:'favoriteList')]
+    private Collection $favoriteList;
+    #[ORM\OneToMany(mappedBy: 'commentator', targetEntity: Comment::class)]
+    private Collection $comments;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
+        $this->favoriteList = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -199,5 +233,64 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Recipe>
+     */
+    public function getFavoriteList(): Collection
+    {
+        return $this->favoriteList;
+    }
+
+    public function addToFavoriteList(Recipe $recipe): self
+    {
+        if (!$this->favoriteList->contains($recipe)) {
+            $this->favoriteList->add($recipe);
+        }
+
+        return $this;
+    }
+
+    public function removeFromFavoriteList(Recipe $recipe): self
+    {
+        $this->favoriteList->removeElement($recipe);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setCommentator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+// set the owning side to null (unless already changed)
+            if ($comment->getCommentator() === $this) {
+                $comment->setCommentator(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getPseudo();
     }
 }

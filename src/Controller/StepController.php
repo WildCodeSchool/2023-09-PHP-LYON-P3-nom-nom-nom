@@ -14,30 +14,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/step')]
+#[Route('/Etapes')]
 #[IsGranted('ROLE_ADMIN')]
 class StepController extends AbstractController
 {
-    #[Route('/new', name: 'app_step_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $step = new Step();
-        $form = $this->createForm(StepType::class, $step);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($step);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('step/new.html.twig', [
-            'step' => $step,
-            'form' => $form,
-        ]);
-    }
-
     #[Route('/{id}', name: 'app_step_show', methods: ['GET'])]
     public function show(Step $step): Response
     {

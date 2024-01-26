@@ -15,16 +15,32 @@
 			<i class="fa-solid fa-circle-plus"></i>
 		</a>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="#">
-			<i class="fa-regular fa-heart"></i>
-		</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="{{ path('app_login') }}">
-			<i class="fa-solid fa-circle-user"></i>
-		</a>
-	</li>
+	{% if app.user %}
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('app_profile_favorite_recipes') }}">
+				<i class="fa-regular fa-heart"></i>
+			</a>
+		</li>
+	{% else %}
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('app_login') }}">
+				<i class="fa-regular fa-heart"></i>
+			</a>
+		</li>
+	{% endif %}
+	{% if app.user %}
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('app_profile') }}">
+				<i class="fa-solid fa-circle-user"></i>
+			</a>
+		</li>
+	{% else %}
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('app_login') }}">
+				<i class="fa-solid fa-circle-user"></i>
+			</a>
+		</li>
+	{% endif %}
 </ul>
 
 {# --------------------------menu bento desktop-------------------- #}
@@ -38,13 +54,21 @@
 	<li class="nav-item">
 		<a class="nav-link" href="{{path('app_recipe_new')}}">Ajouter une recette</a>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="#">Favoris</a>
-	</li>
 	{% if app.user %}
+	<li class="nav-item">
+		<a class="nav-link" href="{{ path('app_profile_favorite_recipes') }}">Favoris</a>
+	</li>
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('app_profile_my_recipes') }}">Mes recettes</a>
+		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="{{path('app_profile')}}">Mon profil</a>
 		</li>
+		{% if is_granted("ROLE_ADMIN") %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{path('admin')}}">Mon Dashboard</a>
+            </li>
+        {% endif %}
 		<li class="nav-item">
 			<a class="link-offset-2 link-underline link-underline-opacity-0 nav-link" href="{{ path('app_logout') }}">
 				Se déconnecter</a>

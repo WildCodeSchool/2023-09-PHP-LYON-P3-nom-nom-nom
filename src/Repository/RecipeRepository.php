@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use App\Entity\Recipe;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
@@ -26,16 +27,12 @@ class RecipeRepository extends ServiceEntityRepository
     public function findLikeNameRecipe(string $nameRecipe): array
     {
         // cette fonction est utilisé pour la recherche des recettes.
-        //Elle recherche les recettes en fonction du nom, description et ingrédient
+        //Elle recherche les recettes en fonction du nom de la recette
         $result = [];
 
         if (!empty($nameRecipe)) {
             $result = $this->createQueryBuilder('r')
-                ->join('r.ingredients', 'ri')
-                ->join('ri.ingredient', 'i')
                 ->andWhere('r.nameRecipe LIKE :nameRecipe')
-                ->orWhere('r.description LIKE :nameRecipe')
-                ->orWhere('i.nameIngredient LIKE :nameRecipe')
                 ->setParameter('nameRecipe', '%' . $nameRecipe . '%')
                 ->orderBy('r.nameRecipe', 'ASC')
                 ->getQuery()
@@ -67,5 +64,30 @@ class RecipeRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
 
             return $countByCategory;
+    }
+
+    public function countFavoriteRecipes(User $user): int
+    {
+        //cette fonction compte toutes les recettes
+        $countFavRecipes = $this->createQueryBuilder('r')
+            ->select('count(r.id)')
+            ->andWhere(':user MEMBER OF r.likers')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $countFavRecipes;
+    }
+    public function countMyRecipes(User $user): int
+    {
+        //cette fonction compte toutes les recettes
+        $countMyRecipes = $this->createQueryBuilder('r')
+            ->select('count(r.id)')
+            ->andWhere(':user = r.owner')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $countMyRecipes;
     }
 }

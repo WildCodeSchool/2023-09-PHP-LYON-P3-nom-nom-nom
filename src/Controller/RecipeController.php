@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
+use App\Entity\Comment;
 use App\Entity\Recipe;
 use App\Entity\Step;
+use App\Form\CommentType;
 use App\Form\RecipeType;
 use App\Repository\CategoryRepository;
-use App\Repository\RecipeIngredientRepository;
+use App\Repository\CommentRepository;
 use App\Repository\RecipeRepository;
-use App\Repository\StepRepository;
+use App\Repository\UserRepository;
 use App\Service\AccessControl;
 use App\Service\DeleteButtonService;
 use App\Service\UpdateNumberService;
@@ -20,8 +21,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route('/recettes')]
+#[Route('/Recettes')]
 class RecipeController extends AbstractController
 {
     private AccessControl $accessControl;
@@ -38,20 +40,35 @@ class RecipeController extends AbstractController
         $this->updateNumberService = $updateNumberService;
     }
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
-    public function index(RecipeRepository $recipeRepository, CategoryRepository $categoryRepository): Response
-    {
+    public function index(
+        RecipeRepository $recipeRepository,
+        CategoryRepository $categoryRepository,
+    ): Response {
+        $recipes = [];
         $categories = $categoryRepository->findAll();
+        foreach ($categories as $category) {
+            // Fetch only 6 recipes for each category
+            $recipes[$category->getId()] = $recipeRepository->findBy(
+                ['category' => $category],
+                ['id' => 'DESC'],
+                6
+            );
+        }
         $totalRecipes = $recipeRepository->countRecipes();
-
         return $this->render('recipe/index.html.twig', [
             'categories' => $categories,
-            'totalRecipes' => $totalRecipes
+            'totalRecipes' => $totalRecipes,
+            'recipes' => $recipes,
         ]);
     }
 
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, MailerInterface $mailer, EntityManagerInterface $entityManager): Response
-    {
+    public function new(
+        Request $request,
+        MailerInterface $mailer,
+        EntityManagerInterface $entityManager,
+        SluggerInterface $slugger
+    ): Response {
         // call the AccessControl service => control if there is a connection
         $userLoggedIn = $this->accessControl->checkIfUserLoggedIn();
         if ($userLoggedIn !== true) {
@@ -66,6 +83,8 @@ class RecipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugger->slug($recipe->getNameRecipe());
+            $recipe->setSlug($slug);
             foreach ($recipe->getSteps() as $step) {
                 $step->setRecipe($recipe);
                 $step->setStepNumber($number += 1);
@@ -102,15 +121,47 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_recipe_show', methods: ['GET'])]
-    public function show(Recipe $recipe): Response
-    {
+    #[Route('/{slug}', name: 'app_recipe_show', methods: ['GET', 'POST'])]
+    public function show(
+        Request $request,
+        Recipe $recipe,
+        UserRepository $userRepository,
+        CommentRepository $commentRepository,
+        EntityManagerInterface $entityManager,
+    ): Response {
+
+
+        $comments = $commentRepository->findBy(['recipe' => $recipe]);
+        $totalLikers = $userRepository->countLikersByRecipe($recipe);
+        $totalNote = $commentRepository->averageNote($recipe);
+
+
+        $comment = new Comment();
+
+        $commentForm = $this->createForm(CommentType::class, $comment);
+        $comment->setRecipe($recipe);
+        $comment->setCommentator($this->getUser());
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_recipe_show', ['slug' => $recipe->getSlug()], Response::HTTP_SEE_OTHER);
+        }
+
+
         return $this->render('recipe/show.html.twig', [
             'recipe' => $recipe,
+            'slug' => $recipe->getSlug(),
+            'totalLikers' => $totalLikers,
+            'commentForm' => $commentForm,
+            'comments' => $comments,
+            'totalNote' => $totalNote,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
+    #[Route('/{slug}/edit', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         // call the AccessControl service => control if there is a connection
@@ -154,7 +205,7 @@ class RecipeController extends AbstractController
             $this->updateNumberService->updateStepsNumber($recipe);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_recipe_show', ['id' => $recipe->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_recipe_show', ['slug' => $recipe->getSlug()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('recipe/edit.html.twig', [
@@ -163,7 +214,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_recipe_delete', methods: ['POST'])]
+    #[Route('/{slug}/delete', name: 'app_recipe_delete', methods: ['POST'])]
     public function delete(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         // call the AccessControl service => control if there is a connection
@@ -188,36 +239,5 @@ class RecipeController extends AbstractController
         }
 
         return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-    #[Route('/{id}/steps', name: 'app_recipe_show_step', methods: ['GET'])]
-    public function showSteps(
-        Recipe $recipe,
-        string $id,
-        RecipeRepository $recipeRepository,
-        StepRepository $stepRepository
-    ): Response {
-        $recipe = $recipeRepository->findOneBy(['id' => $id]);
-        $steps = $stepRepository->findBy(
-            ['recipe' => $recipe],
-            ['stepNumber' => 'ASC'],
-        );
-        return $this->render('recipe/recipe_step.html.twig', [
-            'recipe' => $recipe,
-            'steps' => $steps,
-        ]);
-    }
-
-    #[Route('/{id}/ingredients', name: 'app_recipe_show_ingredients', methods: ['GET'])]
-    public function showIngredients(
-        Recipe $recipe,
-        RecipeIngredientRepository $recipeIngredientRepo
-    ): Response {
-        $recipeIngredients = $recipeIngredientRepo->findBy(['recipe' => $recipe]);
-
-        return $this->render("recipe/recipe_ingredients.html.twig", [
-            'recipe' => $recipe,
-            'recipeIngredients' => $recipeIngredients
-        ]);
     }
 }
