@@ -9,7 +9,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 #[Route('/my-profil')]
 class SecurityController extends AbstractController
@@ -23,16 +25,21 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route('/edit', name: 'app_profile_edit')]
-    public function editProfile(Request $request, User $user, EntityManagerInterface $entityManager): Response
-    {
+    #[Route('/edit', name: 'app_profile_edit', methods: ['GET', 'POST'])]
+    public function editProfile(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $userPasswordHasher,
+    ): Response {
+        $user = $this->getUser();
 
         $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
             $entityManager->flush();
+
+            return $this->redirectToRoute('app_profile', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('security/profile_edit.html.twig', [
@@ -51,7 +58,7 @@ class SecurityController extends AbstractController
             $this->addFlash('danger', 'Votre compte a été supprimé');
         }
 
-        return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/favorite', name: 'app_profile_favorite_recipes')]
