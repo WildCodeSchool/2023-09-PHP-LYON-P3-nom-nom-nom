@@ -5,7 +5,16 @@
 
 {% block body %}
 	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
-	<h1 class="text-center fs-1 mt-4">Mes {{ totalFavoriteRecipes }} recettes favorites</h1>
+	{% if totalFavoriteRecipes > 1 %}
+		<h1 class="text-center fs-1 mt-4">Mes {{ totalFavoriteRecipes }} recettes favorites</h1>
+	{% elseif totalFavoriteRecipes == 1 %}
+		<h1 class="text-center fs-1 mt-4">Ma recette favorite</h1>
+	{% else %}
+		<h1 class="text-center fs-1 mt-4">Cher Gastronomnom, vous n'avez pas encore de recette favorite</h1>
+		<a class="d-flex justify-content-center mt-4 paragraph lien link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_recipe_index') }}">
+			Recherchez vos recettes préférées
+		</a>
+	{% endif %}
 	<div class="d-flex justify-content-center">
 		<img class="object-fit-cover user-avatar" src="{{ asset('build/images/user.png') }}" alt="Photo de l'avatar Nom-Nom"/>
 	</div>

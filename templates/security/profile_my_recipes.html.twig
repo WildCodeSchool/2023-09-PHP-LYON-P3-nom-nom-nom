@@ -11,17 +11,10 @@
 		<h1 class="text-center fs-1 mt-4">Ma recette postée</h1>
 	{% else %}
 		<h1 class="text-center fs-1 mt-4">Cher Gastronomnom, vous n'avez pas encore partagé de recette</h1>
-		<a class="d-flex justify-content-center mt-4 paragraph lien link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_login') }}">
+		<a class="d-flex justify-content-center mt-4 paragraph lien link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_recipe_new') }}">
 			Partagez votre 1ère recette
 		</a>
 	{% endif %}
-			{% if app.user %}
-				{% else %}
-					<br>
-					<a class="paragraph lien link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_profile_my_recipes') }}">
-						Connectez-vous pour aimer cette recette.
-					</a>
-			{% endif %}
 
 	<div class="d-flex justify-content-center">
 		<img class="object-fit-cover user-avatar" src="{{ asset('build/images/user.png') }}" alt="Photo de l'avatar Nom-Nom"/>
