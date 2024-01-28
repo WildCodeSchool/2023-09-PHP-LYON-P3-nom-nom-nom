@@ -78,51 +78,45 @@
 
 		{% if app.user %}
 			{# <div class="comment container w-50"> #}
-    <div class="rating-group w-100 d-flex flex-column align-items-center">
-        {{ form_start(commentForm) }}
-		{{ form_row(commentForm.comment) }}
-<div id="full-stars-example-two" class="rating-group d-flex justify-content-center">
-			{{ form_row(commentForm.note) }}
-        <div class="rating__input-group">
-            {% for star in 1..5 %}
-                <label aria-label="{{ star }} star" class="rating__label" for="rating{{ star }}">
-                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                </label>
-                <input
-                    class="rating__input"
-                    type="radio"
-                    id="rating{{ star }}"
-                    name="{{ commentForm.note.vars.full_name }}"
-                    value="{{ star }}"
-                    {% if star == commentForm.note.vars.value %}checked{% endif %}
-                />
-            {% endfor %}
-        </div>
-    </div>
-	{{ form_row(commentForm.Publiez) }}
-		{{ form_end(commentForm) }}
-    </div>
-</div>
-			{# </div> #}
-		{% else %}
+			<div class="rating-group w-100 d-flex flex-column align-items-center">
+				{{ form_start(commentForm) }}
+				{{ form_row(commentForm.comment) }}
+				<div id="full-stars-example-two" class="rating-group d-flex justify-content-center">
+					{{ form_row(commentForm.note) }}
+					<div class="rating__input-group">
+						{% for star in 1..5 %}
+							<label aria-label="{{ star }} star" class="rating__label" for="rating{{ star }}">
+								<i class="rating__icon rating__icon--star fa fa-star"></i>
+							</label>
+							<input class="rating__input" type="radio" id="rating{{ star }}" name="{{ commentForm.note.vars.full_name }}" value="{{ star }}" {% if star == commentForm.note.vars.value %} checked {% endif %}/>
+						{% endfor %}
+					</div>
+				</div>
+				{{ form_row(commentForm.Publiez) }}
+				{{ form_end(commentForm) }}
+			</div>
+		</div>
+		{# </div> #}
+	{% else %}
 
-			<div class="d-flex justify-content-around d-md-none">
-				<a class="btn button-crud w-75 mt-3" href="{{ path('app_login') }}">
+		<div class="d-flex justify-content-around d-md-none">
+			<a class="btn button-crud w-75 mt-3" href="{{ path('app_login') }}">
+				Se connecter pour commenter
+			</a>
+		</div>
+		<div class="d-none d-md-block">
+			<div class="d-flex justify-content-center">
+				<a class="btn button-crud w-25 mt-3" href="{{ path('app_login') }}">
 					Se connecter pour commenter
 				</a>
 			</div>
-			<div class="d-none d-md-block">
-				<div class="d-flex justify-content-center">
-					<a class="btn button-crud w-25 mt-3" href="{{ path('app_login') }}">
-						Se connecter pour commenter
-					</a>
-				</div>
-			</div>
-		{% endif %}
-	</div>
+		</div>
+	{% endif %}
+
 	<h3 class="mt-3 text-center">Qu'en pensent nos Gastronomnoms ?</h3>
 	<p class="paragraph text-center">Note moyenne donnée par nos Gastronomnoms :
-		{{ totalNote|round(1, 'floor')  }} / 5</p>
+		{{ totalNote|round(1, 'floor')  }}
+		/ 5</p>
 	<div class="container d-md-none">
 		{% for comment in recipe.comments %}
 			<div class="card mx-auto mb-2 w-75">
@@ -142,14 +136,18 @@
 				<div class="card w-25 border border-0 shadow ">
 					<div class="card-header">
 						<p class="card-title mt-0">Posté par :
-						<strong> {{ comment.commentator.pseudo }} </strong></p>
+							<strong>
+								{{ comment.commentator.pseudo }}
+							</strong>
+						</p>
 						<h6 class="card-subtitle mb-2 text-body-secondary">Note :
-						<strong>{{ comment.note }}</strong> </h6>
+							<strong>{{ comment.note }}</strong>
+						</h6>
 					</div>
-						<div class="card-body">
-							<p class="card-text mt-0">Commentaire :
-								<br>{{ comment.comment }}</p>
-						</div>
+					<div class="card-body">
+						<p class="card-text mt-0">Commentaire :
+							<br>{{ comment.comment }}</p>
+					</div>
 				</div>
 			{% endfor %}
 		</div>
