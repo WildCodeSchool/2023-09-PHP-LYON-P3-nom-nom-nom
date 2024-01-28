@@ -988,3 +988,8 @@ nav {
         color: $fontColorText;
     }
 }
+
+label.required:before {
+    content: "*";
+    color: $backgroundButton;
+}

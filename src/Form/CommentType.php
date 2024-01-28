@@ -16,7 +16,10 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('comment', TypeTextType::class, [
-                'label' => 'Votre commentaire'
+                'label' => 'Votre commentaire',
+                'attr' => [
+                    'maxlength' => 300,
+                ],
             ])
             ->add('note', ChoiceType::class, [
                 'choices' => [
