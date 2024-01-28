@@ -81,7 +81,7 @@
     <div class="rating-group w-100 d-flex flex-column align-items-center">
         {{ form_start(commentForm) }}
 		{{ form_row(commentForm.comment) }}
-<div id="full-stars-example-two" class="rating-group">
+<div id="full-stars-example-two" class="rating-group d-flex justify-content-center">
 			{{ form_row(commentForm.note) }}
         <div class="rating__input-group">
             {% for star in 1..5 %}
@@ -122,7 +122,7 @@
 	</div>
 	<h3 class="mt-3 text-center">Qu'en pensent nos Gastronomnoms ?</h3>
 	<p class="paragraph text-center">Note moyenne donnée par nos Gastronomnoms :
-		{{ totalNote|round(1, 'floor')  }}</p>
+		{{ totalNote|round(1, 'floor')  }} / 5</p>
 	<div class="container d-md-none">
 		{% for comment in recipe.comments %}
 			<div class="card mx-auto mb-2 w-75">

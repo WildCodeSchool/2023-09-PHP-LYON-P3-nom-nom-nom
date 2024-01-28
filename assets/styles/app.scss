@@ -36,8 +36,7 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 @import "~bootstrap/scss/bootstrap";
 
 // ---------------------------mixin------------------------------
-@mixin myButton(
-    $x,
+@mixin myButton($x,
     $y,
     $radius,
     $color,
@@ -46,8 +45,7 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     $fontSize,
     $fontStyle,
     $fontWeight,
-    $lineHeight
-) {
+    $lineHeight) {
     width: $x;
     height: $y;
     border-radius: $radius;
@@ -60,14 +58,12 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     line-height: $lineHeight;
 }
 
-@mixin myText(
-    $fontFamily,
+@mixin myText($fontFamily,
     $fontColorText,
     $fontSize,
     $fontStyle,
     $fontWeight,
-    $lineHeight
-) {
+    $lineHeight) {
     font-family: $fontFamily;
     color: $fontColorText;
     font-size: $fontSize;
@@ -124,8 +120,7 @@ body {
 }
 
 .button-crud {
-    @include myButton(
-        8.625rem,
+    @include myButton(8.625rem,
         2rem,
         0.75rem,
         ($backgroundButton),
@@ -134,8 +129,7 @@ body {
         ($fontSizeButton),
         ($fontStyleButton),
         ($fontWeightButton),
-        ($lineHeightButton)
-    );
+        ($lineHeightButton));
 
     &:hover {
         background-color: $backgroundButton;
@@ -164,8 +158,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    @include myButton(
-        12rem,
+    @include myButton(12rem,
         4rem,
         0.75rem,
         ($backgroundButton),
@@ -174,8 +167,7 @@ body {
         ($fontSizeButtonBig),
         ($fontStyleButton),
         ($fontWeightButton),
-        ($lineHeightButton)
-    );
+        ($lineHeightButton));
 
     &:hover {
         background-color: $backgroundButton;
@@ -183,8 +175,7 @@ body {
 }
 
 .button-form {
-    @include myButton(
-        16rem,
+    @include myButton(16rem,
         1.875rem,
         0.75,
         ($backgroundButton),
@@ -193,8 +184,7 @@ body {
         ($fontSizeButton),
         ($fontStyleButton),
         ($fontWeightButton),
-        ($lineHeightButton)
-    );
+        ($lineHeightButton));
 
     &:hover {
         background-color: $backgroundButton;
@@ -202,8 +192,7 @@ body {
 }
 
 .button-form-black {
-    @include myButton(
-        16rem,
+    @include myButton(16rem,
         1.875rem,
         0.75,
         ($backgroundButtonDark),
@@ -212,8 +201,7 @@ body {
         ($fontSizeButton),
         ($fontStyleButton),
         ($fontWeightButton),
-        ($lineHeightButton)
-    );
+        ($lineHeightButton));
 
     &:hover {
         background-color: $backgroundButtonDark;
@@ -233,58 +221,49 @@ body {
 
 //---------------------------text-----------------------------
 .paragraph {
-    @include myText(
-        ($fontText),
+    @include myText(($fontText),
         ($fontColorText),
         ($fontSizeText),
         ($fontStyleText),
         ($fontWeightText),
-        ($lineHeightText)
-    );
+        ($lineHeightText));
 }
 
 .lien {
-    &:hover{
-        @include myText(
-        ($fontText),
-        ($fontColorTextRed),
-        ($fontSizeText),
-        ($fontStyleText),
-        ($fontWeightText),
-        ($lineHeightText)
-    );
+    &:hover {
+        @include myText(($fontText),
+            ($fontColorTextRed),
+            ($fontSizeText),
+            ($fontStyleText),
+            ($fontWeightText),
+            ($lineHeightText));
     }
 }
 
 .textaccount {
-    @include myText(
-        ($fontText),
+    @include myText(($fontText),
         ($fontColorButton),
         ($fontSizeText),
         ($fontStyleText),
         ($fontWeightText),
-        ($lineHeightText)
-    );
+        ($lineHeightText));
 }
 
 .noaccount {
-    @include myText(
-        ($fontText),
+    @include myText(($fontText),
         ($fontColorButton),
         ($fontSizeText),
         ($fontStyleText),
         400,
-        ($lineHeightText)
-    );
+        ($lineHeightText));
+
     &:hover {
-        @include myText(
-            ($fontText),
+        @include myText(($fontText),
             black,
             ($fontSizeText),
             ($fontStyleText),
             400,
-            ($lineHeightText)
-        );
+            ($lineHeightText));
     }
 }
 
@@ -294,14 +273,12 @@ p {
 
 .infos-recipe {
     display: inline;
-    @include myText(
-        ($fontTitle),
+    @include myText(($fontTitle),
         ($fontColorText),
         ($fontSizeInfosRecipe),
         ($fontStyleText),
         ($fontWeightInfos),
-        ($lineHeightText)
-    );
+        ($lineHeightText));
 }
 
 .glassmorphism {
@@ -313,7 +290,7 @@ p {
     bottom: 2vh;
     left: 0;
     text-align: center;
-    color: #faf6f4; 
+    color: #faf6f4;
     width: 95%;
     backdrop-filter: blur(9.2px);
 }
@@ -323,80 +300,67 @@ p {
 }
 
 h2 {
-    @include myText(
-        ($fontTitle),
+    @include myText(($fontTitle),
         ($fontColorText),
         ($fontSizeTitle),
         ($fontStyleText),
         ($fontWeightTitle),
-        ($lineHeightText)
-    );
+        ($lineHeightText));
 }
 
 .category-in-recipe {
     text-decoration: none;
-    @include myText(
-        ($fontTitle),
+    @include myText(($fontTitle),
         ($fontColorTextRed),
         ($fontSizeTitle),
         ($fontStyleText),
         ($fontWeightTitle),
-        ($lineHeightText)
-    );
+        ($lineHeightText));
+
     &:hover {
-        @include myText(
-        ($fontTitle),
-        ($fontColorText),
-        ($fontSizeTitle),
-        ($fontStyleText),
-        ($fontWeightTitle),
-        ($lineHeightText)
-        );
+        @include myText(($fontTitle),
+            ($fontColorText),
+            ($fontSizeTitle),
+            ($fontStyleText),
+            ($fontWeightTitle),
+            ($lineHeightText));
     }
 }
 
 h3 {
-    @include myText(
-        ($fontTitle),
+    @include myText(($fontTitle),
         ($fontColorTextRed),
         ($fontSizeTitleH3),
         ($fontStyleText),
         ($fontWeightTitle),
-        ($lineHeightText)
-    );
+        ($lineHeightText));
 }
 
 h1 {
-    @include myText(
-        ($fontTitle),
+    @include myText(($fontTitle),
         ($fontColorText),
         ($fontSizeTitle),
         ($fontStyleText),
         ($fontWeightTitle),
-        ($lineHeightText)
-    );
+        ($lineHeightText));
 }
 
 .lost {
-    @include myText(
-        ($fontTitle),
+    @include myText(($fontTitle),
         ($fontColorButton),
         ($fontSizeTitle),
         ($fontStyleText),
         ($fontWeightTitle),
-        ($lineHeightText)
-    );
+        ($lineHeightText));
 }
 
 .lost-password form div label {
-    @include myText(
-        ($fontText),
+    @include myText(($fontText),
         ($fontColorButton),
         ($fontSizeText),
         ($fontStyleText),
         400,
-        ($lineHeightText)
-    );
+        ($lineHeightText));
 }
 
 //--------------------navbar-mobile-------------------
@@ -420,7 +384,7 @@ h1 {
     background-color: $backgroundMainColor;
     margin: 0;
     bottom: 0;
-    
+
 
     @include media-breakpoint-up(md) {
         display: none;
@@ -440,14 +404,12 @@ ul {
 }
 
 .color-count {
-    @include myText(
-        ($fontTitle),
+    @include myText(($fontTitle),
         ($fontColorText),
         ($fontSizeTitleH3),
         ($fontStyleText),
         ($fontWeightTitle),
-        ($lineHeightText)
-    );
+        ($lineHeightText));
 }
 
 //--------------------navbar-desktop-------------------//
@@ -540,21 +502,17 @@ ul {
 
 .pic-recipe {
     margin: 15px 0 15px;
-    @include myPicture(
-        ($widthPic),
+    @include myPicture(($widthPic),
         ($heightPic),
         ($borderRadiusPic),
-        ($boxShadowPic)
-    );
+        ($boxShadowPic));
 }
 
 .pic-recipe-desktop {
     margin: 15px 0 15px;
-    @include myPictureDesktop(
-        ($widthPicDesktop),
+    @include myPictureDesktop(($widthPicDesktop),
         ($heightPicDesktop),
-        ($boxShadowPic)
-    );
+        ($boxShadowPic));
 }
 
 //---------------------picture recipe----------------------//
@@ -640,8 +598,7 @@ ul {
     padding: 0 2rem 0 2rem;
     align-items: center;
     text-align: center;
-    @include myButton(
-        max-content,
+    @include myButton(max-content,
         2rem,
         0.45rem,
         ($backgroundButtonDark),
@@ -650,8 +607,7 @@ ul {
         ($fontSizeButton),
         ($fontStyleButton),
         ($fontWeightButton),
-        ($lineHeightButton)
-    );
+        ($lineHeightButton));
 }
 
 // -----------------------recipe-steps page------------------------
@@ -667,7 +623,7 @@ ul {
 }
 
 .bg-fond {
-        background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(0, 0, 0, 0.65);
 }
 
 // --------------------------login desktop--------------------
@@ -684,7 +640,7 @@ ul {
 
 // --------------------------register form --------------------
 
-.register-container{ 
+.register-container {
     @include media-breakpoint-down(md) {
         display: flex;
         flex-direction: column;
@@ -750,7 +706,7 @@ ul {
     }
 }
 
-.register-form .mb-3{
+.register-form .mb-3 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -944,10 +900,12 @@ nav {
     font-family: $fontText;
     border-style: solid;
     border-width: 1px;
+
     a {
         color: $fontColorText;
         text-decoration: none;
     }
+
     &:hover {
         color: $fontColorTextRed;
     }
@@ -962,9 +920,14 @@ nav {
     border-width: 1px;
 }
 
+.rating-group form div .col-sm-10 {
+    width: 100%;
+}
+
+
+
 .rating-group form div div .btn-primary {
-    @include myButton(
-        8.625rem,
+    @include myButton(8.625rem,
         2rem,
         0.75rem,
         ($backgroundButton),
@@ -973,8 +936,8 @@ nav {
         ($fontSizeButton),
         ($fontStyleButton),
         ($fontWeightButton),
-        ($lineHeightButton)
-    );
+        ($lineHeightButton));
+
     &:hover {
         color: $fontColorText;
     }
@@ -989,41 +952,41 @@ label.required:before {
 
 #full-stars-example-two {
     .rating-group {
-      display: inline-flex;
+        display: inline-flex;
     }
-  
+
     .rating__icon {
-      pointer-events: none;
+        pointer-events: none;
     }
-  
+
     .rating__input {
-      position: absolute !important;
-      left: -9999px !important;
+        position: absolute !important;
+        left: -9999px !important;
     }
-  
+
     .rating__input--none {
-      display: none;
+        display: none;
     }
-  
+
     .rating__label {
-      cursor: pointer;
-      padding: 0 0.1em;
-      font-size: 2rem;
+        cursor: pointer;
+        padding: 0 0.1em;
+        font-size: 2rem;
     }
-  
+
     .rating__icon--star {
-      color: orange;
+        color: $backgroundButton;
     }
-  
-    .rating__input:checked ~ .rating__label .rating__icon--star {
-      color: #ddd;
+
+    .rating__input:checked~.rating__label .rating__icon--star {
+        color: #ddd;
     }
-  
+
     .rating-group:hover .rating__label .rating__icon--star {
-      color: orange;
+        color: $backgroundButton;
     }
-  
-    .rating__input:hover ~ .rating__label .rating__icon--star {
-      color: #ddd;
+
+    .rating__input:hover~.rating__label .rating__icon--star {
+        color: #ddd;
     }
-  }
+}
