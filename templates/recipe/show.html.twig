@@ -122,7 +122,7 @@
 	</div>
 	<h3 class="mt-3 text-center">Qu'en pensent nos Gastronomnoms ?</h3>
 	<p class="paragraph text-center">Note moyenne donnée par nos Gastronomnoms :
-		{{ totalNote }} / 5</p>
+		{{ totalNote|round(1, 'floor')  }}</p>
 	<div class="container d-md-none">
 		{% for comment in recipe.comments %}
 			<div class="card mx-auto mb-2 w-75">
@@ -137,17 +137,19 @@
 	</div>
 
 	<div class="d-none d-md-block">
-		<div class="d-flex gap-5 justify-content-evenly flex-wrap">
+		<div class="d-flex gap-3 justify-content-center flex-wrap my-5 ">
 			{% for comment in recipe.comments %}
-				<div class="card w-25">
-					<div class="card-body">
-						<h5 class="card-title">Posté par :
-							{{ comment.commentator.pseudo }}</h5>
+				<div class="card w-25 border border-0 shadow ">
+					<div class="card-header">
+						<p class="card-title mt-0">Posté par :
+						<strong> {{ comment.commentator.pseudo }} </strong></p>
 						<h6 class="card-subtitle mb-2 text-body-secondary">Note :
-							{{ comment.note }}</h6>
-						<p class="card-text">Commentaire :
-							<br>{{ comment.comment }}</p>
+						<strong>{{ comment.note }}</strong> </h6>
 					</div>
+						<div class="card-body">
+							<p class="card-text mt-0">Commentaire :
+								<br>{{ comment.comment }}</p>
+						</div>
 				</div>
 			{% endfor %}
 		</div>
