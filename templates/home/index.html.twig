@@ -27,7 +27,7 @@
 						<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
 						<div class="container-fluid carousel-caption d-md-block glassmorphism">
 							<h5>{{ recipe.nameRecipe }}</h5>
-							<p class="w-75 container text-center">{{ recipe.description }}</p>
+							<p class="w-75 container text-center text-truncate" style="max-width: 350px;">{{ recipe.description }}</p>
 						</div>
 					</div>
 				{% endfor %}
@@ -55,8 +55,8 @@
 						<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 					</a>
 					<div class="glassmorphism-desktop m-2">
-						<h5 class="p-2">{{ recipe.nameRecipe }}</h5>
-						<p class="container text-center">{{ recipe.description }}</p>
+						<h5 class="p-2 text-truncate text-center" style="max-width: 350px;">{{ recipe.nameRecipe }}</h5>
+						<p class="container text-center text-truncate" style="max-width: 450px;">{{ recipe.description }}</p>
 					</div>
 				</div>
 
