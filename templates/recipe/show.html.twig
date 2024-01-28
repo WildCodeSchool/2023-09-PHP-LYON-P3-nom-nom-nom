@@ -77,11 +77,33 @@
 		{# ------------------------commentaire---------------------------- #}
 
 		{% if app.user %}
-			<div class="comment container w-50">
-				{{ form_start(commentForm ) }}
-				{{ form_widget(commentForm) }}
-				{{ form_end(commentForm) }}
-			</div>
+			{# <div class="comment container w-50"> #}
+    <div class="rating-group w-100 d-flex flex-column align-items-center">
+        {{ form_start(commentForm) }}
+		{{ form_row(commentForm.comment) }}
+<div id="full-stars-example-two" class="rating-group">
+			{{ form_row(commentForm.note) }}
+        <div class="rating__input-group">
+            {% for star in 1..5 %}
+                <label aria-label="{{ star }} star" class="rating__label" for="rating{{ star }}">
+                    <i class="rating__icon rating__icon--star fa fa-star"></i>
+                </label>
+                <input
+                    class="rating__input"
+                    type="radio"
+                    id="rating{{ star }}"
+                    name="{{ commentForm.note.vars.full_name }}"
+                    value="{{ star }}"
+                    {% if star == commentForm.note.vars.value %}checked{% endif %}
+                />
+            {% endfor %}
+        </div>
+    </div>
+	{{ form_row(commentForm.Publiez) }}
+		{{ form_end(commentForm) }}
+    </div>
+</div>
+			{# </div> #}
 		{% else %}
 
 			<div class="d-flex justify-content-around d-md-none">

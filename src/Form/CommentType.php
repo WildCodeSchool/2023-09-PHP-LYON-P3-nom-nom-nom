@@ -23,12 +23,16 @@ class CommentType extends AbstractType
             ])
             ->add('note', ChoiceType::class, [
                 'choices' => [
-                    'choisissez une note pour cette recette' => '',
                     '1' => '1',
                     '2' => '2',
                     '3' => '3',
                     '4' => '4',
                     '5' => '5',
+                ],
+                'expanded' => true,
+                'multiple' => false,
+                'attr' => [
+                    'class' => 'rating__input',
                 ]
             ])
             ->add('Publiez', SubmitType::class)
