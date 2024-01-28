@@ -46,7 +46,7 @@
 				<a href="{{ path('app_category_show', { slug: category.slug }) }}" class="link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover">
 					<h2 class="category-in-recipe mt-3">{{ category.name }}</h2>
 				</a>
-				<div class="mx-auto gap-5 row-gap-3 d-flex flex-wrap justify-content-center">
+				<div class="w-75 mx-auto gap-3 row-gap-3 d-flex flex-wrap justify-content-center">
 					{% for recipe in recipes[category.id] %}
 						<div>
 							<a href="{{ path('app_recipe_show',{ slug: recipe.slug }) }}">
@@ -58,8 +58,13 @@
 							</div>
 						</div>
 					{% else %}
-						<p>Aucune recette dans cette catégorie actuellement.</p>
+						<p>Il n'y a pas encore de recette pour cette catégorie.</p>
 					{% endfor %}
+				</div>
+				
+				<div >
+					<a href="{{ path('app_category_show',{ slug: category.slug }) }}" class="w-75 link-dark d-flex justify-content-end">
+					<strong>Voir toutes les recettes > </strong></a>
 				</div>
 			{% endfor %}
 		</div>
