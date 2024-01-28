@@ -13,13 +13,30 @@
 		Liste des
 		{{ category.name }}
 	</h1>
-	
-	<h3 class="mx-auto w-75 color-count text-center mb-5">
-		Découvrez nos
-		{{ totalRecipesByCategory }}
-		recettes et savourez-les !!!
-	</h3>
-
+	{% if totalRecipesByCategory > 1 %}
+		<h3 class="mx-auto w-75 color-count text-center mb-5">
+			Découvrez nos
+			{{ totalRecipesByCategory }}
+			recettes et savourez-les !
+		</h3>
+	{% elseif totalRecipesByCategory == 1 %}
+		<h3 class="mx-auto w-75 color-count text-center mb-5">
+			Découvrez notre recette et savourez-la !
+		</h3>
+	{% else %}
+		<h3 class="mx-auto w-75 color-count text-center mb-5">
+			Il n'existe pas encore de recette dans cette catégorie
+		</h3>
+		{% if app.user %}
+			<a class="d-flex justify-content-center paragraph lien link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_recipe_new') }}">
+				Postez la 1ère recette de cette catégorie
+			</a>
+		{% else %}
+			<a class="d-flex justify-content-center paragraph lien link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_login') }}">
+				Postez la 1ère recette de cette catégorie
+			</a>
+		{% endif %}
+	{% endif %}
 {# MOBILE #}
 <div class="d-md-none">
 	<div class="d-flex flex-wrap gap-1 text-center">
