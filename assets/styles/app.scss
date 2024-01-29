@@ -515,10 +515,6 @@ ul {
         ($boxShadowPic));
 }
 
-//---------------------recipe view----------------------//
-.heart-desktop li {
-    padding: 20%;
-}
 //---------------------picture recipe----------------------//
 .pic-view-recipe {
     @include myPicture(46rem, 25rem, 1.25rem, ($boxShadowPic));
