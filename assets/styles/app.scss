@@ -6,7 +6,7 @@ $backgroundMainColor: #faf6f4;
 $backgroundColorLogin: #74332b;
 $fontTitle: "Maven Pro";
 $fontColorButton: #fff;
-$fontSizeButton: 0.75rem;
+$fontSizeButton: 1rem;
 $fontSizeButtonBig: 1.2rem;
 $fontStyleButton: normal;
 $fontWeightButton: 700;
@@ -120,8 +120,12 @@ body {
 }
 
 .button-crud {
-    @include myButton(8.625rem,
-        2rem,
+    display: flex;
+    justify-items: center;
+    align-items: center;
+ justify-content: center;   
+    @include myButton(none,
+        none,
         0.75rem,
         ($backgroundButton),
         ($fontTitle),
@@ -676,7 +680,7 @@ ul {
         justify-content: center;
         width: 100%;
         position: relative;
-        padding: 20px;
+        padding: 46px;
     }
 
     @include media-breakpoint-up(md) {
@@ -690,12 +694,14 @@ ul {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        padding:3.4rem;
+        margin-right: -2rem;
     }
 }
 
 .register-logo {
-    width: 10.5rem;
-    height: 10rem;
+    width: 7.5rem;
+    height: 7rem;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -727,6 +733,10 @@ ul {
 .register-button:hover {
     background-color: $backgroundButtonDark;
 }
+
+.invalid-feedback {
+    color:#ffffff;
+    }
 
 // --------------------------ingredient desktop--------------------
 .ingredient {
