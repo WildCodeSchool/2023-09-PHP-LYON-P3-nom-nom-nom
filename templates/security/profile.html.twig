@@ -12,6 +12,14 @@
 		<img class="object-fit-cover user-avatar" src="{{ asset('build/images/user.png') }}" alt="Photo de l'avatar Nom-Nom"/>
 		<div class="container-card-button">
 			<div class="user-card">
+				<h4>Nom</h4>
+				<p class="user-paragraph">{{app.user.lastname}}</p>
+			</div>
+			<div class="user-card">
+				<h4>Prénom</h4>
+				<p class="user-paragraph">{{app.user.firstname}}</p>
+			</div>
+			<div class="user-card">
 				<h4>Pseudo</h4>
 				<p>{{app.user.pseudo}}</p>
 			</div>
