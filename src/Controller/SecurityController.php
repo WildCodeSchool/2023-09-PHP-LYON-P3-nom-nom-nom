@@ -9,9 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 #[Route('/my-profil')]
 class SecurityController extends AbstractController
@@ -29,7 +27,6 @@ class SecurityController extends AbstractController
     public function editProfile(
         Request $request,
         EntityManagerInterface $entityManager,
-        UserPasswordHasherInterface $userPasswordHasher,
     ): Response {
         $user = $this->getUser();
 

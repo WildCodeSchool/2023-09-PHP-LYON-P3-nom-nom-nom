@@ -36,7 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     #[Assert\Length(
-        min: 12,
+        min: 8,
         minMessage: 'Votre mot de passe doit avoir au minimum {{ limit }} caractères.',
     )]
     private ?string $password = null;
@@ -44,9 +44,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Vous devez entrer votre nom.')]
     #[Assert\Length(
-        min: 3,
         max: 20,
-        minMessage: 'Votre Nom de famille doit avoir au minimum {{ limit }} caractères.',
         maxMessage: 'Votre Nom de famille ne doit pas dépasser {{ limit }} caractères.',
     )]
     private ?string $lastname = null;
