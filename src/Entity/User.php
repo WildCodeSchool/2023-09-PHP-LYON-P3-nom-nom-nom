@@ -37,9 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     #[Assert\Length(
         min: 8,
-        max: 50,
         minMessage: 'Votre mot de passe doit avoir au minimum {{ limit }} caractères.',
-        maxMessage: 'Votre mot de passe ne doit pas dépasser {{ limit }} caractères.',
     )]
     private ?string $password = null;
 
