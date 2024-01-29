@@ -753,7 +753,7 @@ ul {
 }
 
 .user-card {
-    margin-top: 16px;
+    margin: 16px 0 24px;
 }
 
 .user-card h4{
@@ -797,6 +797,7 @@ ul {
     @include media-breakpoint-down(md) {
         display: flex;
         flex-direction: column;
+
     }
 
     @include media-breakpoint-up(md) {
@@ -825,7 +826,6 @@ ul {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 38px;
     }
 
     @include media-breakpoint-up(md) {
@@ -838,6 +838,24 @@ ul {
         width: 100%;
         margin-bottom: 24px;
     }
+}
+
+// -------------------------- edit user page -------------------
+.edit-user-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 24px;
+}
+
+.edit-user-form .col-form-label{
+   color: $backgroundButton;
+   font-weight: bolder;
+}
+
+.container-edit-button{
+    display: flex;
+    justify-content: center;
 }
 
 // ------------------------------recipe list--------------------

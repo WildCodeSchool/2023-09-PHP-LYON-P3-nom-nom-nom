@@ -11,21 +11,13 @@
 <div class="my-custom-class-for-errors">
 	{{ form_errors(form) }}
 </div>
+			{{ form_row(form.lastname) }}
+			{{ form_row(form.firstname) }}
+			{{ form_row(form.pseudo) }}
+			{{ form_row(form.email) }}
 
-<div class="container">
-	<div>
-		{{ form_row(form.lastname) }}
-	</div>
-	<div>
-		{{ form_row(form.firstname) }}
-	</div>
-	<div>
-		{{ form_row(form.pseudo) }}
-	</div>
-	<div>
-		{{ form_row(form.email) }}
-	</div>
-	<button type="submit" class="btn button-crud mt-4 mb-2 mx-auto">Valider</button>
-</div>
+		<div class="container-edit-button">
+			<button type="submit" class="btn button-crud mt-4 mb-2">Valider</button>
+		</div>
 
 {{ form_end(form) }}
