@@ -68,8 +68,3 @@ setTimeout(function() {
         flashMessage.remove();
     }
 }, 3000);
-
-
-
-
-

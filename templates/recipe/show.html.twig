@@ -14,32 +14,33 @@
 
 	{# Titre #}
 	<section>
-		<h2 class="mx-auto text-center py-3 text-uppercase w-75">{{ recipe.nameRecipe }}</h2>
+		<h2 class="d-flex ms-5 d-md-none text-uppercase m-0 justify-content-center py-3 gap-2">{{ recipe.nameRecipe }}{{ component ('FavoriteList', {recipe: recipe}) }}</h2>
 
 		{# MOBILE - Photo #}
-		<div class="ps-5 container text-center">
+		<div class=" d-md-none ps-5 container text-center">
 			<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-md-none pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 		</div>
-		{# DESKTOP - Photo #}
+		{# DESKTOP #}
+		<h2 class="d-flex d-none d-md-flex text-uppercase m-0 justify-content-center py-3 gap-2">{{ recipe.nameRecipe }}{{ component ('FavoriteList', {recipe: recipe}) }}</h2>
 		<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 
 		<p class="paragraph text-center">
 			{% if totalLikers > 1 %}
-				recette aimée par
+				Recette aimée par
 				{{ totalLikers }}
-				Gastronomnoms.
+				Gastronomnoms
 			{% elseif totalLikers == 1 %}
-				recette aimée par
+				Recette aimée par
 				{{ totalLikers }}
-				Gastronomnom.
+				Gastronomnom
 			{% else %}
-				Soyez le 1er Gastronomnom à aimer cette recette.
+				Soyez le 1er Gastronomnom à aimer cette recette
 			{% endif %}
 			{% if app.user %}
 				{% else %}
 					<br>
 					<a class="paragraph lien link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_login') }}">
-						Connectez-vous pour aimer cette recette.
+						Connectez-vous pour partager cette recette
 					</a>
 			{% endif %}
 		</p>
