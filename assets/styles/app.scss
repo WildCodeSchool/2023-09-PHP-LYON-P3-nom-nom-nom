@@ -752,8 +752,12 @@ ul {
     margin-left: 38px;
 }
 
-.user-card:nth-of-type(2) {
-    margin-top: 38px;
+.user-card {
+    margin: 16px 0 24px;
+}
+
+.user-card h4{
+    color: $backgroundButton;
 }
 
 .user-card {
@@ -779,6 +783,7 @@ ul {
         text-align: center;
         font-size: xx-large;
         font-weight: 600;
+        color: $backgroundMainColor;
     }
 }
 
@@ -792,6 +797,7 @@ ul {
     @include media-breakpoint-down(md) {
         display: flex;
         flex-direction: column;
+
     }
 
     @include media-breakpoint-up(md) {
@@ -820,7 +826,6 @@ ul {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 38px;
     }
 
     @include media-breakpoint-up(md) {
@@ -828,9 +833,29 @@ ul {
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
+        flex-wrap: wrap;
         margin-top: 38px;
         width: 100%;
+        margin-bottom: 24px;
     }
+}
+
+// -------------------------- edit user page -------------------
+.edit-user-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 24px;
+}
+
+.edit-user-form .col-form-label{
+   color: $backgroundButton;
+   font-weight: bolder;
+}
+
+.container-edit-button{
+    display: flex;
+    justify-content: center;
 }
 
 // ------------------------------recipe list--------------------

@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+<div class="my-custom-class-for-errors">
+	{{ form_errors(form) }}
+</div>
+			{{ form_row(form.lastname) }}
+			{{ form_row(form.firstname) }}
+			{{ form_row(form.pseudo) }}
+			{{ form_row(form.email) }}
+
+		<div class="container-edit-button">
+			<button type="submit" class="btn button-crud mt-4 mb-2">Valider</button>
+		</div>
+
+{{ form_end(form) }}
