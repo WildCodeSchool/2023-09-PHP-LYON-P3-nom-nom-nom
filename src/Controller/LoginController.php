@@ -12,8 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class LoginController extends AbstractController
 {
-    // private AccessControl $accessControl;
-
     #[Route('/login', name: 'app_login')]
     public function index(
         AuthenticationUtils $authenticationUtils,
