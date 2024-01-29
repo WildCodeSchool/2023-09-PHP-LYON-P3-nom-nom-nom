@@ -28,41 +28,18 @@ class LoginController extends AbstractController
         if ($user !== null) {
             return $this->redirectToRoute('app_profile', [], Response::HTTP_SEE_OTHER);
         } else {
+            // get the login error if there is one
             $error = $authenticationUtils->getLastAuthenticationError();
 
             // last username entered by the user
             $lastUsername = $authenticationUtils->getLastUsername();
 
-            if ($session->has('referer_url')) {
-                $url = $session->get('referer_url');
-                $session->remove('referer_url'); // Nettoyer la session
+            $this->addFlash('success', 'Bienvenue sur NomNomNom');
 
-                $this->addFlash('success', 'Bienvenue sur NomNomNom');
-
-                return new RedirectResponse($url);
-            }
-
-            // Redirection par défaut si pas d'URL de référence
             return $this->render('login/index.html.twig', [
                 'last_username' => $lastUsername,
                 'error'         => $error,
             ]);
-
-
-
-
-            // // get the login error if there is one
-            // $error = $authenticationUtils->getLastAuthenticationError();
-
-            // // last username entered by the user
-            // $lastUsername = $authenticationUtils->getLastUsername();
-
-            // $this->addFlash('success', 'Bienvenue sur NomNomNom');
-
-            // return $this->render('login/index.html.twig', [
-            //     'last_username' => $lastUsername,
-            //     'error'         => $error,
-            // ]);
         }
     }
 }
