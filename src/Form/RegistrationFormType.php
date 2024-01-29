@@ -50,14 +50,6 @@ class RegistrationFormType extends AbstractType
                 'first_options'  => ['label' => 'Mot de passe (8 caractères minimum)',
                 ],
                 'second_options' => ['label' => 'Confirmation du mot de passe'],
-            ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devez accepter les termes.',
-                    ]),
-                ],
             ]);
     }
 

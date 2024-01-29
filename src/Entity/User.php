@@ -44,7 +44,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Vous devez entrer votre nom.')]
     #[Assert\Length(
+        min: 1,
         max: 20,
+        minMessage: 'Votre Nom de famille doit avoir au minimum {{ limit }} caractères.',
         maxMessage: 'Votre Nom de famille ne doit pas dépasser {{ limit }} caractères.',
     )]
     private ?string $lastname = null;
@@ -52,7 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank(message: 'Vous devez entrer votre prénom.')]
     #[Assert\Length(
-        min: 3,
+        min: 1,
         max: 20,
         minMessage: 'Votre prénom doit avoir au minimum {{ limit }} caractères.',
         maxMessage: 'Votre prénom de passe ne doit pas dépasser {{ limit }} caractères.',
