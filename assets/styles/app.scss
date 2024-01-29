@@ -783,6 +783,7 @@ ul {
         text-align: center;
         font-size: xx-large;
         font-weight: 600;
+        color: $backgroundMainColor;
     }
 }
 
@@ -832,8 +833,10 @@ ul {
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
+        flex-wrap: wrap;
         margin-top: 38px;
         width: 100%;
+        margin-bottom: 24px;
     }
 }
 
