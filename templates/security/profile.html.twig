@@ -12,6 +12,14 @@
 		<img class="object-fit-cover user-avatar" src="{{ asset('build/images/user.png') }}" alt="Photo de l'avatar Nom-Nom"/>
 		<div class="container-card-button">
 			<div class="user-card">
+				<h4>Nom</h4>
+				<p class="user-paragraph">{{app.user.lastname}}</p>
+			</div>
+			<div class="user-card">
+				<h4>Prénom</h4>
+				<p class="user-paragraph">{{app.user.firstname}}</p>
+			</div>
+			<div class="user-card">
 				<h4>Pseudo</h4>
 				<p>{{app.user.pseudo}}</p>
 			</div>
@@ -21,7 +29,8 @@
 			</div>
 			<div class="user-button">
 				<a href="{{ path('app_profile_favorite_recipes') }}" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Mes favoris</a>
-				<a href="{{ path('app_profile_my_recipes') }}" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Mes recettes</a>
+				<a href="#" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Mes recettes</a>
+				<a href="{{ path('app_profile_edit') }}" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Editer mon profil</a>
 			</div>
 		</div>
 	</div>
