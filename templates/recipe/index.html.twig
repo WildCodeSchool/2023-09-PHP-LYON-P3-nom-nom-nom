@@ -61,11 +61,12 @@
 						<p>Il n'y a pas encore de recette pour cette catégorie.</p>
 					{% endfor %}
 				</div>
-				
-				<div >
-					<a href="{{ path('app_category_show',{ slug: category.slug }) }}" class="w-75 link-dark d-flex justify-content-end">
-					<strong>Voir toutes les recettes > </strong></a>
-				</div>
+				{% if recipes[category.id] %}
+					<div >
+						<a href="{{ path('app_category_show',{ slug: category.slug }) }}" class="w-75 link-dark d-flex justify-content-end">
+						<strong>Voir toutes les recettes > </strong></a>
+					</div>
+				{% endif %}
 			{% endfor %}
 		</div>
 	</div>
