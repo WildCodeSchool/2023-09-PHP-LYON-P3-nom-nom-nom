@@ -124,9 +124,12 @@ body {
 }
 
 .button-crud {
+    display:flex;
+    justify-content: center;
+    align-items: center;
     @include myButton(
-        8.625rem,
-        2rem,
+        100%,
+        4rem,
         0.75rem,
         ($backgroundButton),
         ($fontTitle),
