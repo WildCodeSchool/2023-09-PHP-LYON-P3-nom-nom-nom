@@ -5,13 +5,6 @@
 {% endblock %}
 
 {% block body %}
-{% for category, messages in app.flashes %}
-    {% for message in messages %}
-        <div class="alert alert-{{ category }}">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endfor %}
 	<img class="vw-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-home.png') }}"/>
 
 	{# SEARCHBAR #}
