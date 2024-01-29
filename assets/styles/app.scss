@@ -515,6 +515,10 @@ ul {
         ($boxShadowPic));
 }
 
+//---------------------recipe view----------------------//
+.heart-desktop li {
+    padding: 20%;
+}
 //---------------------picture recipe----------------------//
 .pic-view-recipe {
     @include myPicture(46rem, 25rem, 1.25rem, ($boxShadowPic));
@@ -527,9 +531,13 @@ ul {
     color: $backgroundButton;
 }
 
+.bi-heart {
+    color: $backgroundButton;
+    font-size: 1.3rem;
+}
 .bi-heart-fill {
     color: $backgroundButton;
-    font-size: 2rem;
+    font-size: 1.3rem;
 }
 
 //---------------CTA Home-----------------------//
