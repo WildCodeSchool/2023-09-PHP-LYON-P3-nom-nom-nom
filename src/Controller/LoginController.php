@@ -3,26 +3,66 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\HttpFoundation\Request;
 
 class LoginController extends AbstractController
 {
+    // private AccessControl $accessControl;
+
     #[Route('/login', name: 'app_login')]
-    public function index(AuthenticationUtils $authenticationUtils): Response
-    {
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
+    public function index(
+        AuthenticationUtils $authenticationUtils,
+        Request $request,
+    ): Response {
+        $session = $request->getSession();
+        $refererUrl = $request->headers->get('referer');
+        $session->set('referer_url', $refererUrl);
 
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+        $user = $this->getUser();
 
-        $this->addFlash('success', 'Bienvenue sur NomNomNom');
+        if ($user !== null) {
+            return $this->redirectToRoute('app_profile', [], Response::HTTP_SEE_OTHER);
+        } else {
+            $error = $authenticationUtils->getLastAuthenticationError();
 
-        return $this->render('login/index.html.twig', [
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ]);
+            // last username entered by the user
+            $lastUsername = $authenticationUtils->getLastUsername();
+
+            if ($session->has('referer_url')) {
+                $url = $session->get('referer_url');
+                $session->remove('referer_url'); // Nettoyer la session
+
+                $this->addFlash('success', 'Bienvenue sur NomNomNom');
+
+                return new RedirectResponse($url);
+            }
+
+            // Redirection par défaut si pas d'URL de référence
+            return $this->render('login/index.html.twig', [
+                'last_username' => $lastUsername,
+                'error'         => $error,
+            ]);
+
+
+
+
+            // // get the login error if there is one
+            // $error = $authenticationUtils->getLastAuthenticationError();
+
+            // // last username entered by the user
+            // $lastUsername = $authenticationUtils->getLastUsername();
+
+            // $this->addFlash('success', 'Bienvenue sur NomNomNom');
+
+            // return $this->render('login/index.html.twig', [
+            //     'last_username' => $lastUsername,
+            //     'error'         => $error,
+            // ]);
+        }
     }
 }
