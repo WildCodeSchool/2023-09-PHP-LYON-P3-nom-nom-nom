@@ -15,11 +15,20 @@
 	{# MOBILE #}
 	<div class="d-md-none">
 		{% for category in categories %}
-			<h2 class="category-in-recipe mt-3 text-center">{{ category.name }}</h2>
-			<a href="{{ path('app_category_show',{ slug: category.slug }) }}">
+				<a href="{{ path('app_category_show', { slug: category.slug }) }}" class="link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover">
+					<h2 class="text-center category-in-recipe mt-3">{{ category.name }}</h2>
+				</a>
+							{% if recipes[category.id] %}
+					<div >
+						<a href="{{ path('app_category_show',{ slug: category.slug }) }}" class="w-100 link-dark d-flex justify-content-center">
+						<strong>Voir toutes les {{ category.name }} </strong></a>
+					</div>
+				{% endif %}
+			
+			{# <a href="{{ path('app_category_show',{ slug: category.slug }) }}">
 				<strong>Voir toutes les
 					{{ category.name }}</strong>
-			</a>
+			</a> #}
 			<div class="d-flex overflow-x-auto">
 				{% for recipe in recipes[category.id] %}
 					<div class="position-relative ms-3 mb-3">
