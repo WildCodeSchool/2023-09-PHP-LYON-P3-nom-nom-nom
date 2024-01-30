@@ -29,7 +29,7 @@
 		<div class="d-none d-md-flex justify-content-center">
 		<div class=" position-relative">
 			<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-none d-md-block pic-view-recipe object-fit-cover mx-0" alt="{{ recipe.nameRecipe }}"/>
-			<span class="d-none d-md-block position-absolute position-absolute top-0 start-100 translate-middle mx-0 ">{{ component ('FavoriteList', {recipe: recipe}) }}</span>
+			<span class="d-none d-md-flex position-absolute top-0 end-0 translate-middle">{{ component ('FavoriteList', {recipe: recipe}) }}</span>
 		</div>
 		</div>
 		<p class="paragraph text-center">
