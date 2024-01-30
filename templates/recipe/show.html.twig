@@ -14,16 +14,20 @@
 
 	{# Titre #}
 	<section>
-		<h2 class="d-flex ms-5 d-md-none text-uppercase m-0 justify-content-center py-3 gap-2">{{ recipe.nameRecipe }}{{ component ('FavoriteList', {recipe: recipe}) }}</h2>
+		<h2 class="d-flex ms-5 d-md-none text-uppercase m-0 justify-content-center py-3 gap-2">{{ recipe.nameRecipe }}</h2>
 
 		{# MOBILE - Photo #}
-		<div class=" d-md-none ps-5 container text-center">
+		<div class=" d-md-none ps-5 container text-center position-relative">
+			<span class="position-absolute heart	">{{ component ('FavoriteList', {recipe: recipe}) }}</>
 			<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-md-none pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 		</div>
 		{# DESKTOP #}
-		<h2 class="d-flex d-none d-md-flex text-uppercase m-0 justify-content-center py-3 gap-2">{{ recipe.nameRecipe }}{{ component ('FavoriteList', {recipe: recipe}) }}</h2>
-		<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
+		<h2 class="d-flex d-none d-md-flex text-uppercase m-0 justify-content-center py-3 gap-2">{{ recipe.nameRecipe }}</h2>
 
+		<div class="d-none d-md-block position-relative w-50 mx-auto">
+			<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover mx-0" alt="{{ recipe.nameRecipe }}"/>
+			<span class="d-none d-md-block position-absolute position-absolute top-0 start-100 translate-middle mx-0 ">{{ component ('FavoriteList', {recipe: recipe}) }}</span>
+		</div>
 		<p class="paragraph text-center">
 			{% if totalLikers > 1 %}
 				Recette aimée par
@@ -69,7 +73,7 @@
 
 		{# BOUTONS CRUD #}
 		<div class="crud-button-block">
-			{% if is_granted("ROLE_CONTRIBUTOR") %}
+			{% if is_granted("ROLE_USER") %}
 				<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { slug: recipe.slug }) }}">Editer la recette</a>
 				{{ include('recipe/_delete_form.html.twig') }}
 			{% endif %}
@@ -96,7 +100,7 @@
 				{{ form_end(commentForm) }}
 			</div>
 		</div>
-		
+
 	{% else %}
 
 		<div class="d-flex justify-content-around d-md-none">
@@ -114,42 +118,47 @@
 	{% endif %}
 
 	<h3 class="mt-3 text-center">Qu'en pensent nos Gastronomnoms ?</h3>
-	<p class="paragraph text-center">Note moyenne donnée par nos Gastronomnoms :
-		{{ totalNote|round(1, 'floor')  }}
-		/ 5</p>
-	<div class="container d-md-none">
-		{% for comment in recipe.comments %}
-			<div class="card mx-auto mb-2 w-75">
-				<div class="card-body text-center">
-					<h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
-					<h6 class="card-subtitle mb-2 text-body-secondary">Note :
-						{{ comment.note }}</h6>
-					<p class="card-text">{{ comment.comment }}</p>
-				</div>
-			</div>
-		{% endfor %}
-	</div>
-
-	<div class="d-none d-md-block">
-		<div class="d-flex gap-3 justify-content-center flex-wrap my-5 ">
+	{% if totalNote == 0 %}
+		<p class="paragraph text-center">Soyez le premier à noter cette recette</p>
+	{% else %}
+		<p class="paragraph text-center">Note moyenne donnée par nos Gastronomnoms :
+			{{ totalNote|round(1, 'floor')  }}
+			/ 5</p>
+		{% endif%}
+		<div class="container d-md-none">
 			{% for comment in recipe.comments %}
-				<div class="card w-25 border border-0 shadow ">
-					<div class="card-header">
-						<p class="card-title mt-0">Posté par :
-							<strong>
-								{{ comment.commentator.pseudo }}
-							</strong>
-						</p>
+				<div class="card mx-auto mb-2 w-75">
+					<div class="card-body text-center">
+						<h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
 						<h6 class="card-subtitle mb-2 text-body-secondary">Note :
-							<strong>{{ comment.note }}</strong>
-						</h6>
-					</div>
-					<div class="card-body">
-						<p class="card-text mt-0">Commentaire :
-							<br>{{ comment.comment }}</p>
+							{{ comment.note }}</h6>
+						<p class="card-text">{{ comment.comment }}</p>
 					</div>
 				</div>
 			{% endfor %}
+
 		</div>
-	</div>
-{% endblock %}
+
+		<div class="d-none d-md-block">
+			<div class="d-flex gap-3 justify-content-center flex-wrap my-5 ">
+				{% for comment in recipe.comments %}
+					<div class="card w-25 border border-0 shadow ">
+						<div class="card-header">
+							<p class="card-title mt-0">Posté par :
+								<strong>
+									{{ comment.commentator.pseudo }}
+								</strong>
+							</p>
+							<h6 class="card-subtitle mb-2 text-body-secondary">Note :
+								<strong>{{ comment.note }}</strong>
+							</h6>
+						</div>
+						<div class="card-body">
+							<p class="card-text mt-0">Commentaire :
+								<br>{{ comment.comment }}</p>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endblock %}

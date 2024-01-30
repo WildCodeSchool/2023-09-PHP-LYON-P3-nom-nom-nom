@@ -229,6 +229,9 @@ body {
 .button-form-center {
     display: flex;
     justify-content: center;
+    @include media-breakpoint-down(md) {
+    width:50vw;
+}
 }
 
 .button-form-end {
@@ -577,11 +580,11 @@ ul {
 
 .bi-heart {
     color: $backgroundButton;
-    font-size: 1.3rem;
+    font-size: 3rem;
 }
 .bi-heart-fill {
     color: $backgroundButton;
-    font-size: 1.3rem;
+    font-size: 3rem;
 }
 
 //---------------CTA Home-----------------------//
@@ -1082,4 +1085,14 @@ label.required:before {
     text-align: center;
     padding-top: 16px;
     color: $backgroundButton;
+}
+
+
+.heart{
+    top:2vh;
+    left:71vw;
+    @include media-breakpoint-up(md) {
+    top:0px;
+    left:150px;
+    }
 }
