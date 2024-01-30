@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nom-Nom - Edition du profil
+{% endblock %}
+
+{% block body %}
+	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
+	<a class="logout-link link-offset-2 link-underline link-underline-opacity-0 nav-link fs-6 fw-semibold mt-3 mr-3 d-md-none" href="{{ path('app_logout') }}">
+		Se déconnecter</a>
+	<h1 class="text-center fs-1 mt-4">Edition du profil</h1>
+	<div class="user-container">
+		<img class="object-fit-cover user-avatar" src="{{ asset('build/images/user.png') }}" alt="Photo de l'avatar Nom-Nom"/>
+		
+			<div class=" mx-auto d-flex flex-column align-items-end">
+				{{ include('security/_form.html.twig', {'button_label': 'Valider'}) }}
+						
+				<a href="{{ path('app_profile') }}" class="btn button-crud mb-2" tabindex="-1" role="button" aria-disabled="true">Annuler</a>
+			
+				<div class="d-flex button-crud mb-5">{{ include('security/_delete_form.html.twig') }}</div>
+		
+			</div>
+	</div>
+	
+{% endblock %}

@@ -39,7 +39,8 @@ class RecipeType extends AbstractType
                 'label' => 'Un commentaire sur votre recette ?'
             ])
             ->add('calorie', NumberType::class, [
-                'label' => 'Nombre de calories'
+                'label' => 'Nombre de calories',
+                'required' => false
             ])
             ->add('cookingTime', NumberType::class, [
                 'label' => 'Temps de cuisson (min)'

@@ -6,7 +6,7 @@ $backgroundMainColor: #faf6f4;
 $backgroundColorLogin: #74332b;
 $fontTitle: "Maven Pro";
 $fontColorButton: #fff;
-$fontSizeButton: 0.75rem;
+$fontSizeButton: 1rem;
 $fontSizeButtonBig: 1.2rem;
 $fontStyleButton: normal;
 $fontWeightButton: 700;
@@ -124,9 +124,12 @@ body {
 }
 
 .button-crud {
+    display:flex;
+    justify-content: center;
+    align-items: center;
     @include myButton(
-        8.625rem,
-        2rem,
+        50%,
+        4rem,
         0.75rem,
         ($backgroundButton),
         ($fontTitle),
@@ -136,7 +139,9 @@ body {
         ($fontWeightButton),
         ($lineHeightButton)
     );
-
+    @include media-breakpoint-up(md) {
+        width: 24rem;
+    }
     &:hover {
         background-color: $backgroundButton;
     }
@@ -185,7 +190,7 @@ body {
 .button-form {
     @include myButton(
         16rem,
-        1.875rem,
+        3rem,
         0.75,
         ($backgroundButton),
         ($fontTitle),
@@ -244,15 +249,15 @@ body {
 }
 
 .lien {
-    &:hover{
+    &:hover {
         @include myText(
-        ($fontText),
-        ($fontColorTextRed),
-        ($fontSizeText),
-        ($fontStyleText),
-        ($fontWeightText),
-        ($lineHeightText)
-    );
+            ($fontText),
+            ($fontColorTextRed),
+            ($fontSizeText),
+            ($fontStyleText),
+            ($fontWeightText),
+            ($lineHeightText)
+        );
     }
 }
 
@@ -276,6 +281,7 @@ body {
         400,
         ($lineHeightText)
     );
+
     &:hover {
         @include myText(
             ($fontText),
@@ -313,7 +319,7 @@ p {
     bottom: 2vh;
     left: 0;
     text-align: center;
-    color: #faf6f4; 
+    color: #faf6f4;
     width: 95%;
     backdrop-filter: blur(9.2px);
 }
@@ -343,14 +349,15 @@ h2 {
         ($fontWeightTitle),
         ($lineHeightText)
     );
+
     &:hover {
         @include myText(
-        ($fontTitle),
-        ($fontColorText),
-        ($fontSizeTitle),
-        ($fontStyleText),
-        ($fontWeightTitle),
-        ($lineHeightText)
+            ($fontTitle),
+            ($fontColorText),
+            ($fontSizeTitle),
+            ($fontStyleText),
+            ($fontWeightTitle),
+            ($lineHeightText)
         );
     }
 }
@@ -420,7 +427,6 @@ h1 {
     background-color: $backgroundMainColor;
     margin: 0;
     bottom: 0;
-    
 
     @include media-breakpoint-up(md) {
         display: none;
@@ -569,9 +575,13 @@ ul {
     color: $backgroundButton;
 }
 
+.bi-heart {
+    color: $backgroundButton;
+    font-size: 1.3rem;
+}
 .bi-heart-fill {
     color: $backgroundButton;
-    font-size: 2rem;
+    font-size: 1.3rem;
 }
 
 //---------------CTA Home-----------------------//
@@ -667,7 +677,7 @@ ul {
 }
 
 .bg-fond {
-        background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(0, 0, 0, 0.65);
 }
 
 // --------------------------login desktop--------------------
@@ -684,7 +694,7 @@ ul {
 
 // --------------------------register form --------------------
 
-.register-container{ 
+.register-container {
     @include media-breakpoint-down(md) {
         display: flex;
         flex-direction: column;
@@ -705,7 +715,7 @@ ul {
 
 .register-form {
     @include media-breakpoint-down(md) {
-        background-image: url('/assets/images/fond_login.png');
+        background-image: url("/assets/images/fond_login.png");
         background-color: rgba(0, 0, 0, 0.65);
         background-size: cover;
         background-position: center;
@@ -716,11 +726,11 @@ ul {
         justify-content: center;
         width: 100%;
         position: relative;
-        padding: 20px;
+        padding: 46px;
     }
 
     @include media-breakpoint-up(md) {
-        background-image: url('/assets/images/background_login.png');
+        background-image: url("/assets/images/background_login.png");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -730,27 +740,29 @@ ul {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        padding:3.4rem;
+        margin-right: -2rem;
     }
 }
 
 .register-logo {
-    width: 10.5rem;
-    height: 10rem;
+    width: 7.5rem;
+    height: 7rem;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
     @include media-breakpoint-down(md) {
-        background-image: url('/assets/images/nomnomlogo.png');
+        background-image: url("/assets/images/nomnomlogo.png");
     }
 
     @include media-breakpoint-up(md) {
-        background-image: url('/assets/images/logo_white_500.png');
+        background-image: url("/assets/images/logo_white_500.png");
         margin-bottom: 16px;
     }
 }
 
-.register-form .mb-3{
+.register-form .mb-3 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -767,6 +779,10 @@ ul {
 .register-button:hover {
     background-color: $backgroundButtonDark;
 }
+
+.invalid-feedback {
+    color:#ffffff;
+    }
 
 // --------------------------ingredient desktop--------------------
 .ingredient {
@@ -796,8 +812,12 @@ ul {
     margin-left: 38px;
 }
 
-.user-card:nth-of-type(2) {
-    margin-top: 38px;
+.user-card {
+    margin: 16px 0 24px;
+}
+
+.user-card h4{
+    color: $backgroundButton;
 }
 
 .user-card {
@@ -823,6 +843,7 @@ ul {
         text-align: center;
         font-size: xx-large;
         font-weight: 600;
+        color: $backgroundMainColor;
     }
 }
 
@@ -836,6 +857,7 @@ ul {
     @include media-breakpoint-down(md) {
         display: flex;
         flex-direction: column;
+
     }
 
     @include media-breakpoint-up(md) {
@@ -864,7 +886,6 @@ ul {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 38px;
     }
 
     @include media-breakpoint-up(md) {
@@ -872,9 +893,29 @@ ul {
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
+        flex-wrap: wrap;
         margin-top: 38px;
         width: 100%;
+        margin-bottom: 24px;
     }
+}
+
+// -------------------------- edit user page -------------------
+.edit-user-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 24px;
+}
+
+.edit-user-form .col-form-label{
+   color: $backgroundButton;
+   font-weight: bolder;
+}
+
+.container-edit-button{
+    display: flex;
+    justify-content: center;
 }
 
 // ------------------------------recipe list--------------------
@@ -944,10 +985,12 @@ nav {
     font-family: $fontText;
     border-style: solid;
     border-width: 1px;
+
     a {
         color: $fontColorText;
         text-decoration: none;
     }
+
     &:hover {
         color: $fontColorTextRed;
     }
@@ -962,16 +1005,11 @@ nav {
     border-width: 1px;
 }
 
-.comment form div div label{
-    width: 100vw;
-    text-align: center;
-}
-
-.comment form div div div{
+.rating-group form div .col-sm-10 {
     width: 100%;
 }
 
-.comment form div div div .btn-primary {
+.rating-group form div div .btn-primary {
     @include myButton(
         8.625rem,
         2rem,
@@ -984,7 +1022,64 @@ nav {
         ($fontWeightButton),
         ($lineHeightButton)
     );
+
     &:hover {
         color: $fontColorText;
     }
+}
+
+label.required:before {
+    content: "*";
+    color: $backgroundButton;
+}
+
+// ---------------------------etoiles pour les notes----------------
+
+#full-stars-example-two {
+    .rating-group {
+        display: inline-flex;
+    }
+
+    .rating__icon {
+        pointer-events: none;
+    }
+
+    .rating__input {
+        position: absolute !important;
+        left: -9999px !important;
+    }
+
+    .rating__input--none {
+        display: none;
+    }
+
+    .rating__label {
+        cursor: pointer;
+        padding: 0 0.1em;
+        font-size: 2rem;
+    }
+
+    .rating__icon--star {
+        color: $backgroundButton;
+    }
+
+    .rating__input:checked ~ .rating__label .rating__icon--star {
+        color: #ddd;
+    }
+
+    .rating-group:hover .rating__label .rating__icon--star {
+        color: $backgroundButton;
+    }
+
+    .rating__input:hover ~ .rating__label .rating__icon--star {
+        color: #ddd;
+    }
+}
+
+
+// ---------------------------welcome text----------------
+.welcome-text{
+    text-align: center;
+    padding-top: 16px;
+    color: $backgroundButton;
 }

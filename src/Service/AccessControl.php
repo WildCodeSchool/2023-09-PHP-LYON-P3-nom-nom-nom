@@ -20,7 +20,7 @@ class AccessControl extends AbstractController
     public function checkIfUserLoggedIn(): bool
     {
         // this method checks if a user is connected AND checks ADMIN status
-        if (!$this->isGranted('ROLE_CONTRIBUTOR') && !$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_USER') && !$this->isGranted('ROLE_ADMIN')) {
             return false;
         } else {
             return true;
