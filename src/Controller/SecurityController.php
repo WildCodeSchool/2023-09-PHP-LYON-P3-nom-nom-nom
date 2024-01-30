@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/my-profil')]
+#[Route('/Mon-profil')]
 class SecurityController extends AbstractController
 {
     #[Route('/', name: 'app_profile')]
@@ -58,7 +58,7 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/favorite', name: 'app_profile_favorite_recipes')]
+    #[Route('/Favoris', name: 'app_profile_favorite_recipes')]
     public function favoriteRecipes(RecipeRepository $recipeRepository): Response
     {
         $user = $this->getUser();
@@ -69,7 +69,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route('my-profil/my-recipes', name: 'app_profile_my_recipes')]
+    #[Route('/Mes-recettes', name: 'app_profile_my_recipes')]
     public function myRecipes(RecipeRepository $recipeRepository): Response
     {
         $user = $this->getUser();
