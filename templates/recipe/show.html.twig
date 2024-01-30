@@ -78,7 +78,6 @@
 		{# ------------------------commentaire---------------------------- #}
 
 		{% if app.user %}
-			{# <div class="comment container w-50"> #}
 			<div class="rating-group w-100 d-flex flex-column align-items-center">
 				{{ form_start(commentForm) }}
 				{{ form_row(commentForm.comment) }}
@@ -97,7 +96,7 @@
 				{{ form_end(commentForm) }}
 			</div>
 		</div>
-		{# </div> #}
+		
 	{% else %}
 
 		<div class="d-flex justify-content-around d-md-none">
