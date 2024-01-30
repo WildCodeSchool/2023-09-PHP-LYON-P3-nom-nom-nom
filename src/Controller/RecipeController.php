@@ -161,7 +161,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}/édition', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
+    #[Route('/{slug}/Édition', name: 'app_recipe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         // call the AccessControl service => control if there is a connection
