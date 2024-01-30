@@ -69,7 +69,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route('Mon-profil/Mes-recettes', name: 'app_profile_my_recipes')]
+    #[Route('/Mes-recettes', name: 'app_profile_my_recipes')]
     public function myRecipes(RecipeRepository $recipeRepository): Response
     {
         $user = $this->getUser();
