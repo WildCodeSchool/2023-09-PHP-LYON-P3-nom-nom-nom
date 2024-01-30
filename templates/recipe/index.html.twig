@@ -4,6 +4,9 @@
 {% endblock %}
 
 {% block body %}
+<div class="container-add-form d-md-none py-3">
+			<img src="/build/images/nomnomlogo.png" alt="logo de nomnomnom" class="logo-add"/>
+		</div>
 	{% include 'components/_messages.html.twig' %}
 	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
 	<h1 class="text-center mt-2">LISTE DES RECETTES</h1>
@@ -56,7 +59,7 @@
 				</a>
 				<div class="w-75 mx-auto gap-3 row-gap-3 d-flex flex-wrap justify-content-center">
 					{% for recipe in recipes[category.id] %}
-						<div>
+						<div>	
 							<a href="{{ path('app_recipe_show',{ slug: recipe.slug }) }}">
 								<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
 							<div class="position-relative ">
