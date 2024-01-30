@@ -128,7 +128,7 @@ body {
     justify-content: center;
     align-items: center;
     @include myButton(
-        100%,
+        50%,
         4rem,
         0.75rem,
         ($backgroundButton),
@@ -139,7 +139,9 @@ body {
         ($fontWeightButton),
         ($lineHeightButton)
     );
-
+    @include media-breakpoint-up(md) {
+        width: 24rem;
+    }
     &:hover {
         background-color: $backgroundButton;
     }
@@ -724,7 +726,7 @@ ul {
         justify-content: center;
         width: 100%;
         position: relative;
-        padding: 20px;
+        padding: 46px;
     }
 
     @include media-breakpoint-up(md) {
@@ -738,12 +740,14 @@ ul {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        padding:3.4rem;
+        margin-right: -2rem;
     }
 }
 
 .register-logo {
-    width: 10.5rem;
-    height: 10rem;
+    width: 7.5rem;
+    height: 7rem;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -775,6 +779,10 @@ ul {
 .register-button:hover {
     background-color: $backgroundButtonDark;
 }
+
+.invalid-feedback {
+    color:#ffffff;
+    }
 
 // --------------------------ingredient desktop--------------------
 .ingredient {
@@ -1067,9 +1075,7 @@ label.required:before {
         color: #ddd;
     }
 }
-.col-sm-10 {
-    width: 100%;
-}
+
 
 // ---------------------------welcome text----------------
 .welcome-text{
