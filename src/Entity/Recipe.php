@@ -81,7 +81,7 @@ class Recipe
 
     #[Vich\UploadableField(mapping: 'picture_file', fileNameProperty: 'picture')]
     #[Assert\File(
-        maxSize: '2M',
+        maxSize: '6M',
         mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
     )]
     protected ?File $pictureFile = null;

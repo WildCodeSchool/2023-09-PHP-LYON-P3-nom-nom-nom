@@ -5,29 +5,39 @@
 		</label>
 		<input type="search" id="search" class="form-control" value="{{ query }}" data-model="query">
 	</div>
+	{% if this.recipes is not empty %}
 	{# MOBILE - search #}
 	<div class="d-flex flex-column text-center d-md-none">
+
+
 	{% for recipe in this.recipes %}
-		<div class="container-fluid w-75">
+	  		<div class="container-fluid w-75">
 		<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
 			<h5>{{ recipe.nameRecipe }}</h5>
 			<p>{{ recipe.description }}</p>
 		</div>
 	{% endfor %}
+	    
+    
 	</div>
 	
 	{# DESKTOP - search #}
 	<div class="d-none d-md-block">
-	<div class="d-flex flex-wrap gap-1 text-center">
-	{% for recipe in this.recipes %}
-		<div class="container-fluid w-25">
-		<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
-			<h5>{{ recipe.nameRecipe }}</h5>
-			<p>{{ recipe.description }}</p>
+		<div class="d-flex flex-wrap gap-1 text-center">
+		{% for recipe in this.recipes %}
+			<div class="container-fluid w-25">
+			<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}"><img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/></a>
+				<h5>{{ recipe.nameRecipe }}</h5>
+				<p>{{ recipe.description }}</p>
+			</div>
+		{% endfor %}
 		</div>
-	{% endfor %}
-	</div>
 	</div>
 </div>
-
+{% elseif this.recipes is empty and query is not empty %}
+	        <div class="d-flex mx-auto btn button-crud mt-4 mb-2">
+<p>Désolé, nous n'avons pas trouvé de recette.</p>
+    </div>
+ 
+	 {% endif %}
 

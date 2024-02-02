@@ -72,7 +72,7 @@ class RecipeController extends AbstractController
         // call the AccessControl service => control if there is a connection
         $userLoggedIn = $this->accessControl->checkIfUserLoggedIn();
         if ($userLoggedIn !== true) {
-            $this->addFlash('danger', 'Connecter vous pour accéder à cette ressource.');
+            $this->addFlash('danger', 'Connectez-vous pour accéder à cette ressource.');
 
             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }

@@ -124,7 +124,7 @@ body {
 }
 
 .button-crud {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     @include myButton(
@@ -139,6 +139,7 @@ body {
         ($fontWeightButton),
         ($lineHeightButton)
     );
+
     @include media-breakpoint-up(md) {
         width: 24rem;
     }
@@ -229,6 +230,9 @@ body {
 .button-form-center {
     display: flex;
     justify-content: center;
+    @include media-breakpoint-down(md) {
+        width: 50vw;
+    }
 }
 
 .button-form-end {
@@ -577,11 +581,17 @@ ul {
 
 .bi-heart {
     color: $backgroundButton;
-    font-size: 1.3rem;
+    font-size: 3rem;
+    @include media-breakpoint-up(md) {
+        font-size: 1.2rem;
+    }
 }
 .bi-heart-fill {
     color: $backgroundButton;
-    font-size: 1.3rem;
+    font-size: 3rem;
+    @include media-breakpoint-up(md) {
+        font-size: 1.2rem;
+    }
 }
 
 //---------------CTA Home-----------------------//
@@ -740,7 +750,7 @@ ul {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding:3.4rem;
+        padding: 3.4rem;
         margin-right: -2rem;
     }
 }
@@ -781,8 +791,8 @@ ul {
 }
 
 .invalid-feedback {
-    color:#ffffff;
-    }
+    color: #ffffff;
+}
 
 // --------------------------ingredient desktop--------------------
 .ingredient {
@@ -816,7 +826,7 @@ ul {
     margin: 16px 0 24px;
 }
 
-.user-card h4{
+.user-card h4 {
     color: $backgroundButton;
 }
 
@@ -857,7 +867,6 @@ ul {
     @include media-breakpoint-down(md) {
         display: flex;
         flex-direction: column;
-
     }
 
     @include media-breakpoint-up(md) {
@@ -901,19 +910,19 @@ ul {
 }
 
 // -------------------------- edit user page -------------------
-.edit-user-form{
+.edit-user-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin: 0 24px;
 }
 
-.edit-user-form .col-form-label{
-   color: $backgroundButton;
-   font-weight: bolder;
+.edit-user-form .col-form-label {
+    color: $backgroundButton;
+    font-weight: bolder;
 }
 
-.container-edit-button{
+.container-edit-button {
     display: flex;
     justify-content: center;
 }
@@ -1076,10 +1085,14 @@ label.required:before {
     }
 }
 
-
 // ---------------------------welcome text----------------
-.welcome-text{
+.welcome-text {
     text-align: center;
     padding-top: 16px;
     color: $backgroundButton;
+}
+
+.heart {
+    top: 2vh;
+    left: 71vw;
 }
