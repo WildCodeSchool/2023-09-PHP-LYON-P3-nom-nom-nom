@@ -126,7 +126,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'osso-buco.jpg',
-            'description' => 'La célèbre recette traditionnelle de Milan' ,
+            'description' => 'La célèbre recette traditionnelle de Milan',
             'category' => 'category_Plats'
         ],
         [
@@ -135,7 +135,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'quiche.jpg',
-            'description' => 'Venez goûter à la succulente quiche' ,
+            'description' => 'Venez goûter à la succulente quiche',
             'category' => 'category_Plats'
         ],
         [
@@ -144,7 +144,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'tortilla.jpg',
-            'description' => 'La tortilla d\'Espagne' ,
+            'description' => 'La tortilla d\'Espagne',
             'category' => 'category_Plats'
         ],
         [
@@ -153,7 +153,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'ramen.jpg',
-            'description' => 'Les ramens venus tout droit du Japon' ,
+            'description' => 'Les ramens venus tout droit du Japon',
             'category' => 'category_Plats'
         ],
         [
@@ -162,7 +162,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'pasteis.jpg',
-            'description' => 'Faites vibrer avec les pasteis de Lisbonne' ,
+            'description' => 'Faites vibrer avec les pasteis de Lisbonne',
             'category' => 'category_Desserts'
         ],
         [
@@ -171,7 +171,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'pain-perdu.jpg',
-            'description' => 'Les meilleurs pains perdus' ,
+            'description' => 'Les meilleurs pains perdus',
             'category' => 'category_Desserts'
         ],
         [
@@ -180,7 +180,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'brownie.jpg',
-            'description' => 'Une recette à tomber par terre' ,
+            'description' => 'Une recette à tomber par terre',
             'category' => 'category_Desserts'
         ],
         [
@@ -189,7 +189,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'tatin.jpg',
-            'description' => 'La tarte tatin de grand mère' ,
+            'description' => 'La tarte tatin de grand mère',
             'category' => 'category_Desserts'
         ],
         [
@@ -198,7 +198,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'citron-meringue.jpg',
-            'description' => 'La tarte citron préférée des enfants' ,
+            'description' => 'La tarte citron préférée des enfants',
             'category' => 'category_Desserts'
         ],
         [
@@ -207,7 +207,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'verrine.jpg',
-            'description' => 'Une recette simple et délicieuse' ,
+            'description' => 'Une recette simple et délicieuse',
             'category' => 'category_Desserts'
         ],
         [
@@ -216,7 +216,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'hummus.jpg',
-            'description' => 'Retrouvez le hummus Libannais' ,
+            'description' => 'Retrouvez le hummus Libannais',
             'category' => 'category_Apéritifs'
         ],
         [
@@ -225,7 +225,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'nachos.jpg',
-            'description' => 'Vibrer avec ces nachos croquants' ,
+            'description' => 'Vibrer avec ces nachos croquants',
             'category' => 'category_Apéritifs'
         ],
         [
@@ -234,7 +234,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'jambon-olive.jpg',
-            'description' => 'Recette très rapide à faire ' ,
+            'description' => 'Recette très rapide à faire ',
             'category' => 'category_Apéritifs'
         ],
         [
@@ -243,7 +243,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'toast.jpg',
-            'description' => 'Revisitez cette recette aux goûts exotique' ,
+            'description' => 'Revisitez cette recette aux goûts exotique',
             'category' => 'category_Apéritifs'
         ],
         [
@@ -252,7 +252,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'tartare.jpg',
-            'description' => 'Un tartare de boeuf exquis' ,
+            'description' => 'Un tartare de boeuf exquis',
             'category' => 'category_Apéritifs'
         ],
         [
@@ -261,7 +261,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'carpaccio.jpg',
-            'description' => 'Carpaccio de boeuf et parmesan' ,
+            'description' => 'Carpaccio de boeuf et parmesan',
             'category' => 'category_Apéritifs'
         ],
         [
@@ -299,7 +299,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'picture' => 'soupe.png',
             'description' => 'Le gaspaccio d\'asperges délicieux',
             'category' => 'category_Entrées'
-        ],[
+        ], [
             'nameRecipe' => 'Oeufs fumés au bacon',
             'prepareTime' => 15,
             'cookingTime' => 10,

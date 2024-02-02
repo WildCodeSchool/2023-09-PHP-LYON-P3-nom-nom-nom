@@ -18,15 +18,15 @@
 
 		{# MOBILE - Photo #}
 		<div class=" d-md-none ps-5 container text-center position-relative">
-			<span class="position-absolute heart	">{{ component ('FavoriteList', {recipe: recipe}) }}</>
+			<span class="position-absolute heart">{{ component ('FavoriteList', {recipe: recipe}) }}</span>
 			<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-md-none pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 		</div>
 		{# DESKTOP #}
-		<h2 class="d-flex d-none d-md-flex text-uppercase m-0 justify-content-center py-3 gap-2">{{ recipe.nameRecipe }}</h2>
+		<h2 class="d-flex d-none d-md-flex text-uppercase m-0 justify-content-center py-3 gap-2">{{ recipe.nameRecipe }}{{ component ('FavoriteList', {recipe: recipe}) }}</h2>
 
-		<div class="d-none d-md-block position-relative w-50 mx-auto">
+		<div class="d-none d-md-block w-50 mx-auto position-relative container">
 			<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover mx-0" alt="{{ recipe.nameRecipe }}"/>
-			<span class="d-none d-md-block position-absolute position-absolute top-0 start-100 translate-middle mx-0 ">{{ component ('FavoriteList', {recipe: recipe}) }}</span>
+			<span class="d-none d-md-block position-absolute top-0 end-0"></span>
 		</div>
 		<p class="paragraph text-center">
 			{% if totalLikers > 1 %}
