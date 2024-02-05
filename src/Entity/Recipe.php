@@ -39,8 +39,8 @@ class Recipe
         maxMessage: 'Le nom de la recette dépasse la taille maximum de {{ limit }} caractères',
     )]
     #[Assert\Regex(
-        pattern: '/^[a-zA-Z0-9\' -ç]+$/',
-        match: false,
+        pattern: '/[a-zA-Z0-9 ç]/',
+        match: true,
         message: 'Votre nom de recette ne doit comporter que des chiffres et des lettres',
     )]
     private ?string $nameRecipe = null;
