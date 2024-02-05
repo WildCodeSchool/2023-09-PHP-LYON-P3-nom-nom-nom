@@ -17,17 +17,16 @@ class SecurityController extends AbstractController
     #[Route('/', name: 'app_profile')]
     public function profile(RecipeRepository $recipeRepository): Response
     {
-
+        $user = $this->getUser();
         $showMyRecipes = $recipeRepository->findBy(
-            [], // No specific conditions
+            ['owner' => $user], // No specific conditions
             ['id' => 'DESC'],
             3 // Limit to 3 recipes
         );
-        $user = $this->getUser();
-            return $this->render('security/profile.html.twig', [
+        return $this->render('security/profile.html.twig', [
             'user' => $user,
             'myRecipes' => $showMyRecipes,
-            ]);
+        ]);
     }
 
     #[Route('/edit', name: 'app_profile_edit', methods: ['GET', 'POST'])]
