@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class LoginController extends AbstractController
 {
-    #[Route('/Connexion', name: 'app_login')]
+    #[Route('/connexion', name: 'app_login')]
 
     public function index(AuthenticationUtils $authenticationUtils): Response
     {

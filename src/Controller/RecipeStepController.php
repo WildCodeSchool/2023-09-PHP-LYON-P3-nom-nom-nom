@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/recettes')]
 class RecipeStepController extends AbstractController
 {
-    #[Route('/{slug}/Etapes', name: 'app_recipe_show_step', methods: ['GET'])]
+    #[Route('/{slug}/etapes', name: 'app_recipe_show_step', methods: ['GET'])]
     public function showSteps(
         Recipe $recipe,
         RecipeRepository $recipeRepository,
