@@ -434,10 +434,13 @@ h1 {
 
 //--------------------navbar-mobile-------------------
 .fa-solid,
-.fa-regular {
+.fa-regular,
+.fa-trash,
+.fa-pen-to-square {
     color: $backgroundButtonDark;
     font-size: 1.45rem;
     padding: 0;
+    background-color: none;
 }
 
 .fa-circle-plus {
@@ -1117,4 +1120,10 @@ label.required:before {
 .heart {
     top: 2vh;
     left: 71vw;
+}
+// -----------------------ligne-------------------------
+hr {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #000;
 }
