@@ -298,6 +298,28 @@ body {
     }
 }
 
+.recipe-lien {
+    @include myText(
+        ($fontText),
+        ($fontColorTextRed),
+        ($fontSizeText),
+        ($fontStyleText),
+        400,
+        ($lineHeightText)
+    );
+
+    &:hover {
+        @include myText(
+            ($fontText),
+            black,
+            ($fontSizeText),
+            ($fontStyleText),
+            400,
+            ($lineHeightText)
+        );
+    }
+}
+
 p {
     margin: 16px 0 16px;
 }
