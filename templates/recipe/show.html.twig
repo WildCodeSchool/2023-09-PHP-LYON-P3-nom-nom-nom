@@ -84,9 +84,11 @@
 		{% if app.user %}
 			<div class="rating-group w-100 d-flex flex-column align-items-center container">
 				{{ form_start(commentForm) }}
-				{{ form_row(commentForm.comment) }}
+				{# {{ form_row(commentForm.comment) }} #}
+				{{ form_label(commentForm.comment)}}
 				<div id="full-stars-example-two" class="rating-group d-flex justify-content-center">
-					{{ form_row(commentForm.note) }}
+					{# {{ form_row(commentForm.note) }} #}
+					{{ form_widget(commentForm.note) }}
 					<div class="rating__input-group">
 						{% for star in 1..5 %}
 							<label aria-label="{{ star }} star" class="rating__label" for="rating{{ star }}">
@@ -96,6 +98,7 @@
 						{% endfor %}
 					</div>
 				</div>
+				{{ form_widget(commentForm.comment) }}
 				{{ form_row(commentForm.Publiez) }}
 				{{ form_end(commentForm) }}
 			</div>
