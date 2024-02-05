@@ -23,7 +23,7 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route('/Recettes')]
+#[Route('/recettes')]
 class RecipeController extends AbstractController
 {
     private AccessControl $accessControl;
@@ -62,7 +62,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
+    #[Route('/nouvelle', name: 'app_recipe_new', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
         MailerInterface $mailer,
