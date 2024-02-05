@@ -25,7 +25,7 @@ class Comment
     #[ORM\Column(nullable: true)]
     private ?float $note = null;
 
-    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\ManyToOne(inversedBy: 'comments', cascade: ['remove'])]
     private ?User $commentator = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]

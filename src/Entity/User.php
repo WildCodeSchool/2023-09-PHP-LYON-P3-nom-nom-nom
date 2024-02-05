@@ -71,13 +71,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private ?bool $isVerified = false;
 
-    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Recipe::class)]
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Recipe::class, cascade: ['remove'])]
     private Collection $recipes;
 
     #[ORM\ManyToMany(targetEntity: Recipe::class)]
     #[ORM\JoinTable(name:'favoriteList')]
     private Collection $favoriteList;
-    #[ORM\OneToMany(mappedBy: 'commentator', targetEntity: Comment::class)]
+    #[ORM\OneToMany(mappedBy: 'commentator', targetEntity: Comment::class, cascade: ['remove'])]
     private Collection $comments;
 
     public function __construct()
