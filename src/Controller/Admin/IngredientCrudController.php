@@ -20,8 +20,6 @@ class IngredientCrudController extends AbstractCrudController
     {
         return [
             TextField::new('nameIngredient'),
-            TextField::new('category'),
-            BooleanField::new('isAllergen'),
             ImageField::new('picture')->setBasePath('uploads/images/pictures/')
             ->setUploadDir('public/uploads/images/pictures'),
         ];

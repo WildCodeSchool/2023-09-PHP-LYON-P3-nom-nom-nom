@@ -15,6 +15,10 @@ class Step
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\Length(
+        max: 300,
+        maxMessage: 'L\'étape dépasse la taille maximum de {{ limit }} caractères',
+    )]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
     private ?string $description = null;
