@@ -22,7 +22,7 @@ class Category
     private Collection $recipes;
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $slug = null;
 
     public function __construct()
