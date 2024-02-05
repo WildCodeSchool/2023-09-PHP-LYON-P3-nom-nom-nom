@@ -16,7 +16,7 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('comment', TypeTextType::class, [
-                'label' => 'Votre commentaire',
+                'label' => 'Votre commentaire (300 caractères maximum)',
                 'attr' => [
                     'maxlength' => 300,
                 ],
@@ -35,8 +35,7 @@ class CommentType extends AbstractType
                     'class' => 'rating__input',
                 ]
             ])
-            ->add('Publiez', SubmitType::class)
-        ;
+            ->add('Publiez', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
