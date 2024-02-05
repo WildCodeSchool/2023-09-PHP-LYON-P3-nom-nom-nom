@@ -40,7 +40,7 @@ class Recipe
     )]
     #[Assert\Regex(
         pattern: '/^[a-zA-Z0-9\' -ç]+$/',
-        match: true,
+        match: false,
         message: 'Votre nom de recette ne doit comporter que des chiffres et des lettres',
     )]
     private ?string $nameRecipe = null;
