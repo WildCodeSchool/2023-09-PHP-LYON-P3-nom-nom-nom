@@ -31,6 +31,9 @@
 				<a href="{{ path('app_profile_favorite_recipes') }}" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Mes favoris</a>
 				<a href="{{ path('app_profile_my_recipes') }}" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Mes recettes</a>
 				<a href="{{ path('app_profile_edit') }}" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Editer mon profil</a>
+				{% if is_granted("ROLE_ADMIN") %}
+				<a href="{{ path('admin') }}" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Mon Dashboard </a>
+				{% endif %}
 			</div>
 		</div>
 	</div>

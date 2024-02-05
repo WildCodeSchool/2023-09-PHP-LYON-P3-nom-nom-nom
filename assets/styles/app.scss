@@ -298,6 +298,28 @@ body {
     }
 }
 
+.recipe-lien {
+    @include myText(
+        ($fontText),
+        ($fontColorTextRed),
+        ($fontSizeText),
+        ($fontStyleText),
+        400,
+        ($lineHeightText)
+    );
+
+    &:hover {
+        @include myText(
+            ($fontText),
+            black,
+            ($fontSizeText),
+            ($fontStyleText),
+            400,
+            ($lineHeightText)
+        );
+    }
+}
+
 p {
     margin: 16px 0 16px;
 }
@@ -412,10 +434,13 @@ h1 {
 
 //--------------------navbar-mobile-------------------
 .fa-solid,
-.fa-regular {
+.fa-regular,
+.fa-trash,
+.fa-pen-to-square {
     color: $backgroundButtonDark;
     font-size: 1.45rem;
     padding: 0;
+    background-color: none;
 }
 
 .fa-circle-plus {
@@ -536,6 +561,13 @@ ul {
 .padding-sidebar {
     @include media-breakpoint-up(md) {
         padding-left: 3vw;
+    }
+}
+
+.padding-sidebar ul {
+    z-index: 999;
+    @include media-breakpoint-up(md) {
+        z-index: 0;
     }
 }
 
@@ -1102,4 +1134,10 @@ label.required:before {
 .heart {
     top: 2vh;
     left: 71vw;
+}
+// -----------------------ligne-------------------------
+hr {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #000;
 }

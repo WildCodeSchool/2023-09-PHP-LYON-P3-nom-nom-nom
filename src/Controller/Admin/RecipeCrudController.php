@@ -28,11 +28,11 @@ class RecipeCrudController extends AbstractCrudController
             ImageField::new('picture')->setBasePath('uploads/images/pictures/')
             ->setUploadDir('public/uploads/images/pictures'),
             TextField::new('description')
-            ->onlyWhenUpdating(),
+            ->onlyOnForms(),
             NumberField::new('prepareTime')
-            ->onlyWhenUpdating(),
+            ->onlyOnForms(),
             NumberField::new('cookingTime')
-            ->onlyWhenUpdating(),
+            ->onlyOnForms(),
             CollectionField::new('steps')
             ->onlyOnForms()
             ->setEntryType(StepType::class),
