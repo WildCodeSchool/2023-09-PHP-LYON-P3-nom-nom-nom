@@ -539,6 +539,13 @@ ul {
     }
 }
 
+.padding-sidebar ul {
+    z-index: 999;
+    @include media-breakpoint-up(md) {
+        z-index: 0;
+    }
+}
+
 //-------Carrousel----------
 .carousel-dark .carousel-indicators [data-bs-target] {
     background-color: $fontColorButton;
