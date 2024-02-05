@@ -40,13 +40,6 @@
 			{% else %}
 				Soyez le 1er Gastronomnom à aimer cette recette
 			{% endif %}
-			{% if app.user %}
-				{% else %}
-					<br>
-					<a class="paragraph lien link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_login') }}">
-						Connectez-vous pour partager cette recette
-					</a>
-			{% endif %}
 		</p>
 	</section>
 	{# INFOS recette #}
@@ -69,92 +62,94 @@
 					<p class="infos-recipe">{{ recipe.personNumber }}</p>
 				</div>
 			</div>
-		</div>
+		</p>
+		<p class="paragraph text-center">{{ recipe.description }}</p>
+	</div>
 
-		{# BOUTONS CRUD #}
-		<div class="crud-button-block">
-			<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
-		</div>
-		{# ------------------------commentaire---------------------------- #}
+	{# BOUTONS CRUD #}
+	<div class="crud-button-block">
+		<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
+	</div>
+	{# ------------------------commentaire---------------------------- #}
 
-		{% if app.user %}
-			<div class="rating-group w-100 d-flex flex-column align-items-center container">
-				{{ form_start(commentForm) }}
-				{{ form_row(commentForm.comment) }}
-				<div id="full-stars-example-two" class="rating-group d-flex justify-content-center">
-					{{ form_row(commentForm.note) }}
-					<div class="rating__input-group">
-						{% for star in 1..5 %}
-							<label aria-label="{{ star }} star" class="rating__label" for="rating{{ star }}">
-								<i class="rating__icon rating__icon--star fa fa-star"></i>
-							</label>
-							<input class="rating__input" type="radio" id="rating{{ star }}" name="{{ commentForm.note.vars.full_name }}" value="{{ star }}" {% if star == commentForm.note.vars.value %} checked {% endif %}/>
-						{% endfor %}
-					</div>
+	{% if app.user %}
+		<div class="rating-group w-100 d-flex flex-column align-items-center container">
+			{{ form_start(commentForm) }}
+			{{ form_row(commentForm.comment) }}
+			<div id="full-stars-example-two" class="rating-group d-flex justify-content-center">
+				{{ form_row(commentForm.note) }}
+				<div class="rating__input-group">
+					{% for star in 1..5 %}
+						<label aria-label="{{ star }} star" class="rating__label" for="rating{{ star }}">
+							<i class="rating__icon rating__icon--star fa fa-star"></i>
+						</label>
+						<input class="rating__input" type="radio" id="rating{{ star }}" name="{{ commentForm.note.vars.full_name }}" value="{{ star }}" {% if star == commentForm.note.vars.value %} checked {% endif %}/>
+					{% endfor %}
 				</div>
-				{{ form_row(commentForm.Publiez) }}
-				{{ form_end(commentForm) }}
 			</div>
+			{{ form_row(commentForm.Publiez) }}
+			{{ form_end(commentForm) }}
 		</div>
+	</div>
 
-	{% else %}
+{% else %}
 
-		<div class="d-flex justify-content-around d-md-none">
-			<a class="btn button-crud w-75 mt-3" href="{{ path('app_login') }}">
+	<div class="d-flex justify-content-around d-md-none">
+		<a class="btn button-crud w-75 mt-3" href="{{ path('app_login') }}">
+			Se connecter pour commenter
+		</a>
+	</div>
+	<div class="d-none d-md-block">
+		<div class="d-flex justify-content-center">
+			<a class="btn button-crud w-25 mt-3" href="{{ path('app_login') }}">
 				Se connecter pour commenter
 			</a>
 		</div>
-		<div class="d-none d-md-block">
-			<div class="d-flex justify-content-center">
-				<a class="btn button-crud w-25 mt-3" href="{{ path('app_login') }}">
-					Se connecter pour commenter
-				</a>
-			</div>
-		</div>
-	{% endif %}
+	</div>
+{% endif %}
 
-	<h3 class="mt-3 text-center">Qu'en pensent nos Gastronomnoms ?</h3>
-	{% if totalNote == 0 %}
-		<p class="paragraph text-center">Soyez le premier à noter cette recette</p>
-	{% else %}
-		<p class="paragraph text-center">Note moyenne donnée par nos Gastronomnoms :
-			{{ totalNote|round(1, 'floor')  }}
-			/ 5</p>
-		{% endif%}
-		<div class="container d-md-none">
+<h3 class="mt-3 text-center">Qu'en pensent nos Gastronomnoms ?</h3>
+{% if totalNote == 0 %}
+	<p class="paragraph text-center">Soyez le premier à noter cette recette</p>
+{% else %}
+	<p class="paragraph text-center">Note moyenne donnée par nos Gastronomnoms :
+		{{ totalNote|round(1, 'floor')  }}
+		/ 5</p>
+	{% endif%}
+	<div class="container d-md-none">
+		{% for comment in recipe.comments %}
+			<div class="card mx-auto mb-2 w-75">
+				<div class="card-body text-center">
+					<h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
+					<h6 class="card-subtitle mb-2 text-body-secondary">Note :
+						{{ comment.note }}</h6>
+					<p class="card-text">{{ comment.comment }}</p>
+				</div>
+			</div>
+		{% endfor %}
+
+	</div>
+
+	<div class="d-none d-md-block">
+		<div class="d-flex gap-3 justify-content-center flex-wrap my-5 ">
 			{% for comment in recipe.comments %}
-				<div class="card mx-auto mb-2 w-75">
-					<div class="card-body text-center">
-						<h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
+				<div class="card w-25 border border-0 shadow ">
+					<div class="card-header">
+						<p class="card-title mt-0">Posté par :
+							<strong>
+								{{ comment.commentator.pseudo }}
+							</strong>
+						</p>
 						<h6 class="card-subtitle mb-2 text-body-secondary">Note :
-							{{ comment.note }}</h6>
-						<p class="card-text">{{ comment.comment }}</p>
+							<strong>{{ comment.note }}</strong>
+						</h6>
+					</div>
+					<div class="card-body">
+						<p class="card-text mt-0">Commentaire :
+							<br>{{ comment.comment }}</p>
 					</div>
 				</div>
 			{% endfor %}
-
 		</div>
-
-		<div class="d-none d-md-block">
-			<div class="d-flex gap-3 justify-content-center flex-wrap my-5 ">
-				{% for comment in recipe.comments %}
-					<div class="card w-25 border border-0 shadow ">
-						<div class="card-header">
-							<p class="card-title mt-0">Posté par :
-								<strong>
-									{{ comment.commentator.pseudo }}
-								</strong>
-							</p>
-							<h6 class="card-subtitle mb-2 text-body-secondary">Note :
-								<strong>{{ comment.note }}</strong>
-							</h6>
-						</div>
-						<div class="card-body">
-							<p class="card-text mt-0">Commentaire :
-								<br>{{ comment.comment }}</p>
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-		</div>
-	{% endblock %}
+	</div>
+{% endblock %}
