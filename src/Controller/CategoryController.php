@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/Categories')]
+#[Route('/categories')]
 class CategoryController extends AbstractController
 {
     #[Route('/{slug}', name: 'app_category_show', methods: ['GET'])]
