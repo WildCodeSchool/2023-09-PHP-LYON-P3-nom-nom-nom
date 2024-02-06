@@ -38,6 +38,11 @@ class Recipe
         max: 100,
         maxMessage: 'Le nom de la recette dépasse la taille maximum de {{ limit }} caractères',
     )]
+    #[Assert\Regex(
+        pattern: '/[a-zA-Z0-9 ç]/',
+        match: true,
+        message: 'Votre nom de recette ne doit comporter que des chiffres et des lettres',
+    )]
     private ?string $nameRecipe = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -97,6 +102,7 @@ class Recipe
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
+
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Comment::class, cascade: ['remove'])]
     private Collection $comments;
 
