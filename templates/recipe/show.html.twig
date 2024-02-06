@@ -29,16 +29,32 @@
 			<span class="d-none d-md-block position-absolute top-0 end-0"></span>
 		</div>
 		<p class="paragraph text-center">
-			{% if totalLikers > 1 %}
-				Recette aimée par
-				{{ totalLikers }}
-				Gastronomnoms
-			{% elseif totalLikers == 1 %}
-				Recette aimée par
-				{{ totalLikers }}
-				Gastronomnom
+			{% if app.user %}
+				{% if totalLikers > 1 %}
+					Recette aimée par
+					{{ totalLikers }}
+					Gastronomnoms
+				{% elseif totalLikers == 1 %}
+					Recette aimée par
+					{{ totalLikers }}
+					Gastronomnom
+				{% else %}
+					Soyez le 1er Gastronomnom à aimer cette recette
+					<a href="{{ path('app_login') }}"><i class="bi bi-heart"></i></a>
+				{% endif %}
 			{% else %}
-				Soyez le 1er Gastronomnom à aimer cette recette
+				{% if totalLikers > 1 %}
+					Recette aimée par
+					{{ totalLikers }}
+					Gastronomnoms. Aimez la également <a href="{{ path('app_login') }}"><i class="bi bi-heart"></i></a>
+				{% elseif totalLikers == 1 %}
+					Recette aimée par
+					{{ totalLikers }}
+					Gastronomnom. Aimez la également <a href="{{ path('app_login') }}"><i class="bi bi-heart"></i></a>
+				{% else %}
+					Soyez le 1er Gastronomnom à aimer cette recette
+					<a href="{{ path('app_login') }}"><i class="bi bi-heart"></i></a>
+				{% endif %}
 			{% endif %}
 		</p>
 	</section>

@@ -133,6 +133,8 @@ class Recipe
     {
         $this->nameRecipe = ucfirst($nameRecipe);
 
+        $this->setSlug($this->getNameRecipe());
+
         return $this;
     }
 
@@ -332,6 +334,7 @@ class Recipe
 
     public function setSlug(string $slug): static
     {
+        $slug = str_replace(' ', '-', $slug);
         $this->slug = $slug;
 
         return $this;
