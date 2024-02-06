@@ -32,7 +32,6 @@ class IngredientFixtures extends Fixture
         foreach (self::INGREDIENTS as $ingredient) {
             $newIngredient = new Ingredient();
             $newIngredient->setNameIngredient($ingredient['nameIngredient']);
-            $newIngredient->setCategory($ingredient['category']);
             $newIngredient->setPicture($ingredient['picture']);
             $manager->persist($newIngredient);
             $this->addReference('ingredient_' . $ingredient['nameIngredient'], $newIngredient);
