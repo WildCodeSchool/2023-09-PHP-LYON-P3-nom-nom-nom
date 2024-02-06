@@ -864,8 +864,12 @@ ul {
     }
 
     @include media-breakpoint-up(md) {
-        width: 25em;
+        width: 15em;
     }
+}
+.my-profil-position {
+    position: relative;
+    left: 5vw;
 }
 
 .logout-link {
@@ -923,7 +927,7 @@ ul {
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content:space-around;
+        justify-content: space-around;
     }
 }
 
@@ -1065,6 +1069,10 @@ nav {
 }
 
 .rating-group form div .col-sm-10 {
+    width: 100%;
+}
+
+div .mb-3 > .col-sm-10 {
     width: 100%;
 }
 
