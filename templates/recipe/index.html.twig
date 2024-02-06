@@ -34,13 +34,14 @@
 			<div class="d-flex overflow-x-auto">
 				{% for recipe in recipes[category.id] %}
 					<div class="position-relative ms-3 mb-3">
-						<div class="container">
-							<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}">
-								<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
-							<div class="container-fluid carousel-caption glassmorphism-mobile-categories">
-								<h5 class="w-75 container text-center">{{ recipe.nameRecipe }}</h5>
+						<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}">
+							<div class="container">
+								<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe object-fit-cover mb-2" alt="{{ recipe.nameRecipe }}" loading="lazy"/>
+								<div class="container-fluid carousel-caption glassmorphism-mobile-categories">
+									<h5 class="w-75 container text-center">{{ recipe.nameRecipe }}</h5>
+								</div>
 							</div>
-						</div>
+						</a>
 					</div>
 				{% else %}
 					<p class="container text-center">Aucune recette dans cette catégorie actuellement.</p>

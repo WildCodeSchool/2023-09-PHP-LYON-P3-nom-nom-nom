@@ -121,8 +121,11 @@
 			<div class="card mx-auto mb-2 w-75">
 				<div class="card-body text-center">
 					<h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
-					<h6 class="card-subtitle mb-2 text-body-secondary">Note :
-						{{ comment.note }}</h6>
+					<h6 class="card-subtitle mb-2 text-body-secondary">
+						{% for star in 1..comment.note %}
+							<i class="rating__icon rating__icon--star fa fa-star"></i>
+						{% endfor %}
+					</h6>
 					<p class="card-text">{{ comment.comment }}</p>
 				</div>
 			</div>
@@ -135,13 +138,17 @@
 			{% for comment in recipe.comments %}
 				<div class="card w-25 border border-0 shadow ">
 					<div class="card-header">
-						<p class="card-title mt-0">Posté par :
+						<p class="card-title mt-0">Posté par
 							<strong>
 								{{ comment.commentator.pseudo }}
 							</strong>
 						</p>
-						<h6 class="card-subtitle mb-2 text-body-secondary">Note :
-							<strong>{{ comment.note }}</strong>
+						<h6 class="card-subtitle mb-2 text-body-secondary">
+							<strong>
+								{% for star in 1..comment.note %}
+									<i class="rating__icon rating__icon--star fa fa-star"></i>
+								{% endfor %}
+							</strong>
 						</h6>
 					</div>
 					<div class="card-body">

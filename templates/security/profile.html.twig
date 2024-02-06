@@ -7,7 +7,7 @@
 	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
 
 
-	<div class="user-container ">
+	<div class="user-container px-4">
 		<div>
 			<div>
 				<h1 class="text-center fs-1 mt-4">Mon profil</h1>
@@ -71,7 +71,7 @@
 				<a href="{{ path('app_profile_favorite_recipes') }}" tabindex="-1" role="button" aria-disabled="true" class="ms-3 w-100 link-dark d-flex fw-bold">Voir tous mes favoris</a>
 
 				<div>
-					<div class="d-flex flex-wrap justify-content-evenly text-center gap-2">
+					<div class="d-flex flex-wrap justify-content-evenly text-center gap-1">
 						{% for recipe in user.favoriteList|slice(0, 3) %}
 							<div class="position-relative ">
 								<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}">
@@ -87,10 +87,10 @@
 
 			</div>
 			<div>
-				<a href="{{ path('app_profile_my_recipes') }}" tabindex="-1" role="button" aria-disabled="true" class="ms-3 w-100 link-dark d-flex fw-bold">Voir toute mes recettes</a>
+				<a href="{{ path('app_profile_my_recipes') }}" tabindex="-1" role="button" aria-disabled="true" class="ms-3 w-100 link-dark d-flex fw-bold">Voir toutes mes recettes</a>
 
 				<div>
-					<div class="d-flex flex-wrap justify-content-evenly text-center gap-2">
+					<div class="d-flex flex-wrap justify-content-evenly text-center">
 						{% for recipe in myRecipes %}
 							<div class="position-relative">
 								<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}">
