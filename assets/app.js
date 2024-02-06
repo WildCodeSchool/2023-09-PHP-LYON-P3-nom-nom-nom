@@ -12,6 +12,8 @@ import './styles/app.scss';
 import './bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
+// ===================== NAVBAR ========================= //
+
 const icon = document.querySelector(".bento-container");
 const list = document.querySelector(".navbar-desktop");
 
@@ -31,6 +33,8 @@ document.addEventListener("click", function (event){
 		list.classList.remove("list-visible");
 	}
 });
+
+// ======================================================= //
 
 // Fonction pour changer la couleur de l'icône en fonction de la page active
 function changeIconColor() {
