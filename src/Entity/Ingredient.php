@@ -26,13 +26,6 @@ class Ingredient
     #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
     private ?string $nameIngredient = null;
 
-    #[ORM\Column(length: 50)]
-    #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
-    private ?string $category = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?bool $isAllergen = null;
-
     #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: RecipeIngredient::class, orphanRemoval: true)]
     private Collection $recipes;
 
@@ -67,30 +60,6 @@ class Ingredient
     public function setNameIngredient(string $nameIngredient): static
     {
         $this->nameIngredient = ucfirst($nameIngredient);
-
-        return $this;
-    }
-
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(string $category): static
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    public function isIsAllergen(): ?bool
-    {
-        return $this->isAllergen;
-    }
-
-    public function setIsAllergen(?bool $isAllergen): static
-    {
-        $this->isAllergen = $isAllergen;
 
         return $this;
     }
