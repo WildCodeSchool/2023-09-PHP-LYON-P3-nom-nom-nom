@@ -486,6 +486,15 @@ ul {
 }
 
 //--------------------navbar-desktop-------------------//
+.home {
+    cursor: pointer;
+    position: fixed;
+    margin: 15px;
+    z-index: 2;
+    @include media-breakpoint-down(md) {
+        display: none;
+    }  
+}
 .navbar-desktop {
     @include media-breakpoint-down(md) {
         display: none;
