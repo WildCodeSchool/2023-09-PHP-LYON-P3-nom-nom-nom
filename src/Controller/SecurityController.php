@@ -11,15 +11,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/Mon-profil')]
+#[Route('/mon-profil')]
 class SecurityController extends AbstractController
 {
     #[Route('/', name: 'app_profile')]
-    public function profile(): Response
+    public function profile(RecipeRepository $recipeRepository): Response
     {
         $user = $this->getUser();
+        $showMyRecipes = $recipeRepository->findBy(
+            ['owner' => $user], // No specific conditions
+            ['id' => 'DESC'],
+            3 // Limit to 3 recipes
+        );
         return $this->render('security/profile.html.twig', [
             'user' => $user,
+            'myRecipes' => $showMyRecipes,
         ]);
     }
 
@@ -45,11 +51,13 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route('/delete', name: 'app_profile_delete')]
+    #[Route('/delete/{id}', name: 'app_profile_delete')]
     public function deleteProfile(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
 
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+            $request->getSession()->invalidate();
+            $this->container->get('security.token_storage')->setToken(null);
             $entityManager->remove($user);
             $entityManager->flush();
             $this->addFlash('danger', 'Votre compte a été supprimé');
@@ -58,7 +66,7 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/Favoris', name: 'app_profile_favorite_recipes')]
+    #[Route('/favoris', name: 'app_profile_favorite_recipes')]
     public function favoriteRecipes(RecipeRepository $recipeRepository): Response
     {
         $user = $this->getUser();
@@ -69,7 +77,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route('/Mes-recettes', name: 'app_profile_my_recipes')]
+    #[Route('/mes-recettes', name: 'app_profile_my_recipes')]
     public function myRecipes(RecipeRepository $recipeRepository): Response
     {
         $user = $this->getUser();

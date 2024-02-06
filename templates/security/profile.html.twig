@@ -5,33 +5,102 @@
 
 {% block body %}
 	<img class="w-100 object-fit-cover d-none d-md-block" src="{{ asset('/build/images/background-pages.png') }}"/>
-	<a class="logout-link link-offset-2 link-underline link-underline-opacity-0 nav-link fs-6 fw-semibold mt-3 mr-3 d-md-none" href="{{ path('app_logout') }}">
-		Se déconnecter</a>
-	<h1 class="text-center fs-1 mt-4">Mon profil</h1>
-	<div class="user-container">
-		<img class="object-fit-cover user-avatar" src="{{ asset('build/images/user.png') }}" alt="Photo de l'avatar Nom-Nom"/>
-		<div class="container-card-button">
-			<div class="user-card">
-				<h4>Nom</h4>
-				<p class="user-paragraph">{{app.user.lastname}}</p>
+
+
+	<div class="user-container px-4">
+		<div>
+			<div>
+				<h1 class="text-center fs-1 mt-4">Mon profil</h1>
+				<img class="object-fit-cover user-avatar" src="{{ asset('build/images/user.png') }}" alt="Photo de l'avatar Nom-Nom"/>
 			</div>
-			<div class="user-card">
-				<h4>Prénom</h4>
-				<p class="user-paragraph">{{app.user.firstname}}</p>
+			<div>
+				<h4 class="text-center">
+					<i class="fa-solid fa-address-card"></i>
+					Nom</h4>
+				<p class="text-center">{{app.user.lastname}}</p>
 			</div>
-			<div class="user-card">
-				<h4>Pseudo</h4>
-				<p>{{app.user.pseudo}}</p>
+
+			<div>
+				<h4 class="text-center">
+					<i class="fa-solid fa-address-card"></i>
+					Prénom</h4>
+				<p class="text-center">{{app.user.firstname}}</p>
 			</div>
-			<div class="user-card">
-				<h4>Mail</h4>
-				<p class="user-paragraph">{{app.user.email}}</p>
+
+			<div>
+				<h4 class="text-center">
+					<i class="fa-regular fa-user"></i>
+					Pseudo</h4>
+				<p class="text-center">{{app.user.pseudo}}</p>
 			</div>
-			<div class="user-button">
-				<a href="{{ path('app_profile_favorite_recipes') }}" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Mes favoris</a>
-				<a href="{{ path('app_profile_my_recipes') }}" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Mes recettes</a>
-				<a href="{{ path('app_profile_edit') }}" class="btn button-crud mt-4 mb-2" tabindex="-1" role="button" aria-disabled="true">Editer mon profil</a>
+			<div>
+				<h4 class="text-center">
+					<i class="fa-solid fa-envelope"></i>
+					Mail</h4>
+				<p class="text-center">{{app.user.email}}</p>
 			</div>
+
+			{# DECO MOBILE #}
+			<div class="d-flex flex-column my-5">
+
+
+				<a href="{{ path('app_logout') }}" class="pb-3 w-100 link-dark d-flex fw-bold justify-content-center">
+					Se deconnecter
+				</a>
+
+				<a href="{{ path('app_profile_edit') }}" tabindex="-1" role="button" aria-disabled="true" class="pb-3 w-100 link-dark d-flex fw-bold justify-content-center">
+					Editer mon profil
+				</a>
+
+				{% if is_granted("ROLE_ADMIN") %}
+					<a href="{{ path('admin') }}" tabindex="-1" role="button" aria-disabled="true" class="w-100 link-dark d-flex fw-bold justify-content-center">
+						Mon dashboard
+					</a>
+				{% endif %}
+			</div>
+
 		</div>
-	</div>
-{% endblock %}
+
+
+		<div class="d-flex flex-column">
+			<div>
+				<a href="{{ path('app_profile_favorite_recipes') }}" tabindex="-1" role="button" aria-disabled="true" class="ms-3 w-100 link-dark d-flex fw-bold">Voir tous mes favoris</a>
+
+				<div>
+					<div class="d-flex flex-wrap justify-content-start text-center gap-1">
+					
+						{% for recipe in user.favoriteList|slice(0, 3) %}
+							<div class="position-relative ">
+								<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}">
+									<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="my-recipe-desktop object-fit-cover fw-bold" alt="{{ recipe.nameRecipe }}"/>
+								
+								<div class="glassmorphism-desktop m-2">
+									<h5 class="p-2">{{ recipe.nameRecipe }}</h5>
+								</div>
+							</div>
+							</a>
+						{% endfor %}
+					</div>
+				</div>
+
+			</div>
+			<div>
+				<a href="{{ path('app_profile_my_recipes') }}" tabindex="-1" role="button" aria-disabled="true" class="ms-3 w-100 link-dark d-flex fw-bold">Voir toutes mes recettes</a>
+
+				<div>
+					<div class="d-flex flex-wrap justify-content-start text-center">
+						{% for recipe in myRecipes %}
+							<div class="position-relative">
+								<a href="{{ path('app_recipe_show', { slug: recipe.slug }) }}">
+									<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="my-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
+								<div class="glassmorphism-desktop m-2">
+									<h5 class="p-2">{{ recipe.nameRecipe }}</h5>
+								</div>
+							</div>
+								</a>
+						{% endfor %}
+					</div>
+				</div>
+
+
+			{% endblock %}

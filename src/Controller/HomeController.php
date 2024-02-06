@@ -17,11 +17,11 @@ class HomeController extends AbstractController
         RecipeRepository $recipeRepository,
         CategoryRepository $categoryRepository,
     ): Response {
-        $showRecipes = $recipeRepository->findBy(
-            [], // No specific conditions
-            ['id' => 'DESC'],
-            3 // Limit to 3 recipes
-        );
+            $showRecipes = $recipeRepository->findBy(
+                [], // No specific conditions
+                ['id' => 'DESC'],
+                3 // Limit to 3 recipes
+            );
 
         $totalRecipes = $recipeRepository->countRecipes();
 

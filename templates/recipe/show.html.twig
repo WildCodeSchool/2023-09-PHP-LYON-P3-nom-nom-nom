@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Recipe
+	{{ recipe.nameRecipe }}
 {% endblock %}
 
 {% block body %}
@@ -14,34 +14,47 @@
 
 	{# Titre #}
 	<section>
-		<h2 class="d-flex ms-5 d-md-none text-uppercase m-0 justify-content-center py-3 gap-2">{{ recipe.nameRecipe }}{{ component ('FavoriteList', {recipe: recipe}) }}</h2>
+		<h2 class="d-flex ms-5 d-md-none text-uppercase m-0 justify-content-center py-3 gap-2">{{ recipe.nameRecipe }}</h2>
 
 		{# MOBILE - Photo #}
-		<div class=" d-md-none ps-5 container text-center">
+		<div class=" d-md-none ps-5 container text-center position-relative">
+			<span class="position-absolute heart">{{ component ('FavoriteList', {recipe: recipe}) }}</span>
 			<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-md-none pic-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 		</div>
 		{# DESKTOP #}
 		<h2 class="d-flex d-none d-md-flex text-uppercase m-0 justify-content-center py-3 gap-2">{{ recipe.nameRecipe }}{{ component ('FavoriteList', {recipe: recipe}) }}</h2>
-		<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover" alt="{{ recipe.nameRecipe }}"/>
 
+		<div class="d-none d-md-block w-50 mx-auto position-relative container">
+			<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="d-none d-md-block mx-auto pic-view-recipe object-fit-cover mx-0" alt="{{ recipe.nameRecipe }}"/>
+			<span class="d-none d-md-block position-absolute top-0 end-0"></span>
+		</div>
 		<p class="paragraph text-center">
-			{% if totalLikers > 1 %}
-				Recette aimée par
-				{{ totalLikers }}
-				Gastronomnoms
-			{% elseif totalLikers == 1 %}
-				Recette aimée par
-				{{ totalLikers }}
-				Gastronomnom
-			{% else %}
-				Soyez le 1er Gastronomnom à aimer cette recette
-			{% endif %}
 			{% if app.user %}
+				{% if totalLikers > 1 %}
+					Recette aimée par
+					{{ totalLikers }}
+					Gastronomnoms
+				{% elseif totalLikers == 1 %}
+					Recette aimée par
+					{{ totalLikers }}
+					Gastronomnom
 				{% else %}
-					<br>
-					<a class="paragraph lien link-offset-2 link-offset-3-hover link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_login') }}">
-						Connectez-vous pour partager cette recette
-					</a>
+					Soyez le 1er Gastronomnom à aimer cette recette
+					<a href="{{ path('app_login') }}"><i class="bi bi-heart"></i></a>
+				{% endif %}
+			{% else %}
+				{% if totalLikers > 1 %}
+					Recette aimée par
+					{{ totalLikers }}
+					Gastronomnoms. Aimez la également <a href="{{ path('app_login') }}"><i class="bi bi-heart"></i></a>
+				{% elseif totalLikers == 1 %}
+					Recette aimée par
+					{{ totalLikers }}
+					Gastronomnom. Aimez la également <a href="{{ path('app_login') }}"><i class="bi bi-heart"></i></a>
+				{% else %}
+					Soyez le 1er Gastronomnom à aimer cette recette
+					<a href="{{ path('app_login') }}"><i class="bi bi-heart"></i></a>
+				{% endif %}
 			{% endif %}
 		</p>
 	</section>
@@ -65,24 +78,26 @@
 					<p class="infos-recipe">{{ recipe.personNumber }}</p>
 				</div>
 			</div>
-		</div>
+		</p>
+		<p class="paragraph text-center">{{ recipe.description }}</p>
+	</div>
 
-		{# BOUTONS CRUD #}
-		<div class="crud-button-block">
-			{% if is_granted("ROLE_CONTRIBUTOR") %}
-				<a class="btn button-crud mt-3" href="{{ path('app_recipe_edit', { slug: recipe.slug }) }}">Editer la recette</a>
-				{{ include('recipe/_delete_form.html.twig') }}
-			{% endif %}
-			<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
-		</div>
-		{# ------------------------commentaire---------------------------- #}
+	{# BOUTONS CRUD #}
+	<div class="crud-button-block">
+		<a class="btn button-crud mt-3" href="{{ path('app_recipe_index') }}">Retour à la liste</a>
+		{% if is_granted("ROLE_USER") and recipe.owner == app.user or is_granted("ROLE_ADMIN") %}
+			<div class="btn button-crud mt-3">{{ include('recipe/_delete_form.html.twig') }}</div>
+		{% endif %}
+	</div>
+	{# ------------------------commentaire---------------------------- #}
 
-		{% if app.user %}
-			<div class="rating-group w-100 d-flex flex-column align-items-center">
-				{{ form_start(commentForm) }}
-				{{ form_row(commentForm.comment) }}
+	{% if app.user %}
+		<div class="rating-group w-100 d-flex flex-column align-items-center container">
+			{{ form_start(commentForm) }}
+			<div class="d-flex align-items-center mb-2">
+				{{ form_label(commentForm.comment)}}
 				<div id="full-stars-example-two" class="rating-group d-flex justify-content-center">
-					{{ form_row(commentForm.note) }}
+					{{ form_widget(commentForm.note) }}
 					<div class="rating__input-group">
 						{% for star in 1..5 %}
 							<label aria-label="{{ star }} star" class="rating__label" for="rating{{ star }}">
@@ -92,38 +107,56 @@
 						{% endfor %}
 					</div>
 				</div>
-				{{ form_row(commentForm.Publiez) }}
-				{{ form_end(commentForm) }}
+			</div>
+			{{ form_widget(commentForm.comment) }}
+			<div class="my-3">{{ form_row(commentForm.Publiez) }}</div>
+			{{ form_end(commentForm) }}
+		</div>
+	</div>
+</div>{% else %}
+
+<div class="d-flex justify-content-around d-md-none">
+	<a class="btn button-crud w-75 mt-3" href="{{ path('app_login') }}">
+		Se connecter pour commenter
+	</a>
+</div>
+<div class="d-none d-md-block">
+	<div class="d-flex justify-content-center">
+		<a class="btn button-crud w-25 mt-3" href="{{ path('app_login') }}">
+			Se connecter pour commenter
+		</a>
+	</div>
+</div>{% endif %}<h3 class="mt-3 text-center">Qu'en pensent nos Gastronomnoms ?</h3>{% if totalNote == 0 %}
+<p class="paragraph text-center">Soyez le premier à noter cette recette</p>{% else %}
+<p class="paragraph text-center">Note moyenne donnée par nos Gastronomnoms :
+	{{ totalNote|round(1, 'floor')  }}
+	/ 5</p>
+{% endif%}
+<div class="container d-md-none">
+	{% for comment in recipe.comments %}
+		<div class="card mx-auto mb-2 w-75">
+			<div class="card-body text-center">
+				<h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
+				<h6 class="card-subtitle mb-2 text-body-secondary">Note :
+					{{ comment.note }}</h6>
+				<p class="card-text">{{ comment.comment }}</p>
 			</div>
 		</div>
-		
-	{% else %}
+	{% endfor %}
 
-		<div class="d-flex justify-content-around d-md-none">
-			<a class="btn button-crud w-75 mt-3" href="{{ path('app_login') }}">
-				Se connecter pour commenter
-			</a>
-		</div>
-		<div class="d-none d-md-block">
-			<div class="d-flex justify-content-center">
-				<a class="btn button-crud w-25 mt-3" href="{{ path('app_login') }}">
-					Se connecter pour commenter
-				</a>
-			</div>
-		</div>
-	{% endif %}
+</div>
 
-	<h3 class="mt-3 text-center">Qu'en pensent nos Gastronomnoms ?</h3>
-	<p class="paragraph text-center">Note moyenne donnée par nos Gastronomnoms :
-		{{ totalNote|round(1, 'floor')  }}
-		/ 5</p>
-	<div class="container d-md-none">
+<div class="d-none d-md-block">
+	<div class="d-flex gap-3 justify-content-center flex-wrap my-5 ">
 		{% for comment in recipe.comments %}
 			<div class="card mx-auto mb-2 w-75">
 				<div class="card-body text-center">
 					<h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
-					<h6 class="card-subtitle mb-2 text-body-secondary">Note :
-						{{ comment.note }}</h6>
+					<h6 class="card-subtitle mb-2 text-body-secondary">
+						{% for star in 1..comment.note %}
+							<i class="rating__icon rating__icon--star fa fa-star"></i>
+						{% endfor %}
+					</h6>
 					<p class="card-text">{{ comment.comment }}</p>
 				</div>
 			</div>
@@ -135,13 +168,17 @@
 			{% for comment in recipe.comments %}
 				<div class="card w-25 border border-0 shadow ">
 					<div class="card-header">
-						<p class="card-title mt-0">Posté par :
+						<p class="card-title mt-0">Posté par
 							<strong>
 								{{ comment.commentator.pseudo }}
 							</strong>
 						</p>
-						<h6 class="card-subtitle mb-2 text-body-secondary">Note :
-							<strong>{{ comment.note }}</strong>
+						<h6 class="card-subtitle mb-2 text-body-secondary">
+							<strong>
+								{% for star in 1..comment.note %}
+									<i class="rating__icon rating__icon--star fa fa-star"></i>
+								{% endfor %}
+							</strong>
 						</h6>
 					</div>
 					<div class="card-body">

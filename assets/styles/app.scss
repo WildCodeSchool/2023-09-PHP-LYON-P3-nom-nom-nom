@@ -30,6 +30,8 @@ $widthPic: 16rem;
 $heightPic: 29rem;
 $widthPicDesktop: 23rem;
 $heightPicDesktop: 31rem;
+$widthfavRecipeDesktop: 22rem;
+$heightfavRecipeDesktop: 11rem;
 $borderRadiusPic: 1.625rem;
 $boxShadowPic: 0px 4px 9px 3px #c2aca1;
 
@@ -124,7 +126,7 @@ body {
 }
 
 .button-crud {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     @include myButton(
@@ -139,6 +141,7 @@ body {
         ($fontWeightButton),
         ($lineHeightButton)
     );
+
     @include media-breakpoint-up(md) {
         width: 24rem;
     }
@@ -229,6 +232,9 @@ body {
 .button-form-center {
     display: flex;
     justify-content: center;
+    @include media-breakpoint-down(md) {
+        width: 50vw;
+    }
 }
 
 .button-form-end {
@@ -276,6 +282,28 @@ body {
     @include myText(
         ($fontText),
         ($fontColorButton),
+        ($fontSizeText),
+        ($fontStyleText),
+        400,
+        ($lineHeightText)
+    );
+
+    &:hover {
+        @include myText(
+            ($fontText),
+            black,
+            ($fontSizeText),
+            ($fontStyleText),
+            400,
+            ($lineHeightText)
+        );
+    }
+}
+
+.recipe-lien {
+    @include myText(
+        ($fontText),
+        ($fontColorTextRed),
         ($fontSizeText),
         ($fontStyleText),
         400,
@@ -408,10 +436,13 @@ h1 {
 
 //--------------------navbar-mobile-------------------
 .fa-solid,
-.fa-regular {
+.fa-regular,
+.fa-trash,
+.fa-pen-to-square {
     color: $backgroundButtonDark;
     font-size: 1.45rem;
     padding: 0;
+    background-color: none;
 }
 
 .fa-circle-plus {
@@ -457,6 +488,15 @@ ul {
 }
 
 //--------------------navbar-desktop-------------------//
+.home {
+    cursor: pointer;
+    position: fixed;
+    margin: 15px;
+    z-index: 2;
+    @include media-breakpoint-down(md) {
+        display: none;
+    }  
+}
 .navbar-desktop {
     @include media-breakpoint-down(md) {
         display: none;
@@ -535,6 +575,13 @@ ul {
     }
 }
 
+.padding-sidebar ul {
+    z-index: 999;
+    @include media-breakpoint-up(md) {
+        z-index: 0;
+    }
+}
+
 //-------Carrousel----------
 .carousel-dark .carousel-indicators [data-bs-target] {
     background-color: $fontColorButton;
@@ -563,6 +610,15 @@ ul {
     );
 }
 
+.my-recipe-desktop {
+    margin: 15px 0 15px;
+    border-radius: 15px;
+    @include myPictureDesktop(
+        ($widthfavRecipeDesktop),
+        ($heightfavRecipeDesktop),
+        ($boxShadowPic)
+    );
+}
 //---------------------picture recipe----------------------//
 .pic-view-recipe {
     @include myPicture(46rem, 25rem, 1.25rem, ($boxShadowPic));
@@ -577,14 +633,18 @@ ul {
 
 .bi-heart {
     color: $backgroundButton;
-    font-size: 1.3rem;
+    font-size: 3rem;
+    @include media-breakpoint-up(md) {
+        font-size: 1.2rem;
+    }
 }
 .bi-heart-fill {
     color: $backgroundButton;
-    font-size: 1.3rem;
+    font-size: 3rem;
+    @include media-breakpoint-up(md) {
+        font-size: 1.2rem;
+    }
 }
-
-//---------------CTA Home-----------------------//
 
 //----------------------logo in form add----------------------
 .logo-center {
@@ -740,7 +800,7 @@ ul {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding:3.4rem;
+        padding: 3.4rem;
         margin-right: -2rem;
     }
 }
@@ -781,8 +841,15 @@ ul {
 }
 
 .invalid-feedback {
-    color:#ffffff;
-    }
+    color: #ffffff;
+    background-color: #ec7a7a;
+    border-radius: 15px;
+    margin-top: 8px;
+    font-size: inherit;
+    text-align: center;
+    padding: 10px;
+    display: inline-block;
+}
 
 // --------------------------ingredient desktop--------------------
 .ingredient {
@@ -804,8 +871,12 @@ ul {
     }
 
     @include media-breakpoint-up(md) {
-        width: 25em;
+        width: 15em;
     }
+}
+.my-profil-position {
+    position: relative;
+    left: 5vw;
 }
 
 .logout-link {
@@ -816,7 +887,7 @@ ul {
     margin: 16px 0 24px;
 }
 
-.user-card h4{
+.user-card h4 {
     color: $backgroundButton;
 }
 
@@ -857,14 +928,13 @@ ul {
     @include media-breakpoint-down(md) {
         display: flex;
         flex-direction: column;
-
     }
 
     @include media-breakpoint-up(md) {
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
     }
 }
 
@@ -901,19 +971,19 @@ ul {
 }
 
 // -------------------------- edit user page -------------------
-.edit-user-form{
+.edit-user-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin: 0 24px;
 }
 
-.edit-user-form .col-form-label{
-   color: $backgroundButton;
-   font-weight: bolder;
+.edit-user-form .col-form-label {
+    color: $backgroundButton;
+    font-weight: bolder;
 }
 
-.container-edit-button{
+.container-edit-button {
     display: flex;
     justify-content: center;
 }
@@ -1009,6 +1079,10 @@ nav {
     width: 100%;
 }
 
+div .mb-3 > .col-sm-10 {
+    width: 100%;
+}
+
 .rating-group form div div .btn-primary {
     @include myButton(
         8.625rem,
@@ -1076,10 +1150,20 @@ label.required:before {
     }
 }
 
-
 // ---------------------------welcome text----------------
-.welcome-text{
+.welcome-text {
     text-align: center;
     padding-top: 16px;
     color: $backgroundButton;
+}
+
+.heart {
+    top: 2vh;
+    left: 71vw;
+}
+// -----------------------ligne-------------------------
+hr {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #000;
 }

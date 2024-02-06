@@ -46,9 +46,9 @@ class RecipeRepository extends ServiceEntityRepository
     {
         //cette fonction compte toutes les recettes
         $count = $this->createQueryBuilder('r')
-            ->select('count(r.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
+        ->select('count(r.id)')
+        ->getQuery()
+        ->getSingleScalarResult();
 
         return $count;
     }
