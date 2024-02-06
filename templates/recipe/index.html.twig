@@ -62,12 +62,13 @@
 					{% for recipe in recipes[category.id] %}
 						<div>	
 							<a href="{{ path('app_recipe_show',{ slug: recipe.slug }) }}">
-								<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}" loading="lazy"/></a>
-							<div class="position-relative ">
-								<div class="glassmorphism-desktop m-2 py-2">
-									<h5>{{ recipe.nameRecipe }}</h5>
+								<img src="{{ asset('uploads/images/pictures/' ~ recipe.picture) }}" class="pic-recipe-desktop object-fit-cover" alt="{{ recipe.nameRecipe }}" loading="lazy"/>
+								<div class="position-relative ">
+									<div class="glassmorphism-desktop m-2 py-2">
+										<h5>{{ recipe.nameRecipe }}</h5>
+									</div>
 								</div>
-							</div>
+							</a>
 						</div>
 					{% else %}
 						<p>Il n'y a pas encore de recette pour cette catégorie.</p>
