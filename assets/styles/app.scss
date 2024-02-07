@@ -4,7 +4,7 @@ $backgroundButton: #bf4e40;
 $backgroundButtonDark: #444559;
 $backgroundMainColor: #faf6f4;
 $backgroundColorLogin: #74332b;
-$fontTitle: "Antonio";
+$fontTitle: "Lato";
 $fontColorButton: #fff;
 $fontSizeButton: 1rem;
 $fontSizeButtonBig: 1.2rem;
@@ -108,7 +108,7 @@ $boxShadowPic: 0px 4px 9px 3px #c2aca1;
     padding: 0;
     list-style: none;
     scroll-behavior: smooth;
-    font-family:$fontText;
+    font-family: $fontText;
 }
 
 body {
@@ -496,7 +496,7 @@ ul {
     z-index: 2;
     @include media-breakpoint-down(md) {
         display: none;
-    }  
+    }
 }
 .navbar-desktop {
     @include media-breakpoint-down(md) {
