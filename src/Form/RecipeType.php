@@ -40,16 +40,20 @@ class RecipeType extends AbstractType
             ])
             ->add('calorie', NumberType::class, [
                 'label' => 'Nombre de calories',
-                'required' => false
+                'required' => false,
+                'invalid_message' => 'Veuillez entrer des chiffres'
             ])
             ->add('cookingTime', NumberType::class, [
-                'label' => 'Temps de cuisson (min)'
+                'label' => 'Temps de cuisson (min)',
+                'invalid_message' => 'Veuillez entrer des chiffres'
             ])
             ->add('prepareTime', NumberType::class, [
-                'label' => 'Temps de préparation (min)'
+                'label' => 'Temps de préparation (min)',
+                'invalid_message' => 'Veuillez entrer des chiffres'
             ])
             ->add('personNumber', NumberType::class, [
-                'label' => 'Nombre de personnes'
+                'label' => 'Nombre de personnes',
+                'invalid_message' => 'Veuillez entrer des chiffres'
             ])
             ->add('ingredients', CollectionType::class, [
                 'entry_type' => RecipeIngredientType::class,
