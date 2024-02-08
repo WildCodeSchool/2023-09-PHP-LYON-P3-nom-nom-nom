@@ -7,13 +7,11 @@
 	<img class="w-100 object-fit-cover d-none d-md-block " src="/build/images/background-pages.png">
 
 	<div class="container-fluid mt-4 px-4 paragraph w-75">
-			<h1 class="my-2 text-center">Editer une recette</h1>
+		<h1 class="my-2 text-center">Editer une recette</h1>
 
 		<div class="mx-auto paragraph gap-2">
 			{{ include('recipe/_form.html.twig', {'button_label': 'Editer la recette'}) }}
-			<div class="d-flex justify-content-end">	
-				{{ include('recipe/_delete_form.html.twig') }}
-			</div>
+
 			<a class="container btn button-crud my-5 button-form-center" href="{{ path('app_recipe_index') }}">Liste des recettes</a>
 		</div>
 	</div>

@@ -62,7 +62,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'category' => 'category_Entrées'
         ],
         [
-            'nameRecipe' => 'sandwich à la mortadelle',
+            'nameRecipe' => 'Sandwich à la mortadelle',
             'prepareTime' => 15,
             'cookingTime' => 10,
             'personNumber' => 2,
@@ -72,7 +72,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'category' => 'category_Entrées'
         ],
         [
-            'nameRecipe' => 'sandwich au jambon beurre',
+            'nameRecipe' => 'Sandwich au jambon beurre',
             'prepareTime' => 15,
             'cookingTime' => 10,
             'personNumber' => 2,
@@ -82,7 +82,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'category' => 'category_Entrées'
         ],
         [
-            'nameRecipe' => 'sandwich à la coppa',
+            'nameRecipe' => 'Sandwich à la coppa',
             'prepareTime' => 15,
             'cookingTime' => 10,
             'personNumber' => 2,
@@ -92,7 +92,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'category' => 'category_Entrées'
         ],
         [
-            'nameRecipe' => 'sandwich au jambon cru',
+            'nameRecipe' => 'Sandwich au jambon cru',
             'prepareTime' => 15,
             'cookingTime' => 10,
             'personNumber' => 2,
@@ -102,7 +102,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'category' => 'category_Entrées'
         ],
         [
-            'nameRecipe' => 'sandwich au thon',
+            'nameRecipe' => 'Sandwich au thon',
             'prepareTime' => 15,
             'cookingTime' => 10,
             'personNumber' => 2,
@@ -112,7 +112,7 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'category' => 'category_Entrées'
         ],
         [
-            'nameRecipe' => 'salade caesar',
+            'nameRecipe' => 'Salade caesar',
             'prepareTime' => 15,
             'cookingTime' => 10,
             'personNumber' => 2,
@@ -202,30 +202,12 @@ class RecipeFixture extends Fixture implements DependentFixtureInterface
             'category' => 'category_Desserts'
         ],
         [
-            'nameRecipe' => 'Verrine kiwi chantilly',
-            'prepareTime' => 15,
-            'cookingTime' => 10,
-            'personNumber' => 2,
-            'picture' => 'verrine.jpg',
-            'description' => 'Une recette simple et délicieuse',
-            'category' => 'category_Desserts'
-        ],
-        [
             'nameRecipe' => 'Hummus',
             'prepareTime' => 15,
             'cookingTime' => 10,
             'personNumber' => 2,
             'picture' => 'hummus.jpg',
             'description' => 'Retrouvez le hummus Libannais',
-            'category' => 'category_Apéritifs'
-        ],
-        [
-            'nameRecipe' => 'Nachos',
-            'prepareTime' => 15,
-            'cookingTime' => 10,
-            'personNumber' => 2,
-            'picture' => 'nachos.jpg',
-            'description' => 'Vibrer avec ces nachos croquants',
             'category' => 'category_Apéritifs'
         ],
         [
