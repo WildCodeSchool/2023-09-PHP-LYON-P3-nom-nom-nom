@@ -40,20 +40,30 @@
 					Gastronomnom
 				{% else %}
 					Soyez le 1er Gastronomnom à aimer cette recette
-					<a href="{{ path('app_login') }}"><i class="bi bi-heart"></i></a>
+					<a href="{{ path('app_login') }}">
+						<i class="bi bi-heart"></i>
+					</a>
 				{% endif %}
 			{% else %}
 				{% if totalLikers > 1 %}
 					Recette aimée par
 					{{ totalLikers }}
-					Gastronomnoms. Aimez la également <a href="{{ path('app_login') }}"><i class="bi bi-heart"></i></a>
+					Gastronomnoms. Aimez la également
+					<a href="{{ path('app_login') }}">
+						<i class="bi bi-heart"></i>
+					</a>
 				{% elseif totalLikers == 1 %}
 					Recette aimée par
 					{{ totalLikers }}
-					Gastronomnom. Aimez la également <a href="{{ path('app_login') }}"><i class="bi bi-heart"></i></a>
+					Gastronomnom. Aimez la également
+					<a href="{{ path('app_login') }}">
+						<i class="bi bi-heart"></i>
+					</a>
 				{% else %}
 					Soyez le 1er Gastronomnom à aimer cette recette
-					<a href="{{ path('app_login') }}"><i class="bi bi-heart"></i></a>
+					<a href="{{ path('app_login') }}">
+						<i class="bi bi-heart"></i>
+					</a>
 				{% endif %}
 			{% endif %}
 		</p>
@@ -112,81 +122,75 @@
 			<div class="my-3">{{ form_row(commentForm.Publiez) }}</div>
 			{{ form_end(commentForm) }}
 		</div>
-	</div>
-</div>{% else %}
 
-<div class="d-flex justify-content-around d-md-none">
-	<a class="btn button-crud w-75 mt-3" href="{{ path('app_login') }}">
-		Se connecter pour commenter
-	</a>
-</div>
-<div class="d-none d-md-block">
-	<div class="d-flex justify-content-center">
-		<a class="btn button-crud w-25 mt-3" href="{{ path('app_login') }}">
-			Se connecter pour commenter
-		</a>
-	</div>
-</div>{% endif %}<h3 class="mt-3 text-center">Qu'en pensent nos Gastronomnoms ?</h3>{% if totalNote == 0 %}
-<p class="paragraph text-center">Soyez le premier à noter cette recette</p>{% else %}
-<p class="paragraph text-center">Note moyenne donnée par nos Gastronomnoms :
-	{{ totalNote|round(1, 'floor')  }}
-	/ 5</p>
-{% endif%}
-<div class="container d-md-none">
-	{% for comment in recipe.comments %}
-		<div class="card mx-auto mb-2 w-75">
-			<div class="card-body text-center">
-				<h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
-				<h6 class="card-subtitle mb-2 text-body-secondary">Note :
-					{{ comment.note }}</h6>
-				<p class="card-text">{{ comment.comment }}</p>
+	{% else %}
+
+		<div class="d-flex justify-content-around d-md-none">
+			<a class="btn button-crud w-75 mt-3" href="{{ path('app_login') }}">
+				Se connecter pour commenter
+			</a>
+		</div>
+		<div class="d-none d-md-block">
+			<div class="d-flex justify-content-center">
+				<a class="btn button-crud w-25 mt-3" href="{{ path('app_login') }}">
+					Se connecter pour commenter
+				</a>
 			</div>
 		</div>
-	{% endfor %}
+	{% endif %}
 
-</div>
+	<h3 class="mt-3 text-center">Qu'en pensent nos Gastronomnoms ?</h3>
+	{% if totalNote == 0 %}
+		<p class="paragraph text-center">Soyez le premier à noter cette recette</p>
+	{% else %}
+		<p class="paragraph text-center">Note moyenne donnée par nos Gastronomnoms :
+			{{ totalNote|round(1, 'floor')  }}
+			/ 5</p>
+	{% endif %}
+{# ============== MOBILE COMMENTS ===================== #}
 
-<div class="d-none d-md-block">
-	<div class="d-flex gap-3 justify-content-center flex-wrap my-5 ">
-		{% for comment in recipe.comments %}
-			<div class="card mx-auto mb-2 w-75">
-				<div class="card-body text-center">
-					<h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
-					<h6 class="card-subtitle mb-2 text-body-secondary">
-						{% for star in 1..comment.note %}
-							<i class="rating__icon rating__icon--star fa fa-star"></i>
-						{% endfor %}
-					</h6>
-					<p class="card-text">{{ comment.comment }}</p>
-				</div>
+    <div class="d-md-none d-flex gap-3 justify-content-center flex-wrap my-5 ">
+        {% for comment in recipe.comments %}
+            <div class="card mx-auto mb-2 w-75">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ comment.commentator.pseudo }}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">
+                        {% for star in 1..comment.note %}
+                            <i class="ratingicon ratingicon--star fa fa-star"></i>
+                        {% endfor %}
+                    </h6>
+                    <p class="card-text">{{ comment.comment }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{# ==================================Desktop======================== #}
+
+		<div class="d-none d-md-block">
+			<div class="d-flex gap-3 justify-content-center flex-wrap my-5 ">
+				{% for comment in recipe.comments %}
+					<div class="card w-25 border border-0 shadow ">
+						<div class="card-header">
+							<p class="card-title mt-0">Posté par
+								<strong>
+									{{ comment.commentator.pseudo }}
+								</strong>
+							</p>
+							<h6 class="card-subtitle mb-2 text-body-secondary">
+								<strong>
+									{% for star in 1..comment.note %}
+										<i class="rating__icon rating__icon--star fa fa-star"></i>
+									{% endfor %}
+								</strong>
+							</h6>
+						</div>
+						<div class="card-body">
+							<p class="card-text mt-0">Commentaire :
+								<br>{{ comment.comment }}</p>
+						</div>
+					</div>
+				{% endfor %}
 			</div>
-		{% endfor %}
-	</div>
-
-	<div class="d-none d-md-block">
-		<div class="d-flex gap-3 justify-content-center flex-wrap my-5 ">
-			{% for comment in recipe.comments %}
-				<div class="card w-25 border border-0 shadow ">
-					<div class="card-header">
-						<p class="card-title mt-0">Posté par
-							<strong>
-								{{ comment.commentator.pseudo }}
-							</strong>
-						</p>
-						<h6 class="card-subtitle mb-2 text-body-secondary">
-							<strong>
-								{% for star in 1..comment.note %}
-									<i class="rating__icon rating__icon--star fa fa-star"></i>
-								{% endfor %}
-							</strong>
-						</h6>
-					</div>
-					<div class="card-body">
-						<p class="card-text mt-0">Commentaire :
-							<br>{{ comment.comment }}</p>
-					</div>
-				</div>
-			{% endfor %}
 		</div>
-	</div>
-{% endblock %}
+	{% endblock %}
